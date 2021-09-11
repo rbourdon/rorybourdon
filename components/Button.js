@@ -1,5 +1,5 @@
 import styled, { ThemeContext } from "styled-components";
-import { motion, useTransform } from "framer-motion";
+import { animate, motion, useMotionValue, useTransform } from "framer-motion";
 import Link from "next/link";
 import CardBorder from "@/components/CardBorder";
 import { useContext } from "react";
@@ -10,12 +10,13 @@ const defaultStrokeWidth = 1.2;
 const defaultBorderRadius = 23;
 
 const Container = styled(motion.a)`
-  width: 175px;
-  height: 50px;
+  width: ${(props) => props.$width + "px"};
+  height: ${(props) => props.$height + "px"};
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 5;
 `;
 
 const Content = styled(motion.div)`
@@ -68,6 +69,22 @@ const contentV = {
   }),
 };
 
+function handleHoverStart(hover) {
+  animate(hover, 1, {
+    duration: 0.1,
+    bounce: 0.5,
+    type: "tween",
+  });
+}
+
+function handleHoverEnd(hover) {
+  animate(hover, 0, {
+    duration: 0.1,
+    bounce: 0.5,
+    type: "tween",
+  });
+}
+
 export default function Button({
   href,
   children,
@@ -87,6 +104,9 @@ export default function Button({
   const buttonColor2 = color2 ? color2 : "#b36db5";
   const strokeWidth = sWidth ? sWidth : defaultStrokeWidth;
   const borderRadius = bRadius ? bRadius : defaultBorderRadius;
+  const hover = useMotionValue(0);
+
+  // const scaleY = useTransform(hover, [0, 1], [1, 1.1]);
   const boxShadow = useTransform(
     [theme.shadow_key, theme.shadow_ambient],
     ([latestShadow1, latestShadow2]) =>
@@ -105,10 +125,18 @@ export default function Button({
       },
     },
   };
+
   return (
     <Link href={href ? href : "/"} passHref>
-      <Container>
+      <Container
+        $width={buttonWidth}
+        $height={buttonHeight}
+        onHoverStart={() => handleHoverStart(hover)}
+        onHoverEnd={() => handleHoverEnd(hover)}
+        layout
+      >
         <Content
+          layout
           style={{
             backgroundColor: theme.primary_light,
             boxShadow,
@@ -126,7 +154,7 @@ export default function Button({
           height={buttonHeight}
           sWidth={strokeWidth}
           bRadius={borderRadius}
-          startLoc={1}
+          startLoc={3}
           borderV={borderV}
           frameV={frameV}
           innerBorderV={innerBorderV}
