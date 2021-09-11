@@ -5,8 +5,9 @@ import SkillsCard from "@/components/SkillsCard";
 import styled, { ThemeContext } from "styled-components";
 import Button from "@/components/Button";
 import { motion } from "framer-motion";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Banner from "@/components/Banner";
+import { getAllSkillsTitles } from "@/lib/graphcms";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -90,66 +91,77 @@ const buttonsV = {
   },
 };
 
-export default function Home() {
+export default function Home({ skills }) {
   const [introComplete, setIntroComplete] = useState(false);
   const theme = useContext(ThemeContext);
+  useEffect(() => {
+    setIntroComplete(true);
+  }, []);
   return (
     <Layout introComplete={introComplete}>
-      <Container initial="hidden" animate="visible">
-        {!introComplete && (
+      {!introComplete && (
+        <Container initial="hidden" animate="visible">
           <IntroLogo layoutId="logo">
             <Logo onAnimationComplete={() => setIntroComplete(true)} intro />
           </IntroLogo>
-        )}
-        {introComplete ? (
-          <>
-            <HeroSection initial="hidden" animate="visible">
-              <HeroBanner>
-                <Banner />
-                <Buttons variants={buttonsV}>
-                  <Button
-                    color1={theme.blue.get()}
-                    color2={theme.purple.get()}
-                    href="/"
-                    id="learnMoreButton"
-                    delay={1}
-                  >
-                    Learn More
-                  </Button>
-                  <Button
-                    color1={theme.blue.get()}
-                    color2={theme.teal.get()}
-                    href="/"
-                    id="contactButton"
-                    delay={1.5}
-                  >
-                    Contact Me
-                  </Button>
-                </Buttons>
-              </HeroBanner>
-              <HeroBody>
-                <NavCard
-                  height={200}
-                  width={275}
-                  stemDir="h"
-                  stemLoc={1}
+        </Container>
+      )}
+      {introComplete && (
+        <Container initial="hidden" animate="visible">
+          <HeroSection>
+            <HeroBanner>
+              <Banner />
+              <Buttons variants={buttonsV}>
+                <Button
                   color1={theme.blue.get()}
                   color2={theme.purple.get()}
-                  effectLocation={{ x: 0.5, y: 0.8 }}
-                  id={"welcomeCard"}
+                  href="/"
+                  id="learnMoreButton"
+                  delay={1}
                 >
-                  <CardContent>
-                    <p>Hello</p>
-                  </CardContent>
-                </NavCard>
-              </HeroBody>
-            </HeroSection>
-            <Skills>
-              <SkillsCard />
-            </Skills>
-          </>
-        ) : null}
-      </Container>
+                  Learn More
+                </Button>
+                <Button
+                  color1={theme.blue.get()}
+                  color2={theme.teal.get()}
+                  href="/"
+                  id="contactButton"
+                  delay={1.5}
+                >
+                  Contact Me
+                </Button>
+              </Buttons>
+            </HeroBanner>
+            <HeroBody>
+              <NavCard
+                height={200}
+                width={275}
+                stemDir="h"
+                stemLoc={1}
+                color1={theme.blue.get()}
+                color2={theme.purple.get()}
+                effectLocation={{ x: 0.5, y: 0.8 }}
+                id={"welcomeCard"}
+              >
+                <CardContent>
+                  <p>Hello</p>
+                </CardContent>
+              </NavCard>
+            </HeroBody>
+          </HeroSection>
+          <Skills>
+            <SkillsCard skills={skills} />
+          </Skills>
+        </Container>
+      )}
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const skills = (await getAllSkillsTitles()) || [];
+  return {
+    props: { skills },
+    revalidate: 20000,
+  };
 }
