@@ -19,62 +19,16 @@ const Container = styled(motion.div)`
   height: ${(props) => props.$height + "px"};
 `;
 
-const Content = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const defaultWidth = 200;
 const defaultHeight = 200;
 const defaultBorderRadius = 30;
 const defaultStrokeWidth = 1.2;
 
-// const circleV = {
-//   hidden: {
-//     pathLength: 0,
-//   },
-//   visible: {
-//     pathLength: 1,
-//     transition: {
-//       delay: 1.85,
-//       duration: 0.9,
-//     },
-//   },
-// };
-
-// const lineV = {
-//   hidden: {
-//     pathLength: 0,
-//   },
-//   visible: {
-//     pathLength: 1,
-//     transition: {
-//       delay: 2.2,
-//       duration: 0.75,
-//     },
-//   },
-// };
-
-// const contentV = {
-//   hidden: {
-//     opacity: 0,
-//   },
-//   visible: {
-//     opacity: 1,
-//     transition: {
-//       delay: 1.5,
-//       duration: 0.4,
-//     },
-//   },
-// };
-
 const cardV = {
   visible: {
     transition: {
       delayChildren: 0.3,
+      staggerChildren: 0.5,
     },
   },
 };
@@ -86,37 +40,6 @@ const frameV = {
     },
   },
 };
-
-// const backingV = {
-//   hidden: {
-//     opacity: 0,
-//     transition: {
-//       transition: {
-//         duration: 0.3,
-//       },
-//     },
-//   },
-//   visible: {
-//     opacity: 1,
-//     transition: {
-//       duration: 0.3,
-//       delay: 1.6,
-//     },
-//   },
-// };
-
-// const faceV = {
-//   hidden: {
-//     opacity: 0,
-//   },
-//   visible: {
-//     opacity: 1,
-//     transition: {
-//       delayChildren: 1.35,
-//       staggerChildren: 0.125,
-//     },
-//   },
-// };
 
 const containerV = {
   visible: (custom) => ({
@@ -150,7 +73,6 @@ export default function NavCard({
   const sWidth = strokeWidth ? strokeWidth : defaultStrokeWidth;
   const cardWidth = width ? width : defaultWidth;
   const cardHeight = height ? height : defaultHeight;
-  console.log((cardWidth + cardHeight) * 0.0015);
   return (
     <Container
       $width={
@@ -178,41 +100,6 @@ export default function NavCard({
       variants={containerV}
       custom={delay ? delay : 0}
     >
-      <CardEffect
-        width={cardWidth}
-        height={cardHeight}
-        sWidth={sWidth}
-        color1={color1}
-        color2={color2}
-        circleV={{
-          hidden: {
-            pathLength: 0,
-          },
-          visible: {
-            pathLength: 1,
-            transition: {
-              delay: (cardWidth + cardHeight) * 0.00225 + (delay ? delay : 0),
-              duration: 0.9,
-            },
-          },
-        }}
-        lineV={{
-          hidden: {
-            pathLength: 0,
-          },
-          visible: {
-            pathLength: 1,
-            transition: {
-              delay: (cardWidth + cardHeight) * 0.0035,
-              duration: 0.75,
-            },
-          },
-        }}
-        radius={effectRadius ? effectRadius : 150}
-        x={effectLocation ? effectLocation.x : 0.5}
-        y={effectLocation ? effectLocation.y : 0.5}
-        id={id}
-      />
       {stemLength && stemSide === "l" && (
         <CardStem
           width={
@@ -240,6 +127,38 @@ export default function NavCard({
         />
       )}
       <Card variants={cardV} width={cardWidth} height={cardHeight}>
+        <CardBorder
+          stroke="#3a3a3a"
+          color1={color1}
+          color2={color2}
+          width={cardWidth}
+          height={cardHeight}
+          sWidth={sWidth}
+          bRadius={bRadius}
+          startLoc={3}
+          borderV={{
+            hidden: { pathLength: 0 },
+            visible: {
+              pathLength: 1,
+              transition: { duration: (cardWidth + cardHeight) * 0.0011 },
+              ease: "linear",
+            },
+          }}
+          innerBorderV={{
+            hidden: {
+              pathLength: 0,
+            },
+            visible: {
+              pathLength: 1,
+              transition: {
+                duration: (cardWidth + cardHeight) * 0.0013,
+                ease: "linear",
+              },
+            },
+          }}
+          frameV={frameV}
+          id={id}
+        />
         <CardBacking
           backingV={{
             hidden: {
@@ -284,54 +203,42 @@ export default function NavCard({
           color2={color2}
           id={id}
         />
-        <CardBorder
-          stroke="#3a3a3a"
-          color1={color1}
-          color2={color2}
+        {children}
+        <CardEffect
           width={cardWidth}
           height={cardHeight}
           sWidth={sWidth}
-          bRadius={bRadius}
-          startLoc={3}
-          borderV={{
-            hidden: { pathLength: 0 },
-            visible: {
-              pathLength: 1,
-              transition: { duration: (cardWidth + cardHeight) * 0.0011 },
-              ease: "linear",
-            },
-          }}
-          innerBorderV={{
+          color1={color1}
+          color2={color2}
+          circleV={{
             hidden: {
               pathLength: 0,
             },
             visible: {
               pathLength: 1,
               transition: {
-                duration: (cardWidth + cardHeight) * 0.0013,
-                ease: "linear",
+                delay: (cardWidth + cardHeight) * 0.00225 + (delay ? delay : 0),
+                duration: 0.9,
               },
             },
           }}
-          frameV={frameV}
-          id={id}
-        />
-        <Content
-          variants={{
+          lineV={{
             hidden: {
-              opacity: 0,
+              pathLength: 0,
             },
             visible: {
-              opacity: 1,
+              pathLength: 1,
               transition: {
-                delay: (cardWidth + cardHeight) * 0.003 + (delay ? delay : 0),
-                duration: 0.4,
+                delay: (cardWidth + cardHeight) * 0.0035,
+                duration: 0.75,
               },
             },
           }}
-        >
-          {children}
-        </Content>
+          radius={effectRadius ? effectRadius : 150}
+          x={effectLocation ? effectLocation.x : 0.5}
+          y={effectLocation ? effectLocation.y : 0.5}
+          id={id}
+        />
       </Card>
       {stemLength && stemSide === "r" && (
         <>
