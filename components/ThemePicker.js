@@ -1,7 +1,7 @@
 const theme = {
   light: {
     name: "light",
-    //primary_dark: "hsla(273, 12%, 86%, 1)",
+    primary_dark: "hsla(0, 0, 28.63%, 1)",
     primary: "hsla(270, 8.74%, 85.88%, 1)",
     // primary_med: "hsla(280, 17%, 93%, 1)",
     primary_light: "hsla(270, 8.64%, 88.52%, 1)",
@@ -27,7 +27,7 @@ const theme = {
   },
   dark: {
     name: "dark",
-    // primary_dark: "hsla(300, 8%, 7%, 1)",
+    primary_dark: "hsla(0, 0, 28.63%, 1)",
     primary: "hsla(300, 2%, 10%, 1)",
     // primary_med: "hsla(285, 6%, 14%, 1)",
     primary_light: "hsla(276, 5%, 17.5%, 1)",
@@ -53,7 +53,7 @@ const theme = {
   },
   default: {
     name: "default",
-    //primary_dark: "hsla(273, 12%, 86%, 1)",
+    primary_dark: "hsla(0, 0, 28.63%, 1)",
     primary: "hsla(270, 8.74%, 85.88%, 1)",
     // primary_med: "hsla(280, 17%, 93%, 1)",
     // primary_light: "hsla(280, 21%, 94.25%, 1)",
