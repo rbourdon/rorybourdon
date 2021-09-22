@@ -9,6 +9,7 @@ const Container = styled(motion.div)`
   align-items: center;
   overflow: hidden;
   position: absolute;
+  z-index: 3;
   top: 0;
   left: 0;
 `;
@@ -17,21 +18,33 @@ const gradientBandV = {
   hidden: (custom) => ({
     clipPath: custom.start,
     transition: {
-      transition: {
-        type: "spring",
-        duration: 0.9,
-        bounce: 0.4,
-      },
+      type: "spring",
+      duration: 0.7,
+      bounce: 0.4,
     },
   }),
   visible: (custom) => ({
     clipPath: custom.end,
     transition: {
-      transition: {
-        type: "spring",
-        duration: 0.9,
-        bounce: 0.4,
-      },
+      type: "spring",
+      duration: 0.7,
+      bounce: 0.4,
+    },
+  }),
+};
+
+const shineBandV = {
+  hidden: (custom) => ({
+    d: custom.start,
+  }),
+  visible: (custom) => ({
+    d: [custom.start, custom.middle, custom.end],
+    transition: {
+      type: "tween",
+      duration: 0.35,
+      ease: "linear",
+      repeat: Infinity,
+      repeatDelay: 5,
     },
   }),
 };
@@ -54,6 +67,7 @@ export default function CardFace({
       }}
       $width={width}
       $height={height}
+      layoutId={`${id}CardFace`}
     >
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"
@@ -71,18 +85,6 @@ export default function CardFace({
             <stop offset=".8" stopColor={color2} />
           </linearGradient>
         </defs>
-        {/* <motion.rect
-          x={sWidth / 2 + "px"}
-          y={sWidth / 2 + "px"}
-          width={width - sWidth + "px"}
-          height={height - sWidth + "px"}
-          stroke="none"
-          style={{
-            fill: theme.primary_light,
-            rx: bRadius + "px",
-          }}
-          variants={backingV}
-        /> */}
         <motion.rect
           x={sWidth / 2 + "px"}
           y={sWidth / 2 + "px"}
@@ -97,18 +99,6 @@ export default function CardFace({
             end: "path('M0,90 l90,-90 h20 l-110,110 v-20 z')",
           }}
           variants={gradientBandV}
-          // initial="hidden"
-          // animate="visible"
-          // initial={{ clipPath: "path('M0,0 l0,0 h0 l0,0 v0 z')" }}
-          // animate={{
-          //   clipPath: "path('M0,90 l90,-90 h20 l-110,110 v-20 z')",
-          //   transition: {
-          //     type: "spring",
-          //     delay: 1.5,
-          //     duration: 0.9,
-          //     bounce: 0.4,
-          //   },
-          // }}
         />
         <motion.rect
           x={sWidth / 2 + "px"}
@@ -124,16 +114,6 @@ export default function CardFace({
             end: "path('M0,50 l50,-50 h20 l-70,70 v-20 z')",
           }}
           variants={gradientBandV}
-          // initial={{ clipPath: "path('M0,0 l0,0 h0 l0,0 v0 z')" }}
-          // animate={{
-          //   clipPath: "path('M0,50 l50,-50 h20 l-70,70 v-20 z')",
-          //   transition: {
-          //     type: "spring",
-          //     delay: 1.35,
-          //     duration: 0.7,
-          //     bounce: 0.4,
-          //   },
-          // }}
         />
         <motion.rect
           x={sWidth / 2 + "px"}
@@ -149,20 +129,26 @@ export default function CardFace({
             end: `path('M${width - 70},${height} l70,-70 v20 l-50,50 h-20 z')`,
           }}
           variants={gradientBandV}
-          // initial={{
-          //   clipPath: `path('M${width},${height} l0,0 h0 l0,0 v0 z')`,
-          // }}
-          // animate={{
-          //   clipPath: `path('M${
-          //     width - 70
-          //   },${height} l70,-70 v20 l-50,50 h-20 z')`,
-          //   transition: {
-          //     type: "spring",
-          //     delay: 1.45,
-          //     duration: 0.6,
-          //     bounce: 0.4,
-          //   },
-          // }}
+        />
+        <motion.path
+          x={sWidth / 2 + "px"}
+          y={sWidth / 2 + "px"}
+          width={width - sWidth + "px"}
+          height={height - sWidth + "px"}
+          stroke="#FFFFFF"
+          strokeWidth={70}
+          style={{
+            opacity: 0.075,
+            mixBlendMode: "luminosity",
+            zIndex: 10,
+          }}
+          custom={{
+            start: `M-0,0 L0,0`,
+            middle: `M-${width},${height * 2} L${width * 2},-${height}`,
+            //end: `M-${width},${height * 2} L${width * 2},-${height}`,
+            end: `M${width},${height} L${width},${height}`,
+          }}
+          variants={shineBandV}
         />
       </motion.svg>
     </Container>
