@@ -22,10 +22,16 @@ const tagV = {
   }),
 };
 
-export default function Tagline({ children, cardHeight, bRadius }) {
+export default function Tagline({ children, cardHeight, bRadius, stemLoc }) {
   const y = {
-    visible: (cardHeight - bRadius * 2) * 0.335 + bRadius / 2,
-    hidden: (cardHeight - bRadius * 2) * 0.335 + bRadius / 2 + 50,
+    visible:
+      stemLoc === 3 || stemLoc === 8
+        ? (cardHeight - bRadius * 2) * 0.335 + bRadius / 2
+        : (cardHeight - bRadius * 2) * 0.665 + bRadius / 2,
+    hidden:
+      stemLoc === 3 || stemLoc === 8
+        ? (cardHeight - bRadius * 2) * 0.335 + bRadius / 2
+        : (cardHeight - bRadius * 2) * 0.665 + bRadius / 2,
   };
   return (
     <Text custom={y} variants={tagV}>
