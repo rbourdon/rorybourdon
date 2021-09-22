@@ -86,56 +86,25 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1;
     font-weight: 100;
   }
-  input:autofill,
-  input:autofill:hover, 
-  input:autofill:focus,
-  textarea:autofill,
-  textarea:autofill:hover,
-  textarea:autofill:focus,
-  select:autofill,
-  select:autofill:hover,
-  select:autofill:focus {
-    filter: none;
-    outline: none;
-    -webkit-text-fill-color: var(--color-purple_light);
-    box-shadow: 0 0 0 100px var(--color-primary_med) inset;
-    border: 0.13rem solid var(--color-purple_light);
-  }
-
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover, 
-  input:-webkit-autofill:focus,
-  textarea:-webkit-autofill,
-  textarea:-webkit-autofill:hover,
-  textarea:-webkit-autofill:focus,
-  select:-webkit-autofill,
-  select:-webkit-autofill:hover,
-  select:-webkit-autofill:focus {
-    outline: none;
-    -webkit-text-fill-color: var(--color-purple_light);
-    box-shadow: 0 0 0 100px var(--color-primary_med) inset;
-    border: 0.13rem solid var(--color-purple_light);
-  }
 `;
 
-function handleExitComplete() {
-  if (typeof window !== "undefined") {
-    window.scrollTo(0, 0);
-  }
-}
+// function handleExitComplete() {
+//   if (typeof window !== "undefined") {
+//     window.scrollTo(0, 0);
+//   }
+// }
 
 function MyApp({ Component, pageProps, router }) {
   return (
     <ThemeControlProvider>
       <GlobalStyle />
-      <AnimateSharedLayout>
-        <AnimatePresence
-          exitBeforeEnter
-          onExitComplete={() => handleExitComplete()}
-        >
-          <Component {...pageProps} key={router.route} />
-        </AnimatePresence>
-      </AnimateSharedLayout>
+
+      <AnimatePresence
+        exitBeforeEnter
+        //onExitComplete={() => handleExitComplete()}
+      >
+        <Component {...pageProps} key={router.route} />
+      </AnimatePresence>
     </ThemeControlProvider>
   );
 }
