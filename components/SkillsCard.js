@@ -16,7 +16,7 @@ const CardContent = styled(motion.div)`
   align-items: center;
   position: relative;
   padding: 35px 30px;
-  z-index: 5;
+  z-index: 3;
 `;
 
 const Icon = styled(motion.div)`
@@ -62,6 +62,20 @@ const skillsIconV = {
   },
 };
 
+const underlineV = {
+  hidden: {
+    pathLength: 0,
+  },
+  visible: {
+    pathLength: 1,
+    transition: {
+      delay: 710 * 230 * 0.0000012 + 2.05,
+      duration: 0.8,
+      ease: "easeInOut",
+    },
+  },
+};
+
 export default function SkillsCard({ skills, selected, children }) {
   const theme = useContext(ThemeContext);
   return (
@@ -76,7 +90,7 @@ export default function SkillsCard({ skills, selected, children }) {
         color2={theme.teal.get()}
         effectOffset={{ x: 50, y: -50 }}
         effectRadius={325}
-        id={"skills"}
+        id="skills"
         delay={0.5}
         tagline="I have a wide variety of skills and love to learn."
         selected={selected}
@@ -88,10 +102,12 @@ export default function SkillsCard({ skills, selected, children }) {
           <Label>
             Skills
             <Underline
-              width={50}
+              variants={underlineV}
+              width={130}
               sWidth={1.2}
               color1={theme.blue.get()}
               color2={theme.teal.get()}
+              id="skills"
             />
           </Label>
           <SkillRoller selected={selected} skills={skills} />
