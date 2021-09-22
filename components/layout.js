@@ -1,9 +1,7 @@
 import Head from "next/head";
 import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
-import NavBar from "@/components/NavBar";
 import { useContext } from "react";
-import NavLink from "@/components//NavLink";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -14,7 +12,7 @@ const Container = styled(motion.div)`
   flex-direction: column;
 `;
 
-function Layout({ children, title, introComplete }) {
+function Layout({ children, title }) {
   const theme = useContext(ThemeContext);
   return (
     <Container style={{ backgroundColor: theme.primary }}>
@@ -75,9 +73,9 @@ function Layout({ children, title, introComplete }) {
                     "--color-primary_light": "hsla(280, 2.64%, 89.02%, 1)",
                     "--color-primary_dark": "hsla(0, 0, 28.63%, 1)",
                     "--color-yellow": "hsla(57.71, 43.12%, 60.08%, 1)",
-                    "--color-green": "hsla(83.88, 57.31%, 67.06%, 1)",
+                    "--color-green": "hsla(83.88, 42.31%, 57.06%, 1)",
                     "--color-teal": "hsla(170.49, 42.93%, 62.9%, 1)",
-                    "--color-blue": "hsla(200.16, 60.72%, 45.98%, 1)",
+                    "--color-blue": "hsla(209.16, 52.72%, 47.98%, 1)",
                     "--color-purple": "hsla(298.33, 36.78%, 55.98%, 1)",
                     "--color-red": "hsla(351.89, 42.07%, 47.02%, 1)",
                     "--color-shadow_key": "hsla(270, 6%, 10%, 0.5)",
@@ -89,9 +87,9 @@ function Layout({ children, title, introComplete }) {
                     "--color-primary_light": "hsla(280, 2.64%, 89.02%, 1)",
                     "--color-primary_dark": "hsla(0, 0, 28.63%, 1)",
                     "--color-yellow": "hsla(57.71, 43.12%, 60.08%, 1)",
-                    "--color-green": "hsla(83.88, 57.31%, 67.06%, 1)",
+                    "--color-green": "hsla(83.88, 42.31%, 57.06%, 1)",
                     "--color-teal": "hsla(170.49, 42.93%, 62.9%, 1)",
-                    "--color-blue": "hsla(200.16, 60.72%, 45.98%, 1)",
+                    "--color-blue": "hsla(209.16, 52.72%, 47.98%, 1)",
                     "--color-purple": "hsla(298.33, 36.78%, 55.98%, 1)",
                     "--color-red": "hsla(351.89, 42.07%, 47.02%, 1)",
                     "--color-shadow_key": "hsla(270, 6%, 10%, 0.15)",
@@ -108,10 +106,6 @@ function Layout({ children, title, introComplete }) {
           }}
         />
       </Head>
-      <NavBar introComplete={introComplete}>
-        <NavLink href="/">Projects</NavLink>
-        <NavLink href="/">Resume</NavLink>
-      </NavBar>
       {children}
       {/* <Footer />  */}
     </Container>
