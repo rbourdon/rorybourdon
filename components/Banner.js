@@ -27,7 +27,7 @@ const Subtitle = styled(motion.p)`
 
 const titleV = {
   hidden: {
-    y: "150%",
+    y: "170%",
   },
   visible: (custom) => ({
     y: "0%",
@@ -39,9 +39,17 @@ const titleV = {
     },
   }),
 };
+
+const bannerV = {
+  exit: {
+    opacity: 0,
+    transition: { duration: 0.01 },
+  },
+};
+
 export default function Banner() {
   return (
-    <Container initial="hidden" animate="visible">
+    <Container variants={bannerV}>
       <Title custom={0.6} variants={titleV}>
         Rory Bourdon
       </Title>
