@@ -29,21 +29,21 @@ export default function CardEffect({
 }) {
   const circleRad = radius ? radius : 150;
   const lineLoc = {
-    x: circleRad * 2,
-    y: circleRad * 2,
+    x: circleRad * 1.5,
+    y: circleRad * 1.5,
   };
   return (
     <Container
-      $width={circleRad * 4 + sWidth * 2}
-      $height={circleRad * 4 + sWidth * 2}
-      $xOffset={width / 2 - (circleRad * 4 + sWidth * 2) / 2 + xOff}
-      $yOffset={height / 2 - (circleRad * 4 + sWidth * 2) / 2 + yOff}
+      $width={circleRad * 3 + sWidth * 2}
+      $height={circleRad * 3 + sWidth * 2}
+      $xOffset={width / 2 - (circleRad * 3 + sWidth * 2) / 2 + xOff}
+      $yOffset={height / 2 - (circleRad * 3 + sWidth * 2) / 2 + yOff}
       layoutId={`${id}`}
     >
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox={`0 0 ${circleRad * 4 + sWidth * 2} ${
-          circleRad * 4 + sWidth * 2
+        viewBox={`0 0 ${circleRad * 3 + sWidth * 2} ${
+          circleRad * 3 + sWidth * 2
         }`}
       >
         <defs>
@@ -59,8 +59,8 @@ export default function CardEffect({
         </defs>
         <motion.g>
           <motion.path
-            d={`M${circleRad},${
-              circleRad * 2 + sWidth
+            d={`M${circleRad * 0.5},${
+              circleRad * 1.5 + sWidth
             } a${circleRad},${circleRad} 0 0 1 ${circleRad},-${circleRad} a${circleRad},${circleRad} 0 0 1 ${circleRad},${circleRad} a${circleRad},${circleRad} 0 0 1 -${circleRad},${circleRad} a${circleRad},${circleRad} 0 0 1 -${circleRad},-${circleRad}`}
             stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
             strokeWidth={sWidth}
