@@ -16,7 +16,7 @@ const Container = styled(motion.a)`
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 5;
+  z-index: 99;
 `;
 
 const Content = styled(motion.div)`
@@ -96,6 +96,7 @@ export default function Button({
   bRadius,
   id,
   delay,
+  onClick,
 }) {
   const theme = useContext(ThemeContext);
   const buttonWidth = width ? width : defaultWidth;
@@ -127,22 +128,23 @@ export default function Button({
   };
 
   return (
-    <Link href={href ? href : "/"} passHref>
+    <Link href={href ? href : "/"} passHref scroll={false}>
       <Container
         $width={buttonWidth}
         $height={buttonHeight}
         onHoverStart={() => handleHoverStart(hover)}
         onHoverEnd={() => handleHoverEnd(hover)}
-        layout
+        onClick={(e) => onClick(id)(e)}
+        layoutId={`${id}Button`}
       >
         <Content
-          layout
           style={{
             backgroundColor: theme.primary_light,
             boxShadow,
           }}
           custom={{ borderRadius: borderRadius, delay: delay }}
           variants={contentV}
+          layoutId={`${id}ButtonContent`}
         >
           {children}
         </Content>
@@ -159,7 +161,7 @@ export default function Button({
           frameV={frameV}
           innerBorderV={innerBorderV}
           innerOffset={-6}
-          id={id}
+          id={id + "button"}
           rotation={0}
         />
       </Container>
