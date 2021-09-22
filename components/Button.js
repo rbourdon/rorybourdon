@@ -149,7 +149,6 @@ export default function Button({
           {children}
         </Content>
         <CardBorder
-          stroke="#3a3a3a"
           color1={buttonColor1}
           color2={buttonColor2}
           width={buttonWidth}

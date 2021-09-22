@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import styled from "styled-components";
+import { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -176,7 +177,6 @@ export default function CardBorder({
   width,
   height,
   borderV,
-  stroke,
   startLoc,
   frameV,
   innerBorderV,
@@ -187,6 +187,7 @@ export default function CardBorder({
 }) {
   const startLocation = startLoc ? startLoc : 8;
   const innerOff = innerOffset ? innerOffset : -10;
+  const theme = useContext(ThemeContext);
   return (
     <Container layoutId={`${id}cardBorder`}>
       <motion.svg
@@ -208,11 +209,10 @@ export default function CardBorder({
         </defs>
         <motion.path
           d={getPath(startLocation, height, width, bRadius, sWidth, 0)}
-          stroke={stroke}
           strokeWidth={sWidth}
           vector-effect="non-scaling-stroke"
           fill="none"
-          style={{ zIndex: 3 }}
+          style={{ zIndex: 3, stroke: theme.primary_dark }}
           variants={borderV}
         />
         <motion.path
