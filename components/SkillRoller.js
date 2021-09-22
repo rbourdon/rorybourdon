@@ -20,19 +20,13 @@ const bubbleV = {
   visible: {
     opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.25,
     },
   },
 };
 
 const bubbleBottom = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 0,
-    transition: {
-      duration: 0.5,
-    },
-  },
 };
 
 const bubbleTop = {
@@ -40,7 +34,7 @@ const bubbleTop = {
   visible: {
     opacity: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.3,
     },
   },
 };
@@ -58,6 +52,7 @@ function SkillBubbles({ skills, rollerPos }) {
         title={skills[index].title}
         key={skills[index].title}
         bubbleV={i === 0 ? bubbleTop : i === 6 ? bubbleBottom : bubbleV}
+        transition={{ type: "spring", stiffness: 100 }}
       >
         {skills[index].title}
       </SkillBubble>
