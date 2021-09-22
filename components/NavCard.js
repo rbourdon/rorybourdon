@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Card from "@/components/Card";
 import CardStem from "@/components/CardStem";
 import CardFace from "@/components/CardFace";
+import ShineBand from "@/components/ShineBand";
 import CardBacking from "@/components/CardBacking";
 import CardBorder from "@/components/CardBorder";
 import CardEffect from "@/components/CardEffect";
@@ -204,7 +205,6 @@ export default function NavCard({
         )}
         <Card variants={cardV} width={cardWidth} height={cardHeight} id={id}>
           <CardBorder
-            stroke="#3a3a3a"
             color1={color1}
             color2={color2}
             width={cardWidth}
@@ -284,6 +284,26 @@ export default function NavCard({
             id={id}
           />
           {children}
+          <ShineBand
+            width={cardWidth}
+            height={cardHeight}
+            sWidth={sWidth}
+            bRadius={bRadius}
+            shineV={{
+              hidden: {},
+              visible: {
+                transition: {
+                  delayChildren: cardWidth * cardHeight * 0.0000012 - 0.75,
+                  type: "tween",
+                  duration: 0.3,
+                  ease: "linear",
+                  repeat: Infinity,
+                  repeatDelay: 5,
+                },
+              },
+            }}
+            id={id}
+          />
         </Card>
         {stemLength && (stemLoc === 3 || stemLoc === 4) && (
           <>

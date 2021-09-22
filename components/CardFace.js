@@ -33,22 +33,6 @@ const gradientBandV = {
   }),
 };
 
-const shineBandV = {
-  hidden: (custom) => ({
-    d: custom.start,
-  }),
-  visible: (custom) => ({
-    d: [custom.start, custom.middle, custom.end],
-    transition: {
-      type: "tween",
-      duration: 0.35,
-      ease: "linear",
-      repeat: Infinity,
-      repeatDelay: 5,
-    },
-  }),
-};
-
 export default function CardFace({
   width,
   height,
@@ -130,26 +114,27 @@ export default function CardFace({
           }}
           variants={gradientBandV}
         />
-        <motion.path
+        {/* <motion.path
           x={sWidth / 2 + "px"}
           y={sWidth / 2 + "px"}
           width={width - sWidth + "px"}
           height={height - sWidth + "px"}
           stroke="#FFFFFF"
-          strokeWidth={70}
+          strokeWidth={90}
           style={{
-            opacity: 0.075,
-            mixBlendMode: "luminosity",
+            opacity: 0.255,
+            mixBlendMode: "hard-light",
+
             zIndex: 10,
           }}
           custom={{
             start: `M-0,0 L0,0`,
             middle: `M-${width},${height * 2} L${width * 2},-${height}`,
-            //end: `M-${width},${height * 2} L${width * 2},-${height}`,
-            end: `M${width},${height} L${width},${height}`,
+            end: `M-${width},${height * 2} L${width * 2},-${height}`,
+            //end: `M${width},${height} L${width},${height}`,
           }}
           variants={shineBandV}
-        />
+        /> */}
       </motion.svg>
     </Container>
   );
