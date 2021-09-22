@@ -2,14 +2,15 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 const Container = styled(motion.div)`
-  width: ${(props) => props.$cWidth + "px"};
-  height: ${(props) => props.$cHeight + "px"};
+  width: ${(props) => props.$width + "px"};
+  height: ${(props) => props.$height + "px"};
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: -${(props) => (props.$cHeight - props.$height) / 2 + "px"};
-  left: -${(props) => (props.$cWidth - props.$width) / 2 + "px"};
+  overflow: hidden;
+  top: ${(props) => props.$yOffset + "px"};
+  left: ${(props) => props.$xOffset + "px"};
   z-index: 0;
 `;
 
@@ -22,27 +23,27 @@ export default function CardEffect({
   radius,
   color1,
   color2,
-  x,
-  y,
+  xOff,
+  yOff,
   id,
 }) {
   const circleRad = radius ? radius : 150;
   const lineLoc = {
-    x: width * (x ? x : 0.5) + circleRad,
-    y: height * (y ? y : 0.5) + circleRad / 2,
+    x: circleRad * 2,
+    y: circleRad * 2,
   };
   return (
     <Container
-      $width={width}
-      $height={height}
-      $cWidth={circleRad * 2 + sWidth * 2 + width * (x ? x : 0.5)}
-      $cHeight={circleRad * 2 + sWidth * 2 + height * (y ? y : 0.5)}
-      $rad={circleRad}
+      $width={circleRad * 4 + sWidth * 2}
+      $height={circleRad * 4 + sWidth * 2}
+      $xOffset={width / 2 - (circleRad * 4 + sWidth * 2) / 2 + xOff}
+      $yOffset={height / 2 - (circleRad * 4 + sWidth * 2) / 2 + yOff}
+      layoutId={`${id}`}
     >
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox={`0 0 ${circleRad * 2 + sWidth * 2 + width * (x ? x : 0.5)} ${
-          circleRad * 2 + sWidth * 2 + height * (y ? y : 0.5)
+        viewBox={`0 0 ${circleRad * 4 + sWidth * 2} ${
+          circleRad * 4 + sWidth * 2
         }`}
       >
         <defs>
@@ -56,40 +57,41 @@ export default function CardEffect({
             <stop offset="1" stopColor={color2} />
           </linearGradient>
         </defs>
-        <motion.path
-          d={`M${width * (x ? x : 0.5)},${
-            circleRad / 2 + sWidth * 2 + height * (y ? y : 0.5)
-          } a${circleRad},${circleRad} 0 0 1 ${circleRad},-${circleRad} a${circleRad},${circleRad} 0 0 1 ${circleRad},${circleRad} a${circleRad},${circleRad} 0 0 1 -${circleRad},${circleRad} a${circleRad},${circleRad} 0 0 1 -${circleRad},-${circleRad}`}
-          stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
-          strokeWidth={sWidth}
-          fill="none"
-          variants={circleV}
-        />
-        <motion.path
-          d={`M${lineLoc.x},${lineLoc.y} l${circleRad * 1.5},-${
-            circleRad * 1.5
-          }`}
-          stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
-          strokeWidth={sWidth}
-          fill="none"
-          variants={lineV}
-        />
-        <motion.path
-          d={`M${lineLoc.x - 20},${lineLoc.y + 60} l${circleRad * 1.5},-${
-            circleRad * 1.5
-          }`}
-          stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
-          strokeWidth={sWidth}
-          fill="none"
-          variants={lineV}
-        />
-        <motion.path
-          d={`M${lineLoc.x - 60},${lineLoc.y + 20} l${circleRad},-${circleRad}`}
-          stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
-          strokeWidth={sWidth}
-          fill="none"
-          variants={lineV}
-        />
+        <motion.g>
+          <motion.path
+            d={`M${circleRad},${
+              circleRad * 2 + sWidth
+            } a${circleRad},${circleRad} 0 0 1 ${circleRad},-${circleRad} a${circleRad},${circleRad} 0 0 1 ${circleRad},${circleRad} a${circleRad},${circleRad} 0 0 1 -${circleRad},${circleRad} a${circleRad},${circleRad} 0 0 1 -${circleRad},-${circleRad}`}
+            stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
+            strokeWidth={sWidth}
+            fill="none"
+            variants={circleV}
+          />
+          <motion.path
+            d={`M${lineLoc.x},${lineLoc.y} l${circleRad},-${circleRad}`}
+            stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
+            strokeWidth={sWidth}
+            fill="none"
+            custom={{ x: 40, y: -40 }}
+            variants={lineV}
+          />
+          <motion.path
+            d={`M${lineLoc.x},${lineLoc.y - 40} l${circleRad},-${circleRad}`}
+            stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
+            strokeWidth={sWidth}
+            fill="none"
+            custom={{ x: 30, y: -30 }}
+            variants={lineV}
+          />
+          <motion.path
+            d={`M${lineLoc.x},${lineLoc.y + 40} l${circleRad},-${circleRad}`}
+            stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
+            strokeWidth={sWidth}
+            fill="none"
+            custom={{ x: 20, y: -20 }}
+            variants={lineV}
+          />
+        </motion.g>
       </motion.svg>
     </Container>
   );
