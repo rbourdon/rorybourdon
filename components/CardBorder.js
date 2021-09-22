@@ -10,6 +10,7 @@ const Container = styled(motion.div)`
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 3;
 `;
 
 function getPath(startLoc, height, width, bRadius, sWidth, offset) {
@@ -187,7 +188,7 @@ export default function CardBorder({
   const startLocation = startLoc ? startLoc : 8;
   const innerOff = innerOffset ? innerOffset : -10;
   return (
-    <Container>
+    <Container layoutId={`${id}cardBorder`}>
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox={`0 0 ${width} ${height}`}
@@ -209,6 +210,7 @@ export default function CardBorder({
           d={getPath(startLocation, height, width, bRadius, sWidth, 0)}
           stroke={stroke}
           strokeWidth={sWidth}
+          vector-effect="non-scaling-stroke"
           fill="none"
           style={{ zIndex: 3 }}
           variants={borderV}
@@ -217,6 +219,7 @@ export default function CardBorder({
           d={getPath(startLocation, height, width, bRadius, sWidth, innerOff)}
           stroke={`url(#${id ? id + "_border" : "borderGradient"})`}
           strokeWidth={sWidth}
+          vector-effect="non-scaling-stroke"
           fill="none"
           style={{ zIndex: 3 }}
           variants={innerBorderV}
