@@ -1,4 +1,4 @@
-import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { createGlobalStyle } from "styled-components";
 import { ThemeControlProvider } from "@/lib/ThemeContext";
 
