@@ -6,7 +6,7 @@ const Container = styled(motion.div)`
   width: 100%;
   min-width: 100%;
   max-width: 100%;
-  height: 180px;
+  height: 150px;
   display: grid;
   grid-template-rows: 100%;
   grid-template-columns: 8vw 1fr;
@@ -24,29 +24,33 @@ const NavBox = styled(motion.div)`
 `;
 
 const LogoContainer = styled(motion.div)`
-  width: 100%;
-  height: 100%;
+  width: 120px;
+  height: 120px;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 `;
 
-export default function NavBar({ children, introComplete }) {
+export default function NavBar({ children, logoComplete, setIntroComplete }) {
   return (
     <Container>
-      {introComplete && (
-        <LogoContainer
-          layoutId="logo"
-          transition={{ type: "spring", duration: 0.9, bounce: 0.125 }}
-        >
-          <Logo strokeWidth={2} />
-        </LogoContainer>
-      )}
-      {!introComplete && <LogoContainer />}
-      {introComplete && (
-        <NavBox initial="hidden" animate="visible">
-          {children}
-        </NavBox>
+      {logoComplete && (
+        <>
+          <LogoContainer
+            transition={{ type: "spring", duration: 1, bounce: 0.2 }}
+            layoutId="logo"
+            onLayoutAnimationComplete={() =>
+              setIntroComplete ? setIntroComplete(true) : null
+            }
+          >
+            <Logo />
+          </LogoContainer>
+
+          <NavBox initial="hidden" animate="visible">
+            {children}
+          </NavBox>
+        </>
       )}
     </Container>
   );
