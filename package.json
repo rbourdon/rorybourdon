@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "framer-motion": "^5.0.0-beta.27",
-    "next": "^11.1.2",
+    "framer-motion": "^5.0.0-beta.35",
+    "next": "latest",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-intersection-observer": "^8.32.1",
@@ -22,7 +22,7 @@
     "eslint-config-next": "^11.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react": "^7.26.0",
     "prettier": "^2.3.2"
   }
 }
