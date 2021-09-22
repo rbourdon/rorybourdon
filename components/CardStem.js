@@ -29,25 +29,32 @@ export default function CardStem({
   stemDir,
   stemLength,
   stemLoc,
-  stemSide,
   bRadius,
   sWidth,
 }) {
+  console.log(width, bRadius);
   const stemStart = {
     x:
-      stemDir === "h"
-        ? stemSide === "l"
-          ? 0
-          : stemLength
-        : stemLoc == 2
-        ? width * 0.665
-        : width * 0.335,
+      stemLoc === 2 || stemLoc === 5
+        ? (width - bRadius * 2 - sWidth / 2) * 0.665 + bRadius + sWidth / 2
+        : stemLoc === 1 || stemLoc === 6
+        ? (width - bRadius * 2 - sWidth / 2) * 0.335 + bRadius + sWidth / 2
+        : stemLoc === 7 || stemLoc === 8
+        ? 0
+        : stemLength,
     y:
-      stemDir === "h"
-        ? stemLoc == 2
-          ? height * 0.665
-          : (height - bRadius * 2 - sWidth / 2) * 0.335 + bRadius + sWidth / 2
-        : 0,
+      stemLoc === 3 || stemLoc === 8
+        ? (height - bRadius * 2 - sWidth / 2) * 0.335 + bRadius + sWidth / 2
+        : stemLoc === 4 || stemLoc === 7
+        ? (height - bRadius * 2 - sWidth / 2) * 0.665 + bRadius + sWidth / 2
+        : stemLoc === 1 || stemLoc === 2
+        ? 0
+        : height,
+    // stemDir === "h"
+    //   ? stemLoc == 2
+    //     ? height * 0.665
+    //     : (height - bRadius * 2 - sWidth / 2) * 0.335 + bRadius + sWidth / 2
+    //   : 0,
   };
   return (
     <Container $width={width + "px"} $height={height + "px"}>
@@ -58,7 +65,9 @@ export default function CardStem({
         <motion.path
           //Draw with stem, based on passed in location
           d={`M${stemStart.x},${stemStart.y} ${stemDir}${
-            stemSide === "l" ? stemLength : -stemLength
+            stemLoc === 3 || stemLoc === 4 || stemLoc === 5 || stemLoc === 6
+              ? -stemLength
+              : stemLength
           }`}
           stroke={stroke}
           strokeWidth={sWidth}
