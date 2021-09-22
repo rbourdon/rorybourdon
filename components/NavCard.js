@@ -176,32 +176,41 @@ export default function NavCard({
           id={id}
         />
         {stemLength && (stemLoc === 7 || stemLoc === 8) && (
-          <CardStem
-            width={
-              stemDir === "h"
-                ? stemLength
+          <>
+            <Tagline
+              cardHeight={cardHeight}
+              bRadius={bRadius}
+              stemLoc={stemLoc}
+            >
+              {tagline}
+            </Tagline>
+            <CardStem
+              width={
+                stemDir === "h"
                   ? stemLength
+                    ? stemLength
+                    : defaultWidth
+                  : width
+                  ? width
                   : defaultWidth
-                : width
-                ? width
-                : defaultWidth
-            }
-            height={
-              stemDir === "v"
-                ? stemLength
+              }
+              height={
+                stemDir === "v"
                   ? stemLength
+                    ? stemLength
+                    : defaultHeight
+                  : height
+                  ? height
                   : defaultHeight
-                : height
-                ? height
-                : defaultHeight
-            }
-            sWidth={sWidth}
-            bRadius={bRadius}
-            stemDir={stemDir === "h" || stemDir === "v" ? stemDir : "h"}
-            stemLength={stemLength ? stemLength : defaultWidth}
-            stroke="#3a3a3a"
-            stemLoc={stemLoc}
-          />
+              }
+              sWidth={sWidth}
+              bRadius={bRadius}
+              stemDir={stemDir === "h" || stemDir === "v" ? stemDir : "h"}
+              stemLength={stemLength ? stemLength : defaultWidth}
+              stroke="#3a3a3a"
+              stemLoc={stemLoc}
+            />
+          </>
         )}
         <Card variants={cardV} width={cardWidth} height={cardHeight} id={id}>
           <CardBorder
@@ -333,7 +342,12 @@ export default function NavCard({
               stroke="#3a3a3a"
               stemLoc={stemLoc}
             />
-            <Tagline cardHeight={cardHeight} bRadius={bRadius}>
+
+            <Tagline
+              cardHeight={cardHeight}
+              bRadius={bRadius}
+              stemLoc={stemLoc}
+            >
               {tagline}
             </Tagline>
           </>
