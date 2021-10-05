@@ -6,8 +6,7 @@ const Text = styled(motion.p)`
   min-width: max-content;
   font-weight: 300;
   font-size: 1.125rem;
-  padding-left: 10px;
-  padding-top: 2px;
+  padding: ${(props) => props.$padding};
 `;
 
 const tagV = {
@@ -34,7 +33,17 @@ export default function Tagline({ children, cardHeight, bRadius, stemLoc }) {
         : (cardHeight - bRadius * 2) * 0.665 + bRadius / 2,
   };
   return (
-    <Text custom={y} variants={tagV}>
+    <Text
+      $padding={
+        stemLoc === 3 || stemLoc === 4
+          ? "2px 0 0 10px"
+          : stemLoc === 7 || stemLoc === 8
+          ? "2px 10px 0 0"
+          : "2px 0 0 0"
+      }
+      custom={y}
+      variants={tagV}
+    >
       {children}
     </Text>
   );
