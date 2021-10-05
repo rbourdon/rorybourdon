@@ -7,6 +7,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useContext } from "react";
+
 const Bubble = styled(motion.div)`
   height: 36px;
   min-width: 75px;
@@ -49,7 +50,7 @@ export default function SkillBubble({ title, bubbleV, transition }) {
       key={title + "_bub"}
       variants={bubbleV}
       layoutId={`${title.substring(0, 3)}Bubble`}
-      transition={transition ? transition : { type: "spring", stiffness: 30 }}
+      transition={transition}
       onHoverStart={() => handleHover(hover, 1)}
       onHoverEnd={() => handleHover(hover, 0)}
       style={{ border, backgroundColor }}
@@ -60,3 +61,7 @@ export default function SkillBubble({ title, bubbleV, transition }) {
     </Bubble>
   );
 }
+
+SkillBubble.defaultProps = {
+  transition: { type: "spring", stiffness: 30 },
+};
