@@ -92,7 +92,7 @@ export default function SkillsCard({ skills, selected, children }) {
         effectRadius={325}
         id="skills"
         delay={0.5}
-        tagline="I have a wide variety of skills and love to learn."
+        tagline="I have a wide variety of skills and love to learn"
         selected={selected}
       >
         <CardContent layoutId={"skillsCard_cardContent"} variants={skillsCardV}>
