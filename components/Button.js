@@ -1,7 +1,7 @@
 import styled, { ThemeContext } from "styled-components";
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
 import Link from "next/link";
-import CardBorder from "@/components/Cards/CardBorder";
+import CardBorder from "@/components/CardComponents/CardBorder";
 import { useContext } from "react";
 
 const Container = styled(motion.a)`

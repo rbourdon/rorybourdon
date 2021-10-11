@@ -1,6 +1,6 @@
 import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
-import NavCard from "@/components/Cards/NavCard";
+import NavCard from "@/components/CardComponents/NavCard";
 import { useContext } from "react";
 import ProjectsIcon from "@/components/Icons/ProjectsIcon";
 import Underline from "@/components/Underline";

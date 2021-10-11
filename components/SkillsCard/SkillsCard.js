@@ -1,6 +1,6 @@
 import styled, { ThemeContext } from "styled-components";
 import { motion, MotionConfig } from "framer-motion";
-import NavCard from "@/components/Cards/NavCard";
+import NavCard from "@/components/CardComponents/NavCard";
 import SkillsIcon from "@/components/Icons/SkillsIcon";
 import { useContext, useState } from "react";
 import SkillRoller from "@/components/SkillsCard/SkillRoller";

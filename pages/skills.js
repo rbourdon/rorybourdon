@@ -1,6 +1,6 @@
 import Layout from "@/components/layout";
 import styled, { ThemeContext } from "styled-components";
-import NavCard from "@/components/Cards/NavCard";
+import NavCard from "@/components/CardComponents/NavCard";
 import { motion, MotionConfig } from "framer-motion";
 import React, { useContext } from "react";
 import { getSkillList } from "@/lib/graphcms";

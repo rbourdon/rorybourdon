@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import Card from "@/components/Cards/Card";
-import CardStem from "@/components/Cards/CardStem";
-import CardFace from "@/components/Cards/CardFace";
-import ShineBand from "@/components/Cards/ShineBand";
-import CardBacking from "@/components/Cards/CardBacking";
-import CardBorder from "@/components/Cards/CardBorder";
-import CardEffect from "@/components/Cards/CardEffect";
-import Tagline from "@/components/Cards/Tagline";
+import Card from "@/components/CardComponents/Card";
+import CardStem from "@/components/CardComponents/CardStem";
+import CardFace from "@/components/CardComponents/CardFace";
+import ShineBand from "@/components/CardComponents/ShineBand";
+import CardBacking from "@/components/CardComponents/CardBacking";
+import CardBorder from "@/components/CardComponents/CardBorder";
+import CardEffect from "@/components/CardComponents/CardEffect";
+import Tagline from "@/components/CardComponents/Tagline";
 import { motion } from "framer-motion";
 import useWindowSize from "@/components/utils/useWindowSize";
 

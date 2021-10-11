@@ -1,5 +1,5 @@
 import Layout from "@/components/layout";
-import NavCard from "@/components/Cards/NavCard";
+import NavCard from "@/components/CardComponents/NavCard";
 import SkillsCard from "@/components/SkillsCard/SkillsCard";
 import ProjectsCard from "@/components/ProjectsCard/ProjectsCard";
 import styled, { ThemeContext } from "styled-components";
