@@ -4,11 +4,6 @@ import Link from "next/link";
 import CardBorder from "@/components/CardBorder";
 import { useContext } from "react";
 
-const defaultWidth = 175;
-const defaultHeight = 50;
-const defaultStrokeWidth = 1.2;
-const defaultBorderRadius = 23;
-
 const Container = styled(motion.a)`
   width: ${(props) => props.$width + "px"};
   height: ${(props) => props.$height + "px"};
@@ -40,6 +35,15 @@ const borderV = {
       duration: 0.75,
     },
   },
+  selected: {
+    pathLength: 1,
+    transition: {
+      duration: 0.75,
+    },
+  },
+  exit: {
+    pathLength: 0,
+  },
 };
 
 const innerBorderV = {
@@ -52,20 +56,41 @@ const innerBorderV = {
       duration: 0.85,
     },
   },
+  selected: {
+    pathLength: 1,
+    transition: {
+      duration: 0.75,
+    },
+  },
+  exit: {
+    pathLength: 0,
+  },
 };
 
 const contentV = {
   hidden: (custom) => ({
-    borderRadius: custom.borderRadius,
+    borderRadius: custom.bRadius,
     opacity: 0,
   }),
   visible: (custom) => ({
-    borderRadius: custom.borderRadius,
+    borderRadius: custom.bRadius,
     opacity: 1,
     transition: {
-      delay: custom.delay + 1,
-      duration: 0.4,
+      delay: custom.delay + 0.65,
+      duration: 0.3,
     },
+  }),
+  selected: (custom) => ({
+    borderRadius: custom.bRadius,
+    opacity: 1,
+    transition: {
+      delay: custom.delay + 0.65,
+      duration: 0.3,
+    },
+  }),
+  exit: (custom) => ({
+    borderRadius: custom.bRadius,
+    opacity: 0,
   }),
 };
 
@@ -88,23 +113,17 @@ function handleHoverEnd(hover) {
 export default function Button({
   href,
   children,
-  width,
-  height,
-  color1,
-  color2,
-  sWidth,
-  bRadius,
+  width = 175,
+  height = 50,
+  color1 = "#358ab5",
+  color2 = "#b36db5",
+  sWidth = 1.2,
+  bRadius = 23,
   id,
   delay,
   onClick,
 }) {
   const theme = useContext(ThemeContext);
-  const buttonWidth = width ? width : defaultWidth;
-  const buttonHeight = height ? height : defaultHeight;
-  const buttonColor1 = color1 ? color1 : "#358ab5";
-  const buttonColor2 = color2 ? color2 : "#b36db5";
-  const strokeWidth = sWidth ? sWidth : defaultStrokeWidth;
-  const borderRadius = bRadius ? bRadius : defaultBorderRadius;
   const hover = useMotionValue(0);
 
   // const scaleY = useTransform(hover, [0, 1], [1, 1.1]);
@@ -117,6 +136,7 @@ export default function Button({
       "0px 0px 15px 0px " +
       latestShadow2
   );
+
   const frameV = {
     visible: {
       transition: {
@@ -130,8 +150,8 @@ export default function Button({
   return (
     <Link href={href ? href : "/"} passHref scroll={false}>
       <Container
-        $width={buttonWidth}
-        $height={buttonHeight}
+        $width={width}
+        $height={height}
         onHoverStart={() => handleHoverStart(hover)}
         onHoverEnd={() => handleHoverEnd(hover)}
         onClick={(e) => onClick(id)(e)}
@@ -142,19 +162,19 @@ export default function Button({
             backgroundColor: theme.primary_light,
             boxShadow,
           }}
-          custom={{ borderRadius: borderRadius, delay: delay }}
+          custom={{ bRadius: bRadius, delay: delay }}
           variants={contentV}
           layoutId={`${id}ButtonContent`}
         >
           {children}
         </Content>
         <CardBorder
-          color1={buttonColor1}
-          color2={buttonColor2}
-          width={buttonWidth}
-          height={buttonHeight}
-          sWidth={strokeWidth}
-          bRadius={borderRadius}
+          color1={color1}
+          color2={color2}
+          width={width}
+          height={height}
+          sWidth={sWidth}
+          bRadius={bRadius}
           startLoc={3}
           borderV={borderV}
           frameV={frameV}
