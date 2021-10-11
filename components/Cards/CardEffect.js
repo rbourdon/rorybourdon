@@ -20,7 +20,6 @@ export default function CardEffect({
   height,
   circleV,
   lineV,
-  variants,
   radius = 150,
   color1,
   color2,

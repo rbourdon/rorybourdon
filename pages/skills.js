@@ -1,12 +1,12 @@
 import Layout from "@/components/layout";
 import styled, { ThemeContext } from "styled-components";
-import NavCard from "@/components/NavCard";
+import NavCard from "@/components/Cards/NavCard";
 import { motion, MotionConfig } from "framer-motion";
 import React, { useContext } from "react";
 import { getSkillList } from "@/lib/graphcms";
-import NavBar from "@/components/NavBar";
-import NavLink from "@/components//NavLink";
-import SkillsIcon from "@/components/SkillsIcon";
+import NavBar from "@/components/Nav/NavBar";
+import NavLink from "@/components/Nav/NavLink";
+import SkillsIcon from "@/components/Icons/SkillsIcon";
 import SkillScroller from "@/components/SkillScroller";
 
 const Container = styled(motion.div)`

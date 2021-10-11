@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import Logo from "@/components/Logo";
+import Logo from "@/components/Nav/Logo";
 import Link from "next/link";
 
 const Container = styled(motion.div)`

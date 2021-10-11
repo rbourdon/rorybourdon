@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import SkillChip from "@/components/SkillChip";
+import SkillChip from "@/components/ProjectsCard/SkillChip";
 
 const Container = styled(motion.div)`
   width: 100%;

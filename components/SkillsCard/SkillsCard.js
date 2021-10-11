@@ -1,9 +1,9 @@
 import styled, { ThemeContext } from "styled-components";
 import { motion, MotionConfig } from "framer-motion";
-import NavCard from "@/components/NavCard";
-import SkillsIcon from "@/components/SkillsIcon";
+import NavCard from "@/components/Cards/NavCard";
+import SkillsIcon from "@/components/Icons/SkillsIcon";
 import { useContext, useState } from "react";
-import SkillRoller from "@/components/SkillRoller";
+import SkillRoller from "@/components/SkillsCard/SkillRoller";
 import Underline from "@/components/Underline";
 import { useInView } from "react-intersection-observer";
 import Button from "@/components/Button";

@@ -1,15 +1,15 @@
 import Layout from "@/components/layout";
-import NavCard from "@/components/NavCard";
-import SkillsCard from "@/components/SkillsCard";
-import ProjectsCard from "@/components/ProjectsCard";
+import NavCard from "@/components/Cards/NavCard";
+import SkillsCard from "@/components/SkillsCard/SkillsCard";
+import ProjectsCard from "@/components/ProjectsCard/ProjectsCard";
 import styled, { ThemeContext } from "styled-components";
 import Button from "@/components/Button";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import Banner from "@/components/Banner";
 import { getAllSkillsTitles } from "@/lib/graphcms";
-import NavBar from "@/components/NavBar";
-import NavLink from "@/components//NavLink";
+import NavBar from "@/components/Nav/NavBar";
+import NavLink from "@/components/Nav/NavLink";
 
 const Container = styled(motion.div)`
   width: 100%;

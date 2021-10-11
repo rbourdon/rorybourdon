@@ -1,10 +1,10 @@
 import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
-import NavCard from "@/components/NavCard";
+import NavCard from "@/components/Cards/NavCard";
 import { useContext } from "react";
-import ProjectsIcon from "@/components/ProjectsIcon";
+import ProjectsIcon from "@/components/Icons/ProjectsIcon";
 import Underline from "@/components/Underline";
-import ProjectSummary from "./ProjectSummary";
+import ProjectSummary from "@/components/ProjectsCard/ProjectSummary";
 import { useInView } from "react-intersection-observer";
 import Button from "@/components/Button";
 
