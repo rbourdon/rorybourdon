@@ -1,87 +1,69 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import SkillBubble from "@/components/SkillBubble";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useInterval from "@/components/utils/useInterval";
+
+const NUM_SKILLS = 6;
+const TICK_RATE = 1600;
 
 const Container = styled(motion.div)`
-  width: 100%;
+  width: 110%;
   height: 100%;
   display: grid;
   grid-template-rows: repeat(auto-fit, 36px);
   grid-template-columns: 100%;
-  row-gap: 8px;
+  row-gap: 15px;
   align-content: center;
   justify-items: center;
   align-items: center;
   overflow: hidden;
 `;
 
-const bubbleV = {
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.25,
-    },
-  },
-};
-
-const bubbleBottom = {
-  hidden: { opacity: 0 },
-};
-
-const bubbleTop = {
-  hidden: { opacity: 1 },
-  visible: {
-    opacity: 0,
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
-
-function SkillBubbles({ skills, rollerPos }) {
-  const skillBubbles = [];
-
-  for (let i = 0; i <= 6; i++) {
-    const index =
-      rollerPos + i > skills.length - 1
-        ? rollerPos + i - (skills.length - 1) - 1
-        : rollerPos + i;
-    skillBubbles.push(
-      <SkillBubble
-        title={skills[index].title}
-        key={skills[index].title}
-        bubbleV={i === 0 ? bubbleTop : i === 6 ? bubbleBottom : bubbleV}
-        transition={{ type: "spring", stiffness: 100 }}
-      >
-        {skills[index].title}
-      </SkillBubble>
-    );
-  }
-
-  return skillBubbles;
-}
-
 export default function SkillRoller({ skills, selected }) {
   const [rollerPos, setRollerPos] = useState(0);
-  const [scrollTimer, setScrollTimer] = useState(null);
-
-  const scrollSkills = () => {
-    setRollerPos((prev) => (prev + 1 > skills.length - 1 ? 0 : prev + 1));
-  };
-
-  useEffect(() => {
-    scrollTimer && clearInterval(scrollTimer);
-    !selected && setScrollTimer(setInterval(scrollSkills, 1100));
-    return function cleanup() {
-      clearInterval(scrollTimer);
-      setScrollTimer(null);
-    };
-  }, [selected]);
+  const [hovering, setHovering] = useState(false);
+  useInterval(
+    () => {
+      setRollerPos((prev) => (prev + 1 > skills.length - 1 ? 0 : prev + 1));
+    },
+    selected ? null : TICK_RATE
+  );
 
   return (
     <Container layoutId="skillRoller">
-      <SkillBubbles skills={skills} rollerPos={rollerPos} />
+      {[
+        ...skills.slice(rollerPos, rollerPos + NUM_SKILLS),
+        ...skills.slice(
+          0,
+          NUM_SKILLS - skills.slice(rollerPos, rollerPos + NUM_SKILLS).length
+        ),
+      ].map((skill, index) => {
+        return (
+          <SkillBubble
+            title={skill.title}
+            key={skill.title}
+            index={index}
+            height={36}
+            transition={{
+              type: "spring",
+              stiffness: 200,
+              mass: 1.25,
+              damping: 15,
+            }}
+            outlineTransition={{
+              type: "spring",
+              stiffness: 200,
+              mass: 1.25,
+              damping: 15,
+            }}
+            onHover={setHovering}
+            hovering={hovering === skill.title}
+          >
+            {skill.title}
+          </SkillBubble>
+        );
+      })}
     </Container>
   );
 }

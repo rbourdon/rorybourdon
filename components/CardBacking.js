@@ -20,13 +20,16 @@ export default function CardBacking({
   bRadius,
   sWidth,
   backingV,
+  keyShadow,
+  bgColor,
   id,
 }) {
   const theme = useContext(ThemeContext);
   const boxShadow = useTransform(
     [theme.shadow_key, theme.shadow_ambient],
     ([latestShadow1, latestShadow2]) =>
-      "1px 2px 3px 0px " +
+      keyShadow +
+      " " +
       latestShadow1 +
       ", " +
       "0px 0px 30px 0px " +
@@ -35,7 +38,6 @@ export default function CardBacking({
   return (
     <Container
       variants={backingV}
-      layout
       style={{
         borderRadius: bRadius,
         boxShadow,
@@ -55,7 +57,7 @@ export default function CardBacking({
           height={height - sWidth + "px"}
           stroke="none"
           style={{
-            fill: theme.primary_light,
+            fill: bgColor || theme.primary_light,
             rx: bRadius + "px",
           }}
         />

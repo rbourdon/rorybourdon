@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import styled from "styled-components";
+import { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 
 const Container = styled(motion.div)`
   width: ${(props) => props.$width};
@@ -8,19 +9,6 @@ const Container = styled(motion.div)`
   justify-content: center;
   align-items: center;
 `;
-
-const stemV = {
-  hidden: {
-    pathLength: 0,
-  },
-  visible: {
-    pathLength: 1,
-    transition: {
-      duration: 0.3,
-      ease: "linear",
-    },
-  },
-};
 
 export default function CardStem({
   width,
@@ -31,6 +19,7 @@ export default function CardStem({
   stemLoc,
   bRadius,
   sWidth,
+  variants,
 }) {
   const stemStart = {
     x:
@@ -55,6 +44,7 @@ export default function CardStem({
     //     : (height - bRadius * 2 - sWidth / 2) * 0.335 + bRadius + sWidth / 2
     //   : 0,
   };
+  const theme = useContext(ThemeContext);
   return (
     <Container $width={width + "px"} $height={height + "px"}>
       <motion.svg
@@ -70,7 +60,8 @@ export default function CardStem({
           }`}
           stroke={stroke}
           strokeWidth={sWidth}
-          variants={stemV}
+          style={{ zIndex: 3, stroke: theme.primary_dark }}
+          variants={variants}
         />
       </motion.svg>
     </Container>

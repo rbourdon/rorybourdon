@@ -184,6 +184,7 @@ export default function CardBorder({
   color2,
   innerOffset,
   id,
+  gradientRotation = -45,
 }) {
   const startLocation = startLoc ? startLoc : 8;
   const innerOff = innerOffset ? innerOffset : -10;
@@ -199,18 +200,17 @@ export default function CardBorder({
           <linearGradient
             id={id ? id + "_border" : "borderGradient"}
             gradientUnits="userSpaceOnUse"
-            gradientTransform={`rotate(${-45 + (height - width) * 0.075}, ${
-              width * 0.5
-            }, ${height * 0.5})`}
+            gradientTransform={`rotate(${
+              gradientRotation + (height - width) * 0.055
+            }, ${width * 0.5}, ${height * 0.5})`}
           >
-            <stop offset=".25" stopColor={color1} />
-            <stop offset=".75" stopColor={color2} />
+            <motion.stop offset=".25" stopColor={color1} />
+            <motion.stop offset=".75" stopColor={color2} />
           </linearGradient>
         </defs>
         <motion.path
           d={getPath(startLocation, height, width, bRadius, sWidth, 0)}
           strokeWidth={sWidth}
-          vector-effect="non-scaling-stroke"
           fill="none"
           style={{ zIndex: 3, stroke: theme.primary_dark }}
           variants={borderV}
@@ -219,7 +219,6 @@ export default function CardBorder({
           d={getPath(startLocation, height, width, bRadius, sWidth, innerOff)}
           stroke={`url(#${id ? id + "_border" : "borderGradient"})`}
           strokeWidth={sWidth}
-          vector-effect="non-scaling-stroke"
           fill="none"
           style={{ zIndex: 3 }}
           variants={innerBorderV}

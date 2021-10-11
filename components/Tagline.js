@@ -9,29 +9,24 @@ const Text = styled(motion.p)`
   padding: ${(props) => props.$padding};
 `;
 
-const tagV = {
-  hidden: (custom) => ({ y: custom.hidden, opacity: 0 }),
-  visible: (custom) => ({
-    opacity: 1,
-    y: custom.visible,
-    transition: {
-      duration: 0.5,
-      delay: 0.1,
-    },
-  }),
-};
-
-export default function Tagline({ children, cardHeight, bRadius, stemLoc }) {
+export default function Tagline({
+  children,
+  height,
+  bRadius,
+  stemLoc,
+  variants,
+}) {
   const y = {
     visible:
       stemLoc === 3 || stemLoc === 8
-        ? (cardHeight - bRadius * 2) * 0.335 + bRadius / 2
-        : (cardHeight - bRadius * 2) * 0.665 + bRadius / 2,
+        ? (height - bRadius * 2) * 0.335 + bRadius / 2
+        : (height - bRadius * 2) * 0.665 + bRadius / 2,
     hidden:
       stemLoc === 3 || stemLoc === 8
-        ? (cardHeight - bRadius * 2) * 0.335 + bRadius / 2
-        : (cardHeight - bRadius * 2) * 0.665 + bRadius / 2,
+        ? (height - bRadius * 2) * 0.335 + bRadius / 2 + 50
+        : (height - bRadius * 2) * 0.665 + bRadius / 2 + 50,
   };
+
   return (
     <Text
       $padding={
@@ -42,7 +37,7 @@ export default function Tagline({ children, cardHeight, bRadius, stemLoc }) {
           : "2px 0 0 0"
       }
       custom={y}
-      variants={tagV}
+      variants={variants}
     >
       {children}
     </Text>

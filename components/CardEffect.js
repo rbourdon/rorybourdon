@@ -20,77 +20,90 @@ export default function CardEffect({
   height,
   circleV,
   lineV,
-  radius,
+  variants,
+  radius = 150,
   color1,
   color2,
   xOff,
   yOff,
   id,
+  gradientRotation = -45,
+  effectRotation = 0,
 }) {
-  const circleRad = radius ? radius : 150;
   const lineLoc = {
-    x: circleRad * 1.5,
-    y: circleRad * 1.5,
+    x: radius * 1.5,
+    y: radius * 1.5,
   };
   return (
     <Container
-      $width={circleRad * 3 + sWidth * 2}
-      $height={circleRad * 3 + sWidth * 2}
-      $xOffset={width / 2 - (circleRad * 3 + sWidth * 2) / 2 + xOff}
-      $yOffset={height / 2 - (circleRad * 3 + sWidth * 2) / 2 + yOff}
-      layoutId={`${id}`}
+      $width={radius * 3 + sWidth * 2}
+      $height={radius * 3 + sWidth * 2}
+      $xOffset={width / 2 - (radius * 3 + sWidth * 2) / 2 + xOff}
+      $yOffset={height / 2 - (radius * 3 + sWidth * 2) / 2 + yOff}
+      layoutId={`${id}CardEffect`}
     >
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox={`0 0 ${circleRad * 3 + sWidth * 2} ${
-          circleRad * 3 + sWidth * 2
-        }`}
+        viewBox={`0 0 ${radius * 3 + sWidth * 2} ${radius * 3 + sWidth * 2}`}
       >
         <defs>
           <linearGradient
             id={id ? id + "_effect" : "cardEffectGradient"}
             gradientUnits="userSpaceOnUse"
-            gradientTransform={`rotate(-45, ${width / 2}, ${height / 2})`}
+            gradientTransform={`rotate(${gradientRotation}, ${width / 2}, ${
+              height / 2
+            })`}
             x1={"-50%"}
           >
-            <stop offset="0" stopColor={color1} />
-            <stop offset="1" stopColor={color2} />
+            <motion.stop offset="0" stopColor={color1} />
+            <motion.stop offset="1" stopColor={color2} />
           </linearGradient>
         </defs>
         <motion.g>
           <motion.path
-            d={`M${circleRad * 0.5},${
-              circleRad * 1.5 + sWidth
-            } a${circleRad},${circleRad} 0 0 1 ${circleRad},-${circleRad} a${circleRad},${circleRad} 0 0 1 ${circleRad},${circleRad} a${circleRad},${circleRad} 0 0 1 -${circleRad},${circleRad} a${circleRad},${circleRad} 0 0 1 -${circleRad},-${circleRad}`}
+            d={`M${radius * 0.5},${
+              radius * 1.5 + sWidth
+            } a${radius},${radius} 0 0 1 ${radius},-${radius} a${radius},${radius} 0 0 1 ${radius},${radius} a${radius},${radius} 0 0 1 -${radius},${radius} a${radius},${radius} 0 0 1 -${radius},-${radius}`}
             stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
             strokeWidth={sWidth}
             fill="none"
             variants={circleV}
           />
-          <motion.path
-            d={`M${lineLoc.x},${lineLoc.y} l${circleRad},-${circleRad}`}
-            stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
-            strokeWidth={sWidth}
-            fill="none"
-            custom={{ x: 40, y: -40 }}
-            variants={lineV}
-          />
-          <motion.path
-            d={`M${lineLoc.x},${lineLoc.y - 40} l${circleRad},-${circleRad}`}
-            stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
-            strokeWidth={sWidth}
-            fill="none"
-            custom={{ x: 30, y: -30 }}
-            variants={lineV}
-          />
-          <motion.path
-            d={`M${lineLoc.x},${lineLoc.y + 40} l${circleRad},-${circleRad}`}
-            stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
-            strokeWidth={sWidth}
-            fill="none"
-            custom={{ x: 20, y: -20 }}
-            variants={lineV}
-          />
+          <motion.g
+            variants={{
+              visible: {
+                originX: 0,
+                originY: 1,
+                rotate: effectRotation,
+                transition: { duration: 0.9 },
+              },
+            }}
+          >
+            <motion.path
+              d={`M${lineLoc.x},${lineLoc.y} l${radius},-${radius}`}
+              stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
+              strokeWidth={sWidth}
+              fill="none"
+              custom={{ x: 40, y: -40 }}
+              variants={lineV}
+            />
+            <motion.path
+              d={`M${lineLoc.x},${lineLoc.y - 40} l${radius},-${radius}`}
+              stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
+              strokeWidth={sWidth}
+              fill="none"
+              custom={{ x: 30, y: -30 }}
+              variants={lineV}
+            />
+            <motion.path
+              d={`M${lineLoc.x},${lineLoc.y + 40} l${radius},-${radius}`}
+              stroke={`url(#${id ? id + "_effect" : "cardEffectGradient"})`}
+              strokeWidth={sWidth}
+              fill="none"
+              custom={{ x: 20, y: -20 }}
+              variants={lineV}
+            />
+          </motion.g>
         </motion.g>
       </motion.svg>
     </Container>
