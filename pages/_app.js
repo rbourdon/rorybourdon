@@ -1,6 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 import { createGlobalStyle } from "styled-components";
-import { ThemeControlProvider } from "@/lib/ThemeContext";
+import { ThemeControlProvider } from "@/lib/Context/ThemeContext";
 
 const GlobalStyle = createGlobalStyle`
   html {
