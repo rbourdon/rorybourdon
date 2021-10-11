@@ -98,7 +98,6 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <ThemeControlProvider>
       <GlobalStyle />
-
       <AnimatePresence
         exitBeforeEnter
         //onExitComplete={() => handleExitComplete()}
