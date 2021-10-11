@@ -7,7 +7,6 @@ import {
   useTransform,
 } from "framer-motion";
 import { useContext, useEffect } from "react";
-import SkillChip from "./SkillChip";
 
 const Bubble = styled(motion.div)`
   height: ${(props) => props.$height + "px"};
