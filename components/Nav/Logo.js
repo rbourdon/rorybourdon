@@ -1,5 +1,5 @@
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
 
 const innerSquareV = {
@@ -44,7 +44,9 @@ const outerSquareV = {
   },
 };
 
-export default function Logo({ onAnimationComplete, intro }) {
+export default function Logo({ intro }) {
+  const [introStarted, setIntroStarted] = useState(false);
+  const [introComplete, setIntroComplete] = useState(!intro);
   const x = useMotionValue(intro ? 350 : 0);
   const y = useMotionValue(intro ? -350 : 0);
   const arrow2x = useTransform(x, [350, 97, 0], [350, 70, 0]);
@@ -53,9 +55,9 @@ export default function Logo({ onAnimationComplete, intro }) {
   const arrow3y = useTransform(y, [-350, -97, 0], [-350, -47, 0]);
   const rotate = useMotionValue(intro ? 180 : 0);
   const theme = useContext(ThemeContext);
-
+  console.log(introComplete);
   useEffect(() => {
-    if (intro) {
+    if (intro && !introStarted) {
       animate(x, 97, {
         type: "spring",
         delay: 0.15,
@@ -94,16 +96,15 @@ export default function Logo({ onAnimationComplete, intro }) {
             damping: 15,
             restDelta: 1,
             restSpeed: 1,
-            onComplete: onAnimationComplete
-              ? () => {
-                  onAnimationComplete(true);
-                }
-              : null,
+            onComplete: () => {
+              setIntroComplete(true);
+            },
           });
         },
       });
+      setIntroStarted(true);
     }
-  }, []);
+  }, [intro, introStarted, rotate, x, y]);
 
   return (
     <motion.svg
