@@ -40,7 +40,7 @@ export default function SkillScroller({ skills }) {
   const theme = useContext(ThemeContext);
   const panPos = useMotionValue(0);
   const [rollerPos, setRollerPos] = useState(11);
-  const [hovering, setHovering] = useState(false);
+  const [hoveredSkill, setHoveredSkill] = useState(false);
 
   const slicedSkills = () => {
     let newSkills = [];
@@ -91,11 +91,11 @@ export default function SkillScroller({ skills }) {
               mass: 0.75,
               damping: 28,
             }}
-            onHover={setHovering}
+            onHover={setHoveredSkill}
             onPan={(e, pointInfo) =>
               panPos.set(panPos.get() + pointInfo.delta.y)
             }
-            hovering={hovering === skill.title}
+            hovering={hoveredSkill === skill.title}
           >
             {skill.title}
           </SkillBubble>
