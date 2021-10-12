@@ -62,14 +62,11 @@ export default function SkillBubble({
 
   useEffect(() => {
     if (index === 0) {
-      opacity.stop();
       const exiting = animate(opacity, 0, { duration: 0.45 });
       return exiting.stop;
     } else if (index === 5) {
-      opacity.stop();
       opacity.set(0);
     } else if (index) {
-      opacity.stop();
       const visible = animate(opacity, 1, { duration: 0.3 });
       return visible.stop;
     }
