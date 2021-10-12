@@ -78,24 +78,22 @@ const CardContent = styled(motion.div)`
 const Banner = styled(motion.div)`
   width: max-content;
   max-width: 100%;
-  font-size: 3.35rem;
-  font-weight: 600;
-  line-height: 1;
   display: flex;
   flex-direction: column;
   justify-self: start;
+  z-index: 3;
+`;
+
+const Title = styled(motion.p)`
+  font-size: 3.35rem;
+  font-weight: 600;
+  line-height: 1;
 `;
 
 const Detail = styled(motion.p)`
-  width: max-content;
-  max-width: 100%;
   font-size: 1.05rem;
   font-weight: 300;
   line-height: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
 `;
 
 const Arrow = styled(motion.div)`
@@ -116,6 +114,23 @@ const skillsIconV = {
   },
 };
 
+const detailsV = {
+  hidden: {
+    opacity: 0,
+    x: 200,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: "spring",
+      stiffness: 60,
+      mass: 1.5,
+      damping: 10,
+    },
+  },
+};
+
 export default function Skills({ skills }) {
   const theme = useContext(ThemeContext);
 
@@ -126,25 +141,48 @@ export default function Skills({ skills }) {
         <NavLink href="/">Resume</NavLink>
       </NavBar>
       <MotionConfig
-        transition={{ type: "spring", stiffness: 60, mass: 2, damping: 10 }}
+        transition={{ type: "spring", stiffness: 60, mass: 1.5, damping: 10 }}
       >
         <Container initial="hidden" animate="visible">
           <Banner
-            layoutId={"skillsCard_label"}
+            layoutId={"skillsCard_banner"}
             transition={{
               type: "spring",
               stiffness: 60,
-              mass: 2,
+              mass: 1.5,
               damping: 10,
             }}
           >
-            Skills
-            <Detail>
+            <Title
+              layoutId={"skillsCard_label"}
+              transition={{
+                type: "spring",
+                stiffness: 60,
+                mass: 1.5,
+                damping: 10,
+              }}
+            >
+              Skills
+            </Title>
+
+            <Detail
+              layoutId={"skillsCard_detail"}
+              transition={{
+                type: "spring",
+                stiffness: 60,
+                mass: 1.5,
+                damping: 10,
+              }}
+              variants={detailsV}
+            >
               These are some of the skills I’ve picked up over the years. I hope
               this list never stops growing.
             </Detail>
           </Banner>
-          <Icon layoutId={"skillsCard_icon"}>
+          <Icon
+            layoutId={"skillsCard_icon"}
+            transition={{ type: "spring", stiffness: 60, mass: 2, damping: 10 }}
+          >
             <SkillsIcon iconV={skillsIconV} />
           </Icon>
           <SkillsColumn>
