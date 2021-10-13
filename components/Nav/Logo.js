@@ -46,7 +46,7 @@ const outerSquareV = {
 
 export default function Logo({ intro }) {
   const [introStarted, setIntroStarted] = useState(false);
-  const [introComplete, setIntroComplete] = useState(!intro);
+  //const [introComplete, setIntroComplete] = useState(!intro);
   const x = useMotionValue(intro ? 350 : 0);
   const y = useMotionValue(intro ? -350 : 0);
   const arrow2x = useTransform(x, [350, 97, 0], [350, 70, 0]);
@@ -55,7 +55,7 @@ export default function Logo({ intro }) {
   const arrow3y = useTransform(y, [-350, -97, 0], [-350, -47, 0]);
   const rotate = useMotionValue(intro ? 180 : 0);
   const theme = useContext(ThemeContext);
-  console.log(introComplete);
+
   useEffect(() => {
     if (intro && !introStarted) {
       animate(x, 97, {
@@ -96,9 +96,9 @@ export default function Logo({ intro }) {
             damping: 15,
             restDelta: 1,
             restSpeed: 1,
-            onComplete: () => {
-              setIntroComplete(true);
-            },
+            // onComplete: () => {
+            //   setIntroComplete(true);
+            // },
           });
         },
       });
