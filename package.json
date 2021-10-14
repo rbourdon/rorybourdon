@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "framer-motion": "^5.0.0-beta.41",
+    "framer-motion": "^5.0.0-beta.43",
     "graphql": "^15.6.1",
     "graphql-request": "^3.5.0",
     "next": "latest",
