@@ -48,11 +48,6 @@ const GlobalStyle = createGlobalStyle`
     font-size: clamp(1rem, .85vw, 1.3rem);
     font-weight: 100;
   }
-  em {
-    font-style: normal;
-    color: var(--color-em);
-    font-weight: 100;
-  }
   figure {
     margin: 0;
   }
@@ -95,7 +90,9 @@ const GlobalStyle = createGlobalStyle`
 // }
 
 function MyApp({ Component, pageProps, router }) {
-  return (
+  const getLayout = Component.getLayout || ((page) => page);
+
+  return getLayout(
     <ThemeControlProvider>
       <GlobalStyle />
       <AnimatePresence
