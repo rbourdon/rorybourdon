@@ -1,7 +1,7 @@
 import Layout from "@/components/layout";
 import NavCard from "@/components/CardComponents/NavCard";
-import SkillsCard from "@/components/SkillsCard/SkillsCard";
-import ProjectsCard from "@/components/ProjectsCard/ProjectsCard";
+import SkillsCard from "@/components/SkillsCard/Index";
+import ProjectsCard from "@/components/ProjectsCard/Index";
 import styled, { ThemeContext } from "styled-components";
 import Button from "@/components/Button";
 import { motion } from "framer-motion";
@@ -10,8 +10,9 @@ import Banner from "@/components/Banner";
 import { getAllSkillsTitles } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
+import Head from "next/head";
 
-const Container = styled(motion.div)`
+const Container = styled(motion.main)`
   width: 100%;
   min-width: 100%;
   min-height: calc(100vh - (150px + 5vh));
@@ -21,7 +22,7 @@ const Container = styled(motion.div)`
   overflow: hidden;
 `;
 
-const HeroBanner = styled(motion.div)`
+const HeroBanner = styled(motion.article)`
   width: 100%;
   height: max-content;
   display: flex;
@@ -103,14 +104,23 @@ export default function Home({ skills }) {
   const theme = useContext(ThemeContext);
 
   return (
-    <Layout title={"Rory Bourdon | Web Developer & Visual Artist"}>
+    <>
+      <Head>
+        <title>Rory Bourdon | Web Developer & Visual Artist</title>
+        <meta name="description" content="Portfolio of Rory Bourdon" />
+        <meta
+          name="og:title"
+          content="Rory Bourdon | Web Developer & Visual Artist"
+        />
+        <meta name="og:description" content="Portfolio of Rory Bourdon" />
+      </Head>
       <NavBar>
         <NavLink href="/skills">Skills</NavLink>
         <NavLink href="/">Projects</NavLink>
         <NavLink href="/">Resume</NavLink>
       </NavBar>
-      <Container>
-        <HeroSection initial="hidden" animate="visible" exit="exit">
+      <Container style={{ backgroundColor: theme.primary }}>
+        <HeroSection initial="hidden" animate="visible">
           <HeroBanner>
             <Banner />
             <Buttons variants={buttonsV}>
@@ -151,16 +161,23 @@ export default function Home({ skills }) {
             </NavCard>
           </HeroBody>
         </HeroSection>
-        <SkillsSection style={{ backgroundColor: theme.primary_light }}>
+        <SkillsSection
+          layoutId="skills_section"
+          style={{ backgroundColor: theme.primary_light }}
+        >
           <SkillsCard skills={skills} />
         </SkillsSection>
         <ProjectsSection>
           <ProjectsCard />
         </ProjectsSection>
       </Container>
-    </Layout>
+    </>
   );
 }
+
+Home.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
+};
 
 export async function getStaticProps() {
   const skills = (await getAllSkillsTitles()) || [];

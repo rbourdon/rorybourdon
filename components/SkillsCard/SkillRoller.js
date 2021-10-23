@@ -4,10 +4,10 @@ import SkillBubble from "@/components/SkillBubble";
 import { useState } from "react";
 import useInterval from "@/components/utils/useInterval";
 
-const NUM_SKILLS = 6;
+const NUM_SKILLS = 7;
 const TICK_RATE = 1600;
 
-const Container = styled(motion.div)`
+const Roller = styled(motion.ul)`
   width: 110%;
   height: 100%;
   display: grid;
@@ -18,9 +18,11 @@ const Container = styled(motion.div)`
   justify-items: center;
   align-items: center;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
 `;
 
-export default function SkillRoller({ skills, selected }) {
+export default function SkillRoller({ skills, selected, variants }) {
   const [rollerPos, setRollerPos] = useState(0);
   const [hovering, setHovering] = useState(false);
   useInterval(
@@ -31,7 +33,7 @@ export default function SkillRoller({ skills, selected }) {
   );
 
   return (
-    <Container layoutId="skillRoller">
+    <Roller layoutId="skillRoller" variants={variants}>
       {[
         ...skills.slice(rollerPos, rollerPos + NUM_SKILLS),
         ...skills.slice(
@@ -43,7 +45,8 @@ export default function SkillRoller({ skills, selected }) {
           <SkillBubble
             title={skill.title}
             key={skill.title}
-            index={index}
+            top={index === 0 ? true : false}
+            bottom={index === NUM_SKILLS - 1 ? true : false}
             height={36}
             transition={{
               type: "spring",
@@ -53,9 +56,9 @@ export default function SkillRoller({ skills, selected }) {
             }}
             outlineTransition={{
               type: "spring",
-              stiffness: 200,
-              mass: 1.25,
-              damping: 15,
+              stiffness: 300,
+              mass: 0.75,
+              damping: 28,
             }}
             onHover={setHovering}
             hovering={hovering === skill.title}
@@ -64,6 +67,6 @@ export default function SkillRoller({ skills, selected }) {
           </SkillBubble>
         );
       })}
-    </Container>
+    </Roller>
   );
 }

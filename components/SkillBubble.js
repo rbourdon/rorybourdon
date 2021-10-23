@@ -8,7 +8,7 @@ import {
 } from "framer-motion";
 import { useContext, useEffect } from "react";
 
-const Bubble = styled(motion.div)`
+const Bubble = styled(motion.li)`
   height: ${(props) => props.$height + "px"};
   min-width: 75px;
   width: max-content;
@@ -36,46 +36,50 @@ const Outline = styled(motion.div)`
 
 const handleHoverStart = (hover, title, onHover) => {
   onHover && onHover(title);
-  animate(hover, 1, { type: "tween", duration: 0.2 });
+  animate(hover, 1, { type: "tween", duration: 0.25 });
 };
 
 const handleHoverEnd = (hover) => {
-  animate(hover, 0, { type: "tween", duration: 0.2 });
+  animate(hover, 0, { type: "tween", duration: 0.25 });
 };
 
 export default function SkillBubble({
-  title,
-  transition,
+  title = "Oops! No Title!",
+  transition = { type: "spring", stiffness: 30 },
   height = 36,
-  index = null,
+  top = false,
+  bottom = false,
   variants,
-  custom,
+  custom = 0,
   bgColor,
-  onHover,
-  onPan,
+  onHover = null,
   hovering = false,
   outlineTransition,
 }) {
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
-  const opacity = useMotionValue(index ? 0 : 1);
+  const opacity = useMotionValue(bottom || top ? 0 : 1);
 
   useEffect(() => {
-    if (index === 0) {
-      const exiting = animate(opacity, 0, { duration: 0.45 });
+    if (top) {
+      const exiting = animate(opacity, 0, { duration: 0.215 });
       return exiting.stop;
-    } else if (index === 5) {
+    } else if (bottom) {
       opacity.set(0);
-    } else if (index) {
+    } else {
       const visible = animate(opacity, 1, { duration: 0.3 });
       return visible.stop;
     }
-  });
+  }, [top, bottom, opacity]);
 
-  useEffect(() => {
-    !hovering && animate(hover, 0, { type: "tween", duration: 0.25 });
-    hovering && animate(hover, 1, { type: "tween", duration: 0.25 });
-  }, [hovering, hover]);
+  // useEffect(() => {
+  //   if (hovering) {
+  //     onHover && onHover(title);
+  //     animate(hover, 1, { type: "tween", duration: 0.25 });
+  //   } else {
+  //     animate(hover, 0, { type: "tween", duration: 0.25 });
+  //   }
+  // }, [hovering, hover]);
 
   const backgroundColor = useTransform(
     [bgColor || theme.primary_light, theme.blue, theme.teal, hover],
@@ -133,11 +137,12 @@ export default function SkillBubble({
       $height={height}
       layoutId={`${title}_bubble`}
       transition={transition}
-      onHoverStart={() => handleHoverStart(hover, title, onHover)}
-      onHoverEnd={() => handleHoverEnd(hover)}
+      onHoverStart={() =>
+        onHover ? handleHoverStart(hover, title, onHover) : null
+      }
+      onHoverEnd={() => (onHover ? handleHoverEnd(hover) : null)}
       variants={variants}
       custom={custom}
-      onPan={onPan}
       style={{
         scale,
         color: titleColor,
@@ -166,7 +171,3 @@ export default function SkillBubble({
     </Bubble>
   );
 }
-
-SkillBubble.defaultProps = {
-  transition: { type: "spring", stiffness: 30 },
-};

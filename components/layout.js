@@ -1,7 +1,6 @@
 import Head from "next/head";
-import styled, { ThemeContext } from "styled-components";
+import styled from "styled-components";
 import { motion } from "framer-motion";
-import { useContext } from "react";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -12,20 +11,15 @@ const Container = styled(motion.div)`
   flex-direction: column;
 `;
 
-function Layout({ children, title }) {
-  const theme = useContext(ThemeContext);
+function Layout({ children }) {
   return (
-    <Container style={{ backgroundColor: theme.primary }}>
+    <Container>
       <Head>
-        <title>{title}</title>
         <link rel="stylesheet" href="https://use.typekit.net/ekd5pcq.css" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="mask-icon" href="/favicon.ico" color="#FFFFFF" />
         <meta name="author" content="Rory Bourdon" />
-        <meta name="description" content="Portfolio of Rory Bourdon" />
         <meta charSet="utf-8" />
-        <meta name="og:title" content={title} />
-        <meta name="twitter:title" content={title} />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <script
           dangerouslySetInnerHTML={{
@@ -72,7 +66,7 @@ function Layout({ children, title }) {
                     "--color-primary": "hsla(270, 2.74%, 85.88%, 1)",
                     "--color-primary_light": "hsla(280, 2.64%, 89.02%, 1)",
                     "--color-primary_verydark": "hsla(0, 0, 28.63%, 1)",
-                    "--color-primary_dark": "hsla(266.67, 7.89%, 44.71%, 1)",
+                    "--color-primary_dark": "hsla(266.67, 7.89%, 38.71%, 1)",
                     "--color-yellow": "hsla(57.71, 43.12%, 60.08%, 1)",
                     "--color-green": "hsla(83.88, 42.31%, 57.06%, 1)",
                     "--color-teal": "hsla(170.49, 42.93%, 62.9%, 1)",
@@ -87,7 +81,7 @@ function Layout({ children, title }) {
                     "--color-primary": "hsla(270, 2.74%, 85.88%, 1)",
                     "--color-primary_light": "hsla(280, 2.64%, 89.02%, 1)",
                     "--color-primary_verydark": "hsla(0, 0, 28.63%, 1)",
-                    "--color-primary_dark": "hsla(266.67, 7.89%, 44.71%, 1)",
+                    "--color-primary_dark": "hsla(266.67, 7.89%, 38.71%, 1)",
                     "--color-yellow": "hsla(57.71, 43.12%, 60.08%, 1)",
                     "--color-green": "hsla(83.88, 42.31%, 57.06%, 1)",
                     "--color-teal": "hsla(170.49, 42.93%, 62.9%, 1)",
@@ -109,7 +103,6 @@ function Layout({ children, title }) {
         />
       </Head>
       {children}
-      {/* <Footer />  */}
     </Container>
   );
 }
