@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Container = styled(motion.div)`
@@ -24,14 +25,14 @@ const trunkV = {
       stiffness: 50,
       mass: 1.2,
       damping: 11,
-      restDelta: 0.01,
-      restSpeed: 0.01,
+
       delay: custom,
     },
   }),
   selected: {
     scale: 1,
     originY: 1,
+    transition: { duration: 0 },
   },
 };
 
@@ -46,13 +47,39 @@ const foliageV = {
       stiffness: 100,
       mass: 1.2,
       damping: 11,
-      restDelta: 0.01,
-      restSpeed: 0.01,
       delay: custom,
     },
   }),
   selected: {
     scale: 1,
+    transition: { duration: 0 },
+  },
+};
+
+const leavesV = {
+  hidden: (custom) => ({
+    rotate: 0,
+    opacity: 1,
+    y: custom.y,
+    x: custom.x,
+  }),
+  visible: (custom) => ({
+    rotate: 360,
+    opacity: 1,
+    x: "5%",
+    y: "100%",
+    transition: {
+      type: "tween",
+      ease: "linear",
+      repeat: Infinity,
+      duration: 2,
+      delay: custom.delay,
+      repeatDelay: custom.repeatDelay,
+    },
+  }),
+  selected: {
+    opacity: 1,
+    y: "100%",
   },
 };
 
@@ -68,6 +95,11 @@ export default function TreeIcon({
   height = "310px",
   transition = { type: "spring", stiffness: 40, mass: 2, damping: 12 },
 }) {
+  const [leaves, setLeaves] = useState(false);
+
+  useEffect(() => {
+    setLeaves(true);
+  }, []);
   return (
     <Container
       variants={iconV}
@@ -85,6 +117,76 @@ export default function TreeIcon({
         height="100%"
         width="100%"
       >
+        {leaves && (
+          <motion.g initial="hidden" animate="visible">
+            <motion.polygon
+              points={`0,0 ${Math.random() * 1 + 2},${Math.random() * 3 + 3} ${
+                Math.random() * 3 + 3
+              },0`}
+              variants={leavesV}
+              custom={{
+                x: "65%",
+                y: "55%",
+                delay: Math.random() * 2,
+                repeatDelay: Math.random() * 0.5,
+              }}
+              fill={colors.foliage}
+            />
+            <motion.polygon
+              points={`0,0 ${Math.random() * 1 + 2},${Math.random() * 3 + 3} ${
+                Math.random() * 3 + 3
+              },0`}
+              variants={leavesV}
+              custom={{
+                x: "55%",
+                y: "55%",
+                delay: Math.random() * 2,
+                repeatDelay: Math.random() * 0.5,
+              }}
+              fill={colors.foliage}
+            />
+            <motion.polygon
+              points={`0,0 ${Math.random() * 1 + 2},${Math.random() * 3 + 3} ${
+                Math.random() * 3 + 3
+              },0`}
+              variants={leavesV}
+              custom={{
+                x: "25%",
+                y: "52%",
+                delay: Math.random() * 2,
+                repeatDelay: Math.random() * 0.5,
+              }}
+              fill={colors.foliage}
+            />
+            <motion.polygon
+              points={`0,0 ${Math.random() * 1 + 2},${Math.random() * 3 + 3} ${
+                Math.random() * 3 + 3
+              },0`}
+              variants={leavesV}
+              custom={{
+                x: "45%",
+                y: "53%",
+                delay: Math.random() * 2,
+                repeatDelay: Math.random() * 0.5,
+              }}
+              fill={colors.foliage}
+            />
+
+            <motion.polygon
+              points={`0,0 ${Math.random() * 1 + 2},${Math.random() * 3 + 3} ${
+                Math.random() * 3 + 3
+              },0`}
+              variants={leavesV}
+              custom={{
+                x: "15%",
+                y: "51%",
+                delay: Math.random() * 2,
+                repeatDelay: Math.random() * 0.5,
+              }}
+              fill={colors.foliage}
+            />
+          </motion.g>
+        )}
         <motion.path
           variants={foliageV}
           custom={delay + 0.4}

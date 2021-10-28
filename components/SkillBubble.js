@@ -7,6 +7,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useContext, useEffect } from "react";
+import Link from "next/link";
 
 const Bubble = styled(motion.li)`
   height: ${(props) => props.$height + "px"};
@@ -22,6 +23,7 @@ const Bubble = styled(motion.li)`
   user-select: none;
   position: relative;
   cursor: pointer;
+  z-index: 4;
 `;
 
 const Outline = styled(motion.div)`
@@ -34,17 +36,20 @@ const Outline = styled(motion.div)`
   top: -5px;
 `;
 
-const handleHoverStart = (hover, title, onHover) => {
-  onHover && onHover(title);
-  animate(hover, 1, { type: "tween", duration: 0.25 });
-};
+const BubbleLink = styled.a`
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+  user-drag: none;
+  user-select: none;
 
-const handleHoverEnd = (hover) => {
-  animate(hover, 0, { type: "tween", duration: 0.25 });
-};
+  z-index: 4;
+
+  &:focus {
+    outline: none;
+  }
+`;
 
 export default function SkillBubble({
-  title = "Oops! No Title!",
   transition = { type: "spring", stiffness: 30 },
   height = 36,
   top = false,
@@ -53,8 +58,12 @@ export default function SkillBubble({
   custom = 0,
   bgColor,
   onHover = null,
-  hovering = false,
+  hasOutline = false,
+  active = true,
   outlineTransition,
+  title,
+  slug,
+  children,
 }) {
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
@@ -71,6 +80,17 @@ export default function SkillBubble({
       return visible.stop;
     }
   }, [top, bottom, opacity]);
+
+  const handleHoverStart = () => {
+    onHover && onHover(title);
+    active &&
+      animate(hover, 1, { type: "tween", duration: 0.2, ease: "easeInOut" });
+  };
+
+  const handleHoverEnd = () => {
+    hover.get() > 0 &&
+      animate(hover, 0, { type: "tween", duration: 0.2, ease: "easeInOut" });
+  };
 
   // useEffect(() => {
   //   if (hovering) {
@@ -89,7 +109,7 @@ export default function SkillBubble({
         [0, 1],
         [
           latestColor1,
-          transform(latestHover, [0, 2], [latestColor2, latestColor3]),
+          transform(latestHover, [0, 1], [latestColor2, latestColor3]),
         ]
       )
   );
@@ -102,7 +122,7 @@ export default function SkillBubble({
         [0, 1],
         [
           latestColor1,
-          transform(latestHover, [0, 2], [latestColor2, latestColor3]),
+          transform(latestHover, [0, 1], [latestColor2, latestColor3]),
         ]
       )
   );
@@ -135,18 +155,18 @@ export default function SkillBubble({
   return (
     <Bubble
       $height={height}
-      layoutId={`${title}_bubble`}
+      layoutId={`${slug}_bubble`}
       transition={transition}
-      onHoverStart={() =>
-        onHover ? handleHoverStart(hover, title, onHover) : null
-      }
-      onHoverEnd={() => (onHover ? handleHoverEnd(hover) : null)}
+      onHoverStart={handleHoverStart}
+      onHoverEnd={handleHoverEnd}
       variants={variants}
       custom={custom}
+      onFocus={handleHoverStart}
+      onBlur={handleHoverEnd} // onBlur={handleHoverEnd}
       style={{
         scale,
         color: titleColor,
-        zIndex: hovering ? 10 : 1,
+        zIndex: hasOutline ? 10 : 1,
         opacity,
         border,
         backgroundColor:
@@ -155,7 +175,18 @@ export default function SkillBubble({
             : backgroundColor,
       }}
     >
-      {hovering && (
+      {active ? (
+        <Link href={`/skills/${slug}`} passHref scroll={false}>
+          <BubbleLink onDragStart={(e) => e.preventDefault()}>
+            {children}
+          </BubbleLink>
+        </Link>
+      ) : (
+        <BubbleLink onDragStart={(e) => e.preventDefault()}>
+          {children}
+        </BubbleLink>
+      )}
+      {hasOutline && (
         <Outline
           layoutId="bubbleOutline"
           $height={height + 10}
@@ -167,7 +198,6 @@ export default function SkillBubble({
           transition={outlineTransition}
         />
       )}
-      {title}
     </Bubble>
   );
 }

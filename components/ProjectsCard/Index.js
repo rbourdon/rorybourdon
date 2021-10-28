@@ -105,7 +105,6 @@ export default function ProjectsCard({ selected }) {
     <motion.div
       initial="hidden"
       animate={selected ? "selected" : inView ? "visible" : "hidden"}
-      exit={selected ? null : "exit"}
     >
       <NavCard
         height={422}
@@ -150,7 +149,7 @@ export default function ProjectsCard({ selected }) {
               color2={theme.green}
               href="/projects"
               id="projects"
-              delay={710 * 230 * 0.0000012 + 2.15}
+              animationDelay={710 * 230 * 0.0000012 + 2.15}
             >
               All Projects
             </Button>

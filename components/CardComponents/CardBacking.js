@@ -22,7 +22,6 @@ export default function CardBacking({
   backingV,
   keyShadow,
   bgColor,
-  id,
 }) {
   const theme = useContext(ThemeContext);
   const boxShadow = useTransform(
@@ -44,7 +43,6 @@ export default function CardBacking({
       }}
       $width={width}
       $height={height}
-      layoutId={`${id}Backing`}
     >
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"

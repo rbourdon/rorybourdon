@@ -40,16 +40,9 @@ const titleV = {
   }),
 };
 
-const bannerV = {
-  exit: {
-    opacity: 0,
-    transition: { duration: 0.01 },
-  },
-};
-
 export default function Banner() {
   return (
-    <Container variants={bannerV}>
+    <Container>
       <Title custom={0.6} variants={titleV}>
         Rory Bourdon
       </Title>

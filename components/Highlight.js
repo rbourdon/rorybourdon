@@ -1,5 +1,6 @@
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
+import { useContext } from "react";
 
 const HighlightedText = styled(motion.em)`
   display: inline;
@@ -7,6 +8,9 @@ const HighlightedText = styled(motion.em)`
   font-style: normal;
 `;
 
-export default function Highlight({ children, color = "#358ab5" }) {
-  return <HighlightedText style={{ color: color }}>{children}</HighlightedText>;
+export default function Highlight({ children }) {
+  const theme = useContext(ThemeContext);
+  return (
+    <HighlightedText style={{ color: theme.teal }}>{children}</HighlightedText>
+  );
 }

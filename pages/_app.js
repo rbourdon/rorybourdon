@@ -1,6 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { createGlobalStyle } from "styled-components";
 import { ThemeControlProvider } from "@/lib/Context/ThemeContext";
+import Layout from "@/components/layout";
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -81,26 +82,27 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1;
     font-weight: 100;
   }
+  
 `;
 
-// function handleExitComplete() {
-//   if (typeof window !== "undefined") {
-//     window.scrollTo(0, 0);
-//   }
-// }
+function handleExitComplete() {
+  if (typeof window !== "undefined") {
+    window.scrollTo({ top: 0, left: 0 });
+  }
+}
 
 function MyApp({ Component, pageProps, router }) {
-  const getLayout = Component.getLayout || ((page) => page);
-
-  return getLayout(
+  return (
     <ThemeControlProvider>
       <GlobalStyle />
-      <AnimatePresence
-        exitBeforeEnter
-        //onExitComplete={() => handleExitComplete()}
-      >
-        <Component {...pageProps} key={router.route} />
-      </AnimatePresence>
+      <Layout>
+        <AnimatePresence
+          exitBeforeEnter
+          onExitComplete={() => handleExitComplete()}
+        >
+          <Component {...pageProps} key={router.route} />
+        </AnimatePresence>
+      </Layout>
     </ThemeControlProvider>
   );
 }

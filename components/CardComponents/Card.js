@@ -13,13 +13,12 @@ const Container = styled(motion.div)`
 const defaultWidth = 200;
 const defaultHeight = 200;
 
-export default function Card({ width, height, children, variants, id }) {
+export default function Card({ width, height, children, variants }) {
   return (
     <Container
       $width={width ? width : defaultWidth}
       $height={height ? height : defaultHeight}
       variants={variants}
-      layoutId={`${id}Card`}
     >
       {children}
     </Container>

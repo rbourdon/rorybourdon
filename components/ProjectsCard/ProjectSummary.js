@@ -58,7 +58,6 @@ const descV = {
 };
 
 function GetSkillChips({ skills }) {
-  //console.log(skills);
   return skills.map((skill, index) => {
     return (
       <SkillChip

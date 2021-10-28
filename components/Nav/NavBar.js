@@ -1,8 +1,7 @@
-import styled, { ThemeContext } from "styled-components";
+import styled from "styled-components";
 import { motion } from "framer-motion";
 import Logo from "@/components/Nav/Logo";
 import Link from "next/link";
-import { useContext } from "react";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -12,9 +11,15 @@ const Container = styled(motion.div)`
   display: grid;
   grid-template-rows: 100%;
   grid-template-columns: minmax(max-content, 8vw) 1fr;
-  justify-items: end;
+  justify-items: flex-end;
   align-items: center;
-  padding: 0 25px 0 25px;
+  padding: 0 25px;
+  z-index: 3;
+
+  @media (max-width: 555px) {
+    height: 7.5vh;
+    padding: 0 10px;
+  }
 `;
 
 const NavBox = styled(motion.nav)`
@@ -31,24 +36,25 @@ const NavBox = styled(motion.nav)`
 `;
 
 const LogoContainer = styled(motion.a)`
-  width: 100%;
-  height: 100%;
+  width: 70%;
+  height: 70%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 555px) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export default function NavBar({ children }) {
-  const theme = useContext(ThemeContext);
   return (
-    <Container style={{ backgroundColor: theme.primary }}>
+    <Container>
       <Link href="/" passHref>
-        <LogoContainer
-          transition={{ type: "spring", duration: 1, bounce: 0.2 }}
-          layoutId="logo"
-        >
-          <Logo />
+        <LogoContainer>
+          <Logo intro />
         </LogoContainer>
       </Link>
 

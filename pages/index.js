@@ -1,4 +1,3 @@
-import Layout from "@/components/layout";
 import NavCard from "@/components/CardComponents/NavCard";
 import SkillsCard from "@/components/SkillsCard/Index";
 import ProjectsCard from "@/components/ProjectsCard/Index";
@@ -7,12 +6,17 @@ import Button from "@/components/Button";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import Banner from "@/components/Banner";
-import { getAllSkillsTitles } from "@/lib/graphcms";
+import { getAllSkills } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
 
-const Container = styled(motion.main)`
+const Container = styled(motion.div)`
+  width: 100%;
+  min-height: 100vh;
+`;
+
+const Content = styled(motion.main)`
   width: 100%;
   min-width: 100%;
   min-height: calc(100vh - (150px + 5vh));
@@ -56,11 +60,11 @@ const HeroSection = styled(motion.section)`
 
 const SkillsSection = styled(motion.section)`
   width: 100%;
-  min-height: 95vh;
-  padding: 200px 5vw;
-  height: max-content;
+  height: 130vh;
+  padding: 0 5vw;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 const ProjectsSection = styled(motion.section)`
   width: 100%;
@@ -104,7 +108,12 @@ export default function Home({ skills }) {
   const theme = useContext(ThemeContext);
 
   return (
-    <>
+    <Container
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      style={{ backgroundColor: theme.primary }}
+    >
       <Head>
         <title>Rory Bourdon | Web Developer & Visual Artist</title>
         <meta name="description" content="Portfolio of Rory Bourdon" />
@@ -119,8 +128,8 @@ export default function Home({ skills }) {
         <NavLink href="/">Projects</NavLink>
         <NavLink href="/">Resume</NavLink>
       </NavBar>
-      <Container style={{ backgroundColor: theme.primary }}>
-        <HeroSection initial="hidden" animate="visible">
+      <Content>
+        <HeroSection>
           <HeroBanner>
             <Banner />
             <Buttons variants={buttonsV}>
@@ -129,7 +138,7 @@ export default function Home({ skills }) {
                 color2={theme.purple.get()}
                 href="/"
                 id="learnMoreButton"
-                delay={1}
+                animationDelay={1}
               >
                 Learn More
               </Button>
@@ -138,7 +147,7 @@ export default function Home({ skills }) {
                 color2={theme.teal.get()}
                 href="/"
                 id="contactButton"
-                delay={1.33}
+                animationDelay={1.33}
               >
                 Contact Me
               </Button>
@@ -161,26 +170,37 @@ export default function Home({ skills }) {
             </NavCard>
           </HeroBody>
         </HeroSection>
-        <SkillsSection
-          layoutId="skills_section"
-          style={{ backgroundColor: theme.primary_light }}
-        >
+        <SkillsSection style={{ backgroundColor: theme.primary_light }}>
           <SkillsCard skills={skills} />
         </SkillsSection>
         <ProjectsSection>
           <ProjectsCard />
         </ProjectsSection>
-      </Container>
-    </>
+      </Content>
+    </Container>
   );
 }
 
-Home.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
-};
+// Home.getLayout = function getLayout(page) {
+//   return (
+//     <Container
+//       initial="hidden"
+//       animate="visible"
+//       exit="exit"
+//       variants={containerV}
+//     >
+//       <NavBar>
+//         <NavLink href="/skills">Skills</NavLink>
+//         <NavLink href="/">Projects</NavLink>
+//         <NavLink href="/">Resume</NavLink>
+//       </NavBar>
+//       {page}
+//     </Container>
+//   );
+// };
 
 export async function getStaticProps() {
-  const skills = (await getAllSkillsTitles()) || [];
+  const skills = (await getAllSkills()) || [];
   return {
     props: { skills },
     revalidate: 20000,

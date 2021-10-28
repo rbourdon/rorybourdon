@@ -17,20 +17,20 @@ const CardContent = styled(motion.article)`
   row-gap: 5px;
   justify-items: center;
   align-items: center;
-  position: relative;
   padding: 45px 30px;
   z-index: 3;
 `;
 
 const CardWindow = styled(motion.div)`
-  width: 100%;
-  height: 100%;
+  width: 170px;
+  height: 235px;
   display: grid;
   align-items: center;
   justify-items: center;
   grid-template-columns: 100%;
   grid-template-rows: 30% 70%;
   border-radius: 20px;
+  position: relative;
 `;
 
 const Trees = styled(motion.div)`
@@ -55,7 +55,7 @@ const Backing = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 2;
 `;
 
 const skillsCardV = {
@@ -74,8 +74,20 @@ const skillsCardV = {
   },
   selected: {
     opacity: 1,
+  },
+};
+
+const containerV = {
+  hidden: {
+    opacity: 1,
+  },
+  visible: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.9,
     },
   },
 };
@@ -97,7 +109,7 @@ const rollerV = {
   selected: {
     opacity: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.2,
     },
   },
 };
@@ -122,6 +134,9 @@ const skillsIconV = {
   selected: (custom) => ({
     originY: 1,
     scale: custom,
+    transition: {
+      duration: 0,
+    },
   }),
 };
 
@@ -148,54 +163,54 @@ const skillsIconV = {
 
 export default function SkillsCard({ skills }) {
   const [selected, setSelected] = useState(false);
+  const [layoutComplete, setLayoutComplete] = useState(false);
   const theme = useContext(ThemeContext);
+  //const [isPresent, safeToRemove] = usePresence();
 
-  const clickHandler = () => () => {
+  const clickHandler = () => {
     setSelected(true);
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    }
+    setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0 });
+    }, 800);
   };
+
   const { ref, inView } = useInView({
     threshold: 0.66,
   });
 
   return (
     <MotionConfig
-      transition={{
-        type: "spring",
-        stiffness: 60,
-        mass: 2,
-        damping: 14,
-      }}
+      transition={
+        !layoutComplete
+          ? { type: "spring", stiffness: 100, mass: 1, damping: 14 }
+          : {
+              duration: 0,
+            }
+      }
     >
+      {selected && <Backing style={{ backgroundColor: theme.primary_light }} />}
       <motion.div
         initial="hidden"
         animate={selected ? "selected" : inView ? "visible" : "hidden"}
+        exit="exit"
         style={{
-          top: selected ? "calc(50vh - " + 710 / 2 + "px)" : "auto",
-          position: selected ? "fixed" : "relative",
+          top: "calc(50vh - " + 710 / 2 + "px)",
+          position: selected ? "fixed" : "static",
+          zIndex: selected ? 4 : 1,
         }}
+        variants={containerV}
+        layoutId="skillsCard_container"
+        onLayoutAnimationComplete={() =>
+          setLayoutComplete(selected ? true : false)
+        }
       >
-        {selected && (
-          <Backing
-            style={{ backgroundColor: theme.primary }}
-            initial={{ y: "-100vh" }}
-            animate={{
-              y: "0",
-              transition: { duration: 0.2 },
-              type: "tween",
-              ease: "linear",
-            }}
-          />
-        )}
         <NavCard
           height={710}
           width={230}
           stemDir="h"
           stemLoc={3}
           stemLength={475}
-          color1={theme.blue}
+          color1={theme.teal}
           color2={theme.teal}
           effectOffset={{ x: 50, y: -50 }}
           effectRadius={325}
@@ -206,24 +221,21 @@ export default function SkillsCard({ skills }) {
           stem
         >
           <CardContent
-            layoutId={"skillsCard_cardContent"}
             variants={skillsCardV}
+            style={{
+              color: theme.primary_verydark,
+            }}
           >
             <CardWindow
-              layoutId={"skillsCard_window"}
+              layoutId="skillsCard_window"
               style={{
-                backgroundColor: selected ? theme.primary_light : theme.primary,
-                color: theme.primary_verydark,
+                backgroundColor: selected
+                  ? theme.primary_verylight
+                  : theme.primary,
+                zIndex: selected ? 4 : 1,
               }}
             >
-              <Label
-                layoutId={"skillsCard_label"}
-                style={{
-                  color: theme.primary_verydark,
-                }}
-              >
-                Skills
-              </Label>
+              <Label layoutId="skillsCard_label">Skills</Label>
               <Trees>
                 <TreeIcon
                   colors={{
@@ -237,6 +249,7 @@ export default function SkillsCard({ skills }) {
                   height={"140px"}
                   iconV={skillsIconV}
                   delay={710 * 230 * 0.0000012 + 2.15}
+                  transition={{ duration: 0 }}
                 />
                 <TreeIcon
                   width={"95px"}
@@ -244,6 +257,7 @@ export default function SkillsCard({ skills }) {
                   iconV={skillsIconV}
                   delay={710 * 230 * 0.0000012 + 2}
                   zIndex={3}
+                  transition={{ duration: 0 }}
                 />
                 <TreeIcon
                   width={"95px"}
@@ -257,6 +271,7 @@ export default function SkillsCard({ skills }) {
                   scale={0.8}
                   iconV={skillsIconV}
                   delay={710 * 230 * 0.0000012 + 2.3}
+                  transition={{ duration: 0 }}
                 />
               </Trees>
             </CardWindow>
@@ -273,7 +288,8 @@ export default function SkillsCard({ skills }) {
               href="/skills"
               onClick={clickHandler}
               id="skills"
-              delay={710 * 230 * 0.0000012 + 2.15}
+              animationDelay={710 * 230 * 0.0000012 + 2.15}
+              actionDelay={5}
             >
               All Skills
             </Button>

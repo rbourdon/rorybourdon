@@ -28,6 +28,11 @@ const cardV = {
       staggerChildren: 0.5,
     },
   },
+  selected: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 const frameV = {
@@ -44,10 +49,6 @@ const containerV = {
       delayChildren: custom,
     },
   }),
-  exit: {
-    opacity: 0,
-    transition: { duration: 0.1 },
-  },
 };
 
 const tagV = {
@@ -122,7 +123,7 @@ export default function NavCard({
       ref={intersectionRef}
       variants={containerV}
       custom={delay}
-      layoutId={`${id}NavcardContainer`}
+      layoutId={`${id}_navCardContainer`}
     >
       <CardEffect
         width={width}
@@ -252,7 +253,7 @@ export default function NavCard({
             selected: {
               pathLength: 0,
               transition: {
-                duration: width * height * 0.0000012 + 0.7,
+                duration: width * height * 0.0000012 + 0.5,
               },
             },
           }}
@@ -290,7 +291,6 @@ export default function NavCard({
           bRadius={borderRadius}
           keyShadow={keyShadow}
           bgColor={bgColor}
-          id={id}
         />
         {children}
         <CardFace

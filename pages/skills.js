@@ -1,11 +1,9 @@
-import Layout from "@/components/layout";
 import styled, { ThemeContext } from "styled-components";
 import { motion, MotionConfig } from "framer-motion";
 import React, { useContext } from "react";
 import { getSkillList } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
-
 import SkillScroller from "@/components/SkillScroller";
 import Highlight from "@/components/Highlight";
 import Head from "next/head";
@@ -16,19 +14,18 @@ const Content = styled(motion.main)`
   width: 100%;
   min-width: 100%;
   height: max-content;
-  flex-grow: 1;
   display: grid;
-  grid-template-rows: max-content max-content 1fr;
+  flex: 1;
+  grid-template-rows: max-content max-content max-content;
   grid-template-columns: 72% 1fr;
-  padding: 10vh 16vw;
+  padding: 0 16vw;
   grid-auto-flow: dense;
-
   align-items: center;
-  position: relative;
-  overflow: hidden;
+  align-content: center;
 
   @media (max-width: 555px) {
     row-gap: 10px;
+    align-items: start;
     grid-template-rows: max-content max-content 1fr;
     grid-template-columns: 100%;
     padding: 2vh 8vw;
@@ -39,6 +36,9 @@ const Container = styled(motion.div)`
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 `;
 
 const SkillsColumn = styled(motion.section)`
@@ -61,7 +61,7 @@ const SkillsColumn = styled(motion.section)`
 const Trees = styled(motion.div)`
   width: max-content;
   max-width: min(100%, 500px);
-  height: 100%;
+  height: max-content;
   align-items: flex-end;
   justify-content: center;
   justify-self: flex-end;
@@ -70,7 +70,11 @@ const Trees = styled(motion.div)`
   zindex: 0;
 
   @media (max-width: 555px) {
-    width: 100%;
+    width: 80%;
+    justify-self: center;
+    position: absolute;
+    bottom: 0;
+    height: max-content;
   }
 `;
 
@@ -97,24 +101,28 @@ const Title = styled(motion.h1)`
 `;
 
 const Detail = styled(motion.div)`
-  max-width: 475px;
+  padding: 0 0 10vh 0;
+  max-width: 520px;
   font-size: clamp(1rem, 4vw, 1.3525rem);
   font-weight: 200;
   line-height: clamp(1rem, 4.5vw, 1.55rem);
   grid-column: 1;
+
+  @media (max-width: 555px) {
+    padding: 0;
+  }
 `;
 
-const skillsIconV = {
+const treeV = {
   hidden: (custom) => ({
     originY: 0.65,
+    y: -20,
     scale: custom,
   }),
   visible: (custom) => ({
     originY: 0.65,
+    y: -20,
     scale: custom,
-    transition: {
-      duration: 3,
-    },
   }),
 };
 
@@ -131,6 +139,13 @@ const detailsV = {
       stiffness: 60,
       mass: 1.5,
       damping: 10,
+    },
+  },
+  exit: {
+    opacity: 0,
+    x: 0,
+    transition: {
+      duration: 0.1,
     },
   },
 };
@@ -155,39 +170,41 @@ export default function Skills({ skills }) {
   const theme = useContext(ThemeContext);
 
   return (
-    <Container
-      style={{
-        backgroundColor: theme.primary_light,
-      }}
+    <MotionConfig
+      transition={{ type: "spring", stiffness: 40, mass: 2, damping: 14 }}
     >
-      <Head>
-        <title>Skills - Rory Bourdon | Web Developer & Visual Artist</title>
-        <meta
-          name="description"
-          content="Skills - Rory Bourdon | Web Developer & Visual Artist"
-        />
-      </Head>
-      <NavBar logoComplete={true}>
-        <NavLink href="/">Projects</NavLink>
-        <NavLink href="/">Resume</NavLink>
-      </NavBar>
-      <MotionConfig
-        transition={{ type: "spring", stiffness: 60, mass: 2, damping: 14 }}
+      <Container
+        style={{ backgroundColor: theme.primary }}
+        layoutId={"skillsCard_window"}
+        transition={{ type: "spring", stiffness: 40, mass: 2, damping: 14 }}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
       >
-        <Content
-          style={{ backgroundColor: theme.primary }}
-          initial="hidden"
-          animate="visible"
-          layoutId={"skillsCard_window"}
-        >
+        <Head>
+          <title>Skills - Rory Bourdon | Web Developer & Visual Artist</title>
+          <meta
+            name="description"
+            content="Skills - Rory Bourdon | Web Developer & Visual Artist"
+          />
+        </Head>
+        <NavBar>
+          <NavLink href="/">Projects</NavLink>
+          <NavLink href="/">Resume</NavLink>
+        </NavBar>
+        <Content>
           <HorizonLine />
           <Title
-            layoutId={"skillsCard_label"}
+            layoutId="skillsCard_label"
             style={{ color: theme.primary_verydark }}
           >
             Skills
           </Title>
-          <Detail variants={detailsV} style={{ color: theme.primary_dark }}>
+          <Detail
+            variants={detailsV}
+            style={{ color: theme.primary_dark }}
+            layoutId="skillDetails"
+          >
             {`These are some of the skills I’ve picked up over the years through
               a combination of formal education, self-directed learning and most
               importantly, `}
@@ -195,11 +212,11 @@ export default function Skills({ skills }) {
             {`. Some I know better than
               others. I hope this list never stops growing.`}
           </Detail>
-          <SkillsColumn layoutId={"skillsCard_skillsColumn"}>
+          <SkillsColumn>
             <SkillScroller skills={skills} />
           </SkillsColumn>
 
-          <Trees initial="visible" layoutId={"skillsCard_trees"}>
+          <Trees initial="visible">
             <TreeIcon
               zIndex={2}
               colors={{
@@ -214,10 +231,14 @@ export default function Skills({ skills }) {
                 damping: 14,
               }}
               margin="0 -100px 0 0"
-              scale={0.85}
-              iconV={skillsIconV}
+              scale={0.95}
+              iconV={treeV}
             />
             <TreeIcon
+              colors={{
+                trunk: theme.primary_verydark,
+                foliage: theme.teal,
+              }}
               zIndex={3}
               transition={{
                 type: "spring",
@@ -225,7 +246,8 @@ export default function Skills({ skills }) {
                 mass: 1.9,
                 damping: 14,
               }}
-              iconV={skillsIconV}
+              scale={1.1}
+              iconV={treeV}
             />
             <TreeIcon
               zIndex={2}
@@ -241,26 +263,43 @@ export default function Skills({ skills }) {
                 damping: 14,
               }}
               margin="0 0 0 -100px"
-              scale={0.75}
-              iconV={skillsIconV}
+              scale={0.85}
+              iconV={treeV}
             />
             <TreeShadow
               initial="hidden"
               animate="visible"
               variants={treeShadowV}
-              layout
               style={{ backgroundColor: theme.primary_slightlydark }}
             />
           </Trees>
         </Content>
-      </MotionConfig>
-    </Container>
+      </Container>
+    </MotionConfig>
   );
 }
 
-Skills.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
-};
+// Skills.getLayout = function getLayout(page) {
+//   return (
+//     <Container
+//       layoutId={"skillsCard_window"}
+//       transition={{ type: "spring", stiffness: 60, mass: 2, damping: 14 }}
+//     >
+//       <Head>
+//         <title>Skills - Rory Bourdon | Web Developer & Visual Artist</title>
+//         <meta
+//           name="description"
+//           content="Skills - Rory Bourdon | Web Developer & Visual Artist"
+//         />
+//       </Head>
+//       <NavBar logoComplete={true}>
+//         <NavLink href="/">Projects</NavLink>
+//         <NavLink href="/">Resume</NavLink>
+//       </NavBar>
+//       {page}
+//     </Container>
+//   );
+// };
 
 export async function getStaticProps() {
   const skills = (await getSkillList("skill-scroller")) || [];

@@ -4,6 +4,8 @@ import styled, { ThemeContext } from "styled-components";
 
 const Line = styled(motion.svg)`
   position: absolute;
+  bottom: -35vw;
+  left: 0;
 `;
 
 const lineV = {
@@ -26,21 +28,21 @@ export default function TreeIcon() {
     <Line xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 200 200`}>
       <motion.path
         variants={lineV}
-        d="M20,104.5 l50,-6.5"
+        d="M20,90.5 l50,-6.5"
         stroke={theme.primary_slightlydark}
         strokeWidth={1}
         vectorEffect="non-scaling-stroke"
       />
       <motion.path
         variants={lineV}
-        d="M0,108 l200,-26"
+        d="M0,94 l200,-26"
         stroke={theme.primary_slightlydark}
         strokeWidth={1}
         vectorEffect="non-scaling-stroke"
       />
       <motion.path
         variants={lineV}
-        d="M145,90 l50,-6.5"
+        d="M145,76 l50,-6.5"
         stroke={theme.primary_slightlydark}
         strokeWidth={1}
         vectorEffect="non-scaling-stroke"
