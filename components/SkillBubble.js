@@ -2,6 +2,7 @@ import styled, { ThemeContext } from "styled-components";
 import {
   animate,
   motion,
+  MotionConfig,
   transform,
   useMotionValue,
   useTransform,
@@ -14,8 +15,6 @@ const Bubble = styled(motion.li)`
   min-width: 75px;
   width: max-content;
   padding: 0 22px;
-  font-weight: 300;
-  font-size: 1rem;
   border-radius: 20px;
   display: flex;
   align-items: center;
@@ -49,6 +48,11 @@ const BubbleLink = styled.a`
   }
 `;
 
+const Title = styled(motion.p)`
+  font-weight: 300;
+  font-size: 1rem;
+`;
+
 export default function SkillBubble({
   transition = { type: "spring", stiffness: 30 },
   height = 36,
@@ -63,7 +67,6 @@ export default function SkillBubble({
   outlineTransition,
   title,
   slug,
-  children,
 }) {
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
@@ -153,51 +156,52 @@ export default function SkillBubble({
   const scale = useTransform(hover, [0, 1], [1, 1.125]);
 
   return (
-    <Bubble
-      $height={height}
-      layoutId={`${slug}_bubble`}
-      transition={transition}
-      onHoverStart={handleHoverStart}
-      onHoverEnd={handleHoverEnd}
-      variants={variants}
-      custom={custom}
-      onFocus={handleHoverStart}
-      onBlur={handleHoverEnd} // onBlur={handleHoverEnd}
-      style={{
-        scale,
-        color: titleColor,
-        zIndex: hasOutline ? 10 : 1,
-        opacity,
-        border,
-        backgroundColor:
-          backgroundColor.get() === "var(--color-teal)"
-            ? theme.primary
-            : backgroundColor,
-      }}
-    >
-      {active ? (
-        <Link href={`/skills/${slug}`} passHref scroll={false}>
+    <MotionConfig transition={transition}>
+      <Bubble
+        $height={height}
+        layoutId={`${slug}_bubble`}
+        onHoverStart={handleHoverStart}
+        onHoverEnd={handleHoverEnd}
+        variants={variants}
+        custom={custom}
+        onFocus={handleHoverStart}
+        onBlur={handleHoverEnd} // onBlur={handleHoverEnd}
+        style={{
+          scale,
+          color: titleColor,
+          zIndex: hasOutline ? 10 : 1,
+          opacity,
+          border,
+          backgroundColor:
+            backgroundColor.get() === "var(--color-teal)"
+              ? theme.primary
+              : backgroundColor,
+        }}
+      >
+        {active ? (
+          <Link href={`/skills/${slug}`} passHref scroll={false}>
+            <BubbleLink onDragStart={(e) => e.preventDefault()}>
+              <Title layoutId={`${slug}_bubbleLink`}>{title}</Title>
+            </BubbleLink>
+          </Link>
+        ) : (
           <BubbleLink onDragStart={(e) => e.preventDefault()}>
-            {children}
+            <Title layoutId={`${slug}_bubbleLink`}>{title}</Title>
           </BubbleLink>
-        </Link>
-      ) : (
-        <BubbleLink onDragStart={(e) => e.preventDefault()}>
-          {children}
-        </BubbleLink>
-      )}
-      {hasOutline && (
-        <Outline
-          layoutId="bubbleOutline"
-          $height={height + 10}
-          style={{
-            outline,
-            outlineOffset,
-            borderRadius: "20px",
-          }}
-          transition={outlineTransition}
-        />
-      )}
-    </Bubble>
+        )}
+        {hasOutline && (
+          <Outline
+            layoutId="bubbleOutline"
+            $height={height + 10}
+            style={{
+              outline,
+              outlineOffset,
+              borderRadius: "20px",
+            }}
+            transition={outlineTransition}
+          />
+        )}
+      </Bubble>
+    </MotionConfig>
   );
 }
