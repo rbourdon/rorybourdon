@@ -156,9 +156,7 @@ export default function SkillScroller({ skills }) {
               onHover={handleSkillHover}
               hasOutline={hoveredSkill === skill.title && !panning}
               active={!panning}
-            >
-              {skill.title}
-            </SkillBubble>
+            />
           );
         })}
 
