@@ -9,8 +9,11 @@ export default function ArrowIcon() {
         strokeLinecap="round"
         strokeMiterlimit="10"
       >
-        <motion.path d="M6.2 15V1.9" />
-        <motion.path d="M.5 6.2 6.1.5a.1.1 0 0 1 .2 0l5.6 5.7" />
+        <motion.path vectorEffect="non-scaling-stroke" d="M6.2 15V1" />
+        <motion.path
+          vectorEffect="non-scaling-stroke"
+          d="M.5 6.2 6.1.5a.1.1 0 0 1 .2 0l5.6 5.7"
+        />
       </g>
     </svg>
   );
