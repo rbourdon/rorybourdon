@@ -64,7 +64,7 @@ export default function SkillBubble({
   onHover = null,
   hasOutline = false,
   active = true,
-  outlineTransition,
+  outlineTransition = { type: "spring", stiffness: 30 },
   title,
   slug,
 }) {
