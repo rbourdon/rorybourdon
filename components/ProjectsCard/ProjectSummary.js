@@ -57,10 +57,11 @@ const descV = {
   },
 };
 
-function GetSkillChips({ skills }) {
+function GetSkillChips({ skills, projectTitle }) {
   return skills.map((skill, index) => {
     return (
       <SkillChip
+        layoutId={`${skill.title}_chip_${projectTitle}`}
         title={skill.title}
         key={skill.title}
         variants={{
@@ -83,19 +84,15 @@ function GetSkillChips({ skills }) {
   });
 }
 
-export default function ProjectSummary() {
+export default function ProjectSummary({ project }) {
   return (
     <Container>
-      <ProjectTitle variants={titleV}>Cool project</ProjectTitle>
+      <ProjectTitle variants={titleV}>{project.title}</ProjectTitle>
       <ProjectDescription variants={descV}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Vulputate dignissim
-        suspendisse in est ante in nibh.
+        {project.description}
       </ProjectDescription>
       <SkillChips>
-        <GetSkillChips
-          skills={[{ title: "React" }, { title: "Git" }, { title: "CSS" }]}
-        />
+        <GetSkillChips skills={project.skills} projectTitle={project.title} />
       </SkillChips>
     </Container>
   );

@@ -18,6 +18,7 @@ const Chip = styled(motion.div)`
   align-items: center;
   justify-content: center;
   margin-right: 5px;
+  margin-bottom: 5px;
   user-select: none;
 `;
 
@@ -25,7 +26,12 @@ const handleHover = (hover, to) => {
   animate(hover, to, { type: "tween", duration: 0.2 });
 };
 
-export default function SkillChip({ title, variants, transition }) {
+export default function SkillChip({
+  title,
+  variants,
+  transition,
+  layoutId = "skillChip",
+}) {
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
   const border = useTransform(
@@ -49,7 +55,7 @@ export default function SkillChip({ title, variants, transition }) {
     <Chip
       key={title + "_chip"}
       variants={variants}
-      layoutId={`${title.substring(0, 3)}Chip`}
+      layoutId={layoutId}
       transition={transition}
       onHoverStart={() => handleHover(hover, 1)}
       onHoverEnd={() => handleHover(hover, 0)}

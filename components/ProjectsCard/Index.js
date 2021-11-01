@@ -96,7 +96,7 @@ const underlineV = {
   },
 };
 
-export default function ProjectsCard({ selected }) {
+export default function ProjectsCard({ selected, projects }) {
   const theme = useContext(ThemeContext);
   const { ref, inView } = useInView({
     threshold: 0.66,
@@ -141,7 +141,7 @@ export default function ProjectsCard({ selected }) {
             <ProjectsIcon iconV={iconV} delay={710 * 230 * 0.0000012 + 2.15} />
           </Icon>
           <ProjectsBox>
-            <ProjectSummary />
+            <ProjectSummary project={projects[0]} />
             <Button
               width={150}
               height={50}
