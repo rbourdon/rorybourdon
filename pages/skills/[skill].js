@@ -7,6 +7,7 @@ import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
 import Image from "next/image";
 import BackArrow from "@/components/BackArrow";
+import ProjectsScroller from "@/components/ProjectsScroller";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -182,7 +183,7 @@ export default function Skill({ skill }) {
         <Content>
           {/* <HorizonLine /> */}
           <TitleBlock>
-            <BackArrow variants={arrowV} />
+            <BackArrow href="/skills" variants={arrowV} />
             <Title
               layoutId={`${skill.slug}_bubbleLink`}
               style={{ color: theme.primary_verydark }}
@@ -217,6 +218,7 @@ export default function Skill({ skill }) {
               {skill.description}
             </Detail>
           </DetailBlock>
+          <ProjectsScroller projects={skill.projects} />
           {/* <SkillsColumn></SkillsColumn> */}
         </Content>
       </Container>
