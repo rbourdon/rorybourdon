@@ -9,6 +9,7 @@ import Highlight from "@/components/Highlight";
 import Head from "next/head";
 import TreeIcon from "@/components/Icons/TreeIcon";
 import HorizonLine from "@/components/Icons/HorizonLine";
+import BackArrow from "@/components/BackArrow";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -98,6 +99,7 @@ const Title = styled(motion.h1)`
   font-size: clamp(3.4rem, 15vw, 9rem);
   font-weight: 300;
   line-height: 1;
+  margin-left: 20px;
 `;
 
 const Detail = styled(motion.div)`
@@ -111,6 +113,12 @@ const Detail = styled(motion.div)`
   @media (max-width: 555px) {
     padding: 0;
   }
+`;
+
+const TitleBlock = styled(motion.div)`
+  width: 100%;
+  display: flex;
+  align-items: center;
 `;
 
 const treeV = {
@@ -166,6 +174,30 @@ const treeShadowV = {
   },
 };
 
+const arrowV = {
+  hidden: {
+    opacity: 1,
+    x: 600,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: "spring",
+      stiffness: 30,
+      mass: 1,
+      damping: 8,
+    },
+  },
+  exit: {
+    opacity: 0,
+    x: 0,
+    transition: {
+      duration: 0.1,
+    },
+  },
+};
+
 export default function Skills({ skills }) {
   const theme = useContext(ThemeContext);
 
@@ -194,12 +226,16 @@ export default function Skills({ skills }) {
         </NavBar>
         <Content>
           <HorizonLine />
-          <Title
-            layoutId="skillsCard_label"
-            style={{ color: theme.primary_verydark }}
-          >
-            Skills
-          </Title>
+
+          <TitleBlock>
+            <BackArrow variants={arrowV} />
+            <Title
+              layoutId="skillsCard_label"
+              style={{ color: theme.primary_verydark }}
+            >
+              Skills
+            </Title>
+          </TitleBlock>
           <Detail
             variants={detailsV}
             style={{ color: theme.primary_dark }}
