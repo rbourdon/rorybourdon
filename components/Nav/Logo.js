@@ -50,7 +50,7 @@ export default function Logo({ intro }) {
   const x = useMotionValue(intro ? 350 : 0);
   const y = useMotionValue(intro ? -350 : 0);
   const rotate = useMotionValue(intro ? 180 : 0);
-  const theme = useContext(ThemeContext);
+  //const theme = useContext(ThemeContext);
 
   useEffect(() => {
     if (intro && !introStarted) {
@@ -109,119 +109,15 @@ export default function Logo({ intro }) {
       height="100%"
       width="100%"
     >
-      <motion.g stroke={theme.primary_verydark} strokeWidth={1}>
-        <defs>
-          <linearGradient
-            id="a"
-            x1="97.5"
-            y1="90.5"
-            x2="174.8"
-            y2="13.2"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0" stopColor={theme.blue.get()} />
-            <stop offset="1" stopColor={theme.teal.get()} />
-          </linearGradient>
-          <linearGradient
-            id="b"
-            x1="97.5"
-            y1="97.5"
-            x2="174.8"
-            y2="174.8"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0" stopColor={theme.teal.get()} />
-            <stop offset="1" stopColor={theme.green.get()} />
-          </linearGradient>
-          <linearGradient
-            id="c"
-            x1="3.9"
-            y1="184.1"
-            x2="90.5"
-            y2="97.5"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0" stopColor={theme.purple.get()} />
-            <stop offset="1" stopColor={theme.blue.get()} />
-          </linearGradient>
-          <linearGradient
-            id="d"
-            x1="13.3"
-            y1="13.3"
-            x2="90.5"
-            y2="90.5"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0" stopColor={theme.blue.get()} />
-            <stop offset="1" stopColor={theme.purple.get()} />
-          </linearGradient>
-          <linearGradient
-            id="e"
-            x1="28.9"
-            y1="159.1"
-            x2="90.5"
-            y2="97.5"
-            xlinkHref="#a"
-          />
-          <linearGradient
-            id="f"
-            x1="53"
-            y1="135"
-            x2="90.5"
-            y2="97.5"
-            xlinkHref="#b"
-          />
-        </defs>
-        {/*Gradient shapes*/}
-        <motion.path
-          variants={outerSquareV}
-          custom={{ x: 0, y: 97 }}
-          d="M45.2 0A45.2 45.2 0 0 0 0 45.2a45.2 45.2 0 0 0 45.2 45.3h45.3V45.2A45.2 45.2 0 0 0 45.2 0Zm19.2 45.2a19.1 19.1 0 1 1-38.3 0 19.1 19.1 0 0 1 38.3 0Z"
-          fill="none"
-          vectorEffect="non-scaling-stroke"
-        />
-        <motion.path
-          variants={outerSquareV}
-          custom={{ x: -97, y: 97 }}
-          d="M142.8 0h-.1a45.2 45.2 0 0 0-45.2 45.2v45.3h45.3A45.2 45.2 0 0 0 188 45.3v-.1A45.2 45.2 0 0 0 142.8 0ZM162 45.2a19.1 19.1 0 1 1-38.3 0 19.1 19.1 0 0 1 38.3 0Z"
-          fill="none"
-          vectorEffect="non-scaling-stroke"
-        />
-        <motion.path
-          variants={outerSquareV}
-          custom={{ x: -97, y: 0 }}
-          d="M142.9 97.5H97.5V143a45.1 45.1 0 0 0 45.2 45.1h.2A45.1 45.1 0 0 0 188 143v-.3a45.1 45.1 0 0 0-45.1-45Zm-.1 64.4a19.1 19.1 0 1 1 19.1-19.1 19.1 19.1 0 0 1-19.1 19.1Z"
-          fill="none"
-          vectorEffect="non-scaling-stroke"
-        />
-        {/*Arrow*/}
-        <motion.path
-          style={{ x, y, rotate }}
-          d="M13 97.5h77.5V175a13 13 0 0 1-13 13 13 13 0 0 1-13-13v-32.2L22.6 184a13.3 13.3 0 0 1-9.4 3.9A13.3 13.3 0 0 1 0 174.7v-1a13.3 13.3 0 0 1 4-9.5l41.3-40.6H13a13 13 0 0 1-13-13 13 13 0 0 1 13-13Z"
-          fill="none"
-          vectorEffect="non-scaling-stroke"
-        />
-
-        {/*Black pieces*/}
-        <motion.path
-          variants={innerSquareV}
-          custom={{ x: 0, y: 97 }}
-          d="M45.2 22A23.2 23.2 0 0 0 22 45.2a23.2 23.2 0 0 0 23.2 23.3h23.3V45.2A23.2 23.2 0 0 0 45.2 22Zm19.2 23.2a19.1 19.1 0 1 1-38.3 0 19.1 19.1 0 0 1 38.3 0Z"
-          fill={theme.primary_verydark}
-        />
-        <motion.path
-          variants={innerSquareV}
-          custom={{ x: -97, y: 97 }}
-          d="M142.8 22.7a22.5 22.5 0 0 0-22.6 22.5v22.5h22.6a22.5 22.5 0 0 0 22.5-22.4v-.1a22.5 22.5 0 0 0-22.5-22.5Zm19.1 22.5a19.1 19.1 0 1 1-38.3 0 19.1 19.1 0 0 1 38.3 0Z"
-          fill={theme.primary_verydark}
-        />
-        <motion.path
-          variants={innerSquareV}
-          custom={{ x: -97, y: 0 }}
-          d="M142.8 120.3h-22.6v22.5a22.5 22.5 0 0 0 22.5 22.5h.1a22.5 22.5 0 0 0 22.5-22.5 22.5 22.5 0 0 0-22.5-22.6Zm0 41.6a19.1 19.1 0 1 1 19.2-19.1 19.1 19.1 0 0 1-19.2 19.1Z"
-          fill={theme.primary_verydark}
-        />
-      </motion.g>
+      <g fill="currentColor">
+        <path d="M159 121.11a16.87 16.87 0 0 1-12-5c-9.67-9.66-38.06-7.12-49.53-4.47-5.6 1.36-55.65 11.95-81.13-13.52a17 17 0 0 1 24-24c8.73 8.72 34.73 7.82 49.56 4.47 5.59-1.29 55.64-11.92 81.1 13.55a17 17 0 0 1-12 29Z" />
+        <path d="M130.42 188.66A56.42 56.42 0 0 1 90.26 172a17 17 0 0 1 24-24 22.86 22.86 0 1 0 32.33-32.32 17 17 0 0 1 24-24 56.8 56.8 0 0 1-40.17 97Z" />
+        <path d="M28.61 103.23a16.88 16.88 0 0 1-12-5 56.79 56.79 0 1 1 80.32-80.3 17 17 0 0 1-24 24 22.86 22.86 0 1 0-32.32 32.33 17 17 0 0 1-12 29Z" />
+        <path d="M79.28 76.06c3.47-.48 6.73-1.06 9.65-1.72a177.08 177.08 0 0 1 24.56-3.6c.29-17.41-2.79-38.91-16.82-52.95a17 17 0 0 0-24 24c6.15 6.21 7.51 20.91 6.61 34.27Z" />
+        <path d="M108.08 114.22c-3.72.5-7 1.09-9.61 1.69a175.1 175.1 0 0 1-24.6 3.6c-.29 17.42 2.78 38.92 16.82 53a17 17 0 0 0 24-24c-6.15-6.2-7.52-20.94-6.61-34.29Z" />
+        <path d="M68.76 120.05a117.7 117.7 0 0 1-23-1l-32.19 32.19a17 17 0 0 0 24 24l32.15-32.15a117.7 117.7 0 0 1-.96-23.04Z" />
+        <path d="M101.29 13.57a17.47 17.47 0 0 1 1.5 1.74c6.4 7.17 10.26 16 12.47 25.12a22.85 22.85 0 0 1 32.14 32.5c-.11.1-.19.22-.29.32 10 2.25 19.69 6.42 27.35 13.65.16.15.33.28.48.44l.33.35a.47.47 0 0 1 .1.1c.06 0 .11.12.17.18.62.64 1.22 1.28 1.81 2A56.79 56.79 0 0 0 98.1 10.64c1.09.94 2.16 1.9 3.19 2.93Z" />
+      </g>
     </motion.svg>
   );
 }
