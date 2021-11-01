@@ -6,7 +6,7 @@ import Button from "@/components/Button";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import Banner from "@/components/Banner";
-import { getAllSkills } from "@/lib/graphcms";
+import { getAllSkills, getAllProjects } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
@@ -104,7 +104,7 @@ const welcomeCardV = {
   },
 };
 
-export default function Home({ skills }) {
+export default function Home({ skills, projects }) {
   const theme = useContext(ThemeContext);
 
   return (
@@ -174,7 +174,7 @@ export default function Home({ skills }) {
           <SkillsCard skills={skills} />
         </SkillsSection>
         <ProjectsSection>
-          <ProjectsCard />
+          <ProjectsCard projects={projects} />
         </ProjectsSection>
       </Content>
     </Container>
@@ -201,8 +201,9 @@ export default function Home({ skills }) {
 
 export async function getStaticProps() {
   const skills = (await getAllSkills()) || [];
+  const projects = (await getAllProjects()) || [];
   return {
-    props: { skills },
+    props: { skills, projects },
     revalidate: 20000,
   };
 }
