@@ -13,7 +13,7 @@ const Container = styled(motion.a)`
 `;
 
 export default function BackArrow({
-  href,
+  href = "/",
   width = 175,
   height = 50,
   id,
@@ -39,7 +39,7 @@ export default function BackArrow({
   };
 
   return (
-    <Link href={href ? href : "/skills"} passHref scroll={false}>
+    <Link href={href} passHref scroll={false}>
       <Container
         $width={width}
         $height={height}
