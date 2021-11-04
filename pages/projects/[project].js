@@ -1,13 +1,12 @@
 import styled, { ThemeContext } from "styled-components";
-import { motion, MotionConfig, useMotionValue } from "framer-motion";
+import { motion, MotionConfig } from "framer-motion";
 import React, { useContext } from "react";
 import { getProjectList, getProjectDetails } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
-import Image from "next/image";
+//import Image from "next/image";
 import BackArrow from "@/components/BackArrow";
-import ProjectsScroller from "@/components/ProjectsScroller";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -40,22 +39,22 @@ const Container = styled(motion.div)`
   position: relative;
 `;
 
-const SkillImage = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-`;
+// const ProjectImage = styled(motion.div)`
+//   width: 100%;
+//   height: 100%;
+// `;
 
-const SkillTile = styled(motion.div)`
-  min-width: 130px;
-  width: 130px;
-  min-height: 130px;
-  height: 130px;
-  margin-right: 20px;
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
-  background-color: yellow;
-`;
+// const ProjectTile = styled(motion.div)`
+//   min-width: 130px;
+//   width: 130px;
+//   min-height: 130px;
+//   height: 130px;
+//   margin-right: 20px;
+//   border-radius: 20px;
+//   overflow: hidden;
+//   position: relative;
+//   background-color: yellow;
+// `;
 
 const Title = styled(motion.h1)`
   width: max-content;
@@ -65,21 +64,21 @@ const Title = styled(motion.h1)`
   margin-left: 20px;
 `;
 
-const Detail = styled(motion.p)`
-  width: 100%;
-  font-size: clamp(1rem, 4vw, 1.3525rem);
-  font-weight: 200;
-  line-height: clamp(1rem, 4.5vw, 1.55rem);
-`;
-const DetailBlock = styled(motion.div)`
-  width: 100%;
-  max-width 800px;
-  font-size: clamp(1rem, 4vw, 1.3525rem);
-  font-weight: 200;
-  line-height: clamp(1rem, 4.5vw, 1.55rem);
-  grid-column: 1;
-  display: flex;
-`;
+// const Detail = styled(motion.p)`
+//   width: 100%;
+//   font-size: clamp(1rem, 4vw, 1.3525rem);
+//   font-weight: 200;
+//   line-height: clamp(1rem, 4.5vw, 1.55rem);
+// `;
+// const DetailBlock = styled(motion.div)`
+//   width: 100%;
+//   max-width 800px;
+//   font-size: clamp(1rem, 4vw, 1.3525rem);
+//   font-weight: 200;
+//   line-height: clamp(1rem, 4.5vw, 1.55rem);
+//   grid-column: 1;
+//   display: flex;
+// `;
 
 const TitleBlock = styled(motion.div)`
   width: 100%;
@@ -87,44 +86,44 @@ const TitleBlock = styled(motion.div)`
   align-items: center;
 `;
 
-const detailsV = {
-  hidden: {
-    opacity: 0,
-    x: "70%",
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      delay: 0.25,
-      type: "spring",
-      stiffness: 30,
-      mass: 1,
-      damping: 8,
-    },
-  },
-  exit: {
-    opacity: 0,
-    x: 0,
-    transition: {
-      duration: 0.1,
-    },
-  },
-};
+// const detailsV = {
+//   hidden: {
+//     opacity: 0,
+//     x: "70%",
+//   },
+//   visible: {
+//     opacity: 1,
+//     x: 0,
+//     transition: {
+//       delay: 0.25,
+//       type: "spring",
+//       stiffness: 30,
+//       mass: 1,
+//       damping: 8,
+//     },
+//   },
+//   exit: {
+//     opacity: 0,
+//     x: 0,
+//     transition: {
+//       duration: 0.1,
+//     },
+//   },
+// };
 
-const skillImageV = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      type: "tween",
-      delay: 1.5,
-      duration: 0.3,
-    },
-  },
-};
+// const skillImageV = {
+//   hidden: {
+//     opacity: 0,
+//   },
+//   visible: {
+//     opacity: 1,
+//     transition: {
+//       type: "tween",
+//       delay: 1.5,
+//       duration: 0.3,
+//     },
+//   },
+// };
 
 const arrowV = {
   hidden: {
