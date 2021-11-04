@@ -7,6 +7,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useContext } from "react";
+
 const Chip = styled(motion.div)`
   height: 20px;
   width: max-content;
@@ -36,7 +37,7 @@ export default function SkillChip({
   const hover = useMotionValue(0);
 
   const backgroundColor = useTransform(
-    [bgColor, theme.primary_light, textColor, hover],
+    [bgColor, theme.primary, textColor, hover],
     ([latestColor1, latestColor2, latestColor3, latestHover]) =>
       transform(
         latestHover,
@@ -90,7 +91,7 @@ export default function SkillChip({
       onHoverStart={() => handleHover(1)}
       onHoverEnd={() => handleHover(0)}
       style={{
-        borderWidth: "1px",
+        borderWidth: 1,
         borderStyle: "solid",
         borderColor: outline,
         backgroundColor,

@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { getSkillList } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
-import SkillScroller from "@/components/SkillScroller";
+import SkillScroller from "@/components/Skills/SkillScroller";
 import Highlight from "@/components/Highlight";
 import Head from "next/head";
 import TreeIcon from "@/components/Icons/TreeIcon";
@@ -203,12 +203,12 @@ export default function Skills({ skills }) {
 
   return (
     <MotionConfig
-      transition={{ type: "spring", stiffness: 40, mass: 2, damping: 14 }}
+      transition={{ type: "spring", stiffness: 70, mass: 2, damping: 14 }}
     >
       <Container
         style={{ backgroundColor: theme.primary }}
         layoutId={"skillsCard_window"}
-        transition={{ type: "spring", stiffness: 40, mass: 2, damping: 14 }}
+        transition={{ type: "spring", stiffness: 70, mass: 2, damping: 14 }}
         initial="hidden"
         animate="visible"
         exit="exit"

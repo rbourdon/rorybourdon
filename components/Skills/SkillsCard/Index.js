@@ -3,7 +3,7 @@ import { motion, MotionConfig } from "framer-motion";
 import NavCard from "@/components/CardComponents/NavCard";
 import TreeIcon from "@/components/Icons/TreeIcon";
 import { useContext, useState } from "react";
-import SkillRoller from "@/components/SkillsCard/SkillRoller";
+import SkillRoller from "@/components/Skills/SkillsCard/SkillRoller";
 // import Underline from "@/components/Underline";
 import { useInView } from "react-intersection-observer";
 import Button from "@/components/Button";

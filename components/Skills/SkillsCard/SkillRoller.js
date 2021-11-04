@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { LayoutGroup, motion } from "framer-motion";
-import SkillBubble from "@/components/SkillBubble";
+import SkillBubble from "@/components/Skills/SkillBubble";
 import { useState } from "react";
 import useInterval from "@/components/utils/useInterval";
 

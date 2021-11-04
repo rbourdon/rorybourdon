@@ -1,9 +1,9 @@
 import styled, { ThemeContext } from "styled-components";
 import { LayoutGroup, motion, useMotionValue } from "framer-motion";
-import SkillBubble from "@/components/SkillBubble";
+import SkillBubble from "@/components/Skills/SkillBubble";
 import { useContext, useState } from "react";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
-import useWindowSize from "./utils/useWindowSize";
+import useWindowSize from "../utils/useWindowSize";
 
 const SCROLL_MULTIPLIER = 35;
 const LIST_BUFFER = 3;

@@ -1,6 +1,6 @@
 import NavCard from "@/components/CardComponents/NavCard";
-import SkillsCard from "@/components/SkillsCard/Index";
-import ProjectsCard from "@/components/ProjectsCard/Index";
+import SkillsCard from "@/components/Skills/SkillsCard/Index";
+import ProjectsCard from "@/components/Projects/ProjectsCard/Index";
 import styled, { ThemeContext } from "styled-components";
 import Button from "@/components/Button";
 import { motion } from "framer-motion";

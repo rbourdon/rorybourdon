@@ -6,9 +6,9 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import SkillChip from "@/components/ProjectsCard/SkillChip";
+import SkillChip from "@/components/Projects/ProjectSummary/SkillChip";
 import { useContext, useEffect } from "react";
-import ArrowIcon from "../Icons/ArrowIcon";
+import ArrowIcon from "../../Icons/ArrowIcon";
 import Link from "next/link";
 
 const Container = styled(motion.div)`
@@ -156,7 +156,7 @@ function GetSkillChips({
             },
           },
         }}
-        transition={{ type: "spring", stiffness: 100 }}
+        transition={{ type: "spring", stiffness: 50, mass: 0.25, damping: 6 }}
         bgColor={bgColor}
         textColor={textColor}
         outline={outline}
@@ -231,7 +231,7 @@ export default function ProjectSummary({
   );
 
   const chipTextColor = useTransform(
-    [theme.primary_dark, bgColor, hover],
+    [theme.primary_verydark, bgColor, hover],
     ([latestColor1, latestColor2, latestHover]) =>
       transform(latestHover, [0, 1], [latestColor1, latestColor2])
   );
@@ -243,7 +243,7 @@ export default function ProjectSummary({
   );
 
   const chipBorderColor = useTransform(
-    [theme.primary_dark, primaryColor, hover],
+    [theme.primary_slightlydark, primaryColor, hover],
     ([latestColor1, latestColor2, latestHover]) =>
       transform(latestHover, [0, 1], [latestColor1, latestColor2])
   );
@@ -264,7 +264,7 @@ export default function ProjectSummary({
         type: "spring",
         stiffness: 50,
         mass: 0.25,
-        damping: 10,
+        damping: 6,
       }}
     >
       {outline && active && (

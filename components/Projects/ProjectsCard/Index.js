@@ -4,7 +4,7 @@ import NavCard from "@/components/CardComponents/NavCard";
 import { useContext } from "react";
 import ProjectsIcon from "@/components/Icons/ProjectsIcon";
 import Underline from "@/components/Underline";
-import ProjectSummary from "@/components/ProjectsCard/ProjectSummary";
+import ProjectSummary from "@/components/Projects/ProjectSummary/Index";
 import { useInView } from "react-intersection-observer";
 import Button from "@/components/Button";
 

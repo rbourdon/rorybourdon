@@ -7,7 +7,7 @@ import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
 import Image from "next/image";
 import BackArrow from "@/components/BackArrow";
-import ProjectsScroller from "@/components/ProjectsScroller";
+import ProjectsScroller from "@/components/Projects/ProjectsScroller";
 
 const Content = styled(motion.main)`
   width: 100%;

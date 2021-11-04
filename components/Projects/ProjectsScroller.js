@@ -2,7 +2,7 @@ import styled, { ThemeContext } from "styled-components";
 import { LayoutGroup, motion, useMotionValue } from "framer-motion";
 import { useContext, useState } from "react";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
-import ProjectSummary from "./ProjectsCard/ProjectSummary";
+import ProjectSummary from "./ProjectSummary/Index";
 
 const Projects = styled(motion.div)`
   width: 100%;
@@ -22,7 +22,7 @@ const Summaries = styled(motion.ul)`
   justify-items: center;
   justify-content: center;
   display: grid;
-  grid-template-rows: 300px;
+  grid-template-rows: 290px;
   grid-template-columns: 360px 360px 360px;
   column-gap: 55px;
   padding: 0 40px;
@@ -128,19 +128,32 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
   const panPos = useMotionValue(0);
   const [panning, setPanning] = useState(false);
 
+  const incrementRollerPos = (dir) => {
+    setRollerPos((prev) =>
+      prev + dir < 0
+        ? projects.length - 1
+        : prev + dir > projects.length - 1
+        ? 0
+        : prev + dir
+    );
+  };
+
   const handlePan = (e, pointInfo) => {
     panPos.set(panPos.get() + pointInfo.delta.x);
-
+    //console.log(panPos.get());
     if (Math.abs(panPos.get()) >= 300) {
-      setRollerPos((prev) =>
-        prev - Math.sign(panPos.get()) < 0
-          ? projects.length - 1
-          : prev - Math.sign(panPos.get()) > projects.length - 1
-          ? 0
-          : prev - Math.sign(panPos.get())
-      );
-      panPos.set(0);
+      incrementRollerPos(Math.sign(panPos.get() * -1));
+      panPos.set(Math.sign(panPos.get()) * -100);
     }
+  };
+
+  const handlePanEnd = (e, pointInfo) => {
+    console.log(pointInfo.velocity.x);
+    if (pointInfo.velocity.x < -400 || pointInfo.velocity.x > 400) {
+      incrementRollerPos(Math.sign(pointInfo.velocity.x * -1));
+    }
+    panPos.set(0);
+    setPanning(false);
   };
 
   const handleClick = (dir) => {
@@ -166,10 +179,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
         <Summaries
           onPanStart={() => setPanning(true)}
           onPan={handlePan}
-          onPanEnd={() => {
-            panPos.set(0);
-            setPanning(false);
-          }}
+          onPanEnd={handlePanEnd}
         >
           {[
             ...projects.slice(rollerPos, rollerPos + 3),
