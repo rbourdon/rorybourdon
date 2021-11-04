@@ -151,6 +151,7 @@ const arrowV = {
 
 export default function Project({ project }) {
   const theme = useContext(ThemeContext);
+
   //   const convert = require("color-convert");
   //   const secondaryColorRGB = convert.rgb.hsl(
   //     skill.secondaryColor.rgba.r,
@@ -198,7 +199,7 @@ export default function Project({ project }) {
         </NavBar>
         <Content>
           <TitleBlock>
-            <BackArrow href="/skills" variants={arrowV} />
+            <BackArrow variants={arrowV} />
             <Title
               layoutId={`${project.slug}_bubbleLink`}
               style={{ color: theme.primary_verydark }}
