@@ -20,36 +20,66 @@ const Chip = styled(motion.div)`
   margin-right: 5px;
   margin-bottom: 5px;
   user-select: none;
+  cursor: pointer;
 `;
-
-const handleHover = (hover, to) => {
-  animate(hover, to, { type: "tween", duration: 0.2 });
-};
 
 export default function SkillChip({
   title,
   variants,
   transition,
   layoutId = "skillChip",
+  bgColor,
+  textColor,
+  outline,
 }) {
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
-  const border = useTransform(
-    theme.primary_dark,
-    (latestColor1) => "1px solid  " + latestColor1
-  );
+
   const backgroundColor = useTransform(
-    [theme.primary_light, theme.teal, theme.green, hover],
+    [bgColor, theme.primary_light, textColor, hover],
     ([latestColor1, latestColor2, latestColor3, latestHover]) =>
       transform(
         latestHover,
         [0, 1],
         [
           latestColor1,
-          transform(latestHover, [0, 3.5], [latestColor2, latestColor3]),
+          transform(latestHover, [0, 1], [latestColor2, latestColor3]),
         ]
       )
   );
+
+  const color = useTransform(
+    [textColor, theme.primary_verydark, bgColor, hover],
+    ([latestColor1, latestColor2, latestColor3, latestHover]) =>
+      transform(
+        latestHover,
+        [0, 1],
+        [
+          latestColor1,
+          transform(latestHover, [0, 1], [latestColor2, latestColor3]),
+        ]
+      )
+  );
+
+  // const color = useTransform(
+  //   [textColor, theme.primary_light, textColor, hover],
+  //   ([latestColor1, latestColor2, latestColor3, latestHover]) =>
+  //     transform(
+  //       latestHover,
+  //       [0, 1],
+  //       [
+  //         latestColor1,
+  //         transform(latestHover, [0, 1], [latestColor2, latestColor3]),
+  //       ]
+  //     )
+  // );
+
+  const handleHover = (to) => {
+    animate(hover, to, {
+      type: "tween",
+      ease: "easeInOut",
+    });
+  };
 
   return (
     <Chip
@@ -57,9 +87,15 @@ export default function SkillChip({
       variants={variants}
       layoutId={layoutId}
       transition={transition}
-      onHoverStart={() => handleHover(hover, 1)}
-      onHoverEnd={() => handleHover(hover, 0)}
-      style={{ border, backgroundColor }}
+      onHoverStart={() => handleHover(1)}
+      onHoverEnd={() => handleHover(0)}
+      style={{
+        borderWidth: "1px",
+        borderStyle: "solid",
+        borderColor: outline,
+        backgroundColor,
+        color,
+      }}
     >
       {title}
     </Chip>
