@@ -8,7 +8,7 @@ export default function SkillsIcon({ iconV }) {
         fill="none"
         stroke="currentColor"
         strokeLinecap="round"
-        strokeWidth="1.12"
+        strokeWidth={1}
       >
         <motion.path
           variants={iconV}

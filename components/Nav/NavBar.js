@@ -7,16 +7,22 @@ const Container = styled(motion.div)`
   width: 100%;
   min-width: 100%;
   max-width: 100%;
-  height: 150px;
+  height: 15vh;
   display: grid;
   grid-template-rows: 100%;
   grid-template-columns: minmax(max-content, 8vw) 1fr;
-  justify-items: end;
+  justify-items: flex-end;
   align-items: center;
-  padding: 0 25px 0 25px;
+  padding: 0 25px;
+  z-index: 3;
+
+  @media (max-width: 555px) {
+    height: 7.5vh;
+    padding: 0 10px;
+  }
 `;
 
-const NavBox = styled(motion.div)`
+const NavBox = styled(motion.nav)`
   width: min(100%, 750px);
   padding: 0 0 0 min(200px, 5vw);
   height: 100%;
@@ -30,23 +36,25 @@ const NavBox = styled(motion.div)`
 `;
 
 const LogoContainer = styled(motion.a)`
-  width: 120px;
-  height: 120px;
+  width: 70%;
+  height: 70%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 555px) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export default function NavBar({ children }) {
   return (
     <Container>
       <Link href="/" passHref>
-        <LogoContainer
-          transition={{ type: "spring", duration: 1, bounce: 0.2 }}
-          layoutId="logo"
-        >
-          <Logo />
+        <LogoContainer>
+          <Logo intro />
         </LogoContainer>
       </Link>
 

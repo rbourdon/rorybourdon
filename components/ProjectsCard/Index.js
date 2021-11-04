@@ -52,7 +52,6 @@ const ProjectsBox = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  padding: 0 0 0 20px;
   overflow: hidden;
 `;
 
@@ -96,7 +95,51 @@ const underlineV = {
   },
 };
 
-export default function ProjectsCard({ selected }) {
+const titleV = {
+  hidden: {
+    x: 120,
+    opacity: 0,
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      delay: 710 * 230 * 0.0000012 + 2.45,
+      duration: 0.7,
+    },
+  },
+};
+
+const descV = {
+  hidden: {
+    x: 120,
+    opacity: 0,
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      delay: 710 * 230 * 0.0000012 + 2.65,
+      duration: 0.7,
+    },
+  },
+};
+
+const outlineV = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
+export default function ProjectsCard({ selected, projects }) {
   const theme = useContext(ThemeContext);
   const { ref, inView } = useInView({
     threshold: 0.66,
@@ -105,11 +148,10 @@ export default function ProjectsCard({ selected }) {
     <motion.div
       initial="hidden"
       animate={selected ? "selected" : inView ? "visible" : "hidden"}
-      exit={selected ? null : "exit"}
     >
       <NavCard
         height={422}
-        width={627}
+        width={697}
         stemDir="h"
         stemLoc={7}
         stemLength={375}
@@ -142,7 +184,19 @@ export default function ProjectsCard({ selected }) {
             <ProjectsIcon iconV={iconV} delay={710 * 230 * 0.0000012 + 2.15} />
           </Icon>
           <ProjectsBox>
-            <ProjectSummary />
+            <ProjectSummary
+              id={projects[0].title}
+              project={projects[0]}
+              bgColor={theme.primary}
+              primaryColor={theme.primary_verydark}
+              outline={false}
+              onHover={null}
+              titleV={titleV}
+              descV={descV}
+              outlineV={outlineV}
+              defaultBGColor={theme.primary_light}
+              delay={710 * 230 * 0.0000012 + 2.85}
+            />
             <Button
               width={150}
               height={50}
@@ -150,7 +204,7 @@ export default function ProjectsCard({ selected }) {
               color2={theme.green}
               href="/projects"
               id="projects"
-              delay={710 * 230 * 0.0000012 + 2.15}
+              animationDelay={710 * 230 * 0.0000012 + 2.15}
             >
               All Projects
             </Button>

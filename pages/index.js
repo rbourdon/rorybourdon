@@ -1,17 +1,22 @@
-import Layout from "@/components/layout";
 import NavCard from "@/components/CardComponents/NavCard";
-import SkillsCard from "@/components/SkillsCard/SkillsCard";
-import ProjectsCard from "@/components/ProjectsCard/ProjectsCard";
+import SkillsCard from "@/components/SkillsCard/Index";
+import ProjectsCard from "@/components/ProjectsCard/Index";
 import styled, { ThemeContext } from "styled-components";
 import Button from "@/components/Button";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import Banner from "@/components/Banner";
-import { getAllSkillsTitles } from "@/lib/graphcms";
+import { getAllSkills, getAllProjects } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
+import Head from "next/head";
 
 const Container = styled(motion.div)`
+  width: 100%;
+  min-height: 100vh;
+`;
+
+const Content = styled(motion.main)`
   width: 100%;
   min-width: 100%;
   min-height: calc(100vh - (150px + 5vh));
@@ -21,7 +26,7 @@ const Container = styled(motion.div)`
   overflow: hidden;
 `;
 
-const HeroBanner = styled(motion.div)`
+const HeroBanner = styled(motion.article)`
   width: 100%;
   height: max-content;
   display: flex;
@@ -55,11 +60,11 @@ const HeroSection = styled(motion.section)`
 
 const SkillsSection = styled(motion.section)`
   width: 100%;
-  min-height: 95vh;
-  padding: 200px 5vw;
-  height: max-content;
+  height: 130vh;
+  padding: 0 5vw;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 const ProjectsSection = styled(motion.section)`
   width: 100%;
@@ -99,18 +104,32 @@ const welcomeCardV = {
   },
 };
 
-export default function Home({ skills }) {
+export default function Home({ skills, projects }) {
   const theme = useContext(ThemeContext);
 
   return (
-    <Layout title={"Rory Bourdon | Web Developer & Visual Artist"}>
+    <Container
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      style={{ backgroundColor: theme.primary }}
+    >
+      <Head>
+        <title>Rory Bourdon | Web Developer & Visual Artist</title>
+        <meta name="description" content="Portfolio of Rory Bourdon" />
+        <meta
+          name="og:title"
+          content="Rory Bourdon | Web Developer & Visual Artist"
+        />
+        <meta name="og:description" content="Portfolio of Rory Bourdon" />
+      </Head>
       <NavBar>
         <NavLink href="/skills">Skills</NavLink>
         <NavLink href="/">Projects</NavLink>
         <NavLink href="/">Resume</NavLink>
       </NavBar>
-      <Container>
-        <HeroSection initial="hidden" animate="visible" exit="exit">
+      <Content>
+        <HeroSection>
           <HeroBanner>
             <Banner />
             <Buttons variants={buttonsV}>
@@ -119,7 +138,7 @@ export default function Home({ skills }) {
                 color2={theme.purple.get()}
                 href="/"
                 id="learnMoreButton"
-                delay={1}
+                animationDelay={1}
               >
                 Learn More
               </Button>
@@ -128,7 +147,7 @@ export default function Home({ skills }) {
                 color2={theme.teal.get()}
                 href="/"
                 id="contactButton"
-                delay={1.33}
+                animationDelay={1.33}
               >
                 Contact Me
               </Button>
@@ -155,17 +174,36 @@ export default function Home({ skills }) {
           <SkillsCard skills={skills} />
         </SkillsSection>
         <ProjectsSection>
-          <ProjectsCard />
+          <ProjectsCard projects={projects} />
         </ProjectsSection>
-      </Container>
-    </Layout>
+      </Content>
+    </Container>
   );
 }
 
+// Home.getLayout = function getLayout(page) {
+//   return (
+//     <Container
+//       initial="hidden"
+//       animate="visible"
+//       exit="exit"
+//       variants={containerV}
+//     >
+//       <NavBar>
+//         <NavLink href="/skills">Skills</NavLink>
+//         <NavLink href="/">Projects</NavLink>
+//         <NavLink href="/">Resume</NavLink>
+//       </NavBar>
+//       {page}
+//     </Container>
+//   );
+// };
+
 export async function getStaticProps() {
-  const skills = (await getAllSkillsTitles()) || [];
+  const skills = (await getAllSkills()) || [];
+  const projects = (await getAllProjects()) || [];
   return {
-    props: { skills },
+    props: { skills, projects },
     revalidate: 20000,
   };
 }

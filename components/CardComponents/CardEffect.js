@@ -39,7 +39,7 @@ export default function CardEffect({
       $height={radius * 3 + sWidth * 2}
       $xOffset={width / 2 - (radius * 3 + sWidth * 2) / 2 + xOff}
       $yOffset={height / 2 - (radius * 3 + sWidth * 2) / 2 + yOff}
-      layoutId={`${id}CardEffect`}
+      //layoutId={`${id}CardEffect`}
     >
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"

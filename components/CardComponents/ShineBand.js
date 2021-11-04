@@ -31,14 +31,7 @@ const shineBandV = {
   }),
 };
 
-export default function ShineBand({
-  width,
-  height,
-  bRadius,
-  sWidth,
-  shineV,
-  id,
-}) {
+export default function ShineBand({ width, height, bRadius, sWidth, shineV }) {
   return (
     <Container
       variants={shineV}
@@ -47,7 +40,7 @@ export default function ShineBand({
       }}
       $width={width}
       $height={height}
-      layoutId={`${id}ShineBand`}
+      //layoutId={`${id}ShineBand`}
     >
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"

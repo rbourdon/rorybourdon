@@ -28,6 +28,11 @@ const cardV = {
       staggerChildren: 0.5,
     },
   },
+  selected: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 const frameV = {
@@ -44,10 +49,6 @@ const containerV = {
       delayChildren: custom,
     },
   }),
-  exit: {
-    opacity: 0,
-    transition: { duration: 0.1 },
-  },
 };
 
 const tagV = {
@@ -90,7 +91,7 @@ const stemV = {
 export default function NavCard({
   height = 200,
   borderRadius = 30,
-  strokeWidth = 1.2,
+  strokeWidth = 1,
   width = 200,
   stem = false,
   stemLength = 200,
@@ -122,7 +123,7 @@ export default function NavCard({
       ref={intersectionRef}
       variants={containerV}
       custom={delay}
-      layoutId={`${id}NavcardContainer`}
+      layoutId={`${id}_navCardContainer`}
     >
       <CardEffect
         width={width}
@@ -135,6 +136,10 @@ export default function NavCard({
         circleV={{
           hidden: {
             pathLength: 0,
+            transition: {
+              delay: 0,
+              duration: 0.9,
+            },
           },
           visible: {
             pathLength: 1,
@@ -149,6 +154,10 @@ export default function NavCard({
             pathLength: 0,
             originX: 0,
             originY: 1,
+            transition: {
+              delay: 0,
+              duration: 0.9,
+            },
           },
           visible: (custom) => ({
             pathLength: 1,
@@ -209,7 +218,12 @@ export default function NavCard({
           bRadius={borderRadius}
           startLoc={finalStemLoc}
           borderV={{
-            hidden: { pathLength: 0 },
+            hidden: {
+              pathLength: 0,
+              transition: {
+                duration: width * height * 0.0000012 + 0.7,
+              },
+            },
             visible: {
               pathLength: 1,
               transition: {
@@ -217,7 +231,7 @@ export default function NavCard({
               },
             },
             selected: {
-              pathLength: 1,
+              pathLength: 0,
               transition: {
                 duration: width * height * 0.0000012 + 0.7,
               },
@@ -226,6 +240,9 @@ export default function NavCard({
           innerBorderV={{
             hidden: {
               pathLength: 0,
+              transition: {
+                duration: width * height * 0.0000012 + 0.7,
+              },
             },
             visible: {
               pathLength: 1,
@@ -234,9 +251,9 @@ export default function NavCard({
               },
             },
             selected: {
-              pathLength: 1,
+              pathLength: 0,
               transition: {
-                duration: width * height * 0.0000012 + 0.7,
+                duration: width * height * 0.0000012 + 0.5,
               },
             },
           }}
@@ -262,7 +279,7 @@ export default function NavCard({
               },
             },
             selected: {
-              opacity: 1,
+              opacity: 0,
               transition: {
                 duration: 0.3,
               },
@@ -274,8 +291,8 @@ export default function NavCard({
           bRadius={borderRadius}
           keyShadow={keyShadow}
           bgColor={bgColor}
-          id={id}
         />
+        {children}
         <CardFace
           width={width}
           height={height}
@@ -283,7 +300,11 @@ export default function NavCard({
           bRadius={borderRadius}
           faceV={{
             hidden: {
-              opacity: 0,
+              opacity: 1,
+              transition: {
+                delayChildren: 0,
+                staggerChildren: 0.125,
+              },
             },
             visible: {
               opacity: 1,
@@ -295,7 +316,7 @@ export default function NavCard({
             selected: {
               opacity: 1,
               transition: {
-                delayChildren: width * height * 0.0000012,
+                delayChildren: 0,
                 staggerChildren: 0.125,
               },
             },
@@ -306,7 +327,6 @@ export default function NavCard({
           id={id}
           gradientRotation={gradientRotation}
         />
-        {children}
         <ShineBand
           width={width}
           height={height}

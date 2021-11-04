@@ -36,13 +36,10 @@ const borderV = {
     },
   },
   selected: {
-    pathLength: 1,
+    pathLength: 0,
     transition: {
       duration: 0.75,
     },
-  },
-  exit: {
-    pathLength: 0,
   },
 };
 
@@ -57,13 +54,10 @@ const innerBorderV = {
     },
   },
   selected: {
-    pathLength: 1,
+    pathLength: 0,
     transition: {
       duration: 0.75,
     },
-  },
-  exit: {
-    pathLength: 0,
   },
 };
 
@@ -76,21 +70,17 @@ const contentV = {
     borderRadius: custom.bRadius,
     opacity: 1,
     transition: {
-      delay: custom.delay + 0.65,
+      animationDelay: custom.animationDelay + 0.65,
       duration: 0.3,
     },
   }),
   selected: (custom) => ({
     borderRadius: custom.bRadius,
-    opacity: 1,
+    opacity: 0,
     transition: {
-      delay: custom.delay + 0.65,
+      animationDelay: 0.75,
       duration: 0.3,
     },
-  }),
-  exit: (custom) => ({
-    borderRadius: custom.bRadius,
-    opacity: 0,
   }),
 };
 
@@ -120,7 +110,7 @@ export default function Button({
   sWidth = 1.2,
   bRadius = 23,
   id,
-  delay,
+  animationDelay = 0,
   onClick,
 }) {
   const theme = useContext(ThemeContext);
@@ -141,7 +131,7 @@ export default function Button({
     visible: {
       transition: {
         staggerChildren: 0.15,
-        delayChildren: delay,
+        animationDelayChildren: animationDelay,
         when: "beforeChildren",
       },
     },
@@ -154,7 +144,7 @@ export default function Button({
         $height={height}
         onHoverStart={() => handleHoverStart(hover)}
         onHoverEnd={() => handleHoverEnd(hover)}
-        onClick={(e) => onClick(id)(e)}
+        onClick={onClick}
         layoutId={`${id}Button`}
       >
         <Content
@@ -162,7 +152,7 @@ export default function Button({
             backgroundColor: theme.primary_light,
             boxShadow,
           }}
-          custom={{ bRadius: bRadius, delay: delay }}
+          custom={{ bRadius: bRadius, animationDelay: animationDelay }}
           variants={contentV}
           layoutId={`${id}ButtonContent`}
         >
