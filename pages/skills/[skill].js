@@ -1,5 +1,5 @@
 import styled, { ThemeContext } from "styled-components";
-import { motion, MotionConfig } from "framer-motion";
+import { motion, MotionConfig, useMotionValue } from "framer-motion";
 import React, { useContext } from "react";
 import { getSkillList, getSkillDetails } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
@@ -152,6 +152,23 @@ const arrowV = {
 
 export default function Skill({ skill }) {
   const theme = useContext(ThemeContext);
+  const convert = require("color-convert");
+  const secondaryColorRGB = convert.rgb.hsl(
+    skill.secondaryColor.rgba.r,
+    skill.secondaryColor.rgba.g,
+    skill.secondaryColor.rgba.b
+  );
+  const primaryColorRGB = convert.rgb.hsl(
+    skill.primaryColor.rgba.r,
+    skill.primaryColor.rgba.g,
+    skill.primaryColor.rgba.b
+  );
+  const primaryColor = useMotionValue(
+    `hsla(${primaryColorRGB[0]},${primaryColorRGB[1]}%,${primaryColorRGB[2]}%,1)`
+  );
+  const secondaryColor = useMotionValue(
+    `hsla(${secondaryColorRGB[0]},${secondaryColorRGB[1]}%,${secondaryColorRGB[2]}%,1)`
+  );
 
   return (
     <MotionConfig
@@ -200,7 +217,7 @@ export default function Skill({ skill }) {
           <DetailBlock>
             <SkillTile
               layoutId={`${skill.slug}_bubble`}
-              style={{ backgroundColor: skill.primaryColor.css }}
+              style={{ backgroundColor: primaryColor }}
             >
               {skill?.image?.url && (
                 <SkillImage variants={skillImageV}>
@@ -218,7 +235,11 @@ export default function Skill({ skill }) {
               {skill.description}
             </Detail>
           </DetailBlock>
-          <ProjectsScroller projects={skill.projects} />
+          <ProjectsScroller
+            projects={skill.projects}
+            primaryColor={primaryColor}
+            bgColor={secondaryColor}
+          />
           {/* <SkillsColumn></SkillsColumn> */}
         </Content>
       </Container>
