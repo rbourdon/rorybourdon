@@ -14,7 +14,6 @@ const Bubble = styled(motion.li)`
   height: ${(props) => props.$height + "px"};
   min-width: 75px;
   width: max-content;
-  padding: 0 22px;
   border-radius: 20px;
   display: flex;
   align-items: center;
@@ -40,8 +39,13 @@ const BubbleLink = styled.a`
   -moz-user-drag: none;
   user-drag: none;
   user-select: none;
-
+  width: 100%;
+  height: 100%;
   z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
 
   &:focus {
     outline: none;
