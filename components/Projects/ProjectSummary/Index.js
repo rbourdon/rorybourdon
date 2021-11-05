@@ -8,8 +8,7 @@ import {
 } from "framer-motion";
 import SkillChip from "@/components/Projects/ProjectSummary/SkillChip";
 import { useContext, useEffect } from "react";
-import ArrowIcon from "../../Icons/ArrowIcon";
-import Link from "next/link";
+import DetailsLink from "@/components/Projects/ProjectSummary/DetailsLink";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -59,113 +58,11 @@ const Outline = styled(motion.div)`
   z-index: -1;
 `;
 
-const Arrow = styled(motion.div)`
-  width: 10px;
-  height: 10px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  outline: none;
-  padding: 0;
-  margin-left: 10px;
-`;
-
-const ProjectLink = styled(motion.a)`
-  -webkit-user-drag: none;
-  -moz-user-drag: none;
-  user-drag: none;
-  user-select: none;
-  font-size: 0.85rem;
-  font-weight: 300;
-  user-select: none;
-  padding: 8px 20px;
-  width: max-content;
-  height: max-content;
-  z-index: 4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
-  align-self: end;
-
-  &:focus {
-    outline: none;
-  }
-`;
-
 const skillChipsV = {
   visible: {
     staggerChildren: 0.2,
   },
 };
-
-const detailsLinkV = {
-  hidden: {
-    opacity: 0,
-    x: -130,
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      type: "spring",
-      duration: 1,
-      delayChildren: 0.15,
-    },
-  },
-};
-
-const arrowV = {
-  hidden: {
-    opacity: 0,
-    x: -100,
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      type: "spring",
-      duration: 1,
-    },
-  },
-};
-
-function GetSkillChips({
-  skills,
-  projectTitle,
-  bgColor,
-  textColor,
-  outline,
-  delay,
-}) {
-  return skills.map((skill, index) => {
-    return (
-      <SkillChip
-        layoutId={`${skill.title}_chip_${projectTitle}`}
-        title={skill.title}
-        key={skill.title}
-        variants={{
-          hidden: { x: 120, opacity: 0 },
-          visible: {
-            x: 0,
-            opacity: 1,
-            transition: {
-              type: "spring",
-              delay: delay + index * 0.1,
-              duration: 0.9,
-            },
-          },
-        }}
-        transition={{ type: "spring", stiffness: 50, mass: 0.25, damping: 6 }}
-        bgColor={bgColor}
-        textColor={textColor}
-        outline={outline}
-      >
-        {skill.title}
-      </SkillChip>
-    );
-  });
-}
 
 export default function ProjectSummary({
   project,
@@ -186,7 +83,7 @@ export default function ProjectSummary({
   const hover = useMotionValue(0);
 
   const handleHoverStart = () => {
-    onHover && onHover(project.title);
+    onHover && onHover(project.slug);
     active &&
       animate(hover, 1, { type: "tween", duration: 0.2, ease: "easeInOut" });
   };
@@ -250,8 +147,11 @@ export default function ProjectSummary({
 
   return (
     <Container
+      tabIndex={0}
       onHoverStart={handleHoverStart}
       onHoverEnd={handleHoverEnd}
+      onFocus={handleHoverStart}
+      onBlur={handleHoverEnd}
       style={{ zIndex: outline ? 3 : 1 }}
       layoutId={`${id}_summary`}
       drag="x"
@@ -264,7 +164,7 @@ export default function ProjectSummary({
         type: "spring",
         stiffness: 50,
         mass: 0.25,
-        damping: 6,
+        damping: 7,
       }}
     >
       {outline && active && (
@@ -286,33 +186,62 @@ export default function ProjectSummary({
           }}
         />
       )}
-      <ProjectTitle variants={titleV} style={{ color }}>
+      <ProjectTitle
+        layoutId={`${id}_title`}
+        variants={titleV}
+        style={{ color }}
+        transition={{ duration: 0 }}
+      >
         {project.title}
       </ProjectTitle>
-      <ProjectDescription variants={descV} style={{ color }}>
+      <ProjectDescription
+        layoutId={`${id}_description`}
+        transition={{ duration: 0 }}
+        variants={descV}
+        style={{ color }}
+      >
         {project.shortDescription}
       </ProjectDescription>
       <SkillChips variants={skillChipsV}>
-        {project.skills && (
-          <GetSkillChips
-            skills={project.skills}
-            projectTitle={project.title}
-            bgColor={chipBGColor}
-            textColor={chipTextColor}
-            outline={chipBorderColor}
-            delay={delay}
-          />
-        )}
+        {project.skills &&
+          project.skills.map((skill, index) => {
+            return (
+              <SkillChip
+                layoutId={`${skill.title}_chip_${project.title}`}
+                title={skill.title}
+                key={skill.title}
+                variants={{
+                  hidden: { x: 120, opacity: 0 },
+                  visible: {
+                    x: 0,
+                    opacity: 1,
+                    transition: {
+                      type: "spring",
+                      delay: delay + index * 0.1,
+                      duration: 0.9,
+                    },
+                  },
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 50,
+                  mass: 0.25,
+                  damping: 7,
+                }}
+                bgColor={chipBGColor}
+                textColor={chipTextColor}
+                outline={chipBorderColor}
+              >
+                {skill.title}
+              </SkillChip>
+            );
+          })}
       </SkillChips>
       {outline && active && (
-        <Link href={`/projects/${encodeURIComponent(project.slug)}`} passHref>
-          <ProjectLink variants={detailsLinkV} style={{ color: linkColor }}>
-            View Details
-            <Arrow style={{ rotate: 90 }} variants={arrowV}>
-              <ArrowIcon />
-            </Arrow>
-          </ProjectLink>
-        </Link>
+        <DetailsLink
+          href={`/projects/${encodeURIComponent(project.slug)}`}
+          linkColor={linkColor}
+        />
       )}
     </Container>
   );
