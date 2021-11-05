@@ -15,7 +15,7 @@ const Content = styled(motion.main)`
   height: max-content;
   display: grid;
   flex: 1;
-  grid-template-rows: max-content max-content 1fr;
+  grid-template-rows: max-content max-content max-content 1fr;
   grid-template-columns: 100%;
   padding: 5vh 16vw;
   grid-auto-flow: dense;
@@ -85,6 +85,15 @@ const TitleBlock = styled(motion.div)`
   width: 100%;
   display: flex;
   align-items: center;
+`;
+
+const ScrollerTitle = styled(motion.p)`
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 `;
 
 const detailsV = {
@@ -235,6 +244,7 @@ export default function Skill({ skill }) {
               {skill.description}
             </Detail>
           </DetailBlock>
+          <ScrollerTitle>Projects built with {skill.title}</ScrollerTitle>
           <ProjectsScroller
             projects={skill.projects}
             primaryColor={primaryColor}
