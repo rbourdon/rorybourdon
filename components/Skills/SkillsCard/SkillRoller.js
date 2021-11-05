@@ -4,7 +4,6 @@ import SkillBubble from "@/components/Skills/SkillBubble";
 import { useState } from "react";
 import useInterval from "@/components/utils/useInterval";
 
-const NUM_SKILLS = 7;
 const TICK_RATE = 1600;
 
 const Roller = styled(motion.ul)`
@@ -22,7 +21,12 @@ const Roller = styled(motion.ul)`
   padding: 0;
 `;
 
-export default function SkillRoller({ skills, selected, variants }) {
+export default function SkillRoller({
+  skills,
+  selected,
+  variants,
+  numSkills = 7,
+}) {
   const [rollerPos, setRollerPos] = useState(0);
   const [hovering, setHovering] = useState(false);
   useInterval(
@@ -36,31 +40,31 @@ export default function SkillRoller({ skills, selected, variants }) {
     <Roller layoutId="skillRoller" variants={variants}>
       <LayoutGroup>
         {[
-          ...skills.slice(rollerPos, rollerPos + NUM_SKILLS),
+          ...skills.slice(rollerPos, rollerPos + numSkills),
           ...skills.slice(
             0,
-            NUM_SKILLS - skills.slice(rollerPos, rollerPos + NUM_SKILLS).length
+            numSkills - skills.slice(rollerPos, rollerPos + numSkills).length
           ),
         ].map((skill, index) => {
           return (
             <SkillBubble
               title={skill.title}
-              slug={skill.slug}
-              key={skill.title}
+              id={skill.slug}
+              key={skill.slug}
               top={index === 0 ? true : false}
-              bottom={index === NUM_SKILLS - 1 ? true : false}
+              bottom={index === numSkills - 1 ? true : false}
               height={36}
               transition={{
                 type: "spring",
-                stiffness: 200,
-                mass: 1.25,
-                damping: 15,
+                stiffness: Math.random() * 10 + 44,
+                mass: Math.random() * 0.2 + 0.4,
+                damping: 4,
               }}
               outlineTransition={{
                 type: "spring",
-                stiffness: 300,
-                mass: 0.75,
-                damping: 28,
+                stiffness: 80,
+                mass: 0.3,
+                damping: 8,
               }}
               onHover={setHovering}
               hasOutline={hovering === skill.title}
