@@ -4,7 +4,8 @@ import ArrowIcon from "./Icons/ArrowIcon";
 import { useRouter } from "next/router";
 
 const Container = styled(motion.button)`
-  width: 40px;
+  width: 50px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,12 +15,15 @@ const Container = styled(motion.button)`
   color: inherit;
   border: none;
   padding: 0;
-  font: inherit;
   cursor: pointer;
-  outline: inherit;
 `;
 
-export default function BackArrow({ width = 175, height = 50, id, variants }) {
+export default function BackArrow({
+  width = 175,
+  height = 50,
+  id = "generic",
+  variants,
+}) {
   const hover = useMotionValue(0);
   const router = useRouter();
   const handleHoverEnd = () => {
