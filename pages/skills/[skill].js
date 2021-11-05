@@ -244,7 +244,9 @@ export default function Skill({ skill }) {
               {skill.description}
             </Detail>
           </DetailBlock>
-          <ScrollerTitle>Projects built with {skill.title}</ScrollerTitle>
+          <ScrollerTitle variants={detailsV}>
+            Projects built with {skill.title}
+          </ScrollerTitle>
           <ProjectsScroller
             projects={skill.projects}
             primaryColor={primaryColor}
