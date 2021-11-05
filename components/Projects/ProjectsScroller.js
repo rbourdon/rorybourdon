@@ -180,6 +180,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
           onPanStart={() => setPanning(true)}
           onPan={handlePan}
           onPanEnd={handlePanEnd}
+          style={{ cursor: panning ? "grabbing" : "grab" }}
         >
           {[
             ...projects.slice(rollerPos, rollerPos + 3),
@@ -195,7 +196,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
                 project={project}
                 bgColor={bgColor}
                 primaryColor={primaryColor}
-                outline={hovering === project.title}
+                outline={hovering === project.slug}
                 active={!panning}
                 onHover={setHovering}
                 titleV={titleV}
