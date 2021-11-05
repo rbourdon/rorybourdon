@@ -34,14 +34,14 @@ const Outline = styled(motion.div)`
   top: -5px;
 `;
 
-const BubbleLink = styled.a`
+const BubbleLink = styled(motion.a)`
   -webkit-user-drag: none;
   -moz-user-drag: none;
   user-drag: none;
   user-select: none;
   width: 100%;
   height: 100%;
-  z-index: 4;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,7 +70,7 @@ export default function SkillBubble({
   active = true,
   outlineTransition = { type: "spring", stiffness: 30 },
   title,
-  slug,
+  id,
 }) {
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
@@ -99,14 +99,10 @@ export default function SkillBubble({
       animate(hover, 0, { type: "tween", duration: 0.2, ease: "easeInOut" });
   };
 
-  // useEffect(() => {
-  //   if (hovering) {
-  //     onHover && onHover(title);
-  //     animate(hover, 1, { type: "tween", duration: 0.25 });
-  //   } else {
-  //     animate(hover, 0, { type: "tween", duration: 0.25 });
-  //   }
-  // }, [hovering, hover]);
+  const disableLinkDrag = (e) => {
+    console.log("link prevented");
+    e.preventDefault();
+  };
 
   const backgroundColor = useTransform(
     [bgColor || theme.primary_light, theme.blue, theme.teal, hover],
@@ -163,13 +159,13 @@ export default function SkillBubble({
     <MotionConfig transition={transition}>
       <Bubble
         $height={height}
-        layoutId={`${slug}_bubble`}
+        layoutId={`${id}_bubble`}
         onHoverStart={handleHoverStart}
         onHoverEnd={handleHoverEnd}
         variants={variants}
         custom={custom}
         onFocus={handleHoverStart}
-        onBlur={handleHoverEnd} // onBlur={handleHoverEnd}
+        onBlur={handleHoverEnd}
         style={{
           scale,
           color: titleColor,
@@ -182,17 +178,14 @@ export default function SkillBubble({
               : backgroundColor,
         }}
       >
-        {active ? (
-          <Link href={`/skills/${slug}`} passHref scroll={false}>
-            <BubbleLink onDragStart={(e) => e.preventDefault()}>
-              <Title layoutId={`${slug}_bubbleLink`}>{title}</Title>
-            </BubbleLink>
-          </Link>
-        ) : (
-          <BubbleLink onDragStart={(e) => e.preventDefault()}>
-            <Title layoutId={`${slug}_bubbleLink`}>{title}</Title>
+        <Link href={`/skills/${id}`} passHref scroll={false}>
+          <BubbleLink
+            onTapStart={disableLinkDrag}
+            onClick={active ? null : disableLinkDrag}
+          >
+            <Title layoutId={`${id}_bubbleLinkTitle`}>{title}</Title>
           </BubbleLink>
-        )}
+        </Link>
         {hasOutline && (
           <Outline
             layoutId="bubbleOutline"

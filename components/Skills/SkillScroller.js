@@ -20,6 +20,7 @@ const Bubbles = styled(motion.ul)`
   margin: 0;
   cursor: grab;
   grid-auto-rows: 37px;
+  z-index: 6;
 `;
 
 const Arrow = styled(motion.button)`
@@ -97,6 +98,11 @@ export default function SkillScroller({ skills }) {
     }
   };
 
+  const handlePanEnd = () => {
+    panPos.set(0);
+    setTimeout(() => setPanning(false), 150);
+  };
+
   const handleClick = (dir) => {
     setRollerPos((prev) =>
       prev + dir < 0
@@ -106,17 +112,13 @@ export default function SkillScroller({ skills }) {
         : prev + dir
     );
   };
-
   return (
-    <Bubbles
-      onPanStart={() => setPanning(true)}
-      onPan={handlePan}
-      onPanEnd={() => {
-        panPos.set(0);
-        setPanning(false);
-      }}
-    >
-      <LayoutGroup>
+    <LayoutGroup>
+      <Bubbles
+        onPanStart={() => setPanning(true)}
+        onPan={handlePan}
+        onPanEnd={handlePanEnd}
+      >
         <Arrow
           onClick={() => handleClick(1)}
           layout
@@ -135,11 +137,11 @@ export default function SkillScroller({ skills }) {
           return (
             <SkillBubble
               title={skill.title}
-              key={skill.title}
+              key={skill.slug}
               variants={bubbleV}
               custom={index}
               bgColor={theme.primary}
-              slug={skill.slug}
+              id={skill.slug}
               height={36}
               transition={{
                 type: "spring",
@@ -167,7 +169,7 @@ export default function SkillScroller({ skills }) {
         >
           <ArrowIcon />
         </Arrow>
-      </LayoutGroup>
-    </Bubbles>
+      </Bubbles>
+    </LayoutGroup>
   );
 }
