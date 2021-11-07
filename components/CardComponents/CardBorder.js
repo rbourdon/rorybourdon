@@ -181,10 +181,7 @@ export default function CardBorder({
   frameV,
   innerBorderV,
   color1,
-  color2,
   innerOffset,
-  id,
-  gradientRotation = -45,
 }) {
   const startLocation = startLoc ? startLoc : 8;
   const innerOff = innerOffset ? innerOffset : -10;
@@ -196,18 +193,6 @@ export default function CardBorder({
         viewBox={`0 0 ${width} ${height}`}
         variants={frameV}
       >
-        <defs>
-          <linearGradient
-            id={id ? id + "_border" : "borderGradient"}
-            gradientUnits="userSpaceOnUse"
-            gradientTransform={`rotate(${
-              gradientRotation + (height - width) * 0.055
-            }, ${width * 0.5}, ${height * 0.5})`}
-          >
-            <motion.stop offset=".25" stopColor={color1} />
-            <motion.stop offset=".75" stopColor={color2} />
-          </linearGradient>
-        </defs>
         <motion.path
           d={getPath(startLocation, height, width, bRadius, sWidth, 0)}
           strokeWidth={sWidth}
@@ -217,10 +202,9 @@ export default function CardBorder({
         />
         <motion.path
           d={getPath(startLocation, height, width, bRadius, sWidth, innerOff)}
-          stroke={`url(#${id ? id + "_border" : "borderGradient"})`}
           strokeWidth={sWidth}
           fill="none"
-          style={{ zIndex: 3 }}
+          style={{ zIndex: 3, stroke: color1 }}
           variants={innerBorderV}
         />
       </motion.svg>
