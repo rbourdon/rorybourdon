@@ -5,8 +5,9 @@ import { getProjectList, getProjectDetails } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
-//import Image from "next/image";
 import BackArrow from "@/components/BackArrow";
+import SkillScroller from "@/components/Skills/SkillScroller";
+import SkillRoller from "@/components/Skills/SkillsCard/SkillRoller";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -14,12 +15,12 @@ const Content = styled(motion.main)`
   height: max-content;
   display: grid;
   flex: 1;
-  grid-template-rows: max-content max-content 1fr;
-  grid-template-columns: 100%;
-  padding: 5vh 16vw;
+  padding: 8vh 10vw;
+  grid-template-rows: max-content max-content max-content;
+  grid-template-columns: minmax(min-content, 60%) 1fr;
   grid-auto-flow: dense;
   align-items: center;
-  overflow: hidden;
+  align-content: center;
 
   @media (max-width: 555px) {
     row-gap: 10px;
@@ -32,7 +33,7 @@ const Content = styled(motion.main)`
 
 const Container = styled(motion.div)`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -60,56 +61,78 @@ const Title = styled(motion.h1)`
   width: max-content;
   font-size: clamp(3.4rem, 15vw, 9rem);
   font-weight: 300;
-  line-height: 1.2;
-  margin-left: 20px;
+  margin: 0 0 20px 30px;
 `;
 
-// const Detail = styled(motion.p)`
-//   width: 100%;
-//   font-size: clamp(1rem, 4vw, 1.3525rem);
-//   font-weight: 200;
-//   line-height: clamp(1rem, 4.5vw, 1.55rem);
-// `;
-// const DetailBlock = styled(motion.div)`
-//   width: 100%;
-//   max-width 800px;
-//   font-size: clamp(1rem, 4vw, 1.3525rem);
-//   font-weight: 200;
-//   line-height: clamp(1rem, 4.5vw, 1.55rem);
-//   grid-column: 1;
-//   display: flex;
-// `;
+const Detail = styled(motion.p)`
+  width: 100%;
+  max-width min(100%, 1000px);
+  font-size: clamp(1rem, 4vw, 1.3525rem);
+  font-weight: 200;
+  line-height: clamp(1rem, 4.5vw, 1.55rem);
+  grid-column: 1;
+`;
+const DetailBlock = styled(motion.div)`
+  width: 100%;
+  justify-self: end;
+  height: max-content;
+  font-size: clamp(1rem, 4vw, 1.3525rem);
+  font-weight: 200;
+  line-height: clamp(1rem, 4.5vw, 1.55rem);
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+`;
+
+const SkillsColumn = styled(motion.section)`
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  justify-self: center;
+  grid-row: span 3;
+
+  @media (max-width: 555px) {
+    height: max-content;
+    grid-row: span 1;
+    justify-content: center;
+    align-items: center;
+  }
+`;
 
 const TitleBlock = styled(motion.div)`
   width: 100%;
   display: flex;
   align-items: center;
+  grid-column: span 2;
 `;
 
-// const detailsV = {
-//   hidden: {
-//     opacity: 0,
-//     x: "70%",
-//   },
-//   visible: {
-//     opacity: 1,
-//     x: 0,
-//     transition: {
-//       delay: 0.25,
-//       type: "spring",
-//       stiffness: 30,
-//       mass: 1,
-//       damping: 8,
-//     },
-//   },
-//   exit: {
-//     opacity: 0,
-//     x: 0,
-//     transition: {
-//       duration: 0.1,
-//     },
-//   },
-// };
+const detailsV = {
+  hidden: {
+    opacity: 0,
+    x: "70%",
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: 0.25,
+      type: "spring",
+      stiffness: 30,
+      mass: 1,
+      damping: 8,
+    },
+  },
+  exit: {
+    opacity: 0,
+    x: 0,
+    transition: {
+      duration: 0.1,
+    },
+  },
+};
 
 // const skillImageV = {
 //   hidden: {
@@ -201,21 +224,42 @@ export default function Project({ project }) {
           <TitleBlock>
             <BackArrow variants={arrowV} />
             <Title
-              layoutId={`${project.slug}_bubbleLink`}
+              layoutId={`${project.slug}_title`}
               style={{ color: theme.primary_verydark }}
               transition={{
                 type: "spring",
-                stiffness: 50,
-                mass: 2,
+                stiffness: 70,
+                mass: 1,
                 damping: 14,
               }}
             >
               {project.title}
             </Title>
           </TitleBlock>
-          {/*
+          <Detail variants={detailsV} style={{ color: theme.primary_dark }}>
+            {project.description}
+          </Detail>
+          <SkillsColumn>
+            <SkillRoller
+              selected={false}
+              skills={project.skills}
+              numSkills={project.skills.length - 1}
+            />
+          </SkillsColumn>
+
           <DetailBlock>
-            <SkillTile
+            <motion.div
+              style={{
+                backgroundColor: "black",
+                width: 800,
+                height: 600,
+                margin: "200px 0",
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { delay: 2, duration: 1 } }}
+            />
+
+            {/* <SkillTile
               layoutId={`${skill.slug}_bubble`}
               style={{ backgroundColor: primaryColor }}
             >
@@ -230,12 +274,9 @@ export default function Project({ project }) {
                   />
                 </SkillImage>
               )}
-            </SkillTile>
-            <Detail variants={detailsV} style={{ color: theme.primary_dark }}>
-              {skill.description}
-            </Detail>
+            </SkillTile> */}
           </DetailBlock>
-          <ProjectsScroller
+          {/*<ProjectsScroller
             projects={skill.projects}
             primaryColor={primaryColor}
             bgColor={secondaryColor}
