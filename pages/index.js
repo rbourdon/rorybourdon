@@ -1,8 +1,6 @@
-import NavCard from "@/components/CardComponents/NavCard";
 import SkillsCard from "@/components/Skills/SkillsCard/Index";
 import ProjectsCard from "@/components/Projects/ProjectsCard/Index";
 import styled, { ThemeContext } from "styled-components";
-import Button from "@/components/Button";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import Banner from "@/components/Banner";
@@ -10,6 +8,8 @@ import { getAllSkills, getAllProjects } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
+import HorizonLine from "@/components/Icons/HorizonLine";
+import HorizonCircle from "@/components/Icons/HorizonCircle";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -54,13 +54,13 @@ const HeroSection = styled(motion.section)`
   min-height: calc(100vh - 150px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 0 18vw 5vh 18vw;
+  justify-content: space-evenly;
+  padding: 0 10vw 5vh 10vw;
 `;
 
 const SkillsSection = styled(motion.section)`
   width: 100%;
-  height: 130vh;
+  height: 110vh;
   padding: 0 5vw;
   display: flex;
   justify-content: center;
@@ -68,12 +68,11 @@ const SkillsSection = styled(motion.section)`
 `;
 const ProjectsSection = styled(motion.section)`
   width: 100%;
-  min-height: 50vh;
-  padding: 300px 5vw;
-  height: max-content;
+  padding: 0 5vw;
+  height: 110vh;
   display: flex;
   justify-content: center;
-  z-index: 1;
+  align-items: center;
 `;
 
 const CardContent = styled(motion.div)`
@@ -128,11 +127,14 @@ export default function Home({ skills, projects }) {
         <NavLink href="/">Projects</NavLink>
         <NavLink href="/">Resume</NavLink>
       </NavBar>
+      <HorizonLine slope={-19} yLoc={35} />
+      <HorizonLine slope={-90} yLoc={130} />
+      <HorizonCircle />
       <Content>
         <HeroSection>
           <HeroBanner>
             <Banner />
-            <Buttons variants={buttonsV}>
+            {/* <Buttons variants={buttonsV}>
               <Button
                 color1={theme.blue.get()}
                 color2={theme.purple.get()}
@@ -151,10 +153,10 @@ export default function Home({ skills, projects }) {
               >
                 Contact Me
               </Button>
-            </Buttons>
+            </Buttons> */}
           </HeroBanner>
           <HeroBody>
-            <NavCard
+            {/* <NavCard
               height={200}
               width={275}
               color1={theme.blue.get()}
@@ -167,7 +169,7 @@ export default function Home({ skills, projects }) {
               <CardContent variants={welcomeCardV}>
                 <p>Hello</p>
               </CardContent>
-            </NavCard>
+            </NavCard> */}
           </HeroBody>
         </HeroSection>
         <SkillsSection style={{ backgroundColor: theme.primary_light }}>
@@ -180,24 +182,6 @@ export default function Home({ skills, projects }) {
     </Container>
   );
 }
-
-// Home.getLayout = function getLayout(page) {
-//   return (
-//     <Container
-//       initial="hidden"
-//       animate="visible"
-//       exit="exit"
-//       variants={containerV}
-//     >
-//       <NavBar>
-//         <NavLink href="/skills">Skills</NavLink>
-//         <NavLink href="/">Projects</NavLink>
-//         <NavLink href="/">Resume</NavLink>
-//       </NavBar>
-//       {page}
-//     </Container>
-//   );
-// };
 
 export async function getStaticProps() {
   const skills = (await getAllSkills()) || [];
