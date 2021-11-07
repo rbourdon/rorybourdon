@@ -10,6 +10,7 @@ const Container = styled(motion.div)`
   align-items: flex-end;
   z-index: ${(props) => props.$zIndex};
   margin: ${(props) => props.$margin};
+  pointer-events: none;
 `;
 
 const trunkV = {
