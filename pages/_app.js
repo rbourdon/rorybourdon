@@ -61,7 +61,7 @@ const GlobalStyle = createGlobalStyle`
   }
   h1 {
     margin: 0;
-    font-size: clamp(3.0rem, 6vw, 6.538rem);
+    font-size: clamp(3.0rem, 8vw, 8.5rem);
     line-height: 1;
     font-weight: 100;
   }
