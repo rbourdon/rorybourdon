@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { LayoutGroup, motion } from "framer-motion";
+import { LayoutGroup, motion, useIsPresent } from "framer-motion";
 import SkillBubble from "@/components/Skills/SkillBubble";
 import { useState } from "react";
 import useInterval from "@/components/utils/useInterval";
@@ -29,11 +29,12 @@ export default function SkillRoller({
 }) {
   const [rollerPos, setRollerPos] = useState(0);
   const [hovering, setHovering] = useState(false);
+  const isPresent = useIsPresent();
   useInterval(
     () => {
       setRollerPos((prev) => (prev + 1 > skills.length - 1 ? 0 : prev + 1));
     },
-    selected ? null : TICK_RATE
+    selected || !isPresent ? null : TICK_RATE
   );
 
   return (
