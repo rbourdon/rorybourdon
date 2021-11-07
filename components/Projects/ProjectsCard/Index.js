@@ -1,46 +1,47 @@
 import styled, { ThemeContext } from "styled-components";
-import { motion } from "framer-motion";
+import { animate, motion, MotionConfig, useMotionValue } from "framer-motion";
 import NavCard from "@/components/CardComponents/NavCard";
-import { useContext } from "react";
-import ProjectsIcon from "@/components/Icons/ProjectsIcon";
-import Underline from "@/components/Underline";
+import { useContext, useEffect, useState } from "react";
 import ProjectSummary from "@/components/Projects/ProjectSummary/Index";
 import { useInView } from "react-intersection-observer";
 import Button from "@/components/Button";
+import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
 
 const CardContent = styled(motion.div)`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 0.85fr 1fr;
-  grid-template-rows: 10% 90%;
+  grid-template-columns: 41% 56%;
+  column-gap: 3%;
+  grid-template-rows: 100%;
   justify-items: center;
   align-items: center;
   position: relative;
-  padding: 35px 40px;
-  z-index: 5;
+  padding: 25px 30px;
+  z-index: 3;
 `;
 
-const Icon = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-  display: flex;
+const CardWindow = styled(motion.div)`
+  width: 95%;
+  max-width: 100%;
+  height: 90%;
+  max-height: 100%;
+  display: grid;
   align-items: center;
-  justify-content: center;
-  padding: 0 20px 0 0;
+  justify-items: center;
+  grid-template-columns: 100%;
+  grid-template-rows: 30% 70%;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
 `;
 
 const Label = styled(motion.p)`
-  width: 100%;
-  height: 100%;
-  font-size: 1.35rem;
+  font-size: 2.25rem;
+  line-height: 1;
   font-weight: 300;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  grid-column: span 2;
+  width: max-content;
+  height: max-content;
 `;
 
 const ProjectsBox = styled(motion.div)`
@@ -55,74 +56,70 @@ const ProjectsBox = styled(motion.div)`
   overflow: hidden;
 `;
 
+const Backing = styled(motion.div)`
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+`;
+
 const projectsCardV = {
-  hidden: { opacity: 0 },
+  hidden: {
+    opacity: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
   visible: {
     opacity: 1,
     transition: {
-      delay: 710 * 230 * 0.0000012 + 2.05,
+      delay: 358 * 697 * 0.0000012 + 2.05,
       duration: 0.4,
     },
   },
+  selected: {
+    opacity: 1,
+  },
 };
 
-const iconV = {
+const projectSummariesV = {
   hidden: {
     opacity: 0,
+    transition: {
+      duration: 0.5,
+    },
   },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.03,
-      duration: 0.05,
-      delay: 710 * 230 * 0.0000012 + 2.45,
-      when: "beforeChildren",
+      delay: 358 * 697 * 0.0000012 + 1.85,
+      duration: 0.5,
     },
   },
-};
-
-const underlineV = {
-  hidden: {
-    pathLength: 0,
-  },
-  visible: {
-    pathLength: 1,
-    transition: {
-      delay: 710 * 230 * 0.0000012 + 2.05,
-      duration: 0.8,
-      ease: "easeInOut",
-    },
-  },
-};
-
-const titleV = {
-  hidden: {
-    x: 120,
+  selected: {
     opacity: 0,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
+const containerV = {
+  hidden: {
+    opacity: 1,
   },
   visible: {
-    x: 0,
+    opacity: 1,
+  },
+  selected: {
+    opacity: 1,
+  },
+  exit: {
     opacity: 1,
     transition: {
-      type: "spring",
-      delay: 710 * 230 * 0.0000012 + 2.45,
-      duration: 0.7,
-    },
-  },
-};
-
-const descV = {
-  hidden: {
-    x: 120,
-    opacity: 0,
-  },
-  visible: {
-    x: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      delay: 710 * 230 * 0.0000012 + 2.65,
-      duration: 0.7,
+      duration: 0.9,
     },
   },
 };
@@ -139,78 +136,112 @@ const outlineV = {
   },
 };
 
-export default function ProjectsCard({ selected, projects }) {
+export default function ProjectsCard({ projects }) {
   const theme = useContext(ThemeContext);
+  const [selected, setSelected] = useState(false);
+  const [layoutComplete, setLayoutComplete] = useState(false);
   const { ref, inView } = useInView({
     threshold: 0.66,
   });
+
+  //const backgroundColor = useMotionValue(theme.primary.get());
+  // useEffect(() => {
+  //   backgroundColor.set(theme.primary.get());
+  // }, [theme.primary, backgroundColor]);
+
+  // useEffect(() => {
+  //   selected
+  //     ? animate(backgroundColor, theme.primary_slightlydark.get(), {
+  //         duration: 0.8,
+  //       })
+  //     : animate(backgroundColor, theme.primary.get(), { duration: 0.8 });
+  // }, [backgroundColor, selected, theme.primary, theme.primary_slightlydark]);
+
+  const clickHandler = () => {
+    setSelected(true);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0 });
+    }, 800);
+  };
   return (
-    <motion.div
-      initial="hidden"
-      animate={selected ? "selected" : inView ? "visible" : "hidden"}
+    <MotionConfig
+      transition={
+        !layoutComplete
+          ? { type: "spring", stiffness: 100, mass: 1, damping: 14 }
+          : {
+              duration: 0,
+            }
+      }
     >
-      <NavCard
-        height={422}
-        width={697}
-        stemDir="h"
-        stemLoc={7}
-        stemLength={375}
-        color1={theme.teal}
-        color2={theme.green}
-        effectOffset={{ x: 600, y: 20 }}
-        effectRadius={315}
-        id="projects"
-        delay={0.5}
-        tagline="I enjoy building and experimenting"
-        intersectionRef={ref}
-        stem
+      {selected && <Backing style={{ backgroundColor: theme.primary_light }} />}
+      <motion.div
+        initial="hidden"
+        animate={selected ? "selected" : inView ? "visible" : "hidden"}
+        exit="exit"
+        variants={containerV}
+        style={{
+          top: "calc(50vh - " + 358 / 2 + "px)",
+          position: selected ? "fixed" : "static",
+          zIndex: selected ? 4 : 1,
+        }}
+        onLayoutAnimationComplete={() =>
+          setLayoutComplete(selected ? true : false)
+        }
       >
-        <CardContent variants={projectsCardV}>
-          <Label>
-            Projects
-            <Underline
-              variants={underlineV}
-              width={130}
-              sWidth={1.2}
-              color1={theme.teal}
-              color2={theme.green}
-              id="projects"
-            />
-          </Label>
-          <Icon
-            layoutId={"projectsCard_icon"}
-            style={{ color: theme.primary_verydark }}
-          >
-            <ProjectsIcon iconV={iconV} delay={710 * 230 * 0.0000012 + 2.15} />
-          </Icon>
-          <ProjectsBox>
-            <ProjectSummary
-              id={projects[0].title}
-              project={projects[0]}
-              bgColor={theme.primary}
-              primaryColor={theme.primary_verydark}
-              outline={false}
-              onHover={null}
-              titleV={titleV}
-              descV={descV}
-              outlineV={outlineV}
-              defaultBGColor={theme.primary_light}
-              delay={710 * 230 * 0.0000012 + 2.85}
-            />
-            <Button
-              width={150}
-              height={50}
-              color1={theme.teal}
-              color2={theme.green}
-              href="/projects"
-              id="projects"
-              animationDelay={710 * 230 * 0.0000012 + 2.15}
+        <NavCard
+          height={358}
+          width={697}
+          stemDir="h"
+          stemLoc={7}
+          stemLength={375}
+          color1={theme.orange}
+          color2={theme.orange}
+          effectOffset={{ x: 600, y: 20 }}
+          effectRadius={315}
+          id="projects"
+          delay={0.5}
+          tagline="I enjoy building and experimenting"
+          intersectionRef={ref}
+          stem
+        >
+          <CardContent variants={projectsCardV}>
+            <CardWindow
+              layoutId="projectCard_window"
+              style={{
+                backgroundColor: theme.primary,
+                zIndex: selected ? 4 : 1,
+              }}
             >
-              All Projects
-            </Button>
-          </ProjectsBox>
-        </CardContent>
-      </NavCard>
-    </motion.div>
+              <Label layoutId="projectCard_label">Projects</Label>
+              <ProjectsSceneIcon iconWidth="450px" iconHeight="450px" />
+            </CardWindow>
+            <ProjectsBox variants={projectSummariesV}>
+              <ProjectSummary
+                id={projects[0].title}
+                project={projects[0]}
+                bgColor={theme.primary}
+                primaryColor={theme.primary_verydark}
+                outline={false}
+                onHover={null}
+                outlineV={outlineV}
+                defaultBGColor={theme.primary_light}
+                delay={358 * 697 * 0.0000012 + 2.85}
+              />
+              <Button
+                width={150}
+                height={50}
+                color1={theme.orange}
+                href="/projects"
+                id="projects"
+                animationDelay={358 * 697 * 0.0000012 + 1.85}
+                onClick={clickHandler}
+              >
+                All Projects
+              </Button>
+            </ProjectsBox>
+          </CardContent>
+        </NavCard>
+      </motion.div>
+    </MotionConfig>
   );
 }
