@@ -6,7 +6,7 @@ import ArrowIcon from "@/components/Icons/ArrowIcon";
 import useWindowSize from "../utils/useWindowSize";
 
 const SCROLL_MULTIPLIER = 35;
-const LIST_BUFFER = 3;
+const LIST_BUFFER = 2;
 
 const Bubbles = styled(motion.ul)`
   width: 275px;
