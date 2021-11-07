@@ -3,21 +3,28 @@ import { LayoutGroup, motion, useMotionValue } from "framer-motion";
 import { useContext, useState } from "react";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
 import ProjectSummary from "./ProjectSummary/Index";
+import useWindowSize from "../utils/useWindowSize";
 
 const Projects = styled(motion.div)`
   width: 100%;
   max-width: 100%;
-  height: 100%;
+  height: max-content;
   justify-content: center;
   align-items: center;
   display: flex;
   margin: 0;
+  padding: 20px 0;
   justify-self: center;
+  user-select: none;
+
+  @media (max-width: 555px) {
+    padding: 0;
+  }
 `;
 
 const Summaries = styled(motion.ul)`
   width: max-content;
-  height: 100%;
+  height: max-content;
   align-content: center;
   justify-items: center;
   justify-content: center;
@@ -29,6 +36,7 @@ const Summaries = styled(motion.ul)`
   margin: 0;
   cursor: grab;
   grid-auto-rows: 320px;
+  user-select: none;
 `;
 
 const Arrow = styled(motion.button)`
@@ -40,74 +48,6 @@ const Arrow = styled(motion.button)`
   outline: none;
   padding: 0;
 `;
-
-const summariesV = {
-  visible: {
-    transition: {
-      delayChildren: 0.75,
-      staggerChildren: 0.15,
-    },
-  },
-  panning: {
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const titleV = {
-  hidden: {
-    x: 120,
-    opacity: 0,
-  },
-  visible: {
-    x: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 50,
-      mass: 0.25,
-      damping: 10,
-    },
-  },
-  panning: {
-    x: [0, 120, 0],
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 50,
-      mass: 0.25,
-      damping: 10,
-    },
-  },
-};
-
-const descV = {
-  hidden: {
-    x: 120,
-    opacity: 0,
-  },
-  visible: {
-    x: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 50,
-      mass: 0.25,
-      damping: 10,
-    },
-  },
-  panning: {
-    x: [0, 120, 0],
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 50,
-      mass: 0.25,
-      damping: 10,
-    },
-  },
-};
 
 const outlineV = {
   hidden: {
@@ -127,6 +67,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
   const [rollerPos, setRollerPos] = useState(0);
   const panPos = useMotionValue(0);
   const [panning, setPanning] = useState(false);
+  const size = useWindowSize();
 
   const incrementRollerPos = (dir) => {
     setRollerPos((prev) =>
@@ -140,7 +81,6 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
 
   const handlePan = (e, pointInfo) => {
     panPos.set(panPos.get() + pointInfo.delta.x);
-    //console.log(panPos.get());
     if (Math.abs(panPos.get()) >= 300) {
       incrementRollerPos(Math.sign(panPos.get() * -1));
       panPos.set(Math.sign(panPos.get()) * -100);
@@ -148,7 +88,6 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
   };
 
   const handlePanEnd = (e, pointInfo) => {
-    console.log(pointInfo.velocity.x);
     if (pointInfo.velocity.x < -400 || pointInfo.velocity.x > 400) {
       incrementRollerPos(Math.sign(pointInfo.velocity.x * -1));
     }
@@ -169,13 +108,15 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
   return (
     <LayoutGroup>
       <Projects>
-        <Arrow
-          onClick={() => handleClick(1)}
-          layout
-          style={{ rotate: 270, color: theme.primary_dark }}
-        >
-          <ArrowIcon />
-        </Arrow>
+        {size.width > 555 && (
+          <Arrow
+            onClick={() => handleClick(1)}
+            layout
+            style={{ rotate: 270, color: theme.primary_dark }}
+          >
+            <ArrowIcon />
+          </Arrow>
+        )}
         <Summaries
           onPanStart={() => setPanning(true)}
           onPan={handlePan}
@@ -188,7 +129,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
               0,
               3 - projects.slice(rollerPos, rollerPos + 3).length
             ),
-          ].map((project) => {
+          ].map((project, index) => {
             return (
               <ProjectSummary
                 key={project.slug}
@@ -196,26 +137,28 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
                 project={project}
                 bgColor={bgColor}
                 primaryColor={primaryColor}
-                outline={hovering === project.slug}
+                outline={
+                  hovering === project.slug || (size.width < 555 && index === 1)
+                }
                 active={!panning}
                 onHover={setHovering}
-                titleV={titleV}
-                descV={descV}
                 outlineV={outlineV}
                 defaultBGColor={theme.primary}
                 delay={1.1}
-                variants={summariesV}
+                scrollerPos={index}
               />
             );
           })}
         </Summaries>
-        <Arrow
-          layout
-          style={{ rotate: 90, color: theme.primary_dark }}
-          onClick={() => handleClick(-1)}
-        >
-          <ArrowIcon />
-        </Arrow>
+        {size.width > 555 && (
+          <Arrow
+            layout
+            style={{ rotate: 90, color: theme.primary_dark }}
+            onClick={() => handleClick(-1)}
+          >
+            <ArrowIcon />
+          </Arrow>
+        )}
       </Projects>
     </LayoutGroup>
   );
