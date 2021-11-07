@@ -1,11 +1,10 @@
 import styled, { ThemeContext } from "styled-components";
-import { motion, MotionConfig, useMotionValue } from "framer-motion";
+import { motion, MotionConfig } from "framer-motion";
 import React, { useContext } from "react";
 import { getProjectList } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
-import Image from "next/image";
 import BackArrow from "@/components/BackArrow";
 import ProjectsScroller from "@/components/Projects/ProjectsScroller";
 import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
@@ -39,23 +38,6 @@ const Container = styled(motion.div)`
   flex-direction: column;
   overflow: hidden;
   position: relative;
-`;
-
-const SkillImage = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-`;
-
-const SkillTile = styled(motion.div)`
-  min-width: 130px;
-  width: 130px;
-  min-height: 130px;
-  height: 130px;
-  margin-right: 20px;
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
-  background-color: yellow;
 `;
 
 const Title = styled(motion.h1)`
@@ -105,14 +87,6 @@ const ProjectsBlock = styled(motion.div)`
   }
 `;
 
-const ScrollerTitle = styled(motion.p)`
-  width: 100%;
-  padding-bottom: 3vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const detailsV = {
   hidden: {
     opacity: 0,
@@ -134,20 +108,6 @@ const detailsV = {
     x: 0,
     transition: {
       duration: 0.1,
-    },
-  },
-};
-
-const skillImageV = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      type: "tween",
-      delay: 1.5,
-      duration: 0.3,
     },
   },
 };

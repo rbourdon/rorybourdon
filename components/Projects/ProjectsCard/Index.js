@@ -1,7 +1,7 @@
 import styled, { ThemeContext } from "styled-components";
-import { animate, motion, MotionConfig, useMotionValue } from "framer-motion";
+import { motion, MotionConfig } from "framer-motion";
 import NavCard from "@/components/CardComponents/NavCard";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import ProjectSummary from "@/components/Projects/ProjectSummary/Index";
 import { useInView } from "react-intersection-observer";
 import Button from "@/components/Button";

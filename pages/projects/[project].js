@@ -6,7 +6,6 @@ import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
 import BackArrow from "@/components/BackArrow";
-import SkillScroller from "@/components/Skills/SkillScroller";
 import SkillRoller from "@/components/Skills/SkillsCard/SkillRoller";
 
 const Content = styled(motion.main)`
