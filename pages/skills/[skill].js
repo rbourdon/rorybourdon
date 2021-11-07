@@ -12,22 +12,22 @@ import ProjectsScroller from "@/components/Projects/ProjectsScroller";
 const Content = styled(motion.main)`
   width: 100%;
   min-width: 100%;
-  height: max-content;
+  height: 100%;
   display: grid;
   flex: 1;
-  grid-template-rows: max-content max-content max-content 1fr;
+  grid-template-rows: max-content max-content;
   grid-template-columns: 100%;
-  padding: 5vh 16vw;
+  padding: 0 16vw;
+  align-content: space-evenly;
   grid-auto-flow: dense;
-  align-items: center;
   overflow: hidden;
 
   @media (max-width: 555px) {
     row-gap: 10px;
     align-items: start;
-    grid-template-rows: max-content max-content 1fr;
+    grid-template-rows: max-content max-content;
     grid-template-columns: 100%;
-    padding: 2vh 8vw;
+    padding: 0 8vw;
   }
 `;
 
@@ -62,7 +62,7 @@ const Title = styled(motion.h1)`
   font-size: clamp(3.4rem, 15vw, 9rem);
   font-weight: 300;
   line-height: 1.2;
-  margin-left: 20px;
+  margin: 0 0 20px 30px;
 `;
 
 const Detail = styled(motion.p)`
@@ -87,12 +87,23 @@ const TitleBlock = styled(motion.div)`
   align-items: center;
 `;
 
+const HeadingBlock = styled(motion.div)`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ProjectsBlock = styled(motion.div)`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
 const ScrollerTitle = styled(motion.p)`
   width: 100%;
-  height: 100px;
-  padding: 10px;
+  padding-bottom: 3vh;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
 `;
 
@@ -208,50 +219,55 @@ export default function Skill({ skill }) {
         </NavBar>
         <Content>
           {/* <HorizonLine /> */}
-          <TitleBlock>
-            <BackArrow variants={arrowV} />
-            <Title
-              layoutId={`${skill.slug}_bubbleLink`}
-              style={{ color: theme.primary_verydark }}
-              transition={{
-                type: "spring",
-                stiffness: 50,
-                mass: 2,
-                damping: 14,
-              }}
-            >
-              {skill.title}
-            </Title>
-          </TitleBlock>
-          <DetailBlock>
-            <SkillTile
-              layoutId={`${skill.slug}_bubble`}
-              style={{ backgroundColor: primaryColor }}
-            >
-              {skill?.image?.url && (
-                <SkillImage variants={skillImageV}>
-                  <Image
-                    width={130}
-                    height={130}
-                    priority
-                    alt={`${skill.title} Logo`}
-                    src={skill.image.url}
-                  />
-                </SkillImage>
-              )}
-            </SkillTile>
-            <Detail variants={detailsV} style={{ color: theme.primary_dark }}>
-              {skill.description}
-            </Detail>
-          </DetailBlock>
-          <ScrollerTitle variants={detailsV}>
-            Projects built with {skill.title}
-          </ScrollerTitle>
-          <ProjectsScroller
-            projects={skill.projects}
-            primaryColor={primaryColor}
-            bgColor={secondaryColor}
-          />
+          <HeadingBlock>
+            <TitleBlock>
+              <BackArrow id="skillPage" variants={arrowV} />
+              <Title
+                layoutId={`${skill.slug}_bubbleLinkTitle`}
+                style={{ color: theme.primary_verydark }}
+                transition={{
+                  type: "spring",
+                  stiffness: 50,
+                  mass: 2,
+                  damping: 14,
+                }}
+              >
+                {skill.title}
+              </Title>
+            </TitleBlock>
+
+            <DetailBlock>
+              <SkillTile
+                layoutId={`${skill.slug}_bubble`}
+                style={{ backgroundColor: primaryColor }}
+              >
+                {skill?.image?.url && (
+                  <SkillImage variants={skillImageV}>
+                    <Image
+                      width={130}
+                      height={130}
+                      priority
+                      alt={`${skill.title} Logo`}
+                      src={skill.image.url}
+                    />
+                  </SkillImage>
+                )}
+              </SkillTile>
+              <Detail variants={detailsV} style={{ color: theme.primary_dark }}>
+                {skill.description}
+              </Detail>
+            </DetailBlock>
+          </HeadingBlock>
+          <ProjectsBlock>
+            <ScrollerTitle variants={detailsV}>
+              Projects built with {skill.title}
+            </ScrollerTitle>
+            <ProjectsScroller
+              projects={skill.projects}
+              primaryColor={primaryColor}
+              bgColor={secondaryColor}
+            />
+          </ProjectsBlock>
           {/* <SkillsColumn></SkillsColumn> */}
         </Content>
       </Container>
