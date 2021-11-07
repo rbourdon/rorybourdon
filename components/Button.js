@@ -70,7 +70,7 @@ const contentV = {
     borderRadius: custom.bRadius,
     opacity: 1,
     transition: {
-      animationDelay: custom.animationDelay + 0.65,
+      delay: custom.animationDelay + 0.65,
       duration: 0.3,
     },
   }),
@@ -78,7 +78,7 @@ const contentV = {
     borderRadius: custom.bRadius,
     opacity: 0,
     transition: {
-      animationDelay: 0.75,
+      delay: 0.75,
       duration: 0.3,
     },
   }),
@@ -106,7 +106,6 @@ export default function Button({
   width = 175,
   height = 50,
   color1 = "#358ab5",
-  color2 = "#b36db5",
   sWidth = 1.2,
   bRadius = 23,
   id,
@@ -131,7 +130,7 @@ export default function Button({
     visible: {
       transition: {
         staggerChildren: 0.15,
-        animationDelayChildren: animationDelay,
+        delayChildren: animationDelay,
         when: "beforeChildren",
       },
     },
@@ -160,7 +159,6 @@ export default function Button({
         </Content>
         <CardBorder
           color1={color1}
-          color2={color2}
           width={width}
           height={height}
           sWidth={sWidth}
