@@ -64,20 +64,86 @@ const skillChipsV = {
   },
 };
 
+const containerV = {
+  visible: (delay) => ({
+    transition: {
+      delayChildren: delay,
+      staggerChildren: 0.15,
+    },
+  }),
+  panning: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const descV = {
+  hidden: (custom) => ({
+    x: 190 * custom,
+    opacity: 0,
+  }),
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 50,
+      mass: 0.25,
+      damping: 10,
+    },
+  },
+  panning: {
+    x: [0, 120, 0],
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 50,
+      mass: 0.25,
+      damping: 10,
+    },
+  },
+};
+
+const titleV = {
+  hidden: (custom) => ({
+    x: 300 * custom,
+    opacity: 0,
+  }),
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 50,
+      mass: 0.25,
+      damping: 10,
+    },
+  },
+  panning: {
+    x: [0, 120, 0],
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 50,
+      mass: 0.25,
+      damping: 10,
+    },
+  },
+};
+
 export default function ProjectSummary({
   project,
   outline = false,
   bgColor = "hsla(0,0,0,1)",
   primaryColor = "hsla(255,0,100,1)",
   onHover,
-  titleV,
-  descV,
   outlineV,
   delay = 0,
   id,
   active,
-  variants,
   defaultBGColor = "hsla(0,0,0,0)",
+  scrollerPos = 1,
 }) {
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
@@ -157,12 +223,13 @@ export default function ProjectSummary({
       drag="x"
       dragSnapToOrigin
       dragMomentum={false}
-      variants={variants}
+      custom={!active ? 0 : 0.75}
+      variants={containerV}
       initial="hidden"
       animate="visible"
       transition={{
         type: "spring",
-        stiffness: 50,
+        stiffness: 40,
         mass: 0.25,
         damping: 7,
       }}
@@ -191,6 +258,7 @@ export default function ProjectSummary({
         variants={titleV}
         style={{ color }}
         transition={{ duration: 0 }}
+        custom={scrollerPos === 0 && !active ? -1 : 1}
       >
         {project.title}
       </ProjectTitle>
@@ -199,6 +267,7 @@ export default function ProjectSummary({
         transition={{ duration: 0 }}
         variants={descV}
         style={{ color }}
+        custom={scrollerPos === 0 && !active ? -1 : 1}
       >
         {project.shortDescription}
       </ProjectDescription>
@@ -211,13 +280,16 @@ export default function ProjectSummary({
                 title={skill.title}
                 key={skill.title}
                 variants={{
-                  hidden: { x: 120, opacity: 0 },
+                  hidden: {
+                    x: scrollerPos === 0 && !active ? -120 : 120,
+                    opacity: 0,
+                  },
                   visible: {
                     x: 0,
                     opacity: 1,
                     transition: {
                       type: "spring",
-                      delay: delay + index * 0.1,
+                      delay: active ? delay + index * 0.1 : 0.35 + index * 0.1,
                       duration: 0.9,
                     },
                   },
