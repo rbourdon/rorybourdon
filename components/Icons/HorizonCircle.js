@@ -28,7 +28,7 @@ const circleV = {
   },
 };
 
-export default function HorizonCircle({ cx = "92%", cy = "15%" }) {
+export default function HorizonCircle({ cx = "92%", cy = "15%", r = 110 }) {
   const theme = useContext(ThemeContext);
 
   return (
@@ -40,7 +40,7 @@ export default function HorizonCircle({ cx = "92%", cy = "15%" }) {
       <motion.circle
         cx={cx}
         cy={cy}
-        r={110}
+        r={r}
         stroke={theme.primary_slightlydark}
         strokeWidth={1}
         vectorEffect="non-scaling-stroke"
@@ -48,7 +48,7 @@ export default function HorizonCircle({ cx = "92%", cy = "15%" }) {
       <motion.circle
         cx={cx}
         cy={cy}
-        r={108.5}
+        r={r * 0.985}
         variants={circleV}
         stroke={theme.primary_slightlydark}
         strokeWidth={1}

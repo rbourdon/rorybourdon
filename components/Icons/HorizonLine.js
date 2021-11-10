@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
+import useWindowSize from "../utils/useWindowSize";
 
 const Line = styled(motion.svg)`
   position: absolute;
-  top: 0;
   left: 0;
   pointer-events: none;
+  top: ${(props) => props.$top};
 `;
 
 const lineV = {
@@ -54,18 +55,15 @@ const line2V = {
   },
 };
 
-export default function HorizonLine({
-  bottom = "-35vw",
-  slope = -16,
-  yLoc = 94,
-}) {
+export default function HorizonLine({ top = "50vh", slope = -16, yLoc = 94 }) {
   const theme = useContext(ThemeContext);
+  const { width } = useWindowSize();
 
   return (
     <Line
-      $bottom={bottom}
       xmlns="http://www.w3.org/2000/svg"
       viewBox={`0 0 200 200`}
+      $top={width < 1920 ? `${(1920 - width) * 0.2}px` : "0"}
     >
       <motion.path
         custom={{ length: 2, offset: 0.2, spacing: 8 }}
