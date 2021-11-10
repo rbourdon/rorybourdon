@@ -173,7 +173,7 @@ export default function TreeIcon({
               fill={colors.foliage}
             />
 
-            <motion.polygon
+            {/* <motion.polygon
               points={`0,0 ${Math.random() * 1 + 2},${Math.random() * 3 + 3} ${
                 Math.random() * 3 + 3
               },0`}
@@ -185,7 +185,7 @@ export default function TreeIcon({
                 repeatDelay: Math.random() * 0.5,
               }}
               fill={colors.foliage}
-            />
+            /> */}
           </motion.g>
         )}
         <motion.path
