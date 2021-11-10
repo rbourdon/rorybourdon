@@ -52,10 +52,9 @@ const SkillsColumn = styled(motion.section)`
   grid-row: span 3;
 
   @media (max-width: 555px) {
-    height: max-content;
     grid-row: span 1;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
   }
 `;
 
@@ -71,10 +70,10 @@ const Trees = styled(motion.div)`
   zindex: 0;
 
   @media (max-width: 555px) {
-    width: 80%;
+    width: max-content;
     justify-self: center;
     position: absolute;
-    bottom: 0;
+    bottom: -2vh;
     height: max-content;
   }
 `;
