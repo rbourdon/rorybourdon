@@ -132,16 +132,28 @@ const titleV = {
   },
 };
 
+const outlineV = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
 export default function ProjectSummary({
   project,
   outline = false,
   bgColor = "hsla(0,0,0,1)",
   primaryColor = "hsla(255,0,100,1)",
   onHover,
-  outlineV,
   delay = 0,
   id,
   active,
+  intro = false,
   defaultBGColor = "hsla(0,0,0,0)",
   scrollerPos = 1,
 }) {
@@ -223,7 +235,8 @@ export default function ProjectSummary({
       drag="x"
       dragSnapToOrigin
       dragMomentum={false}
-      custom={!active ? 0 : 0.75}
+      dragElastic={true}
+      custom={!intro ? 0 : delay}
       variants={containerV}
       initial="hidden"
       animate="visible"
@@ -258,7 +271,7 @@ export default function ProjectSummary({
         variants={titleV}
         style={{ color }}
         transition={{ duration: 0 }}
-        custom={scrollerPos === 0 && !active ? -1 : 1}
+        custom={scrollerPos === 0 ? (!intro ? -1 : 1) : !intro ? 1 : 1}
       >
         {project.title}
       </ProjectTitle>
@@ -267,7 +280,7 @@ export default function ProjectSummary({
         transition={{ duration: 0 }}
         variants={descV}
         style={{ color }}
-        custom={scrollerPos === 0 && !active ? -1 : 1}
+        custom={scrollerPos === 0 ? (!intro ? -1 : 1) : !intro ? 1 : 1}
       >
         {project.shortDescription}
       </ProjectDescription>
@@ -277,28 +290,19 @@ export default function ProjectSummary({
             return (
               <SkillChip
                 layoutId={`${skill.title}_chip_${project.title}`}
-                title={skill.title}
                 key={skill.title}
-                variants={{
-                  hidden: {
-                    x: scrollerPos === 0 && !active ? -120 : 120,
-                    opacity: 0,
-                  },
-                  visible: {
-                    x: 0,
-                    opacity: 1,
-                    transition: {
-                      type: "spring",
-                      delay: active ? delay + index * 0.1 : 0.35 + index * 0.1,
-                      duration: 0.9,
-                    },
-                  },
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 50,
-                  mass: 0.25,
-                  damping: 7,
+                custom={{
+                  x:
+                    scrollerPos === 0
+                      ? !intro
+                        ? -120
+                        : 120
+                      : !intro
+                      ? 120
+                      : 120,
+                  delay: intro
+                    ? delay + 0.35 + index * 0.1
+                    : 0.35 + index * 0.1,
                 }}
                 bgColor={chipBGColor}
                 textColor={chipTextColor}
