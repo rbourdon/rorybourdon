@@ -10,6 +10,7 @@ import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
 import HorizonLine from "@/components/Icons/HorizonLine";
 import HorizonCircle from "@/components/Icons/HorizonCircle";
+import useWindowSize from "@/components/utils/useWindowSize";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -43,11 +44,15 @@ const HeroBody = styled(motion.div)`
 
 const HeroSection = styled(motion.section)`
   width: 100%;
-  min-height: calc(100vh - 150px);
+  min-height: 88vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   padding: 0 10vw 5vh 10vw;
+
+  @media (max-width: 555px) {
+    padding: 0 6vw 5vh 6vw;
+  }
 `;
 
 const SkillsSection = styled(motion.section)`
@@ -69,6 +74,8 @@ const ProjectsSection = styled(motion.section)`
 
 export default function Home({ skills, projects }) {
   const theme = useContext(ThemeContext);
+
+  const { width } = useWindowSize();
 
   return (
     <Container
@@ -93,7 +100,7 @@ export default function Home({ skills, projects }) {
       </NavBar>
       <HorizonLine slope={-19} yLoc={35} />
       <HorizonLine slope={-90} yLoc={130} />
-      <HorizonCircle />
+      <HorizonCircle r={330 - width * 0.105} />
       <Content>
         <HeroSection>
           <HeroBanner>
