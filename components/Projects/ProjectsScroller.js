@@ -1,6 +1,6 @@
 import styled, { ThemeContext } from "styled-components";
 import { LayoutGroup, motion, useMotionValue } from "framer-motion";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
 import ProjectSummary from "./ProjectSummary/Index";
 import useWindowSize from "../utils/useWindowSize";
@@ -49,60 +49,59 @@ const Arrow = styled(motion.button)`
   padding: 0;
 `;
 
-const outlineV = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
-
 export default function ProjectScroller({ projects, bgColor, primaryColor }) {
   const theme = useContext(ThemeContext);
+  const [intro, setIntro] = useState(true);
   const [hovering, setHovering] = useState(false);
   const [rollerPos, setRollerPos] = useState(0);
   const panPos = useMotionValue(0);
   const [panning, setPanning] = useState(false);
   const size = useWindowSize();
 
-  const incrementRollerPos = (dir) => {
-    setRollerPos((prev) =>
-      prev + dir < 0
-        ? projects.length - 1
-        : prev + dir > projects.length - 1
-        ? 0
-        : prev + dir
-    );
-  };
+  useEffect(() => {
+    setTimeout(() => setIntro(false), 1000);
+  }, []);
+
+  useEffect(() => {
+    panPos.onChange((latest) => {
+      if (Math.abs(latest) >= 300) {
+        setRollerPos((prev) =>
+          prev + Math.sign(latest * -1) > projects.length - 1
+            ? 0
+            : prev + Math.sign(latest * -1) < 0
+            ? projects.length - 1
+            : prev + Math.sign(latest * -1)
+        );
+        panPos.set(Math.sign(latest) * -100);
+      }
+    });
+  }, [panPos, projects.length]);
 
   const handlePan = (e, pointInfo) => {
     panPos.set(panPos.get() + pointInfo.delta.x);
-    if (Math.abs(panPos.get()) >= 300) {
-      incrementRollerPos(Math.sign(panPos.get() * -1));
-      panPos.set(Math.sign(panPos.get()) * -100);
-    }
+  };
+
+  const handlePanStart = () => {
+    setPanning(true);
+    panPos.set(0);
   };
 
   const handlePanEnd = (e, pointInfo) => {
-    if (pointInfo.velocity.x < -400 || pointInfo.velocity.x > 400) {
-      incrementRollerPos(Math.sign(pointInfo.velocity.x * -1));
+    if (pointInfo.velocity.x < -400) {
+      incrementRollerPos();
+    } else if (pointInfo.velocity.x > 400) {
+      decrementRollerPos();
     }
     panPos.set(0);
     setPanning(false);
   };
 
-  const handleClick = (dir) => {
-    setRollerPos((prev) =>
-      prev + dir < 0
-        ? projects.length - 1
-        : prev + dir > projects.length - 1
-        ? 0
-        : prev + dir
-    );
+  const incrementRollerPos = () => {
+    setRollerPos((prev) => (prev + 1 > projects.length - 1 ? 0 : prev + 1));
+  };
+
+  const decrementRollerPos = () => {
+    setRollerPos((prev) => (prev - 1 < 0 ? projects.length - 1 : prev - 1));
   };
 
   return (
@@ -110,7 +109,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
       <Projects>
         {size.width > 555 && (
           <Arrow
-            onClick={() => handleClick(1)}
+            onClick={incrementRollerPos}
             layout
             style={{ rotate: 270, color: theme.primary_dark }}
           >
@@ -118,7 +117,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
           </Arrow>
         )}
         <Summaries
-          onPanStart={() => setPanning(true)}
+          onPanStart={handlePanStart}
           onPan={handlePan}
           onPanEnd={handlePanEnd}
           style={{ cursor: panning ? "grabbing" : "grab" }}
@@ -141,10 +140,10 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
                   hovering === project.slug || (size.width < 555 && index === 1)
                 }
                 active={!panning}
+                intro={intro}
                 onHover={setHovering}
-                outlineV={outlineV}
                 defaultBGColor={theme.primary}
-                delay={1.1}
+                delay={0.7 + index * 0.25}
                 scrollerPos={index}
               />
             );
@@ -154,7 +153,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
           <Arrow
             layout
             style={{ rotate: 90, color: theme.primary_dark }}
-            onClick={() => handleClick(-1)}
+            onClick={decrementRollerPos}
           >
             <ArrowIcon />
           </Arrow>
