@@ -65,9 +65,10 @@ export default function SkillBubble({
   variants,
   custom = 0,
   bgColor,
-  onHover = null,
-  hasOutline = false,
-  active = true,
+  select = null,
+  selected = false,
+  hovering = false,
+  canHover = true,
   outlineTransition = { type: "spring", stiffness: 30 },
   title,
   id,
@@ -88,19 +89,25 @@ export default function SkillBubble({
     }
   }, [top, bottom, opacity]);
 
+  useEffect(() => {
+    !hovering && hover.stop();
+    !hovering &&
+      animate(hover, 0, { type: "tween", duration: 0.2, ease: "easeInOut" });
+  }, [hovering, hover]);
+
   const handleHoverStart = () => {
-    onHover && onHover(title);
-    active &&
+    select && select(title);
+    canHover && hover.stop();
+    canHover &&
       animate(hover, 1, { type: "tween", duration: 0.2, ease: "easeInOut" });
   };
 
   const handleHoverEnd = () => {
-    hover.get() > 0 &&
-      animate(hover, 0, { type: "tween", duration: 0.2, ease: "easeInOut" });
+    hover.stop();
+    animate(hover, 0, { type: "tween", duration: 0.2, ease: "easeInOut" });
   };
 
   const disableLinkDrag = (e) => {
-    console.log("link prevented");
     e.preventDefault();
   };
 
@@ -145,6 +152,29 @@ export default function SkillBubble({
       )
   );
 
+  const boxShadow = useTransform(
+    [hover, theme.shadow_key, theme.shadow_ambient],
+    ([latestHover, latestShadow1, latestShadow2]) =>
+      transform(
+        latestHover,
+        [0, 1],
+        [
+          "0px 0px 0px 0px " +
+            " " +
+            latestShadow1 +
+            ", " +
+            "0px 0px 0x 0px " +
+            latestShadow2,
+          "3px 5px 0px 0px " +
+            " " +
+            latestShadow1 +
+            ", " +
+            "0px 0px 30px 3px " +
+            latestShadow2,
+        ]
+      )
+  );
+
   const outlineOffset = useTransform(hover, [0, 1], ["0px", "-8px"]);
 
   const titleColor = useTransform(
@@ -167,9 +197,10 @@ export default function SkillBubble({
         onFocus={handleHoverStart}
         onBlur={handleHoverEnd}
         style={{
+          boxShadow,
           scale,
           color: titleColor,
-          zIndex: hasOutline ? 10 : 1,
+          zIndex: selected ? 10 : 1,
           opacity,
           border,
           backgroundColor:
@@ -179,14 +210,11 @@ export default function SkillBubble({
         }}
       >
         <Link href={`/skills/${id}`} passHref scroll={false}>
-          <BubbleLink
-            onTapStart={disableLinkDrag}
-            onClick={active ? null : disableLinkDrag}
-          >
+          <BubbleLink onTapStart={disableLinkDrag}>
             <Title layoutId={`${id}_bubbleLinkTitle`}>{title}</Title>
           </BubbleLink>
         </Link>
-        {hasOutline && (
+        {selected && (
           <Outline
             layoutId="bubbleOutline"
             $height={height + 10}

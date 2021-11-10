@@ -4,7 +4,7 @@ import SkillBubble from "@/components/Skills/SkillBubble";
 import { useState } from "react";
 import useInterval from "@/components/utils/useInterval";
 
-const TICK_RATE = 1600;
+const TICK_RATE = 2000;
 
 const Roller = styled(motion.ul)`
   width: 110%;
@@ -28,14 +28,21 @@ export default function SkillRoller({
   numSkills = 7,
 }) {
   const [rollerPos, setRollerPos] = useState(0);
-  const [hovering, setHovering] = useState(false);
+  const [hovering, setHovering] = useState(true);
+  const [selectedBubble, setSelectedBubble] = useState(false);
   const isPresent = useIsPresent();
   useInterval(
     () => {
       setRollerPos((prev) => (prev + 1 > skills.length - 1 ? 0 : prev + 1));
+      setHovering(false);
     },
     selected || !isPresent ? null : TICK_RATE
   );
+
+  const selectBubble = (bub) => {
+    setSelectedBubble(bub);
+    setHovering(true);
+  };
 
   return (
     <Roller layoutId="skillRoller" variants={variants}>
@@ -57,18 +64,20 @@ export default function SkillRoller({
               height={36}
               transition={{
                 type: "spring",
-                stiffness: Math.random() * 10 + 44,
-                mass: Math.random() * 0.2 + 0.4,
-                damping: 4,
+                stiffness: 130,
+                mass: 1,
+                damping: 15,
               }}
               outlineTransition={{
                 type: "spring",
-                stiffness: 80,
-                mass: 0.3,
-                damping: 8,
+                stiffness: 150,
+                mass: 0.8,
+                damping: 15,
               }}
-              onHover={setHovering}
-              hasOutline={hovering === skill.title}
+              select={selectBubble}
+              hovering={hovering}
+              canHover={true}
+              selected={selectedBubble === skill.title}
             >
               {skill.title}
             </SkillBubble>

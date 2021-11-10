@@ -15,12 +15,14 @@ const Bubbles = styled(motion.ul)`
   align-items: center;
   display: grid;
   grid-template-rows: repeat(auto-fit, 37px);
+  grid-template-columns: 100%;
   row-gap: 10px;
   padding: 0;
   margin: 0;
   cursor: grab;
   grid-auto-rows: 37px;
   z-index: 6;
+  touch-action: none;
 `;
 
 const Arrow = styled(motion.button)`
@@ -70,17 +72,17 @@ export default function SkillScroller({ skills }) {
         : (size.height - 450) / 50
       : (size.height - 600) / 50 > skills.length - LIST_BUFFER
       ? skills.length - LIST_BUFFER
-      : (size.height - 600) / 50 < 2
-      ? 2
+      : (size.height - 600) / 50 < 3
+      ? 3
       : (size.height - 600) / 50;
   const theme = useContext(ThemeContext);
   const panPos = useMotionValue(0);
   const [panning, setPanning] = useState(false);
   const [rollerPos, setRollerPos] = useState(0);
-  const [hoveredSkill, setHoveredSkill] = useState(false);
+  const [selectedSkill, setSelectedSkill] = useState(false);
 
-  const handleSkillHover = (skill) => {
-    !panning && setHoveredSkill(skill);
+  const handleSkillSelect = (skill) => {
+    !panning && setSelectedSkill(skill);
   };
 
   const handlePan = (e, pointInfo) => {
@@ -100,7 +102,7 @@ export default function SkillScroller({ skills }) {
 
   const handlePanEnd = () => {
     panPos.set(0);
-    setTimeout(() => setPanning(false), 150);
+    setTimeout(() => setPanning(false), 75);
   };
 
   const handleClick = (dir) => {
@@ -126,7 +128,6 @@ export default function SkillScroller({ skills }) {
         >
           <ArrowIcon />
         </Arrow>
-
         {[
           ...skills.slice(rollerPos, rollerPos + numSkills),
           ...skills.slice(
@@ -155,13 +156,12 @@ export default function SkillScroller({ skills }) {
                 mass: 0.25,
                 damping: 10,
               }}
-              onHover={handleSkillHover}
-              hasOutline={hoveredSkill === skill.title && !panning}
-              active={!panning}
+              select={handleSkillSelect}
+              selected={selectedSkill === skill.title}
+              canHover={!panning}
             />
           );
         })}
-
         <Arrow
           layout
           style={{ rotate: 180, color: theme.primary_dark }}
