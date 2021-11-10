@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "color-convert": "^2.0.1",
-    "framer-motion": "^5.2.0",
+    "framer-motion": "^5.3.0-rc.1",
     "graphql": "^15.6.1",
     "graphql-request": "^3.6.1",
     "next": "latest",
