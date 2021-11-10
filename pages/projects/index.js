@@ -180,8 +180,8 @@ export default function Skill({ projects }) {
             content="Projects - Rory Bourdon | Web Developer & Visual Artist"
           />
         </Head>
-        <NavBar logoComplete={true}>
-          <NavLink href="/">Projects</NavLink>
+        <NavBar>
+          <NavLink href="/skills">Skills</NavLink>
           <NavLink href="/">Resume</NavLink>
         </NavBar>
         <Content>
