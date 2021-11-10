@@ -22,6 +22,7 @@ const Bubble = styled(motion.li)`
   position: relative;
   cursor: pointer;
   z-index: 4;
+  -webkit-tap-highlight-color: transparent;
 `;
 
 const Outline = styled(motion.div)`
@@ -191,6 +192,7 @@ export default function SkillBubble({
         $height={height}
         layoutId={`${id}_bubble`}
         onHoverStart={handleHoverStart}
+        onTap={handleHoverStart}
         onHoverEnd={handleHoverEnd}
         variants={variants}
         custom={custom}
@@ -210,7 +212,10 @@ export default function SkillBubble({
         }}
       >
         <Link href={`/skills/${id}`} passHref scroll={false}>
-          <BubbleLink onTapStart={disableLinkDrag}>
+          <BubbleLink
+            onClick={canHover ? null : disableLinkDrag}
+            onTapStart={disableLinkDrag}
+          >
             <Title layoutId={`${id}_bubbleLinkTitle`}>{title}</Title>
           </BubbleLink>
         </Link>
