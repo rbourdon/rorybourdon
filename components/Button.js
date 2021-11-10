@@ -1,5 +1,11 @@
 import styled, { ThemeContext } from "styled-components";
-import { animate, motion, useMotionValue, useTransform } from "framer-motion";
+import {
+  animate,
+  motion,
+  transform,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
 import Link from "next/link";
 import CardBorder from "@/components/CardComponents/CardBorder";
 import { useContext } from "react";
@@ -12,6 +18,7 @@ const Container = styled(motion.a)`
   align-items: center;
   position: relative;
   z-index: 99;
+  -webkit-tap-highlight-color: transparent;
 `;
 
 const Content = styled(motion.div)`
@@ -105,8 +112,7 @@ export default function Button({
   children,
   width = 175,
   height = 50,
-  color1 = "#358ab5",
-  sWidth = 1.2,
+  sWidth = 1,
   bRadius = 23,
   id,
   animationDelay = 0,
@@ -115,15 +121,29 @@ export default function Button({
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
 
-  // const scaleY = useTransform(hover, [0, 1], [1, 1.1]);
+  const scale = useTransform(hover, [0, 1], [1, 1.04]);
+
   const boxShadow = useTransform(
-    [theme.shadow_key, theme.shadow_ambient],
-    ([latestShadow1, latestShadow2]) =>
-      "1px 1px 3px 0px " +
-      latestShadow1 +
-      ", " +
-      "0px 0px 15px 0px " +
-      latestShadow2
+    [hover, theme.shadow_key, theme.shadow_ambient],
+    ([latestHover, latestShadow1, latestShadow2]) =>
+      transform(
+        latestHover,
+        [0, 1],
+        [
+          "1px 2px 0px 0px " +
+            " " +
+            latestShadow1 +
+            ", " +
+            "0px 0px 0x 0px " +
+            latestShadow2,
+          "3px 4px 0px 0px " +
+            " " +
+            latestShadow1 +
+            ", " +
+            "0px 0px 10px 0px " +
+            latestShadow2,
+        ]
+      )
   );
 
   const frameV = {
@@ -145,6 +165,7 @@ export default function Button({
         onHoverEnd={() => handleHoverEnd(hover)}
         onClick={onClick}
         layoutId={`${id}Button`}
+        style={{ scale }}
       >
         <Content
           style={{
@@ -158,7 +179,7 @@ export default function Button({
           {children}
         </Content>
         <CardBorder
-          color1={color1}
+          color1={theme.primary_dark}
           width={width}
           height={height}
           sWidth={sWidth}

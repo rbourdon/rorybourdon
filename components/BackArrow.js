@@ -16,6 +16,7 @@ const Container = styled(motion.button)`
   border: none;
   padding: 0;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 `;
 
 export default function BackArrow({
