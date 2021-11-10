@@ -15,21 +15,20 @@ const Title = styled(motion.h1)`
   width: 100%;
   height: max-content;
   font-weight: 800;
-  letter-spacing: 8px;
+  letter-spacing: 1vw;
   display: flex;
   overflow: hidden;
-  padding: 40px 0;
+  padding: 2vw 0;
 `;
 
 const Spacer = styled(motion.div)`
-  width: 50px;
-  height: 50px;
+  width: 3vw;
+  height: 3vw;
 `;
 
-const Subtitle = styled(motion.p)`
+const Subtitle = styled(motion.h3)`
   width: 100%;
   height: max-content;
-  font-size: 1.85rem;
 `;
 
 const titleV = {
