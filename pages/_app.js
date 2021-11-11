@@ -72,8 +72,8 @@ const GlobalStyle = createGlobalStyle`
   }
   h3 {
     margin: 0;
-    font-size: clamp(1.15rem, 1.66vw, 1.625rem);
-    line-height: 1.1;
+    font-size: clamp(1.15rem, 1.66vw, 1.425rem);
+    line-height: clamp(1.25rem, 1.66vw, 1.8rem);
     font-weight: 100;
   }
   h4 {
