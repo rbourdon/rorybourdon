@@ -154,26 +154,28 @@ export default function ProjectSummary({
   id,
   active,
   intro = false,
-  defaultBGColor = "hsla(0,0,0,0)",
+  defaultBGColor,
   scrollerPos = 1,
 }) {
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
+  const scale = useTransform(hover, [0, 1], [1, 1.02]);
 
   const handleHoverStart = () => {
     onHover && onHover(project.slug);
     active &&
-      animate(hover, 1, { type: "tween", duration: 0.2, ease: "easeInOut" });
+      animate(hover, 1, { type: "tween", duration: 0.25, ease: "easeInOut" });
   };
 
   const handleHoverEnd = () => {
-    hover.get() > 0 &&
-      animate(hover, 0, { type: "tween", duration: 0.2, ease: "easeInOut" });
+    hover.stop();
+    animate(hover, 0, { type: "tween", duration: 0.25, ease: "easeInOut" });
   };
 
   useEffect(() => {
     if (!active) {
-      animate(hover, 0, { type: "tween", duration: 0.2, ease: "easeInOut" });
+      hover.stop();
+      animate(hover, 0, { type: "tween", duration: 0.25, ease: "easeInOut" });
     }
   }, [active, hover]);
 
@@ -191,6 +193,29 @@ export default function ProjectSummary({
     [defaultBGColor, bgColor, hover],
     ([latestColor1, latestColor2, latestHover]) =>
       transform(latestHover, [0, 1], [latestColor1, latestColor2])
+  );
+
+  const boxShadow = useTransform(
+    [hover, theme.shadow_key, theme.shadow_ambient],
+    ([latestHover, latestShadow1, latestShadow2]) =>
+      transform(
+        latestHover,
+        [0, 1],
+        [
+          "0px 0px 0px 0px " +
+            " " +
+            latestShadow1 +
+            ", " +
+            "0px 0px 0x 0px " +
+            latestShadow2,
+          "2px 3px 0px 8px " +
+            " " +
+            latestShadow1 +
+            ", " +
+            "0px 0px 25px 8px " +
+            latestShadow2,
+        ]
+      )
   );
 
   const linkColor = useTransform(
@@ -230,7 +255,7 @@ export default function ProjectSummary({
       onHoverEnd={handleHoverEnd}
       onFocus={handleHoverStart}
       onBlur={handleHoverEnd}
-      style={{ zIndex: outline ? 3 : 1 }}
+      style={{ zIndex: outline ? 3 : 1, boxShadow, scale, backgroundColor }}
       layoutId={`${id}_summary`}
       drag="x"
       dragSnapToOrigin
@@ -247,7 +272,7 @@ export default function ProjectSummary({
         damping: 7,
       }}
     >
-      {outline && active && (
+      {outline && (
         <Outline
           layoutId="projectOutline"
           variants={outlineV}
@@ -256,13 +281,12 @@ export default function ProjectSummary({
             outlineWidth,
             outlineColor,
             outlineStyle: "solid",
-            backgroundColor,
           }}
           transition={{
             type: "spring",
-            stiffness: 100,
-            mass: 0.25,
-            damping: 10,
+            stiffness: 30,
+            mass: 0.1,
+            damping: 3,
           }}
         />
       )}
