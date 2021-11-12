@@ -18,7 +18,7 @@ const Container = styled(motion.a)`
   font-size: 0.85rem;
   font-weight: 300;
   user-select: none;
-  padding: 8px 0px;
+  padding: 8px 0 0 0;
   width: 160px;
   height: max-content;
   z-index: 4;
@@ -39,7 +39,7 @@ const Arrow = styled(motion.div)`
   background: none;
   border: none;
   outline: none;
-  padding: 8px 8px;
+  padding: 0 8px;
 `;
 
 export default function DetailsLink({ href, linkColor }) {

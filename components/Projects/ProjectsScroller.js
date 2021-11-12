@@ -29,7 +29,7 @@ const Summaries = styled(motion.ul)`
   justify-items: center;
   justify-content: center;
   display: grid;
-  grid-template-rows: 290px;
+  grid-template-rows: 240px;
   grid-template-columns: 360px 360px 360px;
   column-gap: 55px;
   padding: 0 40px;

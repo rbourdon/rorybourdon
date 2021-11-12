@@ -16,9 +16,10 @@ const Container = styled(motion.div)`
   padding: 25px 30px;
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: max-content max-content max-content 1fr;
+  grid-template-rows: auto auto auto 1fr;
   align-items: start;
   justify-items: center;
+  align-content: center;
   border-radius: 20px;
   -webkit-user-drag: none;
   -moz-user-drag: none;
@@ -44,7 +45,7 @@ const SkillChips = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  margin: 10px 0 10px 0;
+  padding: 10px 0 10px 0;
 `;
 
 const Outline = styled(motion.div)`
@@ -247,7 +248,6 @@ export default function ProjectSummary({
     ([latestColor1, latestColor2, latestHover]) =>
       transform(latestHover, [0, 1], [latestColor1, latestColor2])
   );
-
   return (
     <Container
       tabIndex={0}
@@ -313,8 +313,8 @@ export default function ProjectSummary({
           project.skills.map((skill, index) => {
             return (
               <SkillChip
-                layoutId={`${skill.title}_chip_${project.title}`}
-                key={skill.title}
+                layoutId={`${skill.slug}_chip_${project.slug}`}
+                key={skill.slug}
                 custom={{
                   x:
                     scrollerPos === 0
