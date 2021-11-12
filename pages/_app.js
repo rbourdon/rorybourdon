@@ -4,26 +4,6 @@ import { ThemeControlProvider } from "@/lib/Context/ThemeContext";
 import Layout from "@/components/layout";
 
 const GlobalStyle = createGlobalStyle`
-  html {
-    scrollbar-width: thin;
-      scrollbar-color: var(--color-purple_light) var(--color-primary_verylight);
-
-      &::-webkit-scrollbar {
-        width: 9px;
-      }
-      
-      &::-webkit-scrollbar-track {
-        background: var(--color-primary_verylight);
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: var(--color-purple_light);
-      }
-
-      &::-webkit-scrollbar-thumb:hover {
-        background-color: var(--color-purple_med);
-      }
-  }
   body {
     margin: 0;
     padding: 0;
@@ -33,12 +13,31 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
     font-family:  proxima-nova, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     color: hsla(0,0%,28.63%,1);
+  }
   a {
     color: inherit;
     text-decoration: none;
   }
   *
   {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-purple_light) var(--color-primary_verylight);
+
+    &::-webkit-scrollbar {
+      width: 9px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--color-primary_verylight);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-purple_light);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: var(--color-purple_med);
+    }
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     box-sizing: border-box;
