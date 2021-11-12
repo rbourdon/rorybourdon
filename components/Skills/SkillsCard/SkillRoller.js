@@ -1,16 +1,16 @@
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import { LayoutGroup, motion, useIsPresent } from "framer-motion";
 import SkillBubble from "@/components/Skills/SkillBubble";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useInterval from "@/components/utils/useInterval";
 
 const TICK_RATE = 2000;
 
 const Roller = styled(motion.ul)`
-  width: 110%;
+  width: 140%;
   height: 100%;
   display: grid;
-  grid-template-rows: repeat(auto-fit, 36px);
+  grid-template-rows: repeat(auto-fit, 40px);
   grid-template-columns: 100%;
   row-gap: 15px;
   align-content: center;
@@ -27,25 +27,24 @@ export default function SkillRoller({
   variants,
   numSkills = 7,
 }) {
+  const theme = useContext(ThemeContext);
   const [rollerPos, setRollerPos] = useState(0);
-  const [hovering, setHovering] = useState(true);
+
   const [selectedBubble, setSelectedBubble] = useState(false);
   const isPresent = useIsPresent();
   useInterval(
     () => {
       setRollerPos((prev) => (prev + 1 > skills.length - 1 ? 0 : prev + 1));
-      setHovering(false);
     },
     selected || !isPresent ? null : TICK_RATE
   );
 
   const selectBubble = (bub) => {
     setSelectedBubble(bub);
-    setHovering(true);
   };
 
   return (
-    <Roller layoutId="skillRoller" variants={variants}>
+    <Roller variants={variants}>
       <LayoutGroup>
         {[
           ...skills.slice(rollerPos, rollerPos + numSkills),
@@ -61,7 +60,10 @@ export default function SkillRoller({
               key={skill.slug}
               top={index === 0 ? true : false}
               bottom={index === numSkills - 1 ? true : false}
-              height={36}
+              hoverColor={{
+                bg: theme.teal,
+                text: theme.primary_dark,
+              }}
               transition={{
                 type: "spring",
                 stiffness: 130,
@@ -75,7 +77,6 @@ export default function SkillRoller({
                 damping: 15,
               }}
               select={selectBubble}
-              hovering={hovering}
               canHover={true}
               selected={selectedBubble === skill.title}
             >

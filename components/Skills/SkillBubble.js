@@ -7,12 +7,13 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
+import ArrowIcon from "../Icons/ArrowIcon";
 
 const Bubble = styled(motion.li)`
-  height: ${(props) => props.$height + "px"};
-  min-width: 75px;
+  min-width: 80px;
+  height: 40px;
   width: max-content;
   border-radius: 20px;
   display: flex;
@@ -29,10 +30,8 @@ const Outline = styled(motion.div)`
   height: calc(100% + 10px);
   position: absolute;
   width: calc(100% + 10px);
-  border-radius: 20px;
+  border-radius: 30px;
   user-select: none;
-  left: -5px;
-  top: -5px;
 `;
 
 const BubbleLink = styled(motion.a)`
@@ -46,7 +45,7 @@ const BubbleLink = styled(motion.a)`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 22px;
+  padding: 0 27px;
 
   &:focus {
     outline: none;
@@ -56,19 +55,74 @@ const BubbleLink = styled(motion.a)`
 const Title = styled(motion.p)`
   font-weight: 300;
   font-size: 1rem;
+  width: max-content;
+  height: min-content;
 `;
+
+const Arrow = styled(motion.div)`
+  width: 11px;
+  margin-left: 0px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  position: absolute;
+`;
+
+const arrowV = {
+  hidden: {
+    opacity: 0,
+    right: 35,
+  },
+  visible: {
+    opacity: 1,
+    right: 17,
+    transition: {
+      delay: 0.05,
+      type: "tween",
+      duration: 0.35,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const titleV = {
+  hidden: {
+    x: 0,
+    scale: 1,
+  },
+  visible: {
+    x: 0,
+    scale: 1,
+    transition: {
+      type: "tween",
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+  },
+  hover: {
+    x: -9,
+    scale: 1.02,
+    transition: {
+      delay: 0.05,
+      type: "tween",
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+  },
+};
 
 export default function SkillBubble({
   transition = { type: "spring", stiffness: 30 },
-  height = 36,
+  height = 37,
   top = false,
   bottom = false,
   variants,
   custom = 0,
   bgColor,
+  hoverColor,
   select = null,
   selected = false,
-  hovering = false,
   canHover = true,
   outlineTransition = { type: "spring", stiffness: 30 },
   title,
@@ -77,6 +131,7 @@ export default function SkillBubble({
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
   const opacity = useMotionValue(bottom || top ? 0 : 1);
+  const [hovering, setHovering] = useState(true);
 
   useEffect(() => {
     if (top) {
@@ -90,67 +145,48 @@ export default function SkillBubble({
     }
   }, [top, bottom, opacity]);
 
-  useEffect(() => {
-    !hovering && hover.stop();
-    !hovering &&
-      animate(hover, 0, { type: "tween", duration: 0.2, ease: "easeInOut" });
-  }, [hovering, hover]);
+  // useEffect(() => {
+  //   !hovering && hover.stop();
+  //   !hovering &&
+  //     animate(hover, 0, { type: "tween", duration: 0.2, ease: "easeInOut" });
+  // }, [hovering, hover]);
 
   const handleHoverStart = () => {
-    select && select(title);
-    canHover && hover.stop();
-    canHover &&
+    select(title);
+    if (canHover) {
       animate(hover, 1, { type: "tween", duration: 0.2, ease: "easeInOut" });
+      setHovering(true);
+    }
   };
 
   const handleHoverEnd = () => {
-    hover.stop();
     animate(hover, 0, { type: "tween", duration: 0.2, ease: "easeInOut" });
+    setHovering(false);
   };
 
   const disableLinkDrag = (e) => {
     e.preventDefault();
+    if (hovering) {
+      animate(hover, 0, { type: "tween", duration: 0.2, ease: "easeInOut" });
+      setHovering(false);
+    }
   };
 
   const backgroundColor = useTransform(
-    [bgColor || theme.primary_light, theme.blue, theme.teal, hover],
-    ([latestColor1, latestColor2, latestColor3, latestHover]) =>
-      transform(
-        latestHover,
-        [0, 1],
-        [
-          latestColor1,
-          transform(latestHover, [0, 1], [latestColor2, latestColor3]),
-        ]
-      )
+    [bgColor || theme.primary_light, hoverColor?.bg || theme.teal, hover],
+    ([latestColor1, latestColor2, latestHover]) =>
+      transform(latestHover, [0, 1], [latestColor1, latestColor2])
   );
 
   const backgroundColor2 = useTransform(
-    [theme.primary_dark, theme.blue, theme.teal, hover],
-    ([latestColor1, latestColor2, latestColor3, latestHover]) =>
-      transform(
-        latestHover,
-        [0, 1],
-        [
-          latestColor1,
-          transform(latestHover, [0, 1], [latestColor2, latestColor3]),
-        ]
-      )
+    [theme.primary_dark, hoverColor?.bg || theme.teal, hover],
+    ([latestColor1, latestColor2, latestHover]) =>
+      transform(latestHover, [0, 1], [latestColor1, latestColor2])
   );
 
   const border = useTransform(
     theme.primary_dark,
-    (latestColor1) => "thin solid  " + latestColor1
-  );
-
-  const outline = useTransform(
-    [backgroundColor2, hover],
-    ([latestColor1, latestHover]) =>
-      transform(
-        latestHover,
-        [0, 1],
-        [`1px solid ${latestColor1}`, `6px solid ${latestColor1}`]
-      )
+    (latestColor1) => "thin solid " + latestColor1
   );
 
   const boxShadow = useTransform(
@@ -166,25 +202,35 @@ export default function SkillBubble({
             ", " +
             "0px 0px 0x 0px " +
             latestShadow2,
-          "3px 5px 0px 0px " +
+          "1px 2px 0px 4px " +
             " " +
             latestShadow1 +
             ", " +
-            "0px 0px 30px 3px " +
+            "0px 0px 10px 5px " +
             latestShadow2,
         ]
       )
   );
 
-  const outlineOffset = useTransform(hover, [0, 1], ["0px", "-8px"]);
+  const outlineOffset = useTransform(hover, [0, 1], ["0px", "-7px"]);
+  const outlineWidth = useTransform(hover, [0, 1], ["1px", "6px"]);
+  // const outlineColor = useTransform(
+  //   [hover, backgroundColor2, theme.shadow_ambient],
+  //   ([latestHover, latestBackgroundColor2, latestShadow2]) =>
+  //     transform(
+  //       latestHover,
+  //       [0, 1],
+  //       [latestBackgroundColor2, latestBackgroundColor2]
+  //     )
+  // );
 
   const titleColor = useTransform(
-    [theme.primary_verydark, theme.primary_dark, hover],
+    [theme.primary_verydark, hoverColor.text || theme.primary_dark, hover],
     ([latestColor3, latestColor4, latestHover]) =>
       transform(latestHover, [0, 1], [latestColor3, latestColor4])
   );
-
-  const scale = useTransform(hover, [0, 1], [1, 1.125]);
+  // const titleX = useTransform(hover, [0, 1], [0, -9]);
+  //const scale = useTransform(hover, [0, 1], [1, 1.125]);
 
   return (
     <MotionConfig transition={transition}>
@@ -200,33 +246,47 @@ export default function SkillBubble({
         onBlur={handleHoverEnd}
         style={{
           boxShadow,
-          scale,
-          color: titleColor,
-          zIndex: selected ? 10 : 1,
+          zIndex: selected ? 10 : 2,
           opacity,
           border,
-          backgroundColor:
-            backgroundColor.get() === "var(--color-teal)"
-              ? theme.primary
-              : backgroundColor,
+          backgroundColor,
         }}
       >
         <Link href={`/skills/${id}`} passHref scroll={false}>
           <BubbleLink
             onClick={canHover ? null : disableLinkDrag}
             onTapStart={disableLinkDrag}
+            initial="hidden"
+            animate="visible"
+            whileHover="hover"
           >
-            <Title layoutId={`${id}_bubbleLinkTitle`}>{title}</Title>
+            <Title
+              layoutId={`${id}_bubbleLinkTitle`}
+              style={{ color: titleColor }}
+              variants={titleV}
+            >
+              {title}
+            </Title>
+            {selected && hovering && (
+              <Arrow
+                variants={arrowV}
+                style={{ color: titleColor, rotate: 90 }}
+              >
+                <ArrowIcon />
+              </Arrow>
+            )}
           </BubbleLink>
         </Link>
         {selected && (
           <Outline
             layoutId="bubbleOutline"
-            $height={height + 10}
+            layoutDependency={selected}
             style={{
-              outline,
+              outlineColor: backgroundColor2,
+              outlineWidth,
+              outlineStyle: "solid",
               outlineOffset,
-              borderRadius: "20px",
+              borderRadius: "30px",
             }}
             transition={outlineTransition}
           />

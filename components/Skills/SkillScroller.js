@@ -14,9 +14,9 @@ const Bubbles = styled(motion.ul)`
   justify-items: center;
   align-items: center;
   display: grid;
-  grid-template-rows: repeat(auto-fit, 37px);
+  grid-template-rows: repeat(auto-fit, 40px);
   grid-template-columns: 100%;
-  row-gap: 10px;
+  row-gap: 15px;
   padding: 0;
   margin: 0;
   cursor: grab;
@@ -42,6 +42,7 @@ const bubbleV = {
     y: 0,
     opacity: 0,
     transition: {
+      opacity: { duration: 0.3 },
       type: "spring",
       stiffness: 150 + custom * 5,
       mass: 2,
@@ -143,7 +144,10 @@ export default function SkillScroller({ skills }) {
               custom={index}
               bgColor={theme.primary}
               id={skill.slug}
-              height={36}
+              hoverColor={{
+                bg: theme.teal,
+                text: theme.primary_dark,
+              }}
               transition={{
                 type: "spring",
                 stiffness: 200,
@@ -152,7 +156,7 @@ export default function SkillScroller({ skills }) {
               }}
               outlineTransition={{
                 type: "spring",
-                stiffness: 150,
+                stiffness: 85,
                 mass: 0.25,
                 damping: 10,
               }}
