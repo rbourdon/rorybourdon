@@ -227,7 +227,7 @@ export default function Skills({ skills }) {
           <HorizonLine yLoc={70} slope={-25} />
 
           <TitleBlock>
-            <BackArrow variants={arrowV} id="skills" />
+            <BackArrow variants={arrowV} id="backArrow_skillsPage" />
             <Title
               layoutId="skillsCard_label"
               style={{ color: theme.primary_verydark }}
