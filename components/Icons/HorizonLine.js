@@ -55,7 +55,7 @@ const line2V = {
   },
 };
 
-export default function HorizonLine({ top = "50vh", slope = -16, yLoc = 94 }) {
+export default function HorizonLine({ slope = -16, yLoc = 94 }) {
   const theme = useContext(ThemeContext);
   const { width } = useWindowSize();
 
