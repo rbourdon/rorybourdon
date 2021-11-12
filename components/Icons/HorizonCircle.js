@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
+import useWindowSize from "@/components/utils/useWindowSize";
 
 const Circle = styled(motion.svg)`
   position: absolute;
@@ -28,9 +29,9 @@ const circleV = {
   },
 };
 
-export default function HorizonCircle({ cx = "92%", cy = "15%", r = 110 }) {
+export default function HorizonCircle({ cx = "92%", cy = "15%", r = 330 }) {
   const theme = useContext(ThemeContext);
-
+  const { width = 330 } = useWindowSize();
   return (
     <Circle
       xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +41,7 @@ export default function HorizonCircle({ cx = "92%", cy = "15%", r = 110 }) {
       <motion.circle
         cx={cx}
         cy={cy}
-        r={r}
+        r={r - width * 0.1}
         stroke={theme.primary_slightlydark}
         strokeWidth={1}
         vectorEffect="non-scaling-stroke"
@@ -48,7 +49,7 @@ export default function HorizonCircle({ cx = "92%", cy = "15%", r = 110 }) {
       <motion.circle
         cx={cx}
         cy={cy}
-        r={r * 0.985}
+        r={r - width * 0.101}
         variants={circleV}
         stroke={theme.primary_slightlydark}
         strokeWidth={1}
