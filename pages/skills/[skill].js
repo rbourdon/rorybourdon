@@ -8,6 +8,8 @@ import Head from "next/head";
 import Image from "next/image";
 import BackArrow from "@/components/BackArrow";
 import ProjectsScroller from "@/components/Projects/ProjectsScroller";
+import HorizonCircle from "@/components/Icons/HorizonCircle";
+import HorizonLine from "@/components/Icons/HorizonLine";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -18,7 +20,8 @@ const Content = styled(motion.main)`
   grid-template-rows: max-content max-content;
   grid-template-columns: 100%;
   padding: 0 16vw;
-  align-content: space-evenly;
+  align-content: start;
+  row-gap: 7vh;
   grid-auto-flow: dense;
   overflow: hidden;
 
@@ -60,7 +63,7 @@ const SkillTile = styled(motion.div)`
 const Title = styled(motion.h1)`
   width: max-content;
   font-size: clamp(3.4rem, 15vw, 9rem);
-  font-weight: 300;
+  font-weight: 100;
   line-height: 1.2;
   margin: 0 0 20px 30px;
 `;
@@ -68,14 +71,14 @@ const Title = styled(motion.h1)`
 const Detail = styled(motion.p)`
   width: 100%;
   font-size: clamp(1rem, 4vw, 1.3525rem);
-  font-weight: 200;
+  font-weight: 100;
   line-height: clamp(1rem, 4.5vw, 1.55rem);
 `;
 const DetailBlock = styled(motion.div)`
   width: 100%;
   max-width 800px;
   font-size: clamp(1rem, 4vw, 1.3525rem);
-  font-weight: 200;
+  font-weight: 100;
   line-height: clamp(1rem, 4.5vw, 1.55rem);
   grid-column: 1;
   display: flex;
@@ -213,10 +216,12 @@ export default function Skill({ skill }) {
             content={`${skill.title} - Skills - Rory Bourdon | Web Developer & Visual Artist`}
           />
         </Head>
-        <NavBar logoComplete={true}>
-          <NavLink href="/">Projects</NavLink>
+        <NavBar>
+          <NavLink href="/projects">Projects</NavLink>
           <NavLink href="/">Resume</NavLink>
         </NavBar>
+        <HorizonLine slope={32} yLoc={-2} />
+        <HorizonCircle r={270} />
         <Content>
           {/* <HorizonLine /> */}
           <HeadingBlock>
@@ -235,7 +240,6 @@ export default function Skill({ skill }) {
                 {skill.title}
               </Title>
             </TitleBlock>
-
             <DetailBlock>
               <SkillTile
                 layoutId={`${skill.slug}_bubble`}
@@ -268,7 +272,6 @@ export default function Skill({ skill }) {
               bgColor={secondaryColor}
             />
           </ProjectsBlock>
-          {/* <SkillsColumn></SkillsColumn> */}
         </Content>
       </Container>
     </MotionConfig>
