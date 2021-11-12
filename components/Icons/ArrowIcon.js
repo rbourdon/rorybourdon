@@ -8,6 +8,7 @@ export default function ArrowIcon() {
         stroke="currentColor"
         strokeLinecap="round"
         strokeMiterlimit="10"
+        strokeWidth={1.2}
       >
         <motion.path vectorEffect="non-scaling-stroke" d="M6.2 15V1" />
         <motion.path
