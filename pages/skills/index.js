@@ -220,7 +220,7 @@ export default function Skills({ skills }) {
           />
         </Head>
         <NavBar>
-          <NavLink href="/">Projects</NavLink>
+          <NavLink href="/projects">Projects</NavLink>
           <NavLink href="/">Resume</NavLink>
         </NavBar>
         <Content>
