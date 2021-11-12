@@ -11,7 +11,7 @@ const CardContent = styled(motion.div)`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 41% 56%;
+  grid-template-columns: 43% 54%;
   column-gap: 3%;
   grid-template-rows: 100%;
   justify-items: center;
@@ -39,7 +39,7 @@ const CardWindow = styled(motion.div)`
 const Label = styled(motion.p)`
   font-size: 2.25rem;
   line-height: 1;
-  font-weight: 300;
+  font-weight: 100;
   width: max-content;
   height: max-content;
 `;
@@ -113,9 +113,6 @@ const containerV = {
   visible: {
     opacity: 1,
   },
-  selected: {
-    opacity: 1,
-  },
   exit: {
     opacity: 1,
     transition: {
@@ -163,6 +160,7 @@ export default function ProjectsCard({ projects }) {
       window.scrollTo({ top: 0, left: 0 });
     }, 800);
   };
+
   return (
     <MotionConfig
       transition={
@@ -213,11 +211,11 @@ export default function ProjectsCard({ projects }) {
               }}
             >
               <Label layoutId="projectCard_label">Projects</Label>
-              <ProjectsSceneIcon iconWidth="450px" iconHeight="450px" />
+              <ProjectsSceneIcon iconWidth="640px" />
             </CardWindow>
             <ProjectsBox variants={projectSummariesV}>
               <ProjectSummary
-                id={projects[0].title}
+                id={projects[0].slug}
                 project={projects[0]}
                 bgColor={theme.primary}
                 primaryColor={theme.primary_verydark}

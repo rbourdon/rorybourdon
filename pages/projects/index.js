@@ -138,23 +138,6 @@ const arrowV = {
 
 export default function Skill({ projects }) {
   const theme = useContext(ThemeContext);
-  //const convert = require("color-convert");
-  // const secondaryColorRGB = convert.rgb.hsl(
-  //   skill.secondaryColor.rgba.r,
-  //   skill.secondaryColor.rgba.g,
-  //   skill.secondaryColor.rgba.b
-  // );
-  // const primaryColorRGB = convert.rgb.hsl(
-  //   skill.primaryColor.rgba.r,
-  //   skill.primaryColor.rgba.g,
-  //   skill.primaryColor.rgba.b
-  // );
-  // const primaryColor = useMotionValue(
-  //   `hsla(${primaryColorRGB[0]},${primaryColorRGB[1]}%,${primaryColorRGB[2]}%,1)`
-  // );
-  // const secondaryColor = useMotionValue(
-  //   `hsla(${secondaryColorRGB[0]},${secondaryColorRGB[1]}%,${secondaryColorRGB[2]}%,1)`
-  // );
 
   return (
     <MotionConfig
@@ -163,7 +146,6 @@ export default function Skill({ projects }) {
         stiffness: 30,
         mass: 2,
         damping: 11,
-        //duration: 2,
       }}
     >
       <Container
@@ -203,22 +185,6 @@ export default function Skill({ projects }) {
             </TitleBlock>
 
             <DetailBlock>
-              {/* <SkillTile
-                layoutId={`${skill.slug}_bubble`}
-                style={{ backgroundColor: primaryColor }}
-              >
-                {skill?.image?.url && (
-                  <SkillImage variants={skillImageV}>
-                    <Image
-                      width={130}
-                      height={130}
-                      priority
-                      alt={`${skill.title} Logo`}
-                      src={skill.image.url}
-                    />
-                  </SkillImage>
-                )}
-              </SkillTile> */}
               <Detail variants={detailsV} style={{ color: theme.primary_dark }}>
                 These are some of the skills I’ve picked up over the years
                 through a combination of formal education, self-directed
@@ -227,7 +193,7 @@ export default function Skill({ projects }) {
               </Detail>
             </DetailBlock>
           </HeadingBlock>
-          <ProjectsSceneIcon />
+          <ProjectsSceneIcon collapsed={false} />
           <ProjectsBlock>
             <ProjectsScroller
               projects={projects}
