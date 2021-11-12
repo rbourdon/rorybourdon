@@ -25,14 +25,6 @@ const Container = styled(motion.a)`
   index: 3;
 `;
 
-const Backdrop = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  user-select: none;
-  pointer-events: none;
-`;
-
 export default function ProjectLink({ type = "Demo", href = "", iconColor }) {
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
@@ -66,17 +58,6 @@ export default function ProjectLink({ type = "Demo", href = "", iconColor }) {
           color,
         }}
       >
-        {/* <Backdrop
-          style={{
-            backgroundColor: theme.primary_dark,
-            width,
-            height,
-            originX: 0.5,
-            borderRadius,
-            left,
-            top,
-          }}
-        /> */}
         {type === "Code" ? (
           <CodeIcon rotate={iconRotate} />
         ) : (
