@@ -226,7 +226,7 @@ export default function Skill({ skill }) {
           {/* <HorizonLine /> */}
           <HeadingBlock>
             <TitleBlock>
-              <BackArrow id="skillPage" variants={arrowV} />
+              <BackArrow id="backArrow_skillPage" variants={arrowV} />
               <Title
                 layoutId={`${skill.slug}_bubbleLinkTitle`}
                 style={{ color: theme.primary_verydark }}
