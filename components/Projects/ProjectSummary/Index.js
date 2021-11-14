@@ -66,13 +66,22 @@ const skillChipsV = {
 };
 
 const containerV = {
-  visible: (delay) => ({
+  hidden: (props) => ({
+    x: 200 * props.dir,
+  }),
+  visible: (props) => ({
+    x: 0,
     transition: {
-      delayChildren: delay,
+      delayChildren: props.delay,
       staggerChildren: 0.15,
+      type: "spring",
+      stiffness: 50,
+      mass: 0.25,
+      damping: 10,
     },
   }),
   panning: {
+    x: 0,
     transition: {
       staggerChildren: 0.15,
     },
@@ -80,8 +89,8 @@ const containerV = {
 };
 
 const descV = {
-  hidden: (custom) => ({
-    x: 190 * custom,
+  hidden: (dir) => ({
+    x: 190 * dir,
     opacity: 0,
   }),
   visible: {
@@ -107,8 +116,8 @@ const descV = {
 };
 
 const titleV = {
-  hidden: (custom) => ({
-    x: 300 * custom,
+  hidden: (dir) => ({
+    x: 300 * dir,
     opacity: 0,
   }),
   visible: {
@@ -123,7 +132,7 @@ const titleV = {
   },
   panning: {
     x: [0, 120, 0],
-    opacity: 1,
+    opacity: 0,
     transition: {
       type: "spring",
       stiffness: 50,
@@ -255,13 +264,21 @@ export default function ProjectSummary({
       onHoverEnd={handleHoverEnd}
       onFocus={handleHoverStart}
       onBlur={handleHoverEnd}
-      style={{ zIndex: outline ? 3 : 1, boxShadow, scale, backgroundColor }}
+      style={{
+        zIndex: outline ? 3 : 1,
+        boxShadow,
+        scale,
+        backgroundColor,
+      }}
       layoutId={`${id}_summary`}
       drag="x"
       dragSnapToOrigin
       dragMomentum={false}
       dragElastic={true}
-      custom={!intro ? 0 : delay}
+      custom={{
+        dir: scrollerPos === 0 ? (!intro ? -1 : 1) : !intro ? 1 : 1,
+        delay: !intro ? 0 : delay,
+      }}
       variants={containerV}
       initial="hidden"
       animate="visible"
@@ -294,21 +311,40 @@ export default function ProjectSummary({
         layoutId={`${id}_title`}
         variants={titleV}
         style={{ color }}
-        transition={{ duration: 0 }}
         custom={scrollerPos === 0 ? (!intro ? -1 : 1) : !intro ? 1 : 1}
+        transition={{
+          type: "spring",
+          stiffness: 40,
+          mass: 0.25,
+          damping: 7,
+        }}
       >
         {project.title}
       </ProjectTitle>
       <ProjectDescription
         layoutId={`${id}_description`}
-        transition={{ duration: 0 }}
         variants={descV}
         style={{ color }}
         custom={scrollerPos === 0 ? (!intro ? -1 : 1) : !intro ? 1 : 1}
+        transition={{
+          type: "spring",
+          stiffness: 40,
+          mass: 0.25,
+          damping: 7,
+        }}
       >
         {project.shortDescription}
       </ProjectDescription>
-      <SkillChips variants={skillChipsV}>
+      <SkillChips
+        layout
+        variants={skillChipsV}
+        transition={{
+          type: "spring",
+          stiffness: 40,
+          mass: 0.25,
+          damping: 7,
+        }}
+      >
         {project.skills &&
           project.skills.map((skill, index) => {
             return (
