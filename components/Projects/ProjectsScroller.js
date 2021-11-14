@@ -29,8 +29,8 @@ const Summaries = styled(motion.ul)`
   justify-items: center;
   justify-content: center;
   display: grid;
-  grid-template-rows: 240px;
-  grid-template-columns: 360px 360px 360px;
+  grid-template-rows: 245px;
+  grid-template-columns: 340px 340px 340px;
   column-gap: 55px;
   padding: 0 40px;
   margin: 0;
@@ -64,7 +64,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
 
   useEffect(() => {
     panPos.onChange((latest) => {
-      if (Math.abs(latest) >= 300) {
+      if (Math.abs(latest) >= 245) {
         setRollerPos((prev) =>
           prev + Math.sign(latest * -1) > projects.length - 1
             ? 0
@@ -72,7 +72,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
             ? projects.length - 1
             : prev + Math.sign(latest * -1)
         );
-        panPos.set(Math.sign(latest) * -100);
+        panPos.set(Math.sign(latest) * -150);
       }
     });
   }, [panPos, projects.length]);
@@ -87,9 +87,9 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
   };
 
   const handlePanEnd = (e, pointInfo) => {
-    if (pointInfo.velocity.x < -400) {
+    if (pointInfo.velocity.x < -500) {
       incrementRollerPos();
-    } else if (pointInfo.velocity.x > 400) {
+    } else if (pointInfo.velocity.x > 500) {
       decrementRollerPos();
     }
     panPos.set(0);
@@ -109,7 +109,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
       <Projects>
         {size.width > 555 && (
           <Arrow
-            onClick={incrementRollerPos}
+            onClick={decrementRollerPos}
             layout
             style={{ rotate: 270, color: theme.primary_dark }}
           >
@@ -153,7 +153,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
           <Arrow
             layout
             style={{ rotate: 90, color: theme.primary_dark }}
-            onClick={decrementRollerPos}
+            onClick={incrementRollerPos}
           >
             <ArrowIcon />
           </Arrow>
