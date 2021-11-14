@@ -19,9 +19,8 @@ const Content = styled(motion.main)`
   flex: 1;
   grid-template-rows: max-content max-content;
   grid-template-columns: 100%;
-  padding: 0 16vw;
-  align-content: start;
-  row-gap: 7vh;
+  padding: 0 11vw;
+  align-content: space-evenly;
   grid-auto-flow: dense;
   overflow: hidden;
 
@@ -217,11 +216,13 @@ export default function Skill({ skill }) {
           />
         </Head>
         <NavBar>
+          <NavLink href="/skills">Skills</NavLink>
           <NavLink href="/projects">Projects</NavLink>
           <NavLink href="/">Resume</NavLink>
         </NavBar>
         <HorizonLine slope={32} yLoc={-2} />
-        <HorizonCircle r={270} />
+        <HorizonLine slope={-10} yLoc={95} />
+        <HorizonCircle cx="0%" cy="30%" />
         <Content>
           {/* <HorizonLine /> */}
           <HeadingBlock>
@@ -229,7 +230,7 @@ export default function Skill({ skill }) {
               <BackArrow id="backArrow_skillPage" variants={arrowV} />
               <Title
                 layoutId={`${skill.slug}_bubbleLinkTitle`}
-                style={{ color: theme.primary_verydark }}
+                style={{ color: theme.primary_dark }}
                 transition={{
                   type: "spring",
                   stiffness: 50,
