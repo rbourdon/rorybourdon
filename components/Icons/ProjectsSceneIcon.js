@@ -3,8 +3,8 @@ import { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
 
 const Container = styled(motion.div)`
-  width: max-content;
-  height: max-content;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,16 +74,17 @@ export default function ProjectsSceneIcon({
   margin = "0px",
   zIndex = 1,
   collapsed = true,
+  scale = 1,
 }) {
   const theme = useContext(ThemeContext);
   return (
-    <Container $margin={margin} $zIndex={zIndex} layoutId="projectSceneIcon">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 542 404"
-        height="100%"
-        width="100%"
-      >
+    <Container
+      $margin={margin}
+      $zIndex={zIndex}
+      style={{ scale }}
+      layoutId="projectSceneIcon"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 542 404">
         {!collapsed && (
           <>
             {/* Right Plant */}

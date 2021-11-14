@@ -8,8 +8,7 @@ import Head from "next/head";
 import BackArrow from "@/components/BackArrow";
 import ProjectsScroller from "@/components/Projects/ProjectsScroller";
 import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
-import HorizonCircle from "@/components/Icons/HorizonCircle";
-import HorizonLine from "@/components/Icons/HorizonLine";
+import HorizonEffects from "@/components/Icons/HorizonEffects";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -178,14 +177,18 @@ export default function Skill({ projects }) {
           <NavLink href="/">Resume</NavLink>
         </NavBar>
         <Content>
-          <HorizonLine slope={-25} yLoc={65} />
-          <HorizonCircle r={0.5} cx={"115%"} cy={"30%"} />
+          <HorizonEffects
+            lines={[{ slope: -25, yLoc: 65 }]}
+            circles={[{ cx: "88%", cy: "8%", r: 0.18 }]}
+            slope={-25}
+            yLoc={65}
+          />
           <HeadingBlock>
             <TitleBlock>
               <BackArrow id="projectsPage" variants={arrowV} />
               <Title
                 layoutId="projectCard_label"
-                style={{ color: theme.primary_verydark }}
+                style={{ color: theme.primary_dark }}
                 transition={{
                   type: "spring",
                   stiffness: 50,
@@ -207,7 +210,7 @@ export default function Skill({ projects }) {
             </DetailBlock>
           </HeadingBlock>
           <ProjectsScene>
-            <ProjectsSceneIcon collapsed={false} />
+            <ProjectsSceneIcon scale={1} collapsed={false} />
           </ProjectsScene>
           <ProjectsBlock>
             <ProjectsScroller
