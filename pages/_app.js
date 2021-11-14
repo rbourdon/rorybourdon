@@ -4,26 +4,6 @@ import { ThemeControlProvider } from "@/lib/Context/ThemeContext";
 import Layout from "@/components/layout";
 
 const GlobalStyle = createGlobalStyle`
-  html {
-    scrollbar-width: thin;
-      scrollbar-color: var(--color-purple_light) var(--color-primary_verylight);
-
-      &::-webkit-scrollbar {
-        width: 9px;
-      }
-      
-      &::-webkit-scrollbar-track {
-        background: var(--color-primary_verylight);
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: var(--color-purple_light);
-      }
-
-      &::-webkit-scrollbar-thumb:hover {
-        background-color: var(--color-purple_med);
-      }
-  }
   body {
     margin: 0;
     padding: 0;
@@ -33,17 +13,45 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
     font-family:  proxima-nova, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     color: hsla(0,0%,28.63%,1);
+  }
   a {
     color: inherit;
     text-decoration: none;
   }
   *
   {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-purple_light) var(--color-primary_verylight);
+
+    &::-webkit-scrollbar {
+      width: 9px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--color-primary_verylight);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-purple_light);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: var(--color-purple_med);
+    }
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     box-sizing: border-box;
     z-index: 1;
   }
+    button, input[type="submit"], input[type="reset"] {
+      background: none;
+      color: inherit;
+      border: none;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      outline: inherit;
+    }
   p {
     margin: 0;
     font-size: clamp(1rem, .85vw, 1.3rem);
@@ -61,19 +69,20 @@ const GlobalStyle = createGlobalStyle`
   }
   h1 {
     margin: 0;
-    font-size: clamp(3.0rem, 6vw, 6.538rem);
+    font-size: clamp(2.5rem, 11vw, 8.5rem);
     line-height: 1;
     font-weight: 100;
   }
   h2 {
-    font-size: clamp(3.5rem, 6vw, 5rem);
+    font-size: clamp(1.2rem, 4.5vw, 1.7rem);
+    line-height: clamp(1.2rem, 7vw, 2rem);
     margin: 0;
     font-weight: 100;
   }
   h3 {
     margin: 0;
-    font-size: clamp(1.15rem, 1.66vw, 1.625rem);
-    line-height: 1.1;
+    font-size: clamp(1.15rem, 1.66vw, 1.425rem);
+    line-height: clamp(1.25rem, 1.66vw, 1.8rem);
     font-weight: 100;
   }
   h4 {

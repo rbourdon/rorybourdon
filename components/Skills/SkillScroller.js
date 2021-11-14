@@ -1,12 +1,12 @@
 import styled, { ThemeContext } from "styled-components";
 import { LayoutGroup, motion, useMotionValue } from "framer-motion";
-import SkillBubble from "@/components/SkillBubble";
+import SkillBubble from "@/components/Skills/SkillBubble";
 import { useContext, useState } from "react";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
-import useWindowSize from "./utils/useWindowSize";
+import useWindowSize from "../utils/useWindowSize";
 
 const SCROLL_MULTIPLIER = 35;
-const LIST_BUFFER = 3;
+const LIST_BUFFER = 2;
 
 const Bubbles = styled(motion.ul)`
   width: 275px;
@@ -14,12 +14,15 @@ const Bubbles = styled(motion.ul)`
   justify-items: center;
   align-items: center;
   display: grid;
-  grid-template-rows: repeat(auto-fit, 37px);
-  row-gap: 10px;
+  grid-template-rows: repeat(auto-fit, 40px);
+  grid-template-columns: 100%;
+  row-gap: 15px;
   padding: 0;
   margin: 0;
   cursor: grab;
-  grid-auto-rows: 37px;
+  grid-auto-rows: 40px;
+  z-index: 6;
+  touch-action: none;
 `;
 
 const Arrow = styled(motion.button)`
@@ -39,6 +42,7 @@ const bubbleV = {
     y: 0,
     opacity: 0,
     transition: {
+      opacity: { duration: 0.3 },
       type: "spring",
       stiffness: 150 + custom * 5,
       mass: 2,
@@ -69,17 +73,17 @@ export default function SkillScroller({ skills }) {
         : (size.height - 450) / 50
       : (size.height - 600) / 50 > skills.length - LIST_BUFFER
       ? skills.length - LIST_BUFFER
-      : (size.height - 600) / 50 < 2
-      ? 2
+      : (size.height - 600) / 50 < 3
+      ? 3
       : (size.height - 600) / 50;
   const theme = useContext(ThemeContext);
   const panPos = useMotionValue(0);
   const [panning, setPanning] = useState(false);
   const [rollerPos, setRollerPos] = useState(0);
-  const [hoveredSkill, setHoveredSkill] = useState(false);
+  const [selectedSkill, setSelectedSkill] = useState(false);
 
-  const handleSkillHover = (skill) => {
-    !panning && setHoveredSkill(skill);
+  const handleSkillSelect = (skill) => {
+    !panning && setSelectedSkill(skill);
   };
 
   const handlePan = (e, pointInfo) => {
@@ -97,6 +101,11 @@ export default function SkillScroller({ skills }) {
     }
   };
 
+  const handlePanEnd = () => {
+    panPos.set(0);
+    setTimeout(() => setPanning(false), 75);
+  };
+
   const handleClick = (dir) => {
     setRollerPos((prev) =>
       prev + dir < 0
@@ -106,17 +115,13 @@ export default function SkillScroller({ skills }) {
         : prev + dir
     );
   };
-
   return (
-    <Bubbles
-      onPanStart={() => setPanning(true)}
-      onPan={handlePan}
-      onPanEnd={() => {
-        panPos.set(0);
-        setPanning(false);
-      }}
-    >
-      <LayoutGroup>
+    <LayoutGroup>
+      <Bubbles
+        onPanStart={() => setPanning(true)}
+        onPan={handlePan}
+        onPanEnd={handlePanEnd}
+      >
         <Arrow
           onClick={() => handleClick(1)}
           layout
@@ -124,7 +129,6 @@ export default function SkillScroller({ skills }) {
         >
           <ArrowIcon />
         </Arrow>
-
         {[
           ...skills.slice(rollerPos, rollerPos + numSkills),
           ...skills.slice(
@@ -135,12 +139,15 @@ export default function SkillScroller({ skills }) {
           return (
             <SkillBubble
               title={skill.title}
-              key={skill.title}
+              key={skill.slug}
               variants={bubbleV}
               custom={index}
               bgColor={theme.primary}
-              slug={skill.slug}
-              height={36}
+              id={skill.slug}
+              hoverColor={{
+                bg: theme.teal,
+                text: theme.primary_dark,
+              }}
               transition={{
                 type: "spring",
                 stiffness: 200,
@@ -149,17 +156,16 @@ export default function SkillScroller({ skills }) {
               }}
               outlineTransition={{
                 type: "spring",
-                stiffness: 150,
+                stiffness: 85,
                 mass: 0.25,
                 damping: 10,
               }}
-              onHover={handleSkillHover}
-              hasOutline={hoveredSkill === skill.title && !panning}
-              active={!panning}
+              select={handleSkillSelect}
+              selected={selectedSkill === skill.title}
+              canHover={!panning}
             />
           );
         })}
-
         <Arrow
           layout
           style={{ rotate: 180, color: theme.primary_dark }}
@@ -167,7 +173,7 @@ export default function SkillScroller({ skills }) {
         >
           <ArrowIcon />
         </Arrow>
-      </LayoutGroup>
-    </Bubbles>
+      </Bubbles>
+    </LayoutGroup>
   );
 }

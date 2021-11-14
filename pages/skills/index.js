@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { getSkillList } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
-import SkillScroller from "@/components/SkillScroller";
+import SkillScroller from "@/components/Skills/SkillScroller";
 import Highlight from "@/components/Highlight";
 import Head from "next/head";
 import TreeIcon from "@/components/Icons/TreeIcon";
@@ -52,10 +52,9 @@ const SkillsColumn = styled(motion.section)`
   grid-row: span 3;
 
   @media (max-width: 555px) {
-    height: max-content;
     grid-row: span 1;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
   }
 `;
 
@@ -71,10 +70,10 @@ const Trees = styled(motion.div)`
   zindex: 0;
 
   @media (max-width: 555px) {
-    width: 80%;
+    width: max-content;
     justify-self: center;
     position: absolute;
-    bottom: 0;
+    bottom: -2vh;
     height: max-content;
   }
 `;
@@ -97,7 +96,7 @@ const TreeShadow = styled(motion.div)`
 const Title = styled(motion.h1)`
   width: max-content;
   font-size: clamp(3.4rem, 15vw, 9rem);
-  font-weight: 300;
+  font-weight: 100;
   line-height: 1;
   margin-left: 20px;
 `;
@@ -106,7 +105,7 @@ const Detail = styled(motion.div)`
   padding: 0 0 10vh 0;
   max-width: 520px;
   font-size: clamp(1rem, 4vw, 1.3525rem);
-  font-weight: 200;
+  font-weight: 100;
   line-height: clamp(1rem, 4.5vw, 1.55rem);
   grid-column: 1;
 
@@ -203,12 +202,12 @@ export default function Skills({ skills }) {
 
   return (
     <MotionConfig
-      transition={{ type: "spring", stiffness: 40, mass: 2, damping: 14 }}
+      transition={{ type: "spring", stiffness: 30, mass: 2, damping: 14 }}
     >
       <Container
         style={{ backgroundColor: theme.primary }}
-        layoutId={"skillsCard_window"}
-        transition={{ type: "spring", stiffness: 40, mass: 2, damping: 14 }}
+        layoutId="skillsCard_window"
+        transition={{ type: "spring", stiffness: 30, mass: 2, damping: 14 }}
         initial="hidden"
         animate="visible"
         exit="exit"
@@ -221,14 +220,14 @@ export default function Skills({ skills }) {
           />
         </Head>
         <NavBar>
-          <NavLink href="/">Projects</NavLink>
+          <NavLink href="/projects">Projects</NavLink>
           <NavLink href="/">Resume</NavLink>
         </NavBar>
         <Content>
-          <HorizonLine />
+          <HorizonLine yLoc={70} slope={-25} />
 
           <TitleBlock>
-            <BackArrow variants={arrowV} />
+            <BackArrow variants={arrowV} id="backArrow_skillsPage" />
             <Title
               layoutId="skillsCard_label"
               style={{ color: theme.primary_verydark }}
@@ -262,7 +261,7 @@ export default function Skills({ skills }) {
               layoutId="skills_tree_left"
               transition={{
                 type: "spring",
-                stiffness: 40,
+                stiffness: 30,
                 mass: 2,
                 damping: 14,
               }}
@@ -278,7 +277,7 @@ export default function Skills({ skills }) {
               zIndex={3}
               transition={{
                 type: "spring",
-                stiffness: 50,
+                stiffness: 35,
                 mass: 1.9,
                 damping: 14,
               }}
@@ -294,7 +293,7 @@ export default function Skills({ skills }) {
               layoutId="skills_tree_right"
               transition={{
                 type: "spring",
-                stiffness: 60,
+                stiffness: 40,
                 mass: 1.8,
                 damping: 14,
               }}

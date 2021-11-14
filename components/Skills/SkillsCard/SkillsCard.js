@@ -3,7 +3,7 @@ import { motion, MotionConfig } from "framer-motion";
 import NavCard from "@/components/CardComponents/NavCard";
 import TreeIcon from "@/components/Icons/TreeIcon";
 import { useContext, useState } from "react";
-import SkillRoller from "@/components/SkillsCard/SkillRoller";
+import SkillRoller from "@/components/Skills/SkillsCard/SkillRoller";
 // import Underline from "@/components/Underline";
 import { useInView } from "react-intersection-observer";
 import Button from "@/components/Button";
@@ -17,12 +17,12 @@ const CardContent = styled(motion.article)`
   row-gap: 5px;
   justify-items: center;
   align-items: center;
-  padding: 45px 30px;
+  padding: 35px 35px;
   z-index: 3;
 `;
 
 const CardWindow = styled(motion.div)`
-  width: 170px;
+  width: 100%;
   height: 235px;
   display: grid;
   align-items: center;
@@ -109,7 +109,7 @@ const rollerV = {
   selected: {
     opacity: 0,
     transition: {
-      duration: 0.2,
+      duration: 0.3,
     },
   },
 };
@@ -140,32 +140,10 @@ const skillsIconV = {
   }),
 };
 
-// const underlineV = {
-//   hidden: {
-//     pathLength: 0,
-//   },
-//   visible: {
-//     pathLength: 1,
-//     transition: {
-//       delay: 710 * 230 * 0.0000012 + 2.05,
-//       duration: 0.8,
-//       ease: "easeInOut",
-//     },
-//   },
-//   selected: {
-//     pathLength: 0,
-//     transition: {
-//       duration: 0.8,
-//       ease: "easeInOut",
-//     },
-//   },
-// };
-
 export default function SkillsCard({ skills }) {
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
   const theme = useContext(ThemeContext);
-  //const [isPresent, safeToRemove] = usePresence();
 
   const clickHandler = () => {
     setSelected(true);
@@ -283,8 +261,7 @@ export default function SkillsCard({ skills }) {
             <Button
               width={150}
               height={50}
-              color1={theme.blue}
-              color2={theme.teal}
+              color1={theme.teal}
               href="/skills"
               onClick={clickHandler}
               id="skills"

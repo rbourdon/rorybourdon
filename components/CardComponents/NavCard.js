@@ -259,7 +259,6 @@ export default function NavCard({
           }}
           frameV={frameV}
           id={id}
-          gradientRotation={gradientRotation}
         />
         <CardBacking
           backingV={{

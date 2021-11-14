@@ -7,12 +7,12 @@ const Container = styled(motion.div)`
   width: 100%;
   min-width: 100%;
   max-width: 100%;
-  height: 15vh;
+  height: 12vh;
   display: grid;
   grid-template-rows: 100%;
   grid-template-columns: minmax(max-content, 8vw) 1fr;
   justify-items: flex-end;
-  align-items: center;
+  align-items: flex-end;
   padding: 0 25px;
   z-index: 3;
 
@@ -25,7 +25,7 @@ const Container = styled(motion.div)`
 const NavBox = styled(motion.nav)`
   width: min(100%, 750px);
   padding: 0 0 0 min(200px, 5vw);
-  height: 100%;
+  height: 70%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;

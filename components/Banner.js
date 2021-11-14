@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import { motion } from "framer-motion";
+import styled, { ThemeContext } from "styled-components";
+import { motion, useTransform } from "framer-motion";
+import { useContext } from "react";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -8,43 +9,80 @@ const Container = styled(motion.div)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  overflow: hidden;
 `;
 
 const Title = styled(motion.h1)`
   width: 100%;
   height: max-content;
-  color: "black";
-  margin-bottom: 30px;
   font-weight: 800;
+  letter-spacing: 1vw;
+  display: flex;
+  overflow: hidden;
+  padding: 2vw 0;
 `;
 
-const Subtitle = styled(motion.p)`
+const Spacer = styled(motion.div)`
+  width: 3vw;
+  height: 3vw;
+`;
+
+const Subtitle = styled(motion.h3)`
   width: 100%;
   height: max-content;
-  font-size: 1.35rem;
 `;
 
 const titleV = {
-  hidden: {
-    y: "170%",
-  },
   visible: (custom) => ({
-    y: "0%",
     transition: {
-      delay: custom,
-      duration: 1.2,
-      bounce: 0.3,
-      type: "spring",
+      delayChildren: custom,
+      staggerChildren: 0.1,
     },
   }),
 };
 
-export default function Banner() {
+const letterV = {
+  hidden: {
+    y: 190,
+  },
+  visible: {
+    y: 0,
+    transition: {
+      duration: 1,
+      bounce: 0.3,
+      type: "spring",
+    },
+  },
+};
+
+export default function Banner({ title = "Rory Bourdon" }) {
+  const theme = useContext(ThemeContext);
+
+  const WebkitTextStroke = useTransform(
+    theme.primary_dark,
+    (latestColor1) => `0.1rem ${latestColor1}`
+  );
+
   return (
     <Container>
-      <Title custom={0.6} variants={titleV}>
-        Rory Bourdon
+      <Title
+        custom={0}
+        variants={titleV}
+        style={{
+          color: theme.primary,
+          WebkitTextStroke,
+        }}
+      >
+        {[...title].map((letter, index) => {
+          return (
+            <motion.span
+              style={{ display: "block" }}
+              variants={letterV}
+              key={letter + index}
+            >
+              {letter === " " ? <Spacer /> : letter}
+            </motion.span>
+          );
+        })}
       </Title>
       <Subtitle custom={0.8} variants={titleV}>
         Web Developer & Visual Artist

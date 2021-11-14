@@ -7,6 +7,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useContext } from "react";
+
 const Chip = styled(motion.div)`
   height: 20px;
   width: max-content;
@@ -23,20 +24,35 @@ const Chip = styled(motion.div)`
   cursor: pointer;
 `;
 
+const variants = {
+  hidden: (custom) => ({
+    x: custom.x,
+    opacity: 0,
+  }),
+  visible: (custom) => ({
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      delay: custom.delay,
+      duration: 0.9,
+    },
+  }),
+};
+
 export default function SkillChip({
-  title,
-  variants,
-  transition,
+  children,
   layoutId = "skillChip",
   bgColor,
   textColor,
   outline,
+  custom,
 }) {
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
 
   const backgroundColor = useTransform(
-    [bgColor, theme.primary_light, textColor, hover],
+    [bgColor, theme.primary, textColor, hover],
     ([latestColor1, latestColor2, latestColor3, latestHover]) =>
       transform(
         latestHover,
@@ -61,19 +77,6 @@ export default function SkillChip({
       )
   );
 
-  // const color = useTransform(
-  //   [textColor, theme.primary_light, textColor, hover],
-  //   ([latestColor1, latestColor2, latestColor3, latestHover]) =>
-  //     transform(
-  //       latestHover,
-  //       [0, 1],
-  //       [
-  //         latestColor1,
-  //         transform(latestHover, [0, 1], [latestColor2, latestColor3]),
-  //       ]
-  //     )
-  // );
-
   const handleHover = (to) => {
     animate(hover, to, {
       type: "tween",
@@ -83,21 +86,27 @@ export default function SkillChip({
 
   return (
     <Chip
-      key={title + "_chip"}
+      key={layoutId}
       variants={variants}
       layoutId={layoutId}
-      transition={transition}
       onHoverStart={() => handleHover(1)}
       onHoverEnd={() => handleHover(0)}
       style={{
-        borderWidth: "1px",
+        borderWidth: 1,
         borderStyle: "solid",
         borderColor: outline,
         backgroundColor,
         color,
       }}
+      transition={{
+        type: "spring",
+        stiffness: 50,
+        mass: 0.25,
+        damping: 7,
+      }}
+      custom={custom}
     >
-      {title}
+      {children}
     </Chip>
   );
 }

@@ -1,27 +1,32 @@
 import styled from "styled-components";
 import { animate, motion, useMotionValue } from "framer-motion";
-import Link from "next/link";
 import ArrowIcon from "./Icons/ArrowIcon";
+import { useRouter } from "next/router";
 
-const Container = styled(motion.a)`
-  width: 40px;
+const Container = styled(motion.button)`
+  width: 50px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   z-index: 99;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 `;
 
 export default function BackArrow({
-  href = "/",
   width = 175,
   height = 50,
-  id,
+  id = "generic",
   variants,
-  onClick,
 }) {
   const hover = useMotionValue(0);
-
+  const router = useRouter();
   const handleHoverEnd = () => {
     animate(hover, 0, {
       duration: 0.1,
@@ -39,19 +44,17 @@ export default function BackArrow({
   };
 
   return (
-    <Link href={href} passHref scroll={false}>
-      <Container
-        $width={width}
-        $height={height}
-        onHoverStart={() => handleHoverStart(hover)}
-        onHoverEnd={() => handleHoverEnd(hover)}
-        onClick={onClick}
-        style={{ rotate: -90 }}
-        layoutId={`${id}Button`}
-        variants={variants}
-      >
-        <ArrowIcon />
-      </Container>
-    </Link>
+    <Container
+      $width={width}
+      $height={height}
+      onHoverStart={() => handleHoverStart(hover)}
+      onHoverEnd={() => handleHoverEnd(hover)}
+      onClick={() => router.back()}
+      style={{ rotate: -90 }}
+      layoutId={`${id}_backArrow`}
+      variants={variants}
+    >
+      <ArrowIcon />
+    </Container>
   );
 }

@@ -1,6 +1,7 @@
 {
   "name": "rorybourdon",
-  "version": "0.1.0",
+  "author": "Rory Bourdon <rorybourdon@gmail.com> (https://rorybourdon.com)",
+  "version": "0.7.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,17 +11,17 @@
   },
   "dependencies": {
     "color-convert": "^2.0.1",
-    "framer-motion": "^5.2.0",
+    "framer-motion": "^5.3.0",
     "graphql": "^15.6.1",
     "graphql-request": "^3.6.1",
     "next": "latest",
+    "next-mdx-remote": "^3.0.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-intersection-observer": "^8.32.1",
     "styled-components": "^5.3.1"
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.13.2",
     "eslint": "^7.32.0",
     "eslint-config-next": "latest",
     "eslint-config-prettier": "^8.3.0",

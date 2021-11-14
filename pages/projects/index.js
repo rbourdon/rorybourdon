@@ -1,13 +1,13 @@
 import styled, { ThemeContext } from "styled-components";
-import { motion, MotionConfig, useMotionValue } from "framer-motion";
+import { motion, MotionConfig } from "framer-motion";
 import React, { useContext } from "react";
-import { getSkillList, getSkillDetails } from "@/lib/graphcms";
+import { getProjectList } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
-import Image from "next/image";
 import BackArrow from "@/components/BackArrow";
 import ProjectsScroller from "@/components/Projects/ProjectsScroller";
+import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
 import HorizonCircle from "@/components/Icons/HorizonCircle";
 import HorizonLine from "@/components/Icons/HorizonLine";
 
@@ -18,16 +18,17 @@ const Content = styled(motion.main)`
   display: grid;
   flex: 1;
   grid-template-rows: max-content max-content;
-  grid-template-columns: 100%;
-  padding: 0 11vw;
+  grid-template-columns: 60% 40%;
+  padding: 0 12vw;
   align-content: space-evenly;
+  justify-content: center;
   grid-auto-flow: dense;
   overflow: hidden;
 
   @media (max-width: 555px) {
     row-gap: 10px;
     align-items: start;
-    grid-template-rows: max-content max-content;
+    grid-template-rows: max-content max-content max-content;
     grid-template-columns: 100%;
     padding: 0 8vw;
   }
@@ -42,23 +43,6 @@ const Container = styled(motion.div)`
   position: relative;
 `;
 
-const SkillImage = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-`;
-
-const SkillTile = styled(motion.div)`
-  min-width: 130px;
-  width: 130px;
-  min-height: 130px;
-  height: 130px;
-  margin-right: 20px;
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
-  background-color: yellow;
-`;
-
 const Title = styled(motion.h1)`
   width: max-content;
   font-size: clamp(3.4rem, 15vw, 9rem);
@@ -69,6 +53,7 @@ const Title = styled(motion.h1)`
 
 const Detail = styled(motion.p)`
   width: 100%;
+  max-width: 700px;
   font-size: clamp(1rem, 4vw, 1.3525rem);
   font-weight: 100;
   line-height: clamp(1rem, 4.5vw, 1.55rem);
@@ -95,18 +80,22 @@ const HeadingBlock = styled(motion.div)`
   flex-direction: column;
 `;
 
+const ProjectsScene = styled(motion.div)`
+  width: 100%;
+  height: max-content;
+  display: flex;
+  justify-content: center;
+`;
+
 const ProjectsBlock = styled(motion.div)`
   width: 100%;
   display: flex;
   flex-direction: column;
-`;
+  grid-column: span 2;
 
-const ScrollerTitle = styled(motion.p)`
-  width: 100%;
-  padding-bottom: 3vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @media (max-width: 555px) {
+    grid-column: span 1;
+  }
 `;
 
 const detailsV = {
@@ -130,20 +119,6 @@ const detailsV = {
     x: 0,
     transition: {
       duration: 0.1,
-    },
-  },
-};
-
-const skillImageV = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      type: "tween",
-      delay: 1.5,
-      duration: 0.3,
     },
   },
 };
@@ -172,25 +147,8 @@ const arrowV = {
   },
 };
 
-export default function Skill({ skill }) {
+export default function Skill({ projects }) {
   const theme = useContext(ThemeContext);
-  const convert = require("color-convert");
-  const secondaryColorRGB = convert.rgb.hsl(
-    skill.secondaryColor.rgba.r,
-    skill.secondaryColor.rgba.g,
-    skill.secondaryColor.rgba.b
-  );
-  const primaryColorRGB = convert.rgb.hsl(
-    skill.primaryColor.rgba.r,
-    skill.primaryColor.rgba.g,
-    skill.primaryColor.rgba.b
-  );
-  const primaryColor = useMotionValue(
-    `hsla(${primaryColorRGB[0]},${primaryColorRGB[1]}%,${primaryColorRGB[2]}%,1)`
-  );
-  const secondaryColor = useMotionValue(
-    `hsla(${secondaryColorRGB[0]},${secondaryColorRGB[1]}%,${secondaryColorRGB[2]}%,1)`
-  );
 
   return (
     <MotionConfig
@@ -199,38 +157,35 @@ export default function Skill({ skill }) {
         stiffness: 30,
         mass: 2,
         damping: 11,
-        //duration: 2,
       }}
     >
       <Container
         style={{ backgroundColor: theme.primary }}
+        layoutId="projectCard_window"
         initial="hidden"
         animate="visible"
         exit="exit"
       >
         <Head>
-          <title>{`${skill.title} - Skills - Rory Bourdon | Web Developer & Visual Artist`}</title>
+          <title>Projects - Rory Bourdon | Web Developer & Visual Artist</title>
           <meta
             name="description"
-            content={`${skill.title} - Skills - Rory Bourdon | Web Developer & Visual Artist`}
+            content="Projects - Rory Bourdon | Web Developer & Visual Artist"
           />
         </Head>
         <NavBar>
           <NavLink href="/skills">Skills</NavLink>
-          <NavLink href="/projects">Projects</NavLink>
           <NavLink href="/">Resume</NavLink>
         </NavBar>
-        <HorizonLine slope={32} yLoc={-2} />
-        <HorizonLine slope={-10} yLoc={95} />
-        <HorizonCircle cx="0%" cy="30%" />
         <Content>
-          {/* <HorizonLine /> */}
+          <HorizonLine slope={-25} yLoc={65} />
+          <HorizonCircle r={0.5} cx={"115%"} cy={"30%"} />
           <HeadingBlock>
             <TitleBlock>
-              <BackArrow id="backArrow_skillPage" variants={arrowV} />
+              <BackArrow id="projectsPage" variants={arrowV} />
               <Title
-                layoutId={`${skill.slug}_bubbleLinkTitle`}
-                style={{ color: theme.primary_dark }}
+                layoutId="projectCard_label"
+                style={{ color: theme.primary_verydark }}
                 transition={{
                   type: "spring",
                   stiffness: 50,
@@ -238,39 +193,27 @@ export default function Skill({ skill }) {
                   damping: 14,
                 }}
               >
-                {skill.title}
+                Projects
               </Title>
             </TitleBlock>
+
             <DetailBlock>
-              <SkillTile
-                layoutId={`${skill.slug}_bubble`}
-                style={{ backgroundColor: primaryColor }}
-              >
-                {skill?.image?.url && (
-                  <SkillImage variants={skillImageV}>
-                    <Image
-                      width={130}
-                      height={130}
-                      priority
-                      alt={`${skill.title} Logo`}
-                      src={skill.image.url}
-                    />
-                  </SkillImage>
-                )}
-              </SkillTile>
               <Detail variants={detailsV} style={{ color: theme.primary_dark }}>
-                {skill.description}
+                These are some of the skills I’ve picked up over the years
+                through a combination of formal education, self-directed
+                learning and most importantly, building things. Some I know
+                better than others. I hope this list never stops growing.
               </Detail>
             </DetailBlock>
           </HeadingBlock>
+          <ProjectsScene>
+            <ProjectsSceneIcon collapsed={false} />
+          </ProjectsScene>
           <ProjectsBlock>
-            <ScrollerTitle variants={detailsV}>
-              Projects built with {skill.title}
-            </ScrollerTitle>
             <ProjectsScroller
-              projects={skill.projects}
-              primaryColor={primaryColor}
-              bgColor={secondaryColor}
+              projects={projects}
+              primaryColor={theme.primary_dark}
+              bgColor={theme.orange}
             />
           </ProjectsBlock>
         </Content>
@@ -279,21 +222,10 @@ export default function Skill({ skill }) {
   );
 }
 
-export async function getStaticProps({ params }) {
-  const skill = (await getSkillDetails(params.skill)) || [];
+export async function getStaticProps() {
+  const projects = (await getProjectList("all")) || [];
   return {
-    props: { skill },
+    props: { projects },
     revalidate: 20000,
   };
-}
-
-export async function getStaticPaths() {
-  //Get slugs for boxes, for dynamic routing.
-  const skills = (await getSkillList("skill-scroller")) || [];
-
-  const paths = skills.map((skill) => ({
-    params: { skill: skill.slug },
-  }));
-
-  return { paths, fallback: false };
 }

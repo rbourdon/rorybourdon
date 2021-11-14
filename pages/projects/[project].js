@@ -1,25 +1,42 @@
 import styled, { ThemeContext } from "styled-components";
-import { motion, MotionConfig } from "framer-motion";
-import React, { useContext } from "react";
+import { motion, MotionConfig, useMotionValue } from "framer-motion";
+import React, { useContext, useMemo } from "react";
 import { getProjectList, getProjectDetails } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
-//import Image from "next/image";
 import BackArrow from "@/components/BackArrow";
+import SkillList from "@/components/Projects/ProjectInfoPanel/SkillList";
+import { serialize } from "next-mdx-remote/serialize";
+import { MDXRemote } from "next-mdx-remote";
+import Post from "@/components/Projects/ProjectPost/Post";
+import Title from "@/components/Projects/ProjectPost/Title";
+import PostImage from "@/components/Projects/ProjectPost/PostImage";
+import PostVideo from "@/components/Projects/ProjectPost/PostVideo";
+import Caption from "@/components/Projects/ProjectPost/Caption";
+import Content from "@/components/Projects/ProjectPost/Content";
+import Highlight from "@/components/Highlight";
+import ProjectInfoPanel from "@/components/Projects/ProjectInfoPanel/ProjectInfoPanel";
+import ProjectLink from "@/components/Projects/ProjectInfoPanel/ProjectLink";
+import Spacer from "@/components/Spacer";
+import AboutProject from "@/components/Projects/ProjectInfoPanel/AboutProject";
+import HorizonLine from "@/components/Icons/HorizonLine";
+import HorizonCircle from "@/components/Icons/HorizonCircle";
+import ProjectLinkBox from "@/components/Projects/ProjectInfoPanel/LinkBox";
 
-const Content = styled(motion.main)`
+const PageContent = styled(motion.main)`
   width: 100%;
   min-width: 100%;
-  height: max-content;
+
   display: grid;
   flex: 1;
-  grid-template-rows: max-content max-content 1fr;
-  grid-template-columns: 100%;
-  padding: 5vh 16vw;
+  padding: 8vh 8vw;
+  grid-template-rows: max-content max-content max-content;
+  grid-template-columns: minmax(min-content, 80%) 1fr;
   grid-auto-flow: dense;
   align-items: center;
-  overflow: hidden;
+  align-content: center;
+  position: relative;
 
   @media (max-width: 555px) {
     row-gap: 10px;
@@ -32,98 +49,54 @@ const Content = styled(motion.main)`
 
 const Container = styled(motion.div)`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: max-content;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  position: relative;
 `;
 
-// const ProjectImage = styled(motion.div)`
-//   width: 100%;
-//   height: 100%;
-// `;
-
-// const ProjectTile = styled(motion.div)`
-//   min-width: 130px;
-//   width: 130px;
-//   min-height: 130px;
-//   height: 130px;
-//   margin-right: 20px;
-//   border-radius: 20px;
-//   overflow: hidden;
-//   position: relative;
-//   background-color: yellow;
-// `;
-
-const Title = styled(motion.h1)`
+const PageTitle = styled(motion.h1)`
   width: max-content;
-  font-size: clamp(3.4rem, 15vw, 9rem);
-  font-weight: 300;
-  line-height: 1.2;
-  margin-left: 20px;
+  font-weight: 100;
+  margin: 0 0 30px 30px;
 `;
 
-// const Detail = styled(motion.p)`
-//   width: 100%;
-//   font-size: clamp(1rem, 4vw, 1.3525rem);
-//   font-weight: 200;
-//   line-height: clamp(1rem, 4.5vw, 1.55rem);
-// `;
-// const DetailBlock = styled(motion.div)`
-//   width: 100%;
-//   max-width 800px;
-//   font-size: clamp(1rem, 4vw, 1.3525rem);
-//   font-weight: 200;
-//   line-height: clamp(1rem, 4.5vw, 1.55rem);
-//   grid-column: 1;
-//   display: flex;
-// `;
+const Details = styled(motion.h3)`
+  align-self: start;
+  grid-row: span 3;
+  grid-column: 2;
+  @media (max-width: 555px) {
+    grid-row: span 1;
+    grid-column: 1;
+  }
+`;
+
+const ProjectContent = styled(motion.article)`
+  width: 100%;
+  min-height: 100vh;
+  justify-self: end;
+  height: max-content;
+  font-size: clamp(1rem, 4vw, 1.3525rem);
+  font-weight: 100;
+  line-height: clamp(1rem, 4.5vw, 1.55rem);
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  padding: 4vw 2vw;
+`;
 
 const TitleBlock = styled(motion.div)`
   width: 100%;
+  max-width: 100%;
   display: flex;
   align-items: center;
+  grid-column: span 2;
+
+  @media (max-width: 555px) {
+    grid-column: span 1;
+  }
 `;
-
-// const detailsV = {
-//   hidden: {
-//     opacity: 0,
-//     x: "70%",
-//   },
-//   visible: {
-//     opacity: 1,
-//     x: 0,
-//     transition: {
-//       delay: 0.25,
-//       type: "spring",
-//       stiffness: 30,
-//       mass: 1,
-//       damping: 8,
-//     },
-//   },
-//   exit: {
-//     opacity: 0,
-//     x: 0,
-//     transition: {
-//       duration: 0.1,
-//     },
-//   },
-// };
-
-// const skillImageV = {
-//   hidden: {
-//     opacity: 0,
-//   },
-//   visible: {
-//     opacity: 1,
-//     transition: {
-//       type: "tween",
-//       delay: 1.5,
-//       duration: 0.3,
-//     },
-//   },
-// };
 
 const arrowV = {
   hidden: {
@@ -149,25 +122,45 @@ const arrowV = {
   },
 };
 
-export default function Project({ project }) {
+const components = {
+  Post,
+  PostImage,
+  PostVideo,
+  Caption,
+  Title,
+  Content,
+  Highlight,
+};
+
+export default function Project({ project, source }) {
   const theme = useContext(ThemeContext);
-  //   const convert = require("color-convert");
-  //   const secondaryColorRGB = convert.rgb.hsl(
-  //     skill.secondaryColor.rgba.r,
-  //     skill.secondaryColor.rgba.g,
-  //     skill.secondaryColor.rgba.b
-  //   );
-  //   const primaryColorRGB = convert.rgb.hsl(
-  //     skill.primaryColor.rgba.r,
-  //     skill.primaryColor.rgba.g,
-  //     skill.primaryColor.rgba.b
-  //   );
-  //   const primaryColor = useMotionValue(
-  //     `hsla(${primaryColorRGB[0]},${primaryColorRGB[1]}%,${primaryColorRGB[2]}%,1)`
-  //   );
-  //   const secondaryColor = useMotionValue(
-  //     `hsla(${secondaryColorRGB[0]},${secondaryColorRGB[1]}%,${secondaryColorRGB[2]}%,1)`
-  //   );
+  const convert = require("color-convert");
+  const secondaryColorRGB = useMemo(() => {
+    return project.secondaryColor
+      ? convert.rgb.hsl(
+          project.secondaryColor.rgba.r,
+          project.secondaryColor.rgba.g,
+          project.secondaryColor.rgba.b
+        )
+      : [0, 0, 0, 0];
+  }, [convert.rgb, project.secondaryColor]);
+
+  const primaryColorRGB = useMemo(() => {
+    return project.primaryColor
+      ? convert.rgb.hsl(
+          project.primaryColor.rgba.r,
+          project.primaryColor.rgba.g,
+          project.primaryColor.rgba.b
+        )
+      : [0, 0, 0, 0];
+  }, [convert.rgb, project.primaryColor]);
+
+  const color1 = useMotionValue(
+    `hsla(${primaryColorRGB[0]},${primaryColorRGB[1]}%,${primaryColorRGB[2]}%,1)`
+  );
+  const color2 = useMotionValue(
+    `hsla(${secondaryColorRGB[0]},${secondaryColorRGB[1]}%,${secondaryColorRGB[2]}%,1)`
+  );
 
   return (
     <MotionConfig
@@ -176,7 +169,6 @@ export default function Project({ project }) {
         stiffness: 30,
         mass: 2,
         damping: 11,
-        //duration: 2,
       }}
     >
       <Container
@@ -193,53 +185,63 @@ export default function Project({ project }) {
           />
         </Head>
         <NavBar logoComplete={true}>
-          <NavLink href="/">Projects</NavLink>
+          <NavLink href="/skills">Skills</NavLink>
+          <NavLink href="/projects">Projects</NavLink>
           <NavLink href="/">Resume</NavLink>
         </NavBar>
-        <Content>
+        <PageContent>
+          <HorizonCircle cx="-28%" cy="-14%" />
+          <HorizonLine slope={-22} yLoc={62} />
           <TitleBlock>
-            <BackArrow href="/skills" variants={arrowV} />
-            <Title
-              layoutId={`${project.slug}_bubbleLink`}
-              style={{ color: theme.primary_verydark }}
+            <BackArrow variants={arrowV} />
+            <PageTitle
+              layoutId={`${project.slug}_title`}
+              style={{ color: theme.primary_dark }}
               transition={{
                 type: "spring",
-                stiffness: 50,
-                mass: 2,
+                stiffness: 70,
+                mass: 1,
                 damping: 14,
               }}
             >
               {project.title}
-            </Title>
+            </PageTitle>
           </TitleBlock>
-          {/*
-          <DetailBlock>
-            <SkillTile
-              layoutId={`${skill.slug}_bubble`}
-              style={{ backgroundColor: primaryColor }}
-            >
-              {skill?.image?.url && (
-                <SkillImage variants={skillImageV}>
-                  <Image
-                    width={130}
-                    height={130}
-                    priority
-                    alt={`${skill.title} Logo`}
-                    src={skill.image.url}
-                  />
-                </SkillImage>
-              )}
-            </SkillTile>
-            <Detail variants={detailsV} style={{ color: theme.primary_dark }}>
-              {skill.description}
-            </Detail>
-          </DetailBlock>
-          <ProjectsScroller
-            projects={skill.projects}
-            primaryColor={primaryColor}
-            bgColor={secondaryColor}
-          />*/}
-        </Content>
+          <ProjectContent style={{ color: theme.primary_dark }}>
+            <MDXRemote
+              {...source}
+              components={components}
+              scope={{ color1: color1, color2: color2, ...project }}
+            />
+          </ProjectContent>
+          <Details>
+            <ProjectInfoPanel>
+              <ProjectLinkBox>
+                <ProjectLink
+                  href={project.demoLink}
+                  type="Demo"
+                  iconColor={color1}
+                />
+                <Spacer height={10} />
+                <ProjectLink
+                  href={project.codeLink}
+                  type="Code"
+                  iconColor={color1}
+                />
+              </ProjectLinkBox>
+              <Spacer height={70} />
+              <SkillList
+                selected={false}
+                skills={project.skills}
+                numSkills={project.skills.length - 1}
+                bubbleColor={color1}
+                textColor={color2}
+              />
+              <Spacer height={70} />
+              <AboutProject description={project.description} />
+            </ProjectInfoPanel>
+          </Details>
+        </PageContent>
       </Container>
     </MotionConfig>
   );
@@ -247,8 +249,11 @@ export default function Project({ project }) {
 
 export async function getStaticProps({ params }) {
   const project = (await getProjectDetails(params.project)) || [];
+  const source =
+    project.content || `<Post><Title>Add project content!</Title></Post>`;
+  const mdxSource = await serialize(source);
   return {
-    props: { project },
+    props: { project: project, source: mdxSource },
     revalidate: 20000,
   };
 }
