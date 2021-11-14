@@ -112,7 +112,7 @@ export default function Button({
   children,
   width = 175,
   height = 50,
-  sWidth = 1,
+  sWidth = 1.1,
   bRadius = 23,
   id,
   animationDelay = 0,
@@ -130,7 +130,7 @@ export default function Button({
         latestHover,
         [0, 1],
         [
-          "1px 2px 0px 0px " +
+          "0px 0px 0px 0px " +
             " " +
             latestShadow1 +
             ", " +
@@ -140,7 +140,7 @@ export default function Button({
             " " +
             latestShadow1 +
             ", " +
-            "0px 0px 10px 0px " +
+            "0px 0px 0px 0px " +
             latestShadow2,
         ]
       )
