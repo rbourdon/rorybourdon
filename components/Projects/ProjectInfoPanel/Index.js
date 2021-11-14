@@ -6,8 +6,12 @@ const Container = styled(motion.section)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-self: center;
-  align-self: start;
+  padding: 3vw 0 0 0;
+
+  @media (max-width: 555px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 `;
 
 export default function ProjectInfoPanel({ children }) {
