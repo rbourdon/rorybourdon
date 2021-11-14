@@ -12,13 +12,17 @@ const Line = styled(motion.svg)`
 
 const lineV = {
   hidden: {
-    pathLength: 0,
+    pathLength: 10,
+    pathOffset: -10,
+    pathSpacing: 10,
   },
   visible: {
+    pathOffset: 0,
     pathLength: 10,
+    pathSpacing: 1,
     transition: {
       type: "tween",
-      duration: 0.5,
+      duration: 2.5,
     },
   },
 };
@@ -31,6 +35,7 @@ const line1V = {
   visible: {
     pathOffset: [-2, 10],
     transition: {
+      delay: 2.5,
       type: "tween",
       duration: 8.5,
       repeat: Infinity,
@@ -72,6 +77,7 @@ export default function HorizonLine({ slope = -16, yLoc = 94 }) {
         stroke={theme.primary_slightlydark}
         strokeWidth={1}
         vectorEffect="non-scaling-stroke"
+        strokeDasharray="0 1"
       />
       <motion.path
         variants={lineV}
@@ -79,6 +85,7 @@ export default function HorizonLine({ slope = -16, yLoc = 94 }) {
         stroke={theme.primary_slightlydark}
         strokeWidth={1}
         vectorEffect="non-scaling-stroke"
+        strokeDasharray="0 1"
       />
       <motion.path
         custom={{ length: 4, offset: 3.6, spacing: 0.9 }}
@@ -87,6 +94,7 @@ export default function HorizonLine({ slope = -16, yLoc = 94 }) {
         stroke={theme.primary_slightlydark}
         strokeWidth={1}
         vectorEffect="non-scaling-stroke"
+        strokeDasharray="0 1"
       />
     </Line>
   );
