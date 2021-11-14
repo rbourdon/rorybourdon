@@ -8,6 +8,8 @@ import Head from "next/head";
 import BackArrow from "@/components/BackArrow";
 import ProjectsScroller from "@/components/Projects/ProjectsScroller";
 import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
+import HorizonCircle from "@/components/Icons/HorizonCircle";
+import HorizonLine from "@/components/Icons/HorizonLine";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -16,9 +18,10 @@ const Content = styled(motion.main)`
   display: grid;
   flex: 1;
   grid-template-rows: max-content max-content;
-  grid-template-columns: 60% 1fr;
-  padding: 0 11vw;
+  grid-template-columns: 60% 40%;
+  padding: 0 12vw;
   align-content: space-evenly;
+  justify-content: center;
   grid-auto-flow: dense;
   overflow: hidden;
 
@@ -50,6 +53,7 @@ const Title = styled(motion.h1)`
 
 const Detail = styled(motion.p)`
   width: 100%;
+  max-width: 700px;
   font-size: clamp(1rem, 4vw, 1.3525rem);
   font-weight: 100;
   line-height: clamp(1rem, 4.5vw, 1.55rem);
@@ -74,6 +78,13 @@ const HeadingBlock = styled(motion.div)`
   width: 100%;
   display: flex;
   flex-direction: column;
+`;
+
+const ProjectsScene = styled(motion.div)`
+  width: 100%;
+  height: max-content;
+  display: flex;
+  justify-content: center;
 `;
 
 const ProjectsBlock = styled(motion.div)`
@@ -167,6 +178,8 @@ export default function Skill({ projects }) {
           <NavLink href="/">Resume</NavLink>
         </NavBar>
         <Content>
+          <HorizonLine slope={-25} yLoc={65} />
+          <HorizonCircle r={0.5} cx={"115%"} cy={"30%"} />
           <HeadingBlock>
             <TitleBlock>
               <BackArrow id="projectsPage" variants={arrowV} />
@@ -193,7 +206,9 @@ export default function Skill({ projects }) {
               </Detail>
             </DetailBlock>
           </HeadingBlock>
-          <ProjectsSceneIcon collapsed={false} />
+          <ProjectsScene>
+            <ProjectsSceneIcon collapsed={false} />
+          </ProjectsScene>
           <ProjectsBlock>
             <ProjectsScroller
               projects={projects}
