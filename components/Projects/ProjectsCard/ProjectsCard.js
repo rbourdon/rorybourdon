@@ -66,10 +66,11 @@ const Backing = styled(motion.div)`
 `;
 
 const ProjectsScene = styled(motion.div)`
-  width: 250%;
-  height: max-content;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
+  position: relative;
 `;
 
 const projectsCardV = {
@@ -218,8 +219,8 @@ export default function ProjectsCard({ projects }) {
               }}
             >
               <Label layoutId="projectCard_label">Projects</Label>
-              <ProjectsScene>
-                <ProjectsSceneIcon iconWidth="640px" />
+              <ProjectsScene layout>
+                <ProjectsSceneIcon scale={2.6} />
               </ProjectsScene>
             </CardWindow>
             <ProjectsBox variants={projectSummariesV}>

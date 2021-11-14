@@ -10,6 +10,7 @@ import ProjectsScroller from "@/components/Projects/ProjectsScroller";
 import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
 import HorizonCircle from "@/components/Icons/HorizonCircle";
 import HorizonLine from "@/components/Icons/HorizonLine";
+import useWindowSize from "@/components/utils/useWindowSize";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -207,7 +208,7 @@ export default function Skill({ projects }) {
             </DetailBlock>
           </HeadingBlock>
           <ProjectsScene>
-            <ProjectsSceneIcon collapsed={false} />
+            <ProjectsSceneIcon scale={1} collapsed={false} />
           </ProjectsScene>
           <ProjectsBlock>
             <ProjectsScroller
