@@ -20,7 +20,7 @@ const Bubbles = styled(motion.ul)`
   padding: 0;
   margin: 0;
   cursor: grab;
-  grid-auto-rows: 37px;
+  grid-auto-rows: 40px;
   z-index: 6;
   touch-action: none;
 `;
