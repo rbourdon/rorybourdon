@@ -43,6 +43,15 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     z-index: 1;
   }
+    button, input[type="submit"], input[type="reset"] {
+      background: none;
+      color: inherit;
+      border: none;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      outline: inherit;
+    }
   p {
     margin: 0;
     font-size: clamp(1rem, .85vw, 1.3rem);
@@ -65,7 +74,8 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 100;
   }
   h2 {
-    font-size: clamp(3.5rem, 6vw, 5rem);
+    font-size: clamp(1.2rem, 4.5vw, 1.7rem);
+    line-height: clamp(1.2rem, 7vw, 2rem);
     margin: 0;
     font-weight: 100;
   }
