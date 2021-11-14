@@ -4,6 +4,7 @@ import {
   motion,
   MotionConfig,
   transform,
+  useMotionTemplate,
   useMotionValue,
   useTransform,
 } from "framer-motion";
@@ -74,7 +75,7 @@ const arrowV = {
     opacity: 0,
     right: 35,
   },
-  visible: {
+  hover: {
     opacity: 1,
     right: 17,
     transition: {
@@ -131,7 +132,7 @@ export default function SkillBubble({
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
   const opacity = useMotionValue(bottom || top ? 0 : 1);
-  const [hovering, setHovering] = useState(true);
+  const [hovering, setHovering] = useState(false);
 
   useEffect(() => {
     if (top) {
@@ -144,12 +145,6 @@ export default function SkillBubble({
       return visible.stop;
     }
   }, [top, bottom, opacity]);
-
-  // useEffect(() => {
-  //   !hovering && hover.stop();
-  //   !hovering &&
-  //     animate(hover, 0, { type: "tween", duration: 0.2, ease: "easeInOut" });
-  // }, [hovering, hover]);
 
   const handleHoverStart = () => {
     select(title);
@@ -178,7 +173,7 @@ export default function SkillBubble({
       transform(latestHover, [0, 1], [latestColor1, latestColor2])
   );
 
-  const backgroundColor2 = useTransform(
+  const outlineColor = useTransform(
     [theme.primary_dark, hoverColor?.bg || theme.teal, hover],
     ([latestColor1, latestColor2, latestHover]) =>
       transform(latestHover, [0, 1], [latestColor1, latestColor2])
@@ -189,48 +184,28 @@ export default function SkillBubble({
     (latestColor1) => "thin solid " + latestColor1
   );
 
+  const boxShadowNormal = useMotionTemplate`0px 0px 0px 0px ${theme.shadow_key}, 0px 0px 0x 0px ${theme.shadow_ambient}`;
+
+  const boxShadowHover = useMotionTemplate`1px 2px 0px 4px ${theme.shadow_key}, 0px 0px 10px 5px ${theme.shadow_ambient}`;
+
   const boxShadow = useTransform(
-    [hover, theme.shadow_key, theme.shadow_ambient],
-    ([latestHover, latestShadow1, latestShadow2]) =>
+    [boxShadowNormal, boxShadowHover, hover],
+    ([latestBoxShadowNormal, latestBoxShadowHover, latestHover]) =>
       transform(
         latestHover,
         [0, 1],
-        [
-          "0px 0px 0px 0px " +
-            " " +
-            latestShadow1 +
-            ", " +
-            "0px 0px 0x 0px " +
-            latestShadow2,
-          "1px 2px 0px 4px " +
-            " " +
-            latestShadow1 +
-            ", " +
-            "0px 0px 10px 5px " +
-            latestShadow2,
-        ]
+        [latestBoxShadowNormal, latestBoxShadowHover]
       )
   );
 
   const outlineOffset = useTransform(hover, [0, 1], ["0px", "-7px"]);
   const outlineWidth = useTransform(hover, [0, 1], ["1px", "6px"]);
-  // const outlineColor = useTransform(
-  //   [hover, backgroundColor2, theme.shadow_ambient],
-  //   ([latestHover, latestBackgroundColor2, latestShadow2]) =>
-  //     transform(
-  //       latestHover,
-  //       [0, 1],
-  //       [latestBackgroundColor2, latestBackgroundColor2]
-  //     )
-  // );
 
   const titleColor = useTransform(
     [theme.primary_verydark, hoverColor.text || theme.primary_dark, hover],
     ([latestColor3, latestColor4, latestHover]) =>
       transform(latestHover, [0, 1], [latestColor3, latestColor4])
   );
-  // const titleX = useTransform(hover, [0, 1], [0, -9]);
-  //const scale = useTransform(hover, [0, 1], [1, 1.125]);
 
   return (
     <MotionConfig transition={transition}>
@@ -257,8 +232,7 @@ export default function SkillBubble({
             onClick={canHover ? null : disableLinkDrag}
             onTapStart={disableLinkDrag}
             initial="hidden"
-            animate="visible"
-            whileHover="hover"
+            animate={hovering ? "hover" : "visible"}
           >
             <Title
               layoutId={`${id}_bubbleLinkTitle`}
@@ -280,9 +254,8 @@ export default function SkillBubble({
         {selected && (
           <Outline
             layoutId="bubbleOutline"
-            layoutDependency={selected}
             style={{
-              outlineColor: backgroundColor2,
+              outlineColor: outlineColor,
               outlineWidth,
               outlineStyle: "solid",
               outlineOffset,

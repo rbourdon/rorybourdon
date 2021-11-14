@@ -92,8 +92,6 @@ export default function TreeIcon({
   margin = "0",
   zIndex = 1,
   scale = 1,
-  width = "181px",
-  height = "310px",
   transition = { type: "spring", stiffness: 40, mass: 2, damping: 12 },
 }) {
   const [leaves, setLeaves] = useState(false);
@@ -109,8 +107,6 @@ export default function TreeIcon({
       transition={transition}
       $margin={margin}
       $zIndex={zIndex}
-      $width={width}
-      $height={height}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -172,20 +168,6 @@ export default function TreeIcon({
               }}
               fill={colors.foliage}
             />
-
-            {/* <motion.polygon
-              points={`0,0 ${Math.random() * 1 + 2},${Math.random() * 3 + 3} ${
-                Math.random() * 3 + 3
-              },0`}
-              variants={leavesV}
-              custom={{
-                x: "15%",
-                y: "51%",
-                delay: Math.random() * 2,
-                repeatDelay: Math.random() * 0.5,
-              }}
-              fill={colors.foliage}
-            /> */}
           </motion.g>
         )}
         <motion.path
