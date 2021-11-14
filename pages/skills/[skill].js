@@ -52,7 +52,7 @@ const SkillTile = styled(motion.div)`
   width: 130px;
   min-height: 130px;
   height: 130px;
-  margin-right: 20px;
+  margin-right: 2.5vw;
   border-radius: 20px;
   overflow: hidden;
   position: relative;
