@@ -1,5 +1,6 @@
 {
   "name": "rorybourdon",
+  "author": "Rory Bourdon <rorybourdon@gmail.com> (https://rorybourdon.com)",
   "version": "0.7.0",
   "private": true,
   "scripts": {
