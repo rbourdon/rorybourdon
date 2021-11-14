@@ -11,7 +11,7 @@ import ExternalLinkIcon from "@/components/Icons/ExternalLinkIcon";
 import Link from "next/link";
 import { useContext } from "react";
 
-const Container = styled(motion.a)`
+const LinkContainer = styled(motion.a)`
   max-width: 100%;
   max-height 100%;
   display: grid;
@@ -23,6 +23,29 @@ const Container = styled(motion.a)`
   line-height: 1.25;
   position: relative;
   index: 3;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const Container = styled(motion.div)`
+  max-width: 100%;
+  max-height 100%;
+  display: grid;
+  grid-template-columns: 23px 1fr;
+  grid-template-rows: 1fr;
+  column-gap: 8px;
+  padding: 10px 20px;
+  font-size: 1.08rem;
+  line-height: 1.25;
+  position: relative;
+  index: 3;
+  
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export default function ProjectLink({ type = "Demo", href = "", iconColor }) {
@@ -30,7 +53,7 @@ export default function ProjectLink({ type = "Demo", href = "", iconColor }) {
   const hover = useMotionValue(0);
 
   const color = useTransform(
-    [theme.primary_dark, iconColor, hover],
+    [theme.primary_dark, iconColor || theme.primary_light, hover],
     ([latestColor1, latestColor2, latestHover]) =>
       transform(latestHover, [0, 1], [latestColor1, latestColor2])
   );
@@ -49,11 +72,15 @@ export default function ProjectLink({ type = "Demo", href = "", iconColor }) {
     animate(hover, 0, { duration: 0.3 });
   };
 
-  return (
+  return href ? (
     <Link href={href} passHref>
-      <Container
+      <LinkContainer
+        rel="noopener"
+        target="_blank"
         onHoverStart={handleHoverStart}
         onHoverEnd={handleHoverEnd}
+        onFocus={handleHoverStart}
+        onBlur={handleHoverEnd}
         style={{
           color,
         }}
@@ -64,7 +91,26 @@ export default function ProjectLink({ type = "Demo", href = "", iconColor }) {
           <ExternalLinkIcon rotate={iconRotate} />
         )}
         <motion.span>{type}</motion.span>
-      </Container>
+      </LinkContainer>
     </Link>
+  ) : (
+    <Container
+      onHoverStart={handleHoverStart}
+      onHoverEnd={handleHoverEnd}
+      onFocus={handleHoverStart}
+      onBlur={handleHoverEnd}
+      style={{
+        color: theme.primary_slightlydark,
+      }}
+    >
+      {type === "Code" ? (
+        <CodeIcon rotate={iconRotate} />
+      ) : (
+        <ExternalLinkIcon rotate={iconRotate} />
+      )}
+      <motion.span
+        style={{ whiteSpace: "nowrap" }}
+      >{`${type} Unavailable`}</motion.span>
+    </Container>
   );
 }
