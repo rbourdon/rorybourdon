@@ -2,7 +2,7 @@ import SkillsCard from "@/components/Skills/SkillsCard/Index";
 import ProjectsCard from "@/components/Projects/ProjectsCard/Index";
 import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import Banner from "@/components/Banner";
 import { getAllSkills, getAllProjects } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
@@ -73,6 +73,8 @@ const ProjectsSection = styled(motion.section)`
 
 export default function Home({ skills, projects }) {
   const theme = useContext(ThemeContext);
+  const skillSection = useRef();
+  const projectsSection = useRef();
 
   return (
     <Container
@@ -91,13 +93,31 @@ export default function Home({ skills, projects }) {
         <meta name="og:description" content="Portfolio of Rory Bourdon" />
       </Head>
       <NavBar>
-        <NavLink href="/skills">Skills</NavLink>
-        <NavLink href="/projects">Projects</NavLink>
+        <NavLink
+          onClick={() =>
+            skillSection.current.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            })
+          }
+        >
+          Skills
+        </NavLink>
+        <NavLink
+          onClick={() =>
+            projectsSection.current.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            })
+          }
+        >
+          Projects
+        </NavLink>
         <NavLink href="/">Resume</NavLink>
       </NavBar>
       <HorizonLine slope={-19} yLoc={35} />
       <HorizonLine slope={-90} yLoc={130} />
-      <HorizonCircle />
+      <HorizonCircle cx="110%" cy="20%" />
       <Content>
         <HeroSection>
           <HeroBanner>
@@ -105,10 +125,14 @@ export default function Home({ skills, projects }) {
           </HeroBanner>
           <HeroBody></HeroBody>
         </HeroSection>
-        <SkillsSection style={{ backgroundColor: theme.primary_light }}>
+        <SkillsSection
+          ref={skillSection}
+          id="skills"
+          style={{ backgroundColor: theme.primary_light }}
+        >
           <SkillsCard skills={skills} />
         </SkillsSection>
-        <ProjectsSection>
+        <ProjectsSection ref={projectsSection}>
           <ProjectsCard projects={projects} />
         </ProjectsSection>
       </Content>
