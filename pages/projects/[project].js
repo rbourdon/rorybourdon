@@ -16,7 +16,7 @@ import PostVideo from "@/components/Projects/ProjectPost/PostVideo";
 import Caption from "@/components/Projects/ProjectPost/Caption";
 import Content from "@/components/Projects/ProjectPost/Content";
 import Highlight from "@/components/Highlight";
-import ProjectInfoPanel from "@/components/Projects/ProjectInfoPanel";
+import ProjectInfoPanel from "@/components/Projects/ProjectInfoPanel/ProjectInfoPanel";
 import ProjectLink from "@/components/Projects/ProjectInfoPanel/ProjectLink";
 import Spacer from "@/components/Spacer";
 import AboutProject from "@/components/Projects/ProjectInfoPanel/AboutProject";

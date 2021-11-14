@@ -2,7 +2,7 @@ import styled, { ThemeContext } from "styled-components";
 import { motion, MotionConfig } from "framer-motion";
 import NavCard from "@/components/CardComponents/NavCard";
 import { useContext, useState } from "react";
-import ProjectSummary from "@/components/Projects/ProjectSummary/Index";
+import ProjectSummary from "@/components/Projects/ProjectSummary/ProjectSummary";
 import { useInView } from "react-intersection-observer";
 import Button from "@/components/Button";
 import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";

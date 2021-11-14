@@ -2,7 +2,7 @@ import styled, { ThemeContext } from "styled-components";
 import { LayoutGroup, motion, useMotionValue } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
-import ProjectSummary from "./ProjectSummary/Index";
+import ProjectSummary from "./ProjectSummary/ProjectSummary";
 import useWindowSize from "../utils/useWindowSize";
 
 const Projects = styled(motion.div)`

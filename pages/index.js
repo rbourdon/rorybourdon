@@ -1,5 +1,5 @@
-import SkillsCard from "@/components/Skills/SkillsCard/Index";
-import ProjectsCard from "@/components/Projects/ProjectsCard/Index";
+import SkillsCard from "@/components/Skills/SkillsCard/SkillsCard";
+import ProjectsCard from "@/components/Projects/ProjectsCard/ProjectsCard";
 import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
 import { useContext, useRef } from "react";
