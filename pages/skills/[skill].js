@@ -55,7 +55,6 @@ const SkillTile = styled(motion.div)`
   border-radius: 20px;
   overflow: hidden;
   position: relative;
-  background-color: yellow;
 `;
 
 const Title = styled(motion.h1)`

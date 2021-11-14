@@ -99,7 +99,6 @@ export default function HorizonEffects({ lines = [], circles = [] }) {
 
   useEffect(() => {
     strokeWidth.set(0.33 - width * 0.0001);
-    console.log(strokeWidth.get());
   }, [strokeWidth, width]);
 
   return (
