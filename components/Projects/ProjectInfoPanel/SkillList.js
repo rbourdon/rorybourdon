@@ -5,7 +5,8 @@ import { useContext, useState } from "react";
 
 const Bubbles = styled(motion.ul)`
   max-width: 100%;
-  width: 200px;
+  width: max-content;
+  height: max-content;
   justify-items: center;
   align-items: center;
   display: grid;
@@ -14,7 +15,8 @@ const Bubbles = styled(motion.ul)`
   row-gap: 12px;
   padding: 10px;
   margin: 0;
-  grid-auto-rows: 37px;
+  grid-auto-rows: 40px;
+  align-self: center;
   z-index: 6;
 `;
 

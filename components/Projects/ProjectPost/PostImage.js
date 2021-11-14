@@ -2,24 +2,24 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const PostImage = styled(motion.figure)`
+const Container = styled(motion.figure)`
   width: 100%;
   height: max-content;
-  padding: 20px 0;
+  padding: 50px 0;
 `;
 
-export default function ProjectPostImage({
+export default function PostImage({
   src,
   width,
   height,
   alt = "",
-  quality = 75,
+  quality = 85,
   priority = false,
   children,
 }) {
   return (
-    <PostImage>
-      {src && (
+    <Container>
+      {src !== "" && (
         <Image
           src={src}
           width={width}
@@ -30,6 +30,6 @@ export default function ProjectPostImage({
         />
       )}
       {children}
-    </PostImage>
+    </Container>
   );
 }

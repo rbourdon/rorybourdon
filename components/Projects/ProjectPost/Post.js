@@ -4,15 +4,14 @@ import { motion } from "framer-motion";
 const Block = styled(motion.div)`
   width: 100%;
   height: max-content;
-  padding: 100px 40px;
+  padding: 5vw 3.5vw;
   justify-self: end;
-  grid-column: 1;
   display: flex;
   align-items: center;
   flex-direction: column;
 `;
 
-export default function ProjectPostBlock({
+export default function Post({
   children,
   variants = {
     hidden: {

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-const Title = styled(motion.p)`
+const Text = styled(motion.p)`
   width: 100%;
   height: max-content;
   font-size: clamp(1rem, 4vw, 1.3525rem);
@@ -10,6 +10,6 @@ const Title = styled(motion.p)`
   padding: 10px 0;
 `;
 
-export default function ProjectPostContent({ children }) {
-  return <Title>{children}</Title>;
+export default function Content({ children }) {
+  return <Text>{children}</Text>;
 }
