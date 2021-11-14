@@ -65,6 +65,13 @@ const Backing = styled(motion.div)`
   z-index: 2;
 `;
 
+const ProjectsScene = styled(motion.div)`
+  width: 250%;
+  height: max-content;
+  display: flex;
+  justify-content: center;
+`;
+
 const projectsCardV = {
   hidden: {
     opacity: 0,
@@ -211,7 +218,9 @@ export default function ProjectsCard({ projects }) {
               }}
             >
               <Label layoutId="projectCard_label">Projects</Label>
-              <ProjectsSceneIcon iconWidth="640px" />
+              <ProjectsScene>
+                <ProjectsSceneIcon iconWidth="640px" />
+              </ProjectsScene>
             </CardWindow>
             <ProjectsBox variants={projectSummariesV}>
               <ProjectSummary
