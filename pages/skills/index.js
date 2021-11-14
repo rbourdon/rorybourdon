@@ -8,7 +8,7 @@ import SkillScroller from "@/components/Skills/SkillScroller";
 import Highlight from "@/components/Highlight";
 import Head from "next/head";
 import TreeIcon from "@/components/Icons/TreeIcon";
-import HorizonLine from "@/components/Icons/HorizonLine";
+import HorizonEffects from "@/components/Icons/HorizonEffects";
 import BackArrow from "@/components/BackArrow";
 
 const Content = styled(motion.main)`
@@ -224,8 +224,7 @@ export default function Skills({ skills }) {
           <NavLink href="/">Resume</NavLink>
         </NavBar>
         <Content>
-          <HorizonLine yLoc={70} slope={-25} />
-
+          <HorizonEffects lines={[{ yLoc: 70, slope: -25 }]} />
           <TitleBlock>
             <BackArrow variants={arrowV} id="backArrow_skillsPage" />
             <Title

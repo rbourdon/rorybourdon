@@ -20,8 +20,7 @@ import ProjectInfoPanel from "@/components/Projects/ProjectInfoPanel/ProjectInfo
 import ProjectLink from "@/components/Projects/ProjectInfoPanel/ProjectLink";
 import Spacer from "@/components/Spacer";
 import AboutProject from "@/components/Projects/ProjectInfoPanel/AboutProject";
-import HorizonLine from "@/components/Icons/HorizonLine";
-import HorizonCircle from "@/components/Icons/HorizonCircle";
+import HorizonEffects from "@/components/Icons/HorizonEffects";
 import ProjectLinkBox from "@/components/Projects/ProjectInfoPanel/LinkBox";
 
 const PageContent = styled(motion.main)`
@@ -190,8 +189,12 @@ export default function Project({ project, source }) {
           <NavLink href="/">Resume</NavLink>
         </NavBar>
         <PageContent>
-          <HorizonCircle cx="-28%" cy="-14%" />
-          <HorizonLine slope={-22} yLoc={62} />
+          <HorizonEffects
+            lines={[{ slope: -22, yLoc: 62 }]}
+            circles={[{ cx: "0%", cy: "38%", r: 0.15 }]}
+            slope={-22}
+            yLoc={62}
+          />
           <TitleBlock>
             <BackArrow variants={arrowV} />
             <PageTitle

@@ -8,8 +8,7 @@ import Head from "next/head";
 import Image from "next/image";
 import BackArrow from "@/components/BackArrow";
 import ProjectsScroller from "@/components/Projects/ProjectsScroller";
-import HorizonCircle from "@/components/Icons/HorizonCircle";
-import HorizonLine from "@/components/Icons/HorizonLine";
+import HorizonEffects from "@/components/Icons/HorizonEffects";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -220,11 +219,15 @@ export default function Skill({ skill }) {
           <NavLink href="/projects">Projects</NavLink>
           <NavLink href="/">Resume</NavLink>
         </NavBar>
-        <HorizonLine slope={32} yLoc={-2} />
-        <HorizonLine slope={-10} yLoc={95} />
-        <HorizonCircle cx="0%" cy="30%" />
+        <HorizonEffects
+          lines={[
+            { slope: 32, yLoc: -2 },
+            { slope: -10, yLoc: 95 },
+          ]}
+          circles={[{ cx: "90%", cy: "11%", r: 0.15 }]}
+        />
         <Content>
-          {/* <HorizonLine /> */}
+          {/* <HorizonEffects /> */}
           <HeadingBlock>
             <TitleBlock>
               <BackArrow id="backArrow_skillPage" variants={arrowV} />

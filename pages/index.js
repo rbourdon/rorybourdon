@@ -8,8 +8,7 @@ import { getAllSkills, getAllProjects } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
-import HorizonLine from "@/components/Icons/HorizonLine";
-import HorizonCircle from "@/components/Icons/HorizonCircle";
+import HorizonEffects from "@/components/Icons/HorizonEffects";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -115,9 +114,13 @@ export default function Home({ skills, projects }) {
         </NavLink>
         <NavLink href="/">Resume</NavLink>
       </NavBar>
-      <HorizonLine slope={-19} yLoc={35} />
-      <HorizonLine slope={-90} yLoc={130} />
-      <HorizonCircle cx="110%" cy="20%" />
+      <HorizonEffects
+        lines={[
+          { slope: -19, yLoc: 35 },
+          { slope: -90, yLoc: 130 },
+        ]}
+        circles={[{ cx: "100%", cy: "10%", r: 0.2 }]}
+      />
       <Content>
         <HeroSection>
           <HeroBanner>
