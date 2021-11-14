@@ -13,6 +13,7 @@ const Roller = styled(motion.ul)`
   grid-template-rows: repeat(auto-fit, 40px);
   grid-template-columns: 100%;
   row-gap: 15px;
+  grid-auto-rows: 40px;
   align-content: center;
   justify-items: center;
   align-items: center;
