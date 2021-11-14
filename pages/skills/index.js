@@ -96,7 +96,7 @@ const TreeShadow = styled(motion.div)`
 const Title = styled(motion.h1)`
   width: max-content;
   font-size: clamp(3.4rem, 15vw, 9rem);
-  font-weight: 300;
+  font-weight: 100;
   line-height: 1;
   margin-left: 20px;
 `;
@@ -105,7 +105,7 @@ const Detail = styled(motion.div)`
   padding: 0 0 10vh 0;
   max-width: 520px;
   font-size: clamp(1rem, 4vw, 1.3525rem);
-  font-weight: 200;
+  font-weight: 100;
   line-height: clamp(1rem, 4.5vw, 1.55rem);
   grid-column: 1;
 
