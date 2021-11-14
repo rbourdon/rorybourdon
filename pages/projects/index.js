@@ -10,7 +10,6 @@ import ProjectsScroller from "@/components/Projects/ProjectsScroller";
 import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
 import HorizonCircle from "@/components/Icons/HorizonCircle";
 import HorizonLine from "@/components/Icons/HorizonLine";
-import useWindowSize from "@/components/utils/useWindowSize";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -186,7 +185,7 @@ export default function Skill({ projects }) {
               <BackArrow id="projectsPage" variants={arrowV} />
               <Title
                 layoutId="projectCard_label"
-                style={{ color: theme.primary_verydark }}
+                style={{ color: theme.primary_dark }}
                 transition={{
                   type: "spring",
                   stiffness: 50,
