@@ -7,10 +7,11 @@ const Container = styled(motion.div)`
   height: max-content;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   z-index: ${(props) => props.$zIndex};
   margin: ${(props) => props.$margin};
   pointer-events: none;
+  user-select: none;
 `;
 
 const computerV = {
@@ -72,8 +73,6 @@ const computerLineV = {
 export default function ProjectsSceneIcon({
   margin = "0px",
   zIndex = 1,
-  iconWidth = "32vw",
-  iconHeight = "100%",
   collapsed = true,
 }) {
   const theme = useContext(ThemeContext);
@@ -82,8 +81,8 @@ export default function ProjectsSceneIcon({
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 542 404"
-        height={iconHeight}
-        width={iconWidth}
+        height="100%"
+        width="100%"
       >
         {!collapsed && (
           <>
@@ -241,22 +240,22 @@ export default function ProjectsSceneIcon({
               {/* Computer Lines */}
               <motion.path
                 variants={computerLineV}
-                custom={{ delay: 1.6, duration: 0.65 }}
+                custom={{ delay: 1.05, duration: 0.5 }}
                 fill="none"
                 stroke="#3f3d56"
                 strokeWidth={1}
-                d="m146 101 l115 -91"
+                d="m146 101 l98 -76"
               />
               <motion.path
                 variants={computerLineV}
-                custom={{ delay: 1.1, duration: 0.5 }}
+                custom={{ delay: 0.9, duration: 0.5 }}
                 d="m150 136 l96 12"
                 fill="none"
                 stroke="#3f3d56"
                 strokeWidth={1}
               />
 
-              <motion.g variants={noteV} custom={{ delay: 2, duration: 0.7 }}>
+              <motion.g variants={noteV} custom={{ delay: 1.3, duration: 0.7 }}>
                 {/* Note 2 */}
                 <path
                   d="M281 42.8h-38.3a3.9 3.9 0 0 1-3.8-4v-35a3.9 3.9 0 0 1 3.8-3.8H281a3.9 3.9 0 0 1 3.9 3.9v35a3.9 3.9 0 0 1-3.9 3.9Z"
@@ -291,7 +290,7 @@ export default function ProjectsSceneIcon({
                   fill="#d8d5db"
                 />
               </motion.g>
-              <motion.g variants={noteV} custom={{ delay: 1.3, duration: 0.7 }}>
+              <motion.g variants={noteV} custom={{ delay: 1.1, duration: 0.7 }}>
                 {/* Note 1 */}
                 <path
                   d="M275.4 176.8H237a3.9 3.9 0 0 1-3.9-3.9v-50.7a3.9 3.9 0 0 1 3.9-3.8h38.3a3.9 3.9 0 0 1 3.8 3.8V173a3.9 3.9 0 0 1-3.8 3.9Z"
