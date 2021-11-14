@@ -3,7 +3,7 @@
   "plugins": [
     [
       "styled-components",
-      { "displayName": true, "preprocess": false, "pure": true }
+      { "displayName": true, "preprocess": false, "pure": true, "ssr": true }
     ]
   ]
 }
