@@ -6,6 +6,7 @@ import ProjectSummary from "@/components/Projects/ProjectSummary/ProjectSummary"
 import { useInView } from "react-intersection-observer";
 import Button from "@/components/Button";
 import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
+import useWindowSize from "@/components/utils/useWindowSize";
 
 const CardContent = styled(motion.div)`
   width: 100%;
@@ -19,6 +20,14 @@ const CardContent = styled(motion.div)`
   position: relative;
   padding: 25px 30px;
   z-index: 3;
+
+  @media (max-width: 757px) {
+    grid-template-columns: 100%;
+    grid-template-rows: 43% 54%;
+    row-gap: 3%;
+    align-content: center;
+    padding: 30px 25px;
+  }
 `;
 
 const CardWindow = styled(motion.div)`
@@ -145,22 +154,10 @@ export default function ProjectsCard({ projects }) {
   const theme = useContext(ThemeContext);
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
+  const { width } = useWindowSize();
   const { ref, inView } = useInView({
     threshold: 0.66,
   });
-
-  //const backgroundColor = useMotionValue(theme.primary.get());
-  // useEffect(() => {
-  //   backgroundColor.set(theme.primary.get());
-  // }, [theme.primary, backgroundColor]);
-
-  // useEffect(() => {
-  //   selected
-  //     ? animate(backgroundColor, theme.primary_slightlydark.get(), {
-  //         duration: 0.8,
-  //       })
-  //     : animate(backgroundColor, theme.primary.get(), { duration: 0.8 });
-  // }, [backgroundColor, selected, theme.primary, theme.primary_slightlydark]);
 
   const clickHandler = () => {
     setSelected(true);
@@ -195,8 +192,8 @@ export default function ProjectsCard({ projects }) {
         }
       >
         <NavCard
-          height={358}
-          width={697}
+          height={width < 757 ? 697 : 358}
+          width={width < 757 ? 358 : 697}
           stemDir="h"
           stemLoc={7}
           stemLength={375}
