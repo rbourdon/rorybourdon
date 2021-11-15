@@ -5,7 +5,6 @@ import Image from "next/image";
 const Container = styled(motion.figure)`
   width: 100%;
   height: max-content;
-  padding: 50px 0;
 `;
 
 export default function PostImage({
