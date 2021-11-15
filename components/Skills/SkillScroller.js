@@ -23,6 +23,10 @@ const Bubbles = styled(motion.ul)`
   grid-auto-rows: 40px;
   z-index: 6;
   touch-action: none;
+
+  @media (max-width: 555px) {
+    row-gap: 10px;
+  }
 `;
 
 const Arrow = styled(motion.button)`
