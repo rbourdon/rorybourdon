@@ -1,6 +1,6 @@
 import styled, { ThemeContext } from "styled-components";
-import { motion, MotionConfig, useMotionValue } from "framer-motion";
-import React, { useContext } from "react";
+import { animate, motion, MotionConfig, useMotionValue } from "framer-motion";
+import React, { useContext, useEffect } from "react";
 import { getSkillList, getSkillDetails } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
@@ -127,7 +127,7 @@ const detailsV = {
     opacity: 0,
     x: 0,
     transition: {
-      duration: 0.1,
+      duration: 0.2,
     },
   },
 };
@@ -165,7 +165,7 @@ const arrowV = {
     opacity: 0,
     x: 0,
     transition: {
-      duration: 0.1,
+      duration: 0.2,
     },
   },
 };
@@ -189,6 +189,16 @@ export default function Skill({ skill }) {
   const secondaryColor = useMotionValue(
     `hsla(${secondaryColorRGB[0]},${secondaryColorRGB[1]}%,${secondaryColorRGB[2]}%,1)`
   );
+
+  const tileBG = useMotionValue("hsla(0,0%,0%,0)");
+
+  useEffect(() => {
+    animate(tileBG, primaryColor.get(), {
+      type: "tween",
+      duration: 1,
+      ease: "easeInOut",
+    });
+  }, [primaryColor, tileBG]);
 
   return (
     <MotionConfig
@@ -219,10 +229,7 @@ export default function Skill({ skill }) {
           <NavLink href="/">Resume</NavLink>
         </NavBar>
         <HorizonEffects
-          lines={[
-            { slope: 32, yLoc: -2 },
-            { slope: -10, yLoc: 95 },
-          ]}
+          lines={[{ slope: 32, yLoc: -2 }]}
           circles={[{ cx: "90%", cy: "11%", r: 0.15 }]}
         />
         <Content>
@@ -246,7 +253,7 @@ export default function Skill({ skill }) {
             <DetailBlock>
               <SkillTile
                 layoutId={`${skill.slug}_bubble`}
-                style={{ backgroundColor: primaryColor }}
+                style={{ backgroundColor: tileBG, borderRadius: "20px" }}
               >
                 {skill?.image?.url && (
                   <SkillImage variants={skillImageV}>
