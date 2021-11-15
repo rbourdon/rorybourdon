@@ -4,11 +4,10 @@ import styled, { ThemeContext } from "styled-components";
 import useWindowSize from "../utils/useWindowSize";
 
 const Line = styled.svg`
+  width: max-content;
   position: absolute;
   left: 0;
   pointer-events: none;
-  top: ${(props) => props.$top};
-  z-index: 0;
 `;
 
 const lineV = {
@@ -102,11 +101,7 @@ export default function HorizonEffects({ lines = [], circles = [] }) {
   }, [strokeWidth, width]);
 
   return (
-    <Line
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox={`0 0 200 200`}
-      $top={width < 1920 ? `${(1920 - width) * 0.2}px` : "0"}
-    >
+    <Line xmlns="http://www.w3.org/2000/svg" viewBox={"0 0 200 200"}>
       {lines.map((line, index) => {
         return (
           <React.Fragment key={line.yLoc + "_frag_" + index}>
