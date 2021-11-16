@@ -292,7 +292,6 @@ export async function getStaticProps({ params }) {
   const skill = (await getSkillDetails(params.skill)) || [];
   return {
     props: { skill },
-    revalidate: 20000,
   };
 }
 

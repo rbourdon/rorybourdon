@@ -255,7 +255,6 @@ export async function getStaticProps({ params }) {
   const mdxSource = await serialize(source);
   return {
     props: { project: project, source: mdxSource },
-    revalidate: 20000,
   };
 }
 

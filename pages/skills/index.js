@@ -339,6 +339,5 @@ export async function getStaticProps() {
   const skills = (await getSkillList("skill-scroller")) || [];
   return {
     props: { skills },
-    revalidate: 20000,
   };
 }

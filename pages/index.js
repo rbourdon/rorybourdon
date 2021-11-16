@@ -124,6 +124,5 @@ export async function getStaticProps() {
   const projects = (await getAllProjects()) || [];
   return {
     props: { skills, projects },
-    revalidate: 20000,
   };
 }
