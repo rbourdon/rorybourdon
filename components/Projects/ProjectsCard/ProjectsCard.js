@@ -161,7 +161,7 @@ export default function ProjectsCard({ projects }) {
   const theme = useContext(ThemeContext);
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
-  const { width } = useWindowSize();
+  const { width = 1920 } = useWindowSize();
   const { ref, inView } = useInView({
     threshold: 0.66,
   });
@@ -172,7 +172,7 @@ export default function ProjectsCard({ projects }) {
       window.scrollTo({ top: 0, left: 0 });
     }, 800);
   };
-  console.log(width, "calc(50vh - " + (width < 757 ? 697 : 358) / 2 + "px)");
+
   return (
     <MotionConfig
       transition={
