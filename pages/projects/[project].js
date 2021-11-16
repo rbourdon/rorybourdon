@@ -26,14 +26,12 @@ import ProjectLinkBox from "@/components/Projects/ProjectInfoPanel/LinkBox";
 const PageContent = styled(motion.main)`
   width: 100%;
   min-width: 100%;
-
   display: grid;
   flex: 1;
   padding: 8vh 8vw;
   grid-template-rows: max-content max-content max-content;
   grid-template-columns: minmax(min-content, 80%) 1fr;
   grid-auto-flow: dense;
-  align-items: center;
   align-content: center;
   position: relative;
 
@@ -190,8 +188,8 @@ export default function Project({ project, source }) {
         </NavBar>
         <PageContent>
           <HorizonEffects
-            lines={[{ slope: -22, yLoc: 62 }]}
-            circles={[{ cx: "0%", cy: "38%", r: 0.15 }]}
+            lines={[{ slope: -22, yLoc: 61 }]}
+            circles={[{ cx: "0%", cy: 75, r: 0.15 }]}
             slope={-22}
             yLoc={62}
           />
@@ -214,7 +212,7 @@ export default function Project({ project, source }) {
             <MDXRemote
               {...source}
               components={components}
-              scope={{ color1: color1, color2: color2, ...project }}
+              scope={{ theme, color1: color1, color2: color2, ...project }}
             />
           </ProjectContent>
           <Details>
