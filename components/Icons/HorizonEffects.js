@@ -8,6 +8,7 @@ const Line = styled.svg`
   position: absolute;
   left: 0;
   pointer-events: none;
+  top: 0;
 `;
 
 const lineV = {
