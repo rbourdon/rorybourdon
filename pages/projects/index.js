@@ -178,7 +178,7 @@ export default function Skill({ projects }) {
         </NavBar>
         <Content>
           <HorizonEffects
-            lines={[{ slope: -25, yLoc: 65 }]}
+            lines={[{ slope: -25, yLoc: 55 }]}
             circles={[{ cx: "88%", cy: "8%", r: 0.18 }]}
             slope={-25}
             yLoc={65}
@@ -210,7 +210,7 @@ export default function Skill({ projects }) {
             </DetailBlock>
           </HeadingBlock>
           <ProjectsScene>
-            <ProjectsSceneIcon scale={1} collapsed={false} />
+            <ProjectsSceneIcon scale={1.1} collapsed={false} />
           </ProjectsScene>
           <ProjectsBlock>
             <ProjectsScroller
