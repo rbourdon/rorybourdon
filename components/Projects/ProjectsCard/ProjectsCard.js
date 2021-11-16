@@ -8,6 +8,13 @@ import Button from "@/components/Button";
 import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
 import useWindowSize from "@/components/utils/useWindowSize";
 
+const Container = styled(motion.article)`
+  top: calc(50vh - 358px / 2);
+  zindex: 1;
+  scroll-margin-top: ${(props) => props.$scrollMargin};
+  scroll-snap-margin: ${(props) => props.$scrollMargin};
+`;
+
 const CardContent = styled(motion.div)`
   width: 100%;
   height: 100%;
@@ -165,7 +172,7 @@ export default function ProjectsCard({ projects }) {
       window.scrollTo({ top: 0, left: 0 });
     }, 800);
   };
-
+  console.log(width, "calc(50vh - " + (width < 757 ? 697 : 358) / 2 + "px)");
   return (
     <MotionConfig
       transition={
@@ -177,13 +184,15 @@ export default function ProjectsCard({ projects }) {
       }
     >
       {selected && <Backing style={{ backgroundColor: theme.primary_light }} />}
-      <motion.div
+      <Container
+        id="projects"
         initial="hidden"
+        $scrollMargin={"calc(50vh - " + (width < 757 ? 697 : 358) / 2 + "px)"}
         animate={selected ? "selected" : inView ? "visible" : "hidden"}
         exit="exit"
         variants={containerV}
         style={{
-          top: "calc(50vh - " + 358 / 2 + "px)",
+          top: "calc(50vh - " + (width < 757 ? 697 : 358) / 2 + "px)",
           position: selected ? "fixed" : "static",
           zIndex: selected ? 4 : 1,
         }}
@@ -246,7 +255,7 @@ export default function ProjectsCard({ projects }) {
             </ProjectsBox>
           </CardContent>
         </NavCard>
-      </motion.div>
+      </Container>
     </MotionConfig>
   );
 }
