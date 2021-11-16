@@ -25,6 +25,7 @@ const Bubble = styled(motion.li)`
   cursor: pointer;
   z-index: 4;
   -webkit-tap-highlight-color: transparent;
+  touch-action: none;
 `;
 
 const Outline = styled(motion.div)`
@@ -146,25 +147,33 @@ export default function SkillBubble({
     }
   }, [top, bottom, opacity]);
 
+  const handleTap = () => {
+    animateHover(0);
+  };
+
   const handleHoverStart = () => {
     select(title);
-    if (canHover) {
-      animate(hover, 1, { type: "tween", duration: 0.2, ease: "easeInOut" });
+    if (canHover && !hovering) {
+      animateHover(1);
       setHovering(true);
     }
   };
 
   const handleHoverEnd = () => {
-    animate(hover, 0, { type: "tween", duration: 0.2, ease: "easeInOut" });
+    animateHover(0);
     setHovering(false);
   };
 
   const disableLinkDrag = (e) => {
     e.preventDefault();
     if (hovering) {
-      animate(hover, 0, { type: "tween", duration: 0.2, ease: "easeInOut" });
+      animateHover(0);
       setHovering(false);
     }
+  };
+
+  const animateHover = (t) => {
+    animate(hover, t, { type: "tween", duration: 0.2, ease: "easeInOut" });
   };
 
   const backgroundColor = useTransform(
@@ -213,7 +222,8 @@ export default function SkillBubble({
         $height={height}
         layoutId={`${id}_bubble`}
         onHoverStart={handleHoverStart}
-        onTap={handleHoverStart}
+        onTapStart={handleHoverStart}
+        onTap={handleTap}
         onHoverEnd={handleHoverEnd}
         variants={variants}
         custom={custom}
@@ -225,6 +235,7 @@ export default function SkillBubble({
           opacity,
           border,
           backgroundColor,
+          //left: transitioning ? "-35%" : "auto",
         }}
       >
         <Link href={`/skills/${id}`} passHref scroll={false}>
