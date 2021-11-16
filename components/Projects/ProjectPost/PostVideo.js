@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const Container = styled(motion.figure)`
   width: 100%;
   height: max-content;
-  margin: 2vw 0;
+  margin: 3vw 0 1vw 0;
   position: relative;
 `;
 
@@ -20,14 +20,16 @@ const PlaceholderImage = styled(motion.div)`
   height: 100%;
   position: absolute;
   top: 0;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: black;
   z-index: 2;
 `;
 
 export default function PostVideo({
   src,
-  placeholder,
+  placeholder = "Failed to load video :(",
   alt = "Sorry, your browser doesn't support embedded videos.",
   children,
 }) {
