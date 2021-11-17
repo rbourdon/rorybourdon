@@ -130,6 +130,8 @@ export default function DetailsLink({ href, linkColor }) {
       <Container
         onHoverStart={() => handleHover(1)}
         onHoverEnd={() => handleHover(0)}
+        onFocus={() => handleHover(1)}
+        onBlur={() => handleHover(0)}
         variants={detailsLinkV}
         style={{ color, scale }}
       >
