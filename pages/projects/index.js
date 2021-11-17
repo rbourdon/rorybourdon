@@ -22,7 +22,6 @@ const Content = styled(motion.main)`
   align-content: space-evenly;
   justify-content: center;
   grid-auto-flow: dense;
-  overflow: hidden;
 
   @media (max-width: 555px) {
     row-gap: 10px;
@@ -47,7 +46,7 @@ const Title = styled(motion.h1)`
   font-size: clamp(3.4rem, 15vw, 9rem);
   font-weight: 100;
   line-height: 1.2;
-  margin: 0 0 20px 30px;
+  margin: 0 0 20px 20px;
 `;
 
 const Detail = styled(motion.p)`
