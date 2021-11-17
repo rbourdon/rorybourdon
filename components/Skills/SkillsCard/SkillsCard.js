@@ -273,7 +273,6 @@ export default function SkillsCard({ skills }) {
               onClick={clickHandler}
               id="skills"
               animationDelay={710 * 230 * 0.0000012 + 2.15}
-              actionDelay={5}
             >
               All Skills
             </Button>

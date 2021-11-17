@@ -313,28 +313,6 @@ export default function Skills({ skills }) {
   );
 }
 
-// Skills.getLayout = function getLayout(page) {
-//   return (
-//     <Container
-//       layoutId={"skillsCard_window"}
-//       transition={{ type: "spring", stiffness: 60, mass: 2, damping: 14 }}
-//     >
-//       <Head>
-//         <title>Skills - Rory Bourdon | Web Developer & Visual Artist</title>
-//         <meta
-//           name="description"
-//           content="Skills - Rory Bourdon | Web Developer & Visual Artist"
-//         />
-//       </Head>
-//       <NavBar logoComplete={true}>
-//         <NavLink href="/">Projects</NavLink>
-//         <NavLink href="/">Resume</NavLink>
-//       </NavBar>
-//       {page}
-//     </Container>
-//   );
-// };
-
 export async function getStaticProps() {
   const skills = (await getSkillList("skill-scroller")) || [];
   return {
