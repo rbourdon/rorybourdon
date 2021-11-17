@@ -21,7 +21,7 @@ const CardContent = styled(motion.div)`
   display: grid;
   grid-template-columns: 43% 54%;
   column-gap: 3%;
-  grid-template-rows: 100%;
+  grid-template-rows: max-content 1fr;
   justify-items: center;
   align-items: center;
   position: relative;
@@ -47,6 +47,7 @@ const CardWindow = styled(motion.div)`
   justify-items: center;
   grid-template-columns: 100%;
   grid-template-rows: 30% 70%;
+  grid-row: span 2;
   border-radius: 20px;
   position: relative;
   overflow: hidden;
@@ -125,7 +126,7 @@ const projectSummariesV = {
   selected: {
     opacity: 0,
     transition: {
-      duration: 0.3,
+      duration: 0.4,
     },
   },
 };
@@ -140,7 +141,7 @@ const containerV = {
   exit: {
     opacity: 1,
     transition: {
-      duration: 0.9,
+      duration: 1.3,
     },
   },
 };
@@ -170,7 +171,7 @@ export default function ProjectsCard({ projects }) {
     setSelected(true);
     setTimeout(() => {
       window.scrollTo({ top: 0, left: 0 });
-    }, 800);
+    }, 1);
   };
 
   return (
@@ -241,18 +242,18 @@ export default function ProjectsCard({ projects }) {
                 defaultBGColor={theme.primary_light}
                 delay={358 * 697 * 0.0000012 + 2.85}
               />
-              <Button
-                width={150}
-                height={50}
-                color1={theme.orange}
-                href="/projects"
-                id="projects"
-                animationDelay={358 * 697 * 0.0000012 + 1.85}
-                onClick={clickHandler}
-              >
-                All Projects
-              </Button>
             </ProjectsBox>
+            <Button
+              width={150}
+              height={50}
+              color1={theme.orange}
+              href="/projects"
+              id="projects"
+              animationDelay={358 * 697 * 0.0000012 + 1.85}
+              onClick={clickHandler}
+            >
+              All Projects
+            </Button>
           </CardContent>
         </NavCard>
       </Container>
