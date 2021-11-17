@@ -178,7 +178,7 @@ export default function Skill({ projects }) {
         </NavBar>
         <Content>
           <HorizonEffects
-            lines={[{ slope: -25, yLoc: 55 }]}
+            lines={[{ slope: -25, yLoc: 65 }]}
             circles={[{ cx: "88%", cy: "8%", r: 0.18 }]}
             slope={-25}
             yLoc={65}
