@@ -22,6 +22,7 @@ import Spacer from "@/components/Spacer";
 import AboutProject from "@/components/Projects/ProjectInfoPanel/AboutProject";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
 import ProjectLinkBox from "@/components/Projects/ProjectInfoPanel/LinkBox";
+import PostPano from "@/components/Projects/ProjectPost/PostPano";
 
 const PageContent = styled(motion.main)`
   width: 100%;
@@ -123,6 +124,7 @@ const components = {
   Post,
   PostImage,
   PostVideo,
+  PostPano,
   Caption,
   Title,
   Content,
