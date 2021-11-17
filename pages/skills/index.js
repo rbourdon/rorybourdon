@@ -226,7 +226,7 @@ export default function Skills({ skills }) {
         <Content>
           <HorizonEffects lines={[{ yLoc: 70, slope: -25 }]} />
           <TitleBlock>
-            <BackArrow variants={arrowV} id="backArrow_skillsPage" />
+            <BackArrow variants={arrowV} id="skillsPage" />
             <Title
               layoutId="skillsCard_label"
               style={{ color: theme.primary_verydark }}

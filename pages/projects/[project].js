@@ -196,7 +196,7 @@ export default function Project({ project, source }) {
             yLoc={62}
           />
           <TitleBlock>
-            <BackArrow variants={arrowV} />
+            <BackArrow variants={arrowV} id={project.slug} />
             <PageTitle
               layoutId={`${project.slug}_title`}
               style={{ color: theme.primary_dark }}
