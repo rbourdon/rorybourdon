@@ -199,7 +199,7 @@ export default function Project({ project, source }) {
             <BackArrow variants={arrowV} id={project.slug} />
             <PageTitle
               layoutId={`${project.slug}_title`}
-              style={{ color: theme.primary_dark }}
+              style={{ color: theme.primary_verydark }}
               transition={{
                 type: "spring",
                 stiffness: 70,
