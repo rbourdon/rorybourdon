@@ -5,4 +5,8 @@ module.exports = {
   images: {
     domains: ["media.graphcms.com"],
   },
+  experimental: {
+    // Enables the styled-components SWC transform
+    styledComponents: true,
+  },
 };
