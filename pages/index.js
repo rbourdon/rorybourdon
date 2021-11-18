@@ -102,6 +102,7 @@ export default function Home({ skills, projects }) {
       <NavBar>
         <NavLink href="#skills">Skills</NavLink>
         <NavLink href="#projects">Projects</NavLink>
+        <NavLink href="/#socials">Contact</NavLink>
         <NavLink href="/">Resume</NavLink>
       </NavBar>
       <HorizonEffects
@@ -124,8 +125,7 @@ export default function Home({ skills, projects }) {
         <ProjectsSection>
           <ProjectsCard projects={projects} />
         </ProjectsSection>
-
-        <SocialsSection>
+        <SocialsSection style={{ backgroundColor: theme.primary_light }}>
           <SocialsCard />
         </SocialsSection>
       </Content>
