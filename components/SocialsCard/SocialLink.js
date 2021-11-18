@@ -8,10 +8,10 @@ import {
 } from "framer-motion";
 import { useContext } from "react";
 import Link from "next/link";
-import TwitterIcon from "./TwitterIcon";
-import LinkedInIcon from "./LinkedInIcon";
-import GithubIcon from "./GithubIcon";
-import InstagramIcon from "./InstagramIcon";
+import TwitterIcon from "./Icons/TwitterIcon";
+import LinkedInIcon from "./Icons/LinkedInIcon";
+import GithubIcon from "./Icons/GithubIcon";
+import InstagramIcon from "./Icons/InstagramIcon";
 
 const Container = styled(motion.a)`
   height: 100%;
