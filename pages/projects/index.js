@@ -201,15 +201,13 @@ export default function Skill({ projects }) {
 
             <DetailBlock>
               <Detail variants={detailsV} style={{ color: theme.primary_dark }}>
-                These are some of the skills I’ve picked up over the years
-                through a combination of formal education, self-directed
-                learning and most importantly, building things. Some I know
-                better than others. I hope this list never stops growing.
+                You can find various projects I have worked on below. I am
+                always building something new or improving on existing projects.
               </Detail>
             </DetailBlock>
           </HeadingBlock>
           <ProjectsScene>
-            <ProjectsSceneIcon scale={1.1} collapsed={false} />
+            <ProjectsSceneIcon scale={1} collapsed={false} />
           </ProjectsScene>
           <ProjectsBlock>
             <ProjectsScroller
