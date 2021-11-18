@@ -124,7 +124,7 @@ const detailsV = {
 const arrowV = {
   hidden: {
     opacity: 1,
-    x: 600,
+    x: 400,
   },
   visible: {
     opacity: 1,
