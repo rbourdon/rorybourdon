@@ -103,7 +103,7 @@ const Title = styled(motion.h1)`
 
 const Detail = styled(motion.div)`
   padding: 0 0 10vh 0;
-  max-width: 520px;
+  max-width: 610px;
   font-size: clamp(1rem, 4vw, 1.3525rem);
   font-weight: 100;
   line-height: clamp(1rem, 4.5vw, 1.55rem);
@@ -242,9 +242,8 @@ export default function Skills({ skills }) {
             {`These are some of the skills I’ve picked up over the years through
               a combination of formal education, self-directed learning and most
               importantly, `}
-            <Highlight>building things</Highlight>
-            {`. Some I know better than
-              others. I hope this list never stops growing.`}
+            <Highlight color={theme.teal}>building things</Highlight>
+            {`. I hope this list never stops growing.`}
           </Detail>
           <SkillsColumn>
             <SkillScroller skills={skills} />
