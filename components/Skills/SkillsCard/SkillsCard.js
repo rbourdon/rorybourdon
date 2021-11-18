@@ -225,7 +225,7 @@ export default function SkillsCard({ skills }) {
                 <TreeIcon
                   colors={{
                     trunk: theme.primary_light,
-                    foliage: theme.primary_verydark,
+                    foliage: theme.primary_dark,
                   }}
                   layoutId="skills_tree_left"
                   margin="0 -70px 0 0"
@@ -249,7 +249,7 @@ export default function SkillsCard({ skills }) {
                   height={"140px"}
                   colors={{
                     trunk: theme.primary_light,
-                    foliage: theme.primary_verydark,
+                    foliage: theme.primary_mediumdark,
                   }}
                   layoutId="skills_tree_right"
                   margin="0 0 0 -70px"

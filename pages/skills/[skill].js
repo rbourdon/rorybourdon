@@ -239,7 +239,7 @@ export default function Skill({ skill }) {
               <BackArrow id="backArrow_skillPage" variants={arrowV} />
               <Title
                 layoutId={`${skill.slug}_bubbleLinkTitle`}
-                style={{ color: theme.primary_dark }}
+                style={{ color: theme.primary_verydark }}
                 transition={{
                   type: "spring",
                   stiffness: 50,
