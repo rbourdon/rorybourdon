@@ -1,5 +1,6 @@
 import SkillsCard from "@/components/Skills/SkillsCard/SkillsCard";
 import ProjectsCard from "@/components/Projects/ProjectsCard/ProjectsCard";
+import SocialsCard from "@/components/SocialsCard/SocialsCard";
 import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
 import { useContext } from "react";
@@ -70,6 +71,15 @@ const ProjectsSection = styled(motion.section)`
   align-items: center;
 `;
 
+const SocialsSection = styled(motion.section)`
+  width: 100%;
+  padding: 0 5vw;
+  height: 120vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export default function Home({ skills, projects }) {
   const theme = useContext(ThemeContext);
 
@@ -114,6 +124,10 @@ export default function Home({ skills, projects }) {
         <ProjectsSection>
           <ProjectsCard projects={projects} />
         </ProjectsSection>
+
+        <SocialsSection>
+          <SocialsCard />
+        </SocialsSection>
       </Content>
     </Container>
   );
