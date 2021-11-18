@@ -6,6 +6,7 @@ import { useInView } from "react-intersection-observer";
 import Button from "@/components/Button";
 import useWindowSize from "@/components/utils/useWindowSize";
 import SocialLink from "@/components/SocialsCard/SocialLink";
+import SocialsSceneIcon from "../Icons/SocialsSceneIcon";
 
 const Container = styled(motion.article)`
   top: calc(50vh - 358px / 2);
@@ -62,6 +63,7 @@ const Label = styled(motion.p)`
   font-weight: 100;
   width: max-content;
   height: max-content;
+  z-index: 3;
 `;
 
 const SocialsBox = styled(motion.div)`
@@ -94,6 +96,13 @@ const Backing = styled(motion.div)`
   top: 0;
   left: 0;
   z-index: 2;
+`;
+
+const SocialsScene = styled(motion.div)`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
 `;
 
 const projectsCardV = {
@@ -220,6 +229,9 @@ export default function SocialsCard() {
               }}
             >
               <Label layoutId="socialsCard_label">Socials</Label>
+              <SocialsScene layout>
+                <SocialsSceneIcon scale={1.3} />
+              </SocialsScene>
             </CardWindow>
             <SocialsBox variants={projectSummariesV}>
               <SocialLink platform="twitter" hoverColor={theme.green} />
@@ -231,7 +243,7 @@ export default function SocialsCard() {
               width={150}
               height={50}
               color1={theme.green}
-              href="/"
+              href="/contact"
               id="contact"
               animationDelay={358 * 697 * 0.0000012 + 1.85}
               onClick={clickHandler}
