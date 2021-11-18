@@ -49,10 +49,7 @@ export default function CardFace({
   sWidth,
   faceV,
   color1,
-  color2,
   bands = [6, 2, 4],
-  id,
-  gradientRotation = -45,
 }) {
   const bandPaths = bands.map((band) => {
     switch (band) {
@@ -116,18 +113,6 @@ export default function CardFace({
         xmlns="http://www.w3.org/2000/svg"
         viewBox={`0 0 ${width} ${height}`}
       >
-        <defs>
-          <linearGradient
-            id={id ? id + "_face" : "linear"}
-            gradientUnits="userSpaceOnUse"
-            gradientTransform={`rotate(${
-              gradientRotation + (height - width) * 0.055
-            }, ${width * 0.5}, ${height * 0.5})`}
-          >
-            <motion.stop offset=".2" stopColor={color1} />
-            <motion.stop offset=".8" stopColor={color2} />
-          </linearGradient>
-        </defs>
         {bandPaths.map((band) => {
           return (
             <motion.rect
@@ -138,7 +123,7 @@ export default function CardFace({
               height={height - sWidth * 1.5 + "px"}
               stroke="none"
               style={{
-                fill: `url(#${id ? id + "_face" : "linear"})`,
+                fill: color1,
               }}
               custom={band}
               variants={gradientBandV}
