@@ -30,7 +30,7 @@ const CardContent = styled(motion.div)`
 
   @media (max-width: 757px) {
     grid-template-columns: 100%;
-    grid-template-rows: 43% 54%;
+    grid-template-rows: 23% 23% 1fr 12%;
     row-gap: 3%;
     align-content: center;
     padding: 30px 25px;
@@ -63,7 +63,7 @@ const Label = styled(motion.p)`
 
 const ProjectsBox = styled(motion.div)`
   width: 100%;
-  height: 100%;
+  height: max-content;
   font-size: 1.35rem;
   font-weight: 300;
   display: flex;
