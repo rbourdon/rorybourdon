@@ -19,6 +19,9 @@ const Container = styled(motion.a)`
   position: relative;
   z-index: 99;
   -webkit-tap-highlight-color: transparent;
+  &:focus {
+    outline: none;
+  }
 `;
 
 const Content = styled(motion.div)`
@@ -91,20 +94,6 @@ const contentV = {
   }),
 };
 
-function handleHoverStart(hover) {
-  animate(hover, 1, {
-    duration: 0.2,
-    type: "tween",
-  });
-}
-
-function handleHoverEnd(hover) {
-  animate(hover, 0, {
-    duration: 0.2,
-    type: "tween",
-  });
-}
-
 export default function Button({
   href,
   children,
@@ -120,6 +109,20 @@ export default function Button({
   const hover = useMotionValue(0);
 
   const scale = useTransform(hover, [0, 1], [1, 1.025]);
+
+  const handleHoverStart = () => {
+    animate(hover, 1, {
+      duration: 0.2,
+      type: "tween",
+    });
+  };
+
+  const handleHoverEnd = () => {
+    animate(hover, 0, {
+      duration: 0.2,
+      type: "tween",
+    });
+  };
 
   const boxShadow = useTransform(
     [hover, theme.shadow_key, theme.shadow_ambient],
@@ -161,6 +164,8 @@ export default function Button({
         $height={height}
         onHoverStart={() => handleHoverStart(hover)}
         onHoverEnd={() => handleHoverEnd(hover)}
+        onFocus={() => handleHoverStart(hover)}
+        onBlur={() => handleHoverEnd(hover)}
         onClick={onClick}
         layoutId={`${id}Button`}
         style={{ scale }}
