@@ -234,10 +234,26 @@ export default function SocialsCard() {
               </SocialsScene>
             </CardWindow>
             <SocialsBox variants={projectSummariesV}>
-              <SocialLink platform="twitter" hoverColor={theme.green} />
-              <SocialLink platform="linkedin" hoverColor={theme.green} />
-              <SocialLink platform="github" hoverColor={theme.green} />
-              <SocialLink platform="instagram" hoverColor={theme.green} />
+              <SocialLink
+                platform="twitter"
+                hoverColor={theme.green}
+                href="https://twitter.com/rorybourdon"
+              />
+              <SocialLink
+                platform="linkedin"
+                hoverColor={theme.green}
+                href="https://www.linkedin.com/in/rorybourdon/"
+              />
+              <SocialLink
+                platform="github"
+                hoverColor={theme.green}
+                href="https://github.com/rbourdon"
+              />
+              <SocialLink
+                platform="instagram"
+                hoverColor={theme.green}
+                href="https://www.instagram.com/draxusd/"
+              />
             </SocialsBox>
             <Button
               width={150}
