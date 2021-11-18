@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const Block = styled(motion.div)`
   width: 100%;
   height: max-content;
-  padding: 5vw 3.5vw;
+  padding: 1vw 3vw 5vw 3vw;
   justify-self: end;
   display: flex;
   align-items: center;

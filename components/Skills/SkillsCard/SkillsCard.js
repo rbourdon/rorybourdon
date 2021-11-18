@@ -4,11 +4,17 @@ import NavCard from "@/components/CardComponents/NavCard";
 import TreeIcon from "@/components/Icons/TreeIcon";
 import { useContext, useState } from "react";
 import SkillRoller from "@/components/Skills/SkillsCard/SkillRoller";
-// import Underline from "@/components/Underline";
 import { useInView } from "react-intersection-observer";
 import Button from "@/components/Button";
 
-const CardContent = styled(motion.article)`
+const Container = styled(motion.article)`
+  top: calc(50vh - 710px / 2);
+  zindex: 1;
+  scroll-margin-top: calc(50vh - 710px / 2);
+  scroll-snap-margin: calc(50vh - 710px / 2);
+`;
+
+const CardContent = styled(motion.div)`
   width: 100%;
   height: 100%;
   display: grid;
@@ -167,7 +173,8 @@ export default function SkillsCard({ skills }) {
       }
     >
       {selected && <Backing style={{ backgroundColor: theme.primary_light }} />}
-      <motion.div
+      <Container
+        id="skills"
         initial="hidden"
         animate={selected ? "selected" : inView ? "visible" : "hidden"}
         exit="exit"
@@ -266,13 +273,12 @@ export default function SkillsCard({ skills }) {
               onClick={clickHandler}
               id="skills"
               animationDelay={710 * 230 * 0.0000012 + 2.15}
-              actionDelay={5}
             >
               All Skills
             </Button>
           </CardContent>
         </NavCard>
-      </motion.div>
+      </Container>
     </MotionConfig>
   );
 }

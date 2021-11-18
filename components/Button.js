@@ -19,6 +19,9 @@ const Container = styled(motion.a)`
   position: relative;
   z-index: 99;
   -webkit-tap-highlight-color: transparent;
+  &:focus {
+    outline: none;
+  }
 `;
 
 const Content = styled(motion.div)`
@@ -91,22 +94,6 @@ const contentV = {
   }),
 };
 
-function handleHoverStart(hover) {
-  animate(hover, 1, {
-    duration: 0.1,
-    bounce: 0.5,
-    type: "tween",
-  });
-}
-
-function handleHoverEnd(hover) {
-  animate(hover, 0, {
-    duration: 0.1,
-    bounce: 0.5,
-    type: "tween",
-  });
-}
-
 export default function Button({
   href,
   children,
@@ -121,7 +108,21 @@ export default function Button({
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
 
-  const scale = useTransform(hover, [0, 1], [1, 1.04]);
+  const scale = useTransform(hover, [0, 1], [1, 1.025]);
+
+  const handleHoverStart = () => {
+    animate(hover, 1, {
+      duration: 0.2,
+      type: "tween",
+    });
+  };
+
+  const handleHoverEnd = () => {
+    animate(hover, 0, {
+      duration: 0.2,
+      type: "tween",
+    });
+  };
 
   const boxShadow = useTransform(
     [hover, theme.shadow_key, theme.shadow_ambient],
@@ -136,11 +137,11 @@ export default function Button({
             ", " +
             "0px 0px 0x 0px " +
             latestShadow2,
-          "3px 4px 0px 0px " +
+          "1px 2px 0px 0px " +
             " " +
             latestShadow1 +
             ", " +
-            "0px 0px 0px 0px " +
+            "0px 0px 11px 0px " +
             latestShadow2,
         ]
       )
@@ -163,6 +164,8 @@ export default function Button({
         $height={height}
         onHoverStart={() => handleHoverStart(hover)}
         onHoverEnd={() => handleHoverEnd(hover)}
+        onFocus={() => handleHoverStart(hover)}
+        onBlur={() => handleHoverEnd(hover)}
         onClick={onClick}
         layoutId={`${id}Button`}
         style={{ scale }}
@@ -180,17 +183,16 @@ export default function Button({
         </Content>
         <CardBorder
           color1={theme.primary_dark}
-          width={width}
-          height={height}
+          width={width * scale.get()}
+          height={height * scale.get()}
           sWidth={sWidth}
           bRadius={bRadius}
           startLoc={3}
           borderV={borderV}
           frameV={frameV}
           innerBorderV={innerBorderV}
-          innerOffset={-6}
+          innerOffset={-8}
           id={id + "button"}
-          rotation={0}
         />
       </Container>
     </Link>

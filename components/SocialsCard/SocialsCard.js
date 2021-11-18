@@ -2,11 +2,11 @@ import styled, { ThemeContext } from "styled-components";
 import { motion, MotionConfig } from "framer-motion";
 import NavCard from "@/components/CardComponents/NavCard";
 import { useContext, useState } from "react";
-import ProjectSummary from "@/components/Projects/ProjectSummary/ProjectSummary";
 import { useInView } from "react-intersection-observer";
 import Button from "@/components/Button";
-import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
 import useWindowSize from "@/components/utils/useWindowSize";
+import SocialLink from "@/components/SocialsCard/SocialLink";
+import SocialsSceneIcon from "../Icons/SocialsSceneIcon";
 
 const Container = styled(motion.article)`
   top: calc(50vh - 358px / 2);
@@ -21,16 +21,16 @@ const CardContent = styled(motion.div)`
   display: grid;
   grid-template-columns: 43% 54%;
   column-gap: 3%;
-  grid-template-rows: max-content 1fr;
+  grid-template-rows: 1fr max-content;
   justify-items: center;
   align-items: center;
   position: relative;
   padding: 25px 30px;
   z-index: 3;
 
-  @media (max-width: 757px) {
+  @media (max-width: 690px) {
     grid-template-columns: 100%;
-    grid-template-rows: 43% 54%;
+    grid-template-rows: 43% 1fr 13%;
     row-gap: 3%;
     align-content: center;
     padding: 30px 25px;
@@ -51,6 +51,10 @@ const CardWindow = styled(motion.div)`
   border-radius: 20px;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 690px) {
+    grid-row: span 1;
+  }
 `;
 
 const Label = styled(motion.p)`
@@ -59,18 +63,30 @@ const Label = styled(motion.p)`
   font-weight: 100;
   width: max-content;
   height: max-content;
+  z-index: 3;
 `;
 
-const ProjectsBox = styled(motion.div)`
+const SocialsBox = styled(motion.div)`
   width: 100%;
   height: 100%;
   font-size: 1.35rem;
   font-weight: 300;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 35px);
+  grid-template-rows: 35px;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-content: center;
+  column-gap: 20px;
   overflow: hidden;
+
+  @media (max-width: 690px) {
+    grid-row: span 1;
+    grid-template-columns: 35px;
+    grid-template-rows: repeat(auto-fit, 35px);
+    column-gap: 0px;
+    row-gap: 20px;
+  }
 `;
 
 const Backing = styled(motion.div)`
@@ -82,9 +98,8 @@ const Backing = styled(motion.div)`
   z-index: 2;
 `;
 
-const ProjectsScene = styled(motion.div)`
+const SocialsScene = styled(motion.div)`
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   position: relative;
@@ -146,19 +161,7 @@ const containerV = {
   },
 };
 
-const outlineV = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
-
-export default function ProjectsCard({ projects }) {
+export default function SocialsCard() {
   const theme = useContext(ThemeContext);
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
@@ -186,14 +189,14 @@ export default function ProjectsCard({ projects }) {
     >
       {selected && <Backing style={{ backgroundColor: theme.primary_light }} />}
       <Container
-        id="projects"
+        id="socials"
         initial="hidden"
-        $scrollMargin={"calc(50vh - " + (width < 757 ? 697 : 358) / 2 + "px)"}
+        $scrollMargin={"calc(50vh - " + (width < 690 ? 631 : 180) / 2 + "px)"}
         animate={selected ? "selected" : inView ? "visible" : "hidden"}
         exit="exit"
         variants={containerV}
         style={{
-          top: "calc(50vh - " + (width < 757 ? 697 : 358) / 2 + "px)",
+          top: "calc(50vh - " + (width < 690 ? 631 : 180) / 2 + "px)",
           position: selected ? "fixed" : "static",
           zIndex: selected ? 4 : 1,
         }}
@@ -202,57 +205,66 @@ export default function ProjectsCard({ projects }) {
         }
       >
         <NavCard
-          height={width < 757 ? 697 : 358}
-          width={width < 757 ? 358 : 697}
+          height={width < 690 ? 631 : 180}
+          width={width < 690 ? 180 : 631}
           stemDir="h"
-          stemLoc={7}
-          stemLength={375}
-          color1={theme.orange}
-          color2={theme.orange}
-          effectOffset={{ x: 600, y: 20 }}
-          effectRadius={315}
-          id="projects"
+          stemLoc={4}
+          stemLength={345}
+          color1={theme.green}
+          color2={theme.green}
+          effectOffset={{ x: 150, y: 20 }}
+          effectRadius={215}
+          id="socials"
           delay={0.5}
-          tagline="I enjoy building and experimenting"
+          tagline="You can find me in most of the usual places"
           intersectionRef={ref}
           stem
         >
           <CardContent variants={projectsCardV}>
             <CardWindow
-              layoutId="projectCard_window"
+              layoutId="socialsCard_window"
               style={{
                 backgroundColor: theme.primary,
                 zIndex: selected ? 4 : 1,
               }}
             >
-              <Label layoutId="projectCard_label">Projects</Label>
-              <ProjectsScene layout>
-                <ProjectsSceneIcon scale={2.6} />
-              </ProjectsScene>
+              <Label layoutId="socialsCard_label">Socials</Label>
+              <SocialsScene layout>
+                <SocialsSceneIcon scale={1.3} />
+              </SocialsScene>
             </CardWindow>
-            <ProjectsBox variants={projectSummariesV}>
-              <ProjectSummary
-                id={projects[0].slug}
-                project={projects[0]}
-                bgColor={theme.primary}
-                primaryColor={theme.primary_verydark}
-                outline={false}
-                onHover={null}
-                outlineV={outlineV}
-                defaultBGColor={theme.primary_light}
-                delay={358 * 697 * 0.0000012 + 2.85}
+            <SocialsBox variants={projectSummariesV}>
+              <SocialLink
+                platform="twitter"
+                hoverColor={theme.green}
+                href="https://twitter.com/rorybourdon"
               />
-            </ProjectsBox>
+              <SocialLink
+                platform="linkedin"
+                hoverColor={theme.green}
+                href="https://www.linkedin.com/in/rorybourdon/"
+              />
+              <SocialLink
+                platform="github"
+                hoverColor={theme.green}
+                href="https://github.com/rbourdon"
+              />
+              <SocialLink
+                platform="instagram"
+                hoverColor={theme.green}
+                href="https://www.instagram.com/draxusd/"
+              />
+            </SocialsBox>
             <Button
               width={150}
               height={50}
-              color1={theme.orange}
-              href="/projects"
-              id="projects"
+              color1={theme.green}
+              href="/contact"
+              id="contact"
               animationDelay={358 * 697 * 0.0000012 + 1.85}
               onClick={clickHandler}
             >
-              All Projects
+              Contact Me
             </Button>
           </CardContent>
         </NavCard>

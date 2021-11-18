@@ -103,7 +103,7 @@ const Title = styled(motion.h1)`
 
 const Detail = styled(motion.div)`
   padding: 0 0 10vh 0;
-  max-width: 520px;
+  max-width: 610px;
   font-size: clamp(1rem, 4vw, 1.3525rem);
   font-weight: 100;
   line-height: clamp(1rem, 4.5vw, 1.55rem);
@@ -176,7 +176,7 @@ const treeShadowV = {
 const arrowV = {
   hidden: {
     opacity: 1,
-    x: 600,
+    x: 400,
   },
   visible: {
     opacity: 1,
@@ -226,7 +226,7 @@ export default function Skills({ skills }) {
         <Content>
           <HorizonEffects lines={[{ yLoc: 70, slope: -25 }]} />
           <TitleBlock>
-            <BackArrow variants={arrowV} id="backArrow_skillsPage" />
+            <BackArrow variants={arrowV} id="skillsPage" />
             <Title
               layoutId="skillsCard_label"
               style={{ color: theme.primary_verydark }}
@@ -242,9 +242,8 @@ export default function Skills({ skills }) {
             {`These are some of the skills I’ve picked up over the years through
               a combination of formal education, self-directed learning and most
               importantly, `}
-            <Highlight>building things</Highlight>
-            {`. Some I know better than
-              others. I hope this list never stops growing.`}
+            <Highlight color={theme.teal}>building things</Highlight>
+            {`. I hope this list never stops growing.`}
           </Detail>
           <SkillsColumn>
             <SkillScroller skills={skills} />
@@ -313,32 +312,9 @@ export default function Skills({ skills }) {
   );
 }
 
-// Skills.getLayout = function getLayout(page) {
-//   return (
-//     <Container
-//       layoutId={"skillsCard_window"}
-//       transition={{ type: "spring", stiffness: 60, mass: 2, damping: 14 }}
-//     >
-//       <Head>
-//         <title>Skills - Rory Bourdon | Web Developer & Visual Artist</title>
-//         <meta
-//           name="description"
-//           content="Skills - Rory Bourdon | Web Developer & Visual Artist"
-//         />
-//       </Head>
-//       <NavBar logoComplete={true}>
-//         <NavLink href="/">Projects</NavLink>
-//         <NavLink href="/">Resume</NavLink>
-//       </NavBar>
-//       {page}
-//     </Container>
-//   );
-// };
-
 export async function getStaticProps() {
   const skills = (await getSkillList("skill-scroller")) || [];
   return {
     props: { skills },
-    revalidate: 20000,
   };
 }

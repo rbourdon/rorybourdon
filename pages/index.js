@@ -1,8 +1,9 @@
 import SkillsCard from "@/components/Skills/SkillsCard/SkillsCard";
 import ProjectsCard from "@/components/Projects/ProjectsCard/ProjectsCard";
+import SocialsCard from "@/components/SocialsCard/SocialsCard";
 import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import Banner from "@/components/Banner";
 import { getAllSkills, getAllProjects } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
@@ -70,10 +71,17 @@ const ProjectsSection = styled(motion.section)`
   align-items: center;
 `;
 
+const SocialsSection = styled(motion.section)`
+  width: 100%;
+  padding: 0 5vw;
+  height: 120vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export default function Home({ skills, projects }) {
   const theme = useContext(ThemeContext);
-  const skillSection = useRef();
-  const projectsSection = useRef();
 
   return (
     <Container
@@ -92,26 +100,9 @@ export default function Home({ skills, projects }) {
         <meta name="og:description" content="Portfolio of Rory Bourdon" />
       </Head>
       <NavBar>
-        <NavLink
-          onClick={() =>
-            skillSection.current.scrollIntoView({
-              behavior: "smooth",
-              block: "center",
-            })
-          }
-        >
-          Skills
-        </NavLink>
-        <NavLink
-          onClick={() =>
-            projectsSection.current.scrollIntoView({
-              behavior: "smooth",
-              block: "center",
-            })
-          }
-        >
-          Projects
-        </NavLink>
+        <NavLink href="#skills">Skills</NavLink>
+        <NavLink href="#projects">Projects</NavLink>
+        <NavLink href="/#socials">Contact</NavLink>
         <NavLink href="/">Resume</NavLink>
       </NavBar>
       <HorizonEffects
@@ -128,16 +119,15 @@ export default function Home({ skills, projects }) {
           </HeroBanner>
           <HeroBody></HeroBody>
         </HeroSection>
-        <SkillsSection
-          ref={skillSection}
-          id="skills"
-          style={{ backgroundColor: theme.primary_light }}
-        >
+        <SkillsSection style={{ backgroundColor: theme.primary_light }}>
           <SkillsCard skills={skills} />
         </SkillsSection>
-        <ProjectsSection ref={projectsSection}>
+        <ProjectsSection>
           <ProjectsCard projects={projects} />
         </ProjectsSection>
+        <SocialsSection style={{ backgroundColor: theme.primary_light }}>
+          <SocialsCard />
+        </SocialsSection>
       </Content>
     </Container>
   );
@@ -148,6 +138,5 @@ export async function getStaticProps() {
   const projects = (await getAllProjects()) || [];
   return {
     props: { skills, projects },
-    revalidate: 20000,
   };
 }

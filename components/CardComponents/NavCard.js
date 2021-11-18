@@ -321,10 +321,7 @@ export default function NavCard({
             },
           }}
           color1={color1}
-          color2={color2}
           bands={faceBands}
-          id={id}
-          gradientRotation={gradientRotation}
         />
         <ShineBand
           width={width}

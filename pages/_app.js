@@ -4,22 +4,7 @@ import { ThemeControlProvider } from "@/lib/Context/ThemeContext";
 import Layout from "@/components/layout";
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-size: 1rem;
-    font-weight: 100;
-    font-style: normal;
-    font-family:  proxima-nova, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    color: hsla(0,0%,28.63%,1);
-  }
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-  *
-  {
+html {
     scrollbar-width: thin;
     scrollbar-color: var(--color-purple_light) var(--color-primary_verylight);
 
@@ -40,6 +25,24 @@ const GlobalStyle = createGlobalStyle`
     }
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-weight: 100;
+    font-style: normal;
+    font-family:  proxima-nova, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    color: hsla(0,0%,28.63%,1);
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  *
+  {
     box-sizing: border-box;
     z-index: 1;
   }

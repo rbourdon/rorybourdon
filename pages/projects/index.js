@@ -22,7 +22,6 @@ const Content = styled(motion.main)`
   align-content: space-evenly;
   justify-content: center;
   grid-auto-flow: dense;
-  overflow: hidden;
 
   @media (max-width: 555px) {
     row-gap: 10px;
@@ -47,7 +46,7 @@ const Title = styled(motion.h1)`
   font-size: clamp(3.4rem, 15vw, 9rem);
   font-weight: 100;
   line-height: 1.2;
-  margin: 0 0 20px 30px;
+  margin: 0 0 20px 20px;
 `;
 
 const Detail = styled(motion.p)`
@@ -125,7 +124,7 @@ const detailsV = {
 const arrowV = {
   hidden: {
     opacity: 1,
-    x: 600,
+    x: 400,
   },
   visible: {
     opacity: 1,
@@ -202,10 +201,8 @@ export default function Skill({ projects }) {
 
             <DetailBlock>
               <Detail variants={detailsV} style={{ color: theme.primary_dark }}>
-                These are some of the skills I’ve picked up over the years
-                through a combination of formal education, self-directed
-                learning and most importantly, building things. Some I know
-                better than others. I hope this list never stops growing.
+                You can find various projects I have worked on below. I am
+                always building something new or improving on existing projects.
               </Detail>
             </DetailBlock>
           </HeadingBlock>
@@ -229,6 +226,5 @@ export async function getStaticProps() {
   const projects = (await getProjectList("all")) || [];
   return {
     props: { projects },
-    revalidate: 20000,
   };
 }

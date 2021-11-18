@@ -25,6 +25,10 @@ const Container = styled(motion.div)`
   -moz-user-drag: none;
   user-drag: none;
   user-select: none;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const ProjectTitle = styled(motion.p)`
