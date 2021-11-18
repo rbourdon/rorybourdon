@@ -208,12 +208,12 @@ export default function SocialsCard() {
           height={width < 690 ? 631 : 180}
           width={width < 690 ? 180 : 631}
           stemDir="h"
-          stemLoc={7}
+          stemLoc={4}
           stemLength={345}
           color1={theme.green}
           color2={theme.green}
-          effectOffset={{ x: 600, y: 20 }}
-          effectRadius={315}
+          effectOffset={{ x: 150, y: 20 }}
+          effectRadius={215}
           id="socials"
           delay={0.5}
           tagline="You can find me in most of the usual places"
