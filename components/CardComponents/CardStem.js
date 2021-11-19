@@ -38,11 +38,6 @@ export default function CardStem({
         : stemLoc === 1 || stemLoc === 2
         ? 0
         : height,
-    // stemDir === "h"
-    //   ? stemLoc == 2
-    //     ? height * 0.665
-    //     : (height - bRadius * 2 - sWidth / 2) * 0.335 + bRadius + sWidth / 2
-    //   : 0,
   };
   const theme = useContext(ThemeContext);
   return (

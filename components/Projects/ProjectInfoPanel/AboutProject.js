@@ -37,8 +37,6 @@ export default function AboutProject({ description = "" }) {
 
   return (
     <Container
-      rel="noopener"
-      target="_blank"
       onHoverStart={handleHoverStart}
       onHoverEnd={handleHoverEnd}
       onFocus={handleHoverStart}

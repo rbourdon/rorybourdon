@@ -207,7 +207,6 @@ export default function Skill({ skill }) {
         stiffness: 30,
         mass: 2,
         damping: 11,
-        //duration: 2,
       }}
     >
       <Container

@@ -48,14 +48,12 @@ const gearV = {
   }),
   hover: {
     scale: 1,
-    //rotate: -200,
     transition: { stiffness: 65, damping: 10, mass: 2, type: "spring" },
   },
 };
 
 export default function ProjectsIcon({ iconV }) {
   return (
-    // <Container>
     <motion.svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="-2 -2 240 279"
@@ -104,6 +102,5 @@ export default function ProjectsIcon({ iconV }) {
         </motion.g>
       </motion.g>
     </motion.svg>
-    //</Container>
   );
 }

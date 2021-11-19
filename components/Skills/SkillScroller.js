@@ -68,7 +68,6 @@ const bubbleV = {
 };
 
 export default function SkillScroller({ skills }) {
-  //const numSkills = useWindowSize().width <= 555 ? 4 : 11;
   const size = useWindowSize();
   const numSkills =
     size.width > 555

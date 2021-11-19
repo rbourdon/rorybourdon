@@ -46,31 +46,6 @@ export default function DetailsLink({ href, linkColor }) {
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
 
-  //   const backgroundColor = useTransform(
-  //     [bgColor, theme.primary, textColor, hover],
-  //     ([latestColor1, latestColor2, latestColor3, latestHover]) =>
-  //       transform(
-  //         latestHover,
-  //         [0, 1],
-  //         [
-  //           latestColor1,
-  //           transform(latestHover, [0, 1], [latestColor2, latestColor3]),
-  //         ]
-  //       )
-  //   );
-
-  //   const color = useTransform(
-  //     [textColor, theme.primary_verydark, bgColor, hover],
-  //     ([latestColor1, latestColor2, latestColor3, latestHover]) =>
-  //       transform(
-  //         latestHover,
-  //         [0, 1],
-  //         [
-  //           latestColor1,
-  //           transform(latestHover, [0, 1], [latestColor2, latestColor3]),
-  //         ]
-  //       )
-  //   );
   const scale = useTransform(hover, [0, 1], [1, 1.1]);
   const rotate = useTransform(hover, [0, 1], [90, 270]);
 
