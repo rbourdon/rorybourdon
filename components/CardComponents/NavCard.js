@@ -91,7 +91,7 @@ const stemV = {
 export default function NavCard({
   height = 200,
   borderRadius = 30,
-  strokeWidth = 1,
+  strokeWidth = 1.2,
   width = 200,
   stem = false,
   stemLength = 200,
