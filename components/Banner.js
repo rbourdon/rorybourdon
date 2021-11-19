@@ -29,6 +29,7 @@ const Spacer = styled(motion.div)`
 const Subtitle = styled(motion.h3)`
   width: 100%;
   height: max-content;
+  user-select: none;
 `;
 
 const titleV = {
@@ -59,7 +60,7 @@ export default function Banner({ title = "Rory Bourdon" }) {
 
   const WebkitTextStroke = useTransform(
     theme.primary_dark,
-    (latestColor1) => `0.1rem ${latestColor1}`
+    (latestColor1) => `0.08rem ${latestColor1}`
   );
 
   return (
@@ -75,7 +76,7 @@ export default function Banner({ title = "Rory Bourdon" }) {
         {[...title].map((letter, index) => {
           return (
             <motion.span
-              style={{ display: "block" }}
+              style={{ userSelect: "none" }}
               variants={letterV}
               key={letter + index}
             >
