@@ -115,7 +115,7 @@ const projectsCardV = {
   visible: {
     opacity: 1,
     transition: {
-      delay: 358 * 697 * 0.0000012 + 2.05,
+      delay: 180 * 631 * 0.0000012 + 2.05,
       duration: 0.4,
     },
   },
@@ -134,7 +134,7 @@ const projectSummariesV = {
   visible: {
     opacity: 1,
     transition: {
-      delay: 358 * 697 * 0.0000012 + 1.85,
+      delay: 180 * 631 * 0.0000012 + 1.85,
       duration: 0.5,
     },
   },
@@ -261,7 +261,7 @@ export default function SocialsCard() {
               color1={theme.green}
               href="/contact"
               id="contact"
-              animationDelay={358 * 697 * 0.0000012 + 1.85}
+              animationDelay={180 * 631 * 0.0000012 + 1.85}
               onClick={clickHandler}
             >
               Contact Me
