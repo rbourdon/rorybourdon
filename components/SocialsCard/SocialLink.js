@@ -44,6 +44,8 @@ export default function SocialLink({ href = "/", platform, hoverColor }) {
   return (
     <Link href={href} passHref>
       <Container
+        rel="noopener"
+        target="_blank"
         onHoverStart={handleHoverStart}
         onHoverEnd={handleHoverEnd}
         style={{ color }}
