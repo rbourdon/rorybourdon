@@ -207,7 +207,6 @@ export default function Skill({ skill }) {
         stiffness: 30,
         mass: 2,
         damping: 11,
-        //duration: 2,
       }}
     >
       <Container
@@ -239,7 +238,7 @@ export default function Skill({ skill }) {
               <BackArrow id="backArrow_skillPage" variants={arrowV} />
               <Title
                 layoutId={`${skill.slug}_bubbleLinkTitle`}
-                style={{ color: theme.primary_dark }}
+                style={{ color: theme.primary_verydark }}
                 transition={{
                   type: "spring",
                   stiffness: 50,

@@ -40,7 +40,6 @@ export default function ShineBand({ width, height, bRadius, sWidth, shineV }) {
       }}
       $width={width}
       $height={height}
-      //layoutId={`${id}ShineBand`}
     >
       <motion.svg
         xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +59,6 @@ export default function ShineBand({ width, height, bRadius, sWidth, shineV }) {
           custom={{
             start: `M-0,0 L0,0`,
             middle: `M-${width},${height * 2} L${width * 2},-${height}`,
-            //end: `M-${width},${height * 2} L${width * 2},-${height}`,
             end: `M${width},${height} L${width},${height}`,
           }}
           variants={shineBandV}

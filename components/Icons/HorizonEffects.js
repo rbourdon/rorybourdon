@@ -3,8 +3,9 @@ import React, { useContext, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
 import useWindowSize from "../utils/useWindowSize";
 
-const Line = styled.svg`
+const Effects = styled.svg`
   width: max-content;
+  min-width: 100%;
   position: absolute;
   left: 0;
   pointer-events: none;
@@ -34,7 +35,7 @@ const line1V = {
     transition: {
       delay: 3.5,
       type: "tween",
-      duration: 21.5,
+      duration: 35.5,
       repeat: Infinity,
       repeatType: "reverse",
       ease: "linear",
@@ -51,7 +52,7 @@ const line2V = {
     pathLength: [0, 0.15, 0],
     transition: {
       type: "tween",
-      duration: 23.5,
+      duration: 37.5,
       repeat: Infinity,
       repeatType: "reverse",
       ease: "linear",
@@ -70,7 +71,7 @@ const circleV = {
     transition: {
       delay: 1.5,
       type: "tween",
-      duration: 23,
+      duration: 35,
       repeat: Infinity,
       ease: "linear",
       repeatType: "reverse",
@@ -102,7 +103,7 @@ export default function HorizonEffects({ lines = [], circles = [] }) {
   }, [strokeWidth, width]);
 
   return (
-    <Line xmlns="http://www.w3.org/2000/svg" viewBox={"0 0 200 200"}>
+    <Effects xmlns="http://www.w3.org/2000/svg" viewBox={"0 0 200 200"}>
       {lines.map((line, index) => {
         return (
           <React.Fragment key={line.yLoc + "_frag_" + index}>
@@ -169,6 +170,6 @@ export default function HorizonEffects({ lines = [], circles = [] }) {
           </React.Fragment>
         );
       })}
-    </Line>
+    </Effects>
   );
 }

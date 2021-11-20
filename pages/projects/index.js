@@ -187,7 +187,7 @@ export default function Skill({ projects }) {
               <BackArrow id="projectsPage" variants={arrowV} />
               <Title
                 layoutId="projectCard_label"
-                style={{ color: theme.primary_dark }}
+                style={{ color: theme.primary_verydark }}
                 transition={{
                   type: "spring",
                   stiffness: 50,

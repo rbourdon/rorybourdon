@@ -254,7 +254,7 @@ export default function Skills({ skills }) {
               zIndex={2}
               colors={{
                 trunk: theme.primary_light,
-                foliage: theme.primary_verydark,
+                foliage: theme.primary_dark,
               }}
               layoutId="skills_tree_left"
               transition={{
@@ -286,7 +286,7 @@ export default function Skills({ skills }) {
               zIndex={2}
               colors={{
                 trunk: theme.primary_light,
-                foliage: theme.primary_verydark,
+                foliage: theme.primary_mediumdark,
               }}
               layoutId="skills_tree_right"
               transition={{

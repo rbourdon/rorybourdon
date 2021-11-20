@@ -235,7 +235,6 @@ export default function SkillBubble({
           opacity,
           border,
           backgroundColor,
-          //left: transitioning ? "-35%" : "auto",
         }}
       >
         <Link href={`/skills/${id}`} passHref scroll={false}>

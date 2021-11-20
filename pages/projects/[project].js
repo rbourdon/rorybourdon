@@ -41,7 +41,7 @@ const PageContent = styled(motion.main)`
     align-items: start;
     grid-template-rows: max-content max-content 1fr;
     grid-template-columns: 100%;
-    padding: 2vh 8vw;
+    padding: 2vh 2vw;
   }
 `;
 
@@ -82,6 +82,10 @@ const ProjectContent = styled(motion.article)`
   flex-direction: column;
   align-items: end;
   padding: 4vw 2vw;
+
+  @media (max-width: 555px) {
+    padding: 4vw 0;
+  }
 `;
 
 const TitleBlock = styled(motion.div)`
@@ -199,7 +203,7 @@ export default function Project({ project, source }) {
             <BackArrow variants={arrowV} id={project.slug} />
             <PageTitle
               layoutId={`${project.slug}_title`}
-              style={{ color: theme.primary_dark }}
+              style={{ color: theme.primary_verydark }}
               transition={{
                 type: "spring",
                 stiffness: 70,

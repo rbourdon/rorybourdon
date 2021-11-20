@@ -1,5 +1,6 @@
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
+import { useContext } from "react";
 
 const Text = styled(motion.p)`
   height: max-content;
@@ -16,6 +17,7 @@ export default function Tagline({
   stemLoc,
   variants,
 }) {
+  const theme = useContext(ThemeContext);
   const y = {
     visible:
       stemLoc === 3 || stemLoc === 8
@@ -38,6 +40,7 @@ export default function Tagline({
       }
       custom={y}
       variants={variants}
+      style={{ color: theme.primary_dark }}
     >
       {children}
     </Text>

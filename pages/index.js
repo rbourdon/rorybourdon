@@ -7,7 +7,6 @@ import { useContext } from "react";
 import Banner from "@/components/Banner";
 import { getAllSkills, getAllProjects } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
-import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
 
@@ -54,31 +53,38 @@ const HeroSection = styled(motion.section)`
   }
 `;
 
-const SkillsSection = styled(motion.section)`
+const Section = styled(motion.section)`
   width: 100%;
   height: 120vh;
   padding: 0 5vw;
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-const ProjectsSection = styled(motion.section)`
-  width: 100%;
-  padding: 0 5vw;
-  height: 120vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 `;
 
-const SocialsSection = styled(motion.section)`
-  width: 100%;
-  padding: 0 5vw;
-  height: 120vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+const pageLinks = [
+  {
+    name: "Skills",
+    href: "#skills",
+    onClick: null,
+  },
+  {
+    name: "Projects",
+    href: "#projects",
+    onClick: null,
+  },
+  {
+    name: "Contact",
+    href: "#socials",
+    onClick: null,
+  },
+  {
+    name: "Resume",
+    href: "/",
+    onClick: null,
+  },
+];
 
 export default function Home({ skills, projects }) {
   const theme = useContext(ThemeContext);
@@ -99,12 +105,7 @@ export default function Home({ skills, projects }) {
         />
         <meta name="og:description" content="Portfolio of Rory Bourdon" />
       </Head>
-      <NavBar>
-        <NavLink href="#skills">Skills</NavLink>
-        <NavLink href="#projects">Projects</NavLink>
-        <NavLink href="/#socials">Contact</NavLink>
-        <NavLink href="/">Resume</NavLink>
-      </NavBar>
+      <NavBar links={pageLinks} />
       <HorizonEffects
         lines={[
           { slope: -19, yLoc: 35 },
@@ -119,15 +120,15 @@ export default function Home({ skills, projects }) {
           </HeroBanner>
           <HeroBody></HeroBody>
         </HeroSection>
-        <SkillsSection style={{ backgroundColor: theme.primary_light }}>
+        <Section style={{ backgroundColor: theme.primary_light }}>
           <SkillsCard skills={skills} />
-        </SkillsSection>
-        <ProjectsSection>
+        </Section>
+        <Section>
           <ProjectsCard projects={projects} />
-        </ProjectsSection>
-        <SocialsSection style={{ backgroundColor: theme.primary_light }}>
+        </Section>
+        <Section style={{ backgroundColor: theme.primary_light }}>
           <SocialsCard />
-        </SocialsSection>
+        </Section>
       </Content>
     </Container>
   );
