@@ -57,6 +57,7 @@ export default function PostPano({ src, children }) {
 
   const handlePanStart = () => {
     stopAutoRotate();
+    pitch.stop();
     yaw.set(getYaw());
     pitch.set(getPitch());
   };
