@@ -3,7 +3,6 @@ import { motion, MotionConfig } from "framer-motion";
 import React, { useContext } from "react";
 import { getProjectList } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
-import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
 import BackArrow from "@/components/BackArrow";
 import ProjectsScroller from "@/components/Projects/ProjectsScroller";
@@ -145,6 +144,24 @@ const arrowV = {
   },
 };
 
+const pageLinks = [
+  {
+    name: "Skills",
+    href: "/skills",
+    onClick: null,
+  },
+  {
+    name: "Contact",
+    href: "/contact",
+    onClick: null,
+  },
+  {
+    name: "Resume",
+    href: "/",
+    onClick: null,
+  },
+];
+
 export default function Skill({ projects }) {
   const theme = useContext(ThemeContext);
 
@@ -171,10 +188,7 @@ export default function Skill({ projects }) {
             content="Projects - Rory Bourdon | Web Developer & Visual Artist"
           />
         </Head>
-        <NavBar>
-          <NavLink href="/skills">Skills</NavLink>
-          <NavLink href="/">Resume</NavLink>
-        </NavBar>
+        <NavBar links={pageLinks} />
         <Content>
           <HorizonEffects
             lines={[{ slope: -25, yLoc: 65 }]}
