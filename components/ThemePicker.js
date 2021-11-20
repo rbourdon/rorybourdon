@@ -47,6 +47,7 @@ const theme = {
     primary_verydark: "hsla(266.67, 6.89%, 28.63%, 1)",
     primary_dark: "hsla(270, 5.89%, 40.71%, 1)",
     primary_mediumdark: "hsla(270, 4.74%, 55.88%, 1)",
+    primary_slightlydark: "hsla(270, 8.74%, 75.88%, 1)",
     primary: "hsla(270, 8.74%, 85.88%, 1)",
     // primary_med: "hsla(280, 17%, 93%, 1)",
     // primary_light: "hsla(280, 21%, 94.25%, 1)",
