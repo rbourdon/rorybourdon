@@ -53,30 +53,14 @@ const HeroSection = styled(motion.section)`
   }
 `;
 
-const SkillsSection = styled(motion.section)`
+const Section = styled(motion.section)`
   width: 100%;
   height: 120vh;
   padding: 0 5vw;
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-const ProjectsSection = styled(motion.section)`
-  width: 100%;
-  padding: 0 5vw;
-  height: 120vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const SocialsSection = styled(motion.section)`
-  width: 100%;
-  padding: 0 5vw;
-  height: 120vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 `;
 
 const pageLinks = [
@@ -136,15 +120,15 @@ export default function Home({ skills, projects }) {
           </HeroBanner>
           <HeroBody></HeroBody>
         </HeroSection>
-        <SkillsSection style={{ backgroundColor: theme.primary_light }}>
+        <Section style={{ backgroundColor: theme.primary_light }}>
           <SkillsCard skills={skills} />
-        </SkillsSection>
-        <ProjectsSection>
+        </Section>
+        <Section>
           <ProjectsCard projects={projects} />
-        </ProjectsSection>
-        <SocialsSection style={{ backgroundColor: theme.primary_light }}>
+        </Section>
+        <Section style={{ backgroundColor: theme.primary_light }}>
           <SocialsCard />
-        </SocialsSection>
+        </Section>
       </Content>
     </Container>
   );
