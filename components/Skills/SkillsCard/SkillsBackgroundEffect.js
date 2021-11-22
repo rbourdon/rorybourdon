@@ -41,21 +41,14 @@ const containerV = {
       },
     },
   }),
-  selected: (custom) => ({
+  selected: {
     opacity: 0,
-    y: custom - 150,
     transition: {
       staggerChildren: 0.05,
       type: "tween",
       duration: 0.2,
-      y: {
-        type: "spring",
-        stiffness: 40,
-        damping: 8,
-        mass: 1.3,
-      },
     },
-  }),
+  },
 };
 
 const lineV = {
@@ -82,7 +75,7 @@ const lineV = {
     originX: 0,
     transition: {
       type: "tween",
-      duration: 0.8,
+      duration: 0.2,
       ease: "easeInOut",
     },
   },
@@ -109,7 +102,7 @@ const circleV = {
     r: 0,
     transition: {
       type: "tween",
-      duration: 0.5,
+      duration: 0.2,
       ease: "easeInOut",
     },
   },
