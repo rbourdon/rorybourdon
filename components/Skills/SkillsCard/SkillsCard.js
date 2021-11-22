@@ -8,7 +8,7 @@ import CardEffect from "@/components/CardComponents/CardEffect";
 import { useInView } from "react-intersection-observer";
 import Button from "@/components/Button";
 import useWindowSize from "@/components/utils/useWindowSize";
-import SkillBackgroundEffect from "@/components/Skills/SkillBackgroundEffect";
+import SkillsBackgroundEffect from "@/components/Skills/SkillsCard/SkillsBackgroundEffect";
 
 const Container = styled(motion.article)`
   width: 100%;
@@ -221,7 +221,7 @@ export default function SkillsCard({ skills }) {
         >
           {cardEffects.map((effect, i) => {
             return (
-              <SkillBackgroundEffect
+              <SkillsBackgroundEffect
                 inView={inView}
                 key={effect.x + effect.y + effect.scale}
                 style={{ delay: i * 0.055 + 1, ...effect }}

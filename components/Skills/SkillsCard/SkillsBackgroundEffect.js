@@ -115,7 +115,7 @@ const circleV = {
   },
 };
 
-export default function SkillBackgroundEffect({
+export default function SkillsBackgroundEffect({
   inView = false,
   style = { x: 0, y: 0, scale: 1, delay: 0 },
 }) {
