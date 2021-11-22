@@ -55,6 +55,19 @@ const letterV = {
   },
 };
 
+const subtitleV = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 1.5,
+      duration: 0.5,
+    },
+  },
+};
+
 export default function Banner({ title = "Rory Bourdon" }) {
   const theme = useContext(ThemeContext);
 
@@ -85,9 +98,7 @@ export default function Banner({ title = "Rory Bourdon" }) {
           );
         })}
       </Title>
-      <Subtitle custom={0.8} variants={titleV}>
-        Web Developer & Visual Artist
-      </Subtitle>
+      <Subtitle variants={subtitleV}>Web Developer & Visual Artist</Subtitle>
     </Container>
   );
 }
