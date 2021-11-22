@@ -4,11 +4,7 @@ import styled from "styled-components";
 const Container = styled(motion.div)`
   width: 100%;
   height: 120vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: absolute;
-  overflow: hidden;
   top: 0;
   left: 0;
   z-index: 1;
@@ -28,7 +24,7 @@ const containerV = {
   },
   selected: {
     transition: {
-      staggerChildren: 0.08,
+      staggerChildren: 0.04,
     },
   },
 };
