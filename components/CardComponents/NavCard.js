@@ -5,7 +5,6 @@ import CardFace from "@/components/CardComponents/CardFace";
 import ShineBand from "@/components/CardComponents/ShineBand";
 import CardBacking from "@/components/CardComponents/CardBacking";
 import CardBorder from "@/components/CardComponents/CardBorder";
-import CardEffect from "@/components/CardComponents/CardEffect";
 import Tagline from "@/components/CardComponents/Tagline";
 import { motion } from "framer-motion";
 import useWindowSize from "@/components/utils/useWindowSize";
@@ -17,7 +16,6 @@ const Container = styled(motion.div)`
   flex-direction: ${(props) => props.$flexDir};
   width: max-content;
   height: ${(props) => props.$height + "px"};
-  position: relative;
   z-index: 10;
 `;
 
@@ -52,13 +50,18 @@ const containerV = {
 };
 
 const tagV = {
-  hidden: (custom) => ({ y: custom.hidden, opacity: 0 }),
+  hidden: (custom) => ({
+    y: custom.hidden,
+    opacity: 0,
+    transition: { delay: 0.25, duration: 0.25 },
+  }),
   visible: (custom) => ({
     opacity: 1,
     y: custom.visible,
     transition: {
       duration: 0.5,
-      delay: 0.1,
+      delay: 0.15,
+      opacity: { duration: 0.3, delay: 0.15 },
     },
   }),
   selected: (custom) => ({
@@ -100,9 +103,6 @@ export default function NavCard({
   children,
   color1,
   color2,
-  effectRadius = 150,
-  effectOffset = { x: 0, y: 0 },
-  effectRotation = 0,
   id,
   delay = 0,
   tagline = "Oops! Missing tagline...",
@@ -110,7 +110,6 @@ export default function NavCard({
   faceBands = [1, 5, 3],
   intersectionRef,
   bgColor,
-  gradientRotation,
 }) {
   const size = useWindowSize();
   const finalStemLoc =
@@ -125,67 +124,6 @@ export default function NavCard({
       custom={delay}
       layoutId={`${id}_navCardContainer`}
     >
-      <CardEffect
-        width={width}
-        height={height}
-        sWidth={strokeWidth}
-        color1={color1}
-        color2={color2}
-        gradientRotation={gradientRotation}
-        effectRotation={effectRotation}
-        circleV={{
-          hidden: {
-            pathLength: 0,
-            transition: {
-              delay: 0,
-              duration: 0.9,
-            },
-          },
-          visible: {
-            pathLength: 1,
-            transition: {
-              delay: width * height * 0.0000012 + 0.9 + (delay ? delay : 0),
-              duration: 0.9,
-            },
-          },
-        }}
-        lineV={{
-          hidden: {
-            pathLength: 0,
-            originX: 0,
-            originY: 1,
-            transition: {
-              delay: 0,
-              duration: 0.9,
-            },
-          },
-          visible: (custom) => ({
-            pathLength: 1,
-            x: [0, custom.x, 0],
-            y: [0, custom.y, 0],
-            originX: 0,
-            originY: 1,
-            transition: {
-              delay: width * height * 0.0000025 + 0.9 + delay,
-              duration: 0.75,
-              x: {
-                duration: custom.x / 7,
-                repeat: Infinity,
-                ease: "linear",
-              },
-              y: {
-                duration: custom.x / 7,
-                repeat: Infinity,
-                ease: "linear",
-              },
-            },
-          }),
-        }}
-        radius={effectRadius}
-        xOff={effectOffset.x}
-        yOff={effectOffset.y}
-        id={id}
-      />
       {stem && (finalStemLoc === 7 || finalStemLoc === 8) && (
         <>
           <Tagline

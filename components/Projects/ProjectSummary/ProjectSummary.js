@@ -353,7 +353,7 @@ export default function ProjectSummary({
           project.skills.map((skill, index) => {
             return (
               <SkillChip
-                layoutId={`${skill.slug}_chip_${project.slug}`}
+                layoutId={`${skill.slug}_chip_${id}`}
                 key={skill.slug}
                 custom={{
                   x:

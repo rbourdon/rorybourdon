@@ -10,6 +10,7 @@ const Effects = styled.svg`
   left: 0;
   pointer-events: none;
   top: 0;
+  will-change: transform;
 `;
 
 const lineV = {

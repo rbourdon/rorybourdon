@@ -2,7 +2,6 @@ import styled, { ThemeContext } from "styled-components";
 import { motion, MotionConfig } from "framer-motion";
 import React, { useContext } from "react";
 import NavBar from "@/components/Nav/NavBar";
-import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
 import BackArrow from "@/components/BackArrow";
@@ -126,6 +125,24 @@ const arrowV = {
   },
 };
 
+const pageLinks = [
+  {
+    name: "Skills",
+    href: "/skills",
+    onClick: null,
+  },
+  {
+    name: "Projects",
+    href: "/projects",
+    onClick: null,
+  },
+  {
+    name: "Resume",
+    href: "/",
+    onClick: null,
+  },
+];
+
 export default function Contact() {
   const theme = useContext(ThemeContext);
 
@@ -149,11 +166,7 @@ export default function Contact() {
             content="Contact Me - Rory Bourdon | Web Developer & Visual Artist"
           />
         </Head>
-        <NavBar>
-          <NavLink href="/skills">Skills</NavLink>
-          <NavLink href="/projects">Projects</NavLink>
-          <NavLink href="/">Resume</NavLink>
-        </NavBar>
+        <NavBar links={pageLinks} />
         <Content>
           <HorizonEffects lines={[{ yLoc: 70, slope: -25 }]} />
           <HeadingBlock>

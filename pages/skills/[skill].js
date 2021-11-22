@@ -3,7 +3,6 @@ import { animate, motion, MotionConfig, useMotionValue } from "framer-motion";
 import React, { useContext, useEffect } from "react";
 import { getSkillList, getSkillDetails } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
-import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
 import Image from "next/image";
 import BackArrow from "@/components/BackArrow";
@@ -170,6 +169,24 @@ const arrowV = {
   },
 };
 
+const pageLinks = [
+  {
+    name: "Projects",
+    href: "/projects",
+    onClick: null,
+  },
+  {
+    name: "Contact",
+    href: "/contact",
+    onClick: null,
+  },
+  {
+    name: "Resume",
+    href: "/",
+    onClick: null,
+  },
+];
+
 export default function Skill({ skill }) {
   const theme = useContext(ThemeContext);
   const convert = require("color-convert");
@@ -222,11 +239,7 @@ export default function Skill({ skill }) {
             content={`${skill.title} - Skills - Rory Bourdon | Web Developer & Visual Artist`}
           />
         </Head>
-        <NavBar>
-          <NavLink href="/skills">Skills</NavLink>
-          <NavLink href="/projects">Projects</NavLink>
-          <NavLink href="/">Resume</NavLink>
-        </NavBar>
+        <NavBar links={pageLinks} />
         <HorizonEffects
           lines={[{ slope: 32, yLoc: -2 }]}
           circles={[{ cx: "90%", cy: "11%", r: 0.15 }]}

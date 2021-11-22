@@ -8,6 +8,7 @@ const Text = styled(motion.p)`
   font-weight: 300;
   font-size: 1.125rem;
   padding: ${(props) => props.$padding};
+  user-select: none;
 `;
 
 export default function Tagline({

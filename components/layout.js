@@ -70,6 +70,7 @@ function Layout({ children }) {
                     "--color-primary_superdark": "hsla(266.67, 6.89%, 18.63%, 1)",
                     "--color-primary_verydark": "hsla(266.67, 6.89%, 28.63%, 1)",
                     "--color-primary_mediumdark": "hsla(270, 4.74%, 55.88%, 1)",
+                    "--color-primary_slightlydark": "hsla(270, 8.74%, 75.88%, 1)",
                     "--color-primary_dark": "hsla(270, 5.89%, 40.71%, 1)",
                     "--color-yellow": "hsla(57.71, 43.12%, 60.08%, 1)",
                     "--color-green": "hsla(80, 37%, 58%, 1)",
@@ -88,6 +89,7 @@ function Layout({ children }) {
                     "--color-primary_superdark": "hsla(266.67, 6.89%, 18.63%, 1)",
                     "--color-primary_verydark": "hsla(266.67, 6.89%, 28.63%, 1)",
                     "--color-primary_mediumdark": "hsla(270, 4.74%, 55.88%, 1)",
+                    "--color-primary_slightlydark": "hsla(270, 8.74%, 75.88%, 1)",
                     "--color-primary_dark": "hsla(270, 5.89%, 40.71%, 1)",
                     "--color-yellow": "hsla(57.71, 43.12%, 60.08%, 1)",
                     "--color-green": "hsla(80, 37%, 58%, 1)",
@@ -100,7 +102,7 @@ function Layout({ children }) {
                     "--color-shadow_ambient": "hsla(270, 6%, 10%, 0.1)",
                   },
                 };
-            
+                
                 changeTheme(currentTheme);
               } catch (err) {
                 console.log(new Error("accessing theme has been denied"));

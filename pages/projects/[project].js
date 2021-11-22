@@ -3,7 +3,6 @@ import { motion, MotionConfig, useMotionValue } from "framer-motion";
 import React, { useContext, useMemo } from "react";
 import { getProjectList, getProjectDetails } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
-import NavLink from "@/components/Nav/NavLink";
 import Head from "next/head";
 import BackArrow from "@/components/BackArrow";
 import SkillList from "@/components/Projects/ProjectInfoPanel/SkillList";
@@ -135,6 +134,24 @@ const components = {
   Highlight,
 };
 
+const pageLinks = [
+  {
+    name: "Skills",
+    href: "/skills",
+    onClick: null,
+  },
+  {
+    name: "Contact",
+    href: "/contact",
+    onClick: null,
+  },
+  {
+    name: "Resume",
+    href: "/",
+    onClick: null,
+  },
+];
+
 export default function Project({ project, source }) {
   const theme = useContext(ThemeContext);
   const convert = require("color-convert");
@@ -187,11 +204,7 @@ export default function Project({ project, source }) {
             content={`${project.title} - Projects - Rory Bourdon | Web Developer & Visual Artist`}
           />
         </Head>
-        <NavBar logoComplete={true}>
-          <NavLink href="/skills">Skills</NavLink>
-          <NavLink href="/projects">Projects</NavLink>
-          <NavLink href="/">Resume</NavLink>
-        </NavBar>
+        <NavBar links={pageLinks} />
         <PageContent>
           <HorizonEffects
             lines={[{ slope: -22, yLoc: 61 }]}

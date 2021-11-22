@@ -3,7 +3,6 @@ import { motion, MotionConfig } from "framer-motion";
 import React, { useContext } from "react";
 import { getSkillList } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
-import NavLink from "@/components/Nav/NavLink";
 import SkillScroller from "@/components/Skills/SkillScroller";
 import Highlight from "@/components/Highlight";
 import Head from "next/head";
@@ -197,6 +196,24 @@ const arrowV = {
   },
 };
 
+const pageLinks = [
+  {
+    name: "Projects",
+    href: "/projects",
+    onClick: null,
+  },
+  {
+    name: "Contact",
+    href: "/contact",
+    onClick: null,
+  },
+  {
+    name: "Resume",
+    href: "/",
+    onClick: null,
+  },
+];
+
 export default function Skills({ skills }) {
   const theme = useContext(ThemeContext);
 
@@ -219,10 +236,7 @@ export default function Skills({ skills }) {
             content="Skills - Rory Bourdon | Web Developer & Visual Artist"
           />
         </Head>
-        <NavBar>
-          <NavLink href="/projects">Projects</NavLink>
-          <NavLink href="/">Resume</NavLink>
-        </NavBar>
+        <NavBar links={pageLinks} />
         <Content>
           <HorizonEffects lines={[{ yLoc: 70, slope: -25 }]} />
           <TitleBlock>

@@ -25,20 +25,20 @@ const Content = styled(motion.main)`
   overflow: hidden;
 `;
 
-const HeroBanner = styled(motion.article)`
+const HeroBanner = styled(motion.header)`
   width: 100%;
   height: max-content;
   display: flex;
   flex-direction: column;
 `;
 
-const HeroBody = styled(motion.div)`
-  width: 100%;
-  height: max-content;
-  display: flex;
-  justify-content: end;
-  margin-top: 1vh;
-`;
+// const HeroBody = styled(motion.div)`
+//   width: 100%;
+//   height: max-content;
+//   display: flex;
+//   justify-content: end;
+//   margin-top: 1vh;
+// `;
 
 const HeroSection = styled(motion.section)`
   width: 100%;
@@ -118,7 +118,7 @@ export default function Home({ skills, projects }) {
           <HeroBanner>
             <Banner />
           </HeroBanner>
-          <HeroBody></HeroBody>
+          {/* <HeroBody /> */}
         </HeroSection>
         <Section style={{ backgroundColor: theme.primary_light }}>
           <SkillsCard skills={skills} />
