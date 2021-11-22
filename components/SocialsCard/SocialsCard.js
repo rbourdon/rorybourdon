@@ -212,8 +212,6 @@ export default function SocialsCard() {
           stemLength={345}
           color1={theme.green}
           color2={theme.green}
-          effectOffset={{ x: 150, y: 20 }}
-          effectRadius={215}
           id="socials"
           delay={0.5}
           tagline="You can find me in most of the usual places"

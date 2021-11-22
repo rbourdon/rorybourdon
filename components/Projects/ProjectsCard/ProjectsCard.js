@@ -209,8 +209,6 @@ export default function ProjectsCard({ projects }) {
           stemLength={375}
           color1={theme.orange}
           color2={theme.orange}
-          effectOffset={{ x: 600, y: 20 }}
-          effectRadius={315}
           id="projects"
           delay={0.5}
           tagline="I enjoy building and experimenting"
