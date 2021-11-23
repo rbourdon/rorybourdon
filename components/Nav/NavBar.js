@@ -87,7 +87,9 @@ export default function NavBar({ children, links = [] }) {
               {hoveredLink === link.name && (
                 <Underline
                   layoutId="linkUnderline"
-                  style={{ backgroundColor: theme.primary_slightlydark }}
+                  style={{
+                    backgroundColor: link.color || theme.primary_slightlydark,
+                  }}
                   transition={{
                     type: "spring",
                     stiffness: 85,

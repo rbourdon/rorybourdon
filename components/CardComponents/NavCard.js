@@ -71,26 +71,6 @@ const tagV = {
   }),
 };
 
-const stemV = {
-  hidden: {
-    pathLength: 0,
-  },
-  visible: {
-    pathLength: 1,
-    transition: {
-      duration: 0.3,
-      ease: "linear",
-    },
-  },
-  selected: {
-    pathLength: 0,
-    transition: {
-      duration: 0.25,
-      ease: "linear",
-    },
-  },
-};
-
 export default function NavCard({
   height = 200,
   borderRadius = 30,
@@ -142,7 +122,6 @@ export default function NavCard({
             stemDir={stemDir}
             stemLength={stemLength}
             stemLoc={finalStemLoc}
-            variants={stemV}
           />
         </>
       )}
@@ -266,29 +245,6 @@ export default function NavCard({
           height={height}
           sWidth={strokeWidth}
           bRadius={borderRadius}
-          shineV={{
-            hidden: {},
-            visible: {
-              transition: {
-                delayChildren: width * height * 0.0000012 - 0.75,
-                type: "tween",
-                duration: 0.3,
-                ease: "linear",
-                repeat: Infinity,
-                repeatDelay: 5,
-              },
-            },
-            selected: {
-              transition: {
-                delayChildren: width * height * 0.0000012 - 0.75,
-                type: "tween",
-                duration: 0.3,
-                ease: "linear",
-                repeat: Infinity,
-                repeatDelay: 5,
-              },
-            },
-          }}
           id={id}
         />
       </Card>
@@ -302,7 +258,6 @@ export default function NavCard({
             stemDir={stemDir}
             stemLength={stemLength}
             stemLoc={finalStemLoc}
-            variants={stemV}
           />
 
           <Tagline

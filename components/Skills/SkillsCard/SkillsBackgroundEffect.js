@@ -7,6 +7,16 @@ const Container = styled(motion.div)`
   left: 0;
   pointer-events: none;
   top: 0;
+  will-change: opacity translate;
+`;
+
+const Check = styled(motion.div)`
+  position: absolute;
+  height: 36px;
+  width: 36px;
+  right: 0;
+  pointer-events: none;
+  top: 0;
 `;
 
 const containerV = {
@@ -17,6 +27,7 @@ const containerV = {
       staggerChildren: 0.1,
       type: "tween",
       duration: 0.2,
+      when: "afterChildren",
       y: {
         type: "spring",
         stiffness: 40,
@@ -57,7 +68,7 @@ const lineV = {
     originX: 0,
     transition: {
       type: "tween",
-      duration: 0.8,
+      duration: 0.4,
       ease: "easeInOut",
     },
   },
@@ -81,25 +92,25 @@ const lineV = {
   },
 };
 
-const circleV = {
+const checkV = {
   hidden: {
-    r: 0,
+    scale: 0,
     transition: {
       type: "tween",
-      duration: 0.5,
+      duration: 0.2,
       ease: "easeInOut",
     },
   },
   visible: {
-    r: 17,
+    scale: 1,
     transition: {
       type: "tween",
-      duration: 0.5,
+      duration: 0.4,
       ease: "easeInOut",
     },
   },
   selected: {
-    r: 0,
+    scale: 0,
     transition: {
       type: "tween",
       duration: 0.2,
@@ -171,19 +182,17 @@ export default function SkillsBackgroundEffect({
           fill={theme.primary_slightlydark}
           d="M117.49 82.63H31.81a3 3 0 0 1 0-5.94h85.68a3 3 0 0 1 0 5.94Z"
         />
-        {/* Check */}
-        <motion.circle
-          variants={circleV}
-          cx={146}
-          cy={17}
-          r={17}
-          fill={theme.teal}
-        />
-        <motion.path
-          fill={theme.primary_light}
-          d="M143.63 25.87a1.89 1.89 0 0 1-1.51-.76l-4.64-6.19a1.89 1.89 0 1 1 3-2.27l3 4.05L151.34 9a1.89 1.89 0 0 1 3.15 2.1L145.21 25a1.91 1.91 0 0 1-1.53.84Z"
-        />
       </svg>
+      <Check variants={checkV}>
+        {/* Check */}
+        <svg viewBox={"128 -1 36 36"}>
+          <motion.circle cx={146} cy={17} r={17} fill={theme.teal} />
+          <motion.path
+            fill={theme.primary_light}
+            d="M143.63 25.87a1.89 1.89 0 0 1-1.51-.76l-4.64-6.19a1.89 1.89 0 1 1 3-2.27l3 4.05L151.34 9a1.89 1.89 0 0 1 3.15 2.1L145.21 25a1.91 1.91 0 0 1-1.53.84Z"
+          />
+        </svg>
+      </Check>
     </Container>
   );
 }

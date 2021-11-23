@@ -20,7 +20,7 @@ const Content = styled(motion.main)`
   grid-template-columns: 72% 1fr;
   padding: 0 16vw;
   grid-auto-flow: dense;
-  align-items: center;
+  align-items: start;
   align-content: center;
 
   @media (max-width: 555px) {
@@ -58,22 +58,24 @@ const SkillsColumn = styled(motion.section)`
 `;
 
 const Trees = styled(motion.div)`
-  width: max-content;
+  width: 100%;
   max-width: min(100%, 500px);
-  height: max-content;
+  height: 35vh;
+  max-height: 100%;
   align-items: flex-end;
   justify-content: center;
   justify-self: flex-end;
+  align-self: flex-end;
   display: flex;
   position: relative;
   zindex: 0;
+  margin-top: 50px;
 
   @media (max-width: 555px) {
-    width: max-content;
+    margin-top: 0;
+    width: 100%;
     justify-self: center;
-    position: absolute;
-    bottom: -2vh;
-    height: max-content;
+    height: 35vh;
   }
 `;
 
@@ -123,13 +125,13 @@ const treeV = {
   hidden: (custom) => ({
     originY: 0.65,
     y: -20,
-    scale: custom,
+    x: custom,
   }),
-  visible: (custom) => ({
+  visible: {
     originY: 0.65,
     y: -20,
-    scale: custom,
-  }),
+    x: 0,
+  },
 };
 
 const detailsV = {
@@ -163,10 +165,10 @@ const treeShadowV = {
   visible: {
     scale: 1,
     transition: {
-      delay: 0.2,
+      delay: 1.3,
       type: "spring",
-      stiffness: 60,
-      mass: 1.5,
+      stiffness: 20,
+      mass: 1.2,
       damping: 10,
     },
   },
@@ -196,26 +198,29 @@ const arrowV = {
   },
 };
 
-const pageLinks = [
-  {
-    name: "Projects",
-    href: "/projects",
-    onClick: null,
-  },
-  {
-    name: "Contact",
-    href: "/contact",
-    onClick: null,
-  },
-  {
-    name: "Resume",
-    href: "/",
-    onClick: null,
-  },
-];
-
 export default function Skills({ skills }) {
   const theme = useContext(ThemeContext);
+
+  const pageLinks = [
+    {
+      name: "Projects",
+      href: "/projects",
+      color: theme.teal,
+      onClick: null,
+    },
+    {
+      name: "Contact",
+      href: "/contact",
+      color: theme.teal,
+      onClick: null,
+    },
+    {
+      name: "Resume",
+      href: "/",
+      color: theme.teal,
+      onClick: null,
+    },
+  ];
 
   return (
     <MotionConfig
@@ -280,6 +285,7 @@ export default function Skills({ skills }) {
               margin="0 -100px 0 0"
               scale={0.95}
               iconV={treeV}
+              custom={50}
             />
             <TreeIcon
               colors={{
@@ -295,6 +301,7 @@ export default function Skills({ skills }) {
               }}
               scale={1.1}
               iconV={treeV}
+              custom={0}
             />
             <TreeIcon
               zIndex={2}
@@ -312,6 +319,7 @@ export default function Skills({ skills }) {
               margin="0 0 0 -100px"
               scale={0.85}
               iconV={treeV}
+              custom={-50}
             />
             <TreeShadow
               initial="hidden"

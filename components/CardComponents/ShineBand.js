@@ -4,9 +4,6 @@ import { motion } from "framer-motion";
 const Container = styled(motion.div)`
   width: ${(props) => props.$width + "px"};
   height: ${(props) => props.$height + "px"};
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
   position: absolute;
   z-index: 5;
@@ -15,12 +12,49 @@ const Container = styled(motion.div)`
   pointer-events: none;
 `;
 
-const shineBandV = {
+const Band = styled(motion.div)`
+  width: ${(props) => props.$width + "px"};
+  height: ${(props) => props.$height + "px"};
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+`;
+
+const shineV = {
   hidden: (custom) => ({
-    d: custom.start,
+    transition: {
+      delayChildren: custom.width * custom.height * 0.0000012 - 0.75,
+    },
   }),
   visible: (custom) => ({
-    d: [custom.start, custom.middle, custom.end],
+    transition: {
+      delayChildren: custom.width * custom.height * 0.0000012 - 0.75,
+    },
+  }),
+  selected: (custom) => ({
+    transition: {
+      delayChildren: custom.width * custom.height * 0.0000012 - 0.75,
+    },
+  }),
+};
+
+const bandV = {
+  hidden: (custom) => ({
+    x: -custom.width,
+  }),
+  visible: (custom) => ({
+    x: [-custom.width, custom.width * 2],
+    transition: {
+      type: "tween",
+      duration: 0.5,
+      ease: "linear",
+      repeat: Infinity,
+      repeatDelay: 5,
+    },
+  }),
+  selected: (custom) => ({
+    x: custom.width * 2,
     transition: {
       type: "tween",
       duration: 0.3,
@@ -31,39 +65,35 @@ const shineBandV = {
   }),
 };
 
-export default function ShineBand({ width, height, bRadius, sWidth, shineV }) {
+export default function ShineBand({ width, height, bRadius }) {
   return (
     <Container
       variants={shineV}
       style={{
         borderRadius: bRadius,
       }}
+      custom={{ width: width, height: height }}
       $width={width}
       $height={height}
     >
-      <motion.svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox={`0 0 ${width} ${height}`}
+      <Band
+        variants={bandV}
+        style={{ opacity: 0.08 }}
+        custom={{ width: width, height: height }}
+        $width={width}
+        $height={height}
       >
-        <motion.path
-          x={sWidth / 2 + "px"}
-          y={sWidth / 2 + "px"}
-          width={width - sWidth + "px"}
-          height={height - sWidth + "px"}
-          stroke="#FFFFFF"
-          strokeWidth={90}
-          style={{
-            opacity: 0.075,
-            mixBlendMode: "hard-light",
-          }}
-          custom={{
-            start: `M-0,0 L0,0`,
-            middle: `M-${width},${height * 2} L${width * 2},-${height}`,
-            end: `M${width},${height} L${width},${height}`,
-          }}
-          variants={shineBandV}
-        />
-      </motion.svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox={`0 0 ${width} ${height}`}
+        >
+          <path
+            stroke="#FFFFFF"
+            strokeWidth={90}
+            d={`M-${width},${height * 2} L${width * 2},-${height}`}
+          />
+        </svg>
+      </Band>
     </Container>
   );
 }

@@ -55,7 +55,7 @@ const HeroSection = styled(motion.section)`
 
 const Section = styled(motion.section)`
   width: 100%;
-  height: 120vh;
+  height: 130vh;
   padding: 0 5vw;
   display: flex;
   justify-content: center;
@@ -63,32 +63,34 @@ const Section = styled(motion.section)`
   position: relative;
 `;
 
-const pageLinks = [
-  {
-    name: "Skills",
-    href: "#skills",
-    onClick: null,
-  },
-  {
-    name: "Projects",
-    href: "#projects",
-    onClick: null,
-  },
-  {
-    name: "Contact",
-    href: "#socials",
-    onClick: null,
-  },
-  {
-    name: "Resume",
-    href: "/",
-    onClick: null,
-  },
-];
-
 export default function Home({ skills, projects }) {
   const theme = useContext(ThemeContext);
-
+  const pageLinks = [
+    {
+      name: "Skills",
+      href: "#skills",
+      color: theme.teal,
+      onClick: null,
+    },
+    {
+      name: "Projects",
+      href: "#projects",
+      color: theme.orange,
+      onClick: null,
+    },
+    {
+      name: "Contact",
+      href: "#socials",
+      color: theme.green,
+      onClick: null,
+    },
+    {
+      name: "Resume",
+      href: "/",
+      color: theme.primary_slightlydark,
+      onClick: null,
+    },
+  ];
   return (
     <Container
       initial="hidden"

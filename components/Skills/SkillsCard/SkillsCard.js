@@ -162,6 +162,13 @@ const DELAY = 0.5;
 const WIDTH = 230;
 const HEIGHT = 710;
 
+const layoutTransition = {
+  type: "spring",
+  stiffness: 100,
+  mass: 1,
+  damping: 14,
+};
+
 export default function SkillsCard({ skills }) {
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
@@ -179,29 +186,44 @@ export default function SkillsCard({ skills }) {
     threshold: 0.36,
   });
 
-  const cardEffects = width
-    ? [
-        { x: width * 0.7, y: height * 0.65, scale: 1 },
-        { x: width * 0.46, y: height * 0.3, scale: 0.55 },
-        { x: width * 0.025, y: height * 0.45, scale: 0.8 },
-        { x: width * 0.1, y: height * 0.8, scale: 0.5 },
-        { x: width * 0.15, y: height * 0.12, scale: 0.3 },
-        { x: width * 0.9, y: height * 0.55, scale: 0.4 },
-        { x: width * 0.78, y: height * 0.25, scale: 0.45 },
-        { x: width * 0.41, y: height * 0.78, scale: 0.65 },
-        { x: width * 0.65, y: height * 0.05, scale: 0.8 },
-        { x: width * 0.85, y: height * 0.88, scale: 0.75 },
-        { x: width * 0.25, y: height * 1.025, scale: 0.65 },
-        { x: width * 0.05, y: height * 0.05, scale: 0.6 },
-        { x: width * 0.65, y: height * 1.1, scale: 0.7 },
-      ]
-    : [];
+  const cardEffects =
+    width && width > 800
+      ? [
+          { x: width * 0.7, y: height * 0.65, scale: 1 },
+          { x: width * 0.46, y: height * 0.3, scale: 0.55 },
+          { x: width * 0.025, y: height * 0.45, scale: 0.8 },
+          { x: width * 0.1, y: height * 0.8, scale: 0.5 },
+          { x: width * 0.15, y: height * 0.12, scale: 0.3 },
+          { x: width * 0.9, y: height * 0.55, scale: 0.4 },
+          { x: width * 0.78, y: height * 0.25, scale: 0.45 },
+          { x: width * 0.41, y: height * 0.78, scale: 0.65 },
+          { x: width * 0.65, y: height * 0.05, scale: 0.8 },
+          { x: width * 0.85, y: height * 0.88, scale: 0.75 },
+          { x: width * 0.25, y: height * 1.025, scale: 0.65 },
+          { x: width * 0.05, y: height * 0.05, scale: 0.6 },
+          { x: width * 0.65, y: height * 1.1, scale: 0.7 },
+        ]
+      : width
+      ? [
+          { x: width * 0.7, y: height * 0.65, scale: 1 },
+          { x: width * 0.025, y: height * 0.49, scale: 0.8 },
+          { x: -width * 0.1, y: height * 0.8, scale: 0.5 },
+          { x: width * 0.25, y: height * 0.02, scale: 0.3 },
+          { x: width * 0.9, y: height * 0.55, scale: 0.4 },
+          { x: width * 0.78, y: height * 0.25, scale: 0.45 },
+          { x: width * 0.65, y: height * 0.05, scale: 0.8 },
+          { x: width * 0.85, y: height * 0.88, scale: 0.75 },
+          { x: width * 0.25, y: height * 1.125, scale: 0.65 },
+          { x: 0, y: height * 0.05, scale: 0.6 },
+          { x: 0, y: height * 1.15, scale: 0.3 },
+        ]
+      : [];
 
   return (
     <MotionConfig
       transition={
         !layoutComplete
-          ? { type: "spring", stiffness: 100, mass: 1, damping: 14 }
+          ? layoutTransition
           : {
               duration: 0,
             }
@@ -285,7 +307,13 @@ export default function SkillsCard({ skills }) {
                     height={"140px"}
                     iconV={skillsIconV}
                     delay={HEIGHT * WIDTH * 0.0000012 + 2.15}
-                    transition={{ duration: 0 }}
+                    transition={
+                      !layoutComplete
+                        ? layoutTransition
+                        : {
+                            duration: 0,
+                          }
+                    }
                   />
                   <TreeIcon
                     width={"95px"}
@@ -293,7 +321,13 @@ export default function SkillsCard({ skills }) {
                     iconV={skillsIconV}
                     delay={HEIGHT * WIDTH * 0.0000012 + 2}
                     zIndex={3}
-                    transition={{ duration: 0 }}
+                    transition={
+                      !layoutComplete
+                        ? layoutTransition
+                        : {
+                            duration: 0,
+                          }
+                    }
                   />
                   <TreeIcon
                     width={"95px"}
@@ -307,7 +341,13 @@ export default function SkillsCard({ skills }) {
                     scale={0.8}
                     iconV={skillsIconV}
                     delay={HEIGHT * WIDTH * 0.0000012 + 2.3}
-                    transition={{ duration: 0 }}
+                    transition={
+                      !layoutComplete
+                        ? layoutTransition
+                        : {
+                            duration: 0,
+                          }
+                    }
                   />
                 </Trees>
               </CardWindow>

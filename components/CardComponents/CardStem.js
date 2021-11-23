@@ -10,16 +10,34 @@ const Container = styled(motion.div)`
   align-items: center;
 `;
 
+const stemV = {
+  hidden: {
+    pathLength: 0,
+  },
+  visible: {
+    pathLength: 1,
+    transition: {
+      duration: 0.3,
+      ease: "linear",
+    },
+  },
+  selected: {
+    pathLength: 0,
+    transition: {
+      duration: 0.25,
+      ease: "linear",
+    },
+  },
+};
+
 export default function CardStem({
   width,
   height,
-  stroke,
   stemDir,
   stemLength,
   stemLoc,
   bRadius,
   sWidth,
-  variants,
 }) {
   const stemStart = {
     x:
@@ -53,10 +71,9 @@ export default function CardStem({
               ? -stemLength
               : stemLength
           }`}
-          stroke={stroke}
+          stroke={theme.primary_dark}
           strokeWidth={sWidth}
-          style={{ zIndex: 3, stroke: theme.primary_dark }}
-          variants={variants}
+          variants={stemV}
         />
       </motion.svg>
     </Container>
