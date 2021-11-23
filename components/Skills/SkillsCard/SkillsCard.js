@@ -162,6 +162,13 @@ const DELAY = 0.5;
 const WIDTH = 230;
 const HEIGHT = 710;
 
+const layoutTransition = {
+  type: "spring",
+  stiffness: 100,
+  mass: 1,
+  damping: 14,
+};
+
 export default function SkillsCard({ skills }) {
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
@@ -216,7 +223,7 @@ export default function SkillsCard({ skills }) {
     <MotionConfig
       transition={
         !layoutComplete
-          ? { type: "spring", stiffness: 100, mass: 1, damping: 14 }
+          ? layoutTransition
           : {
               duration: 0,
             }
@@ -300,7 +307,13 @@ export default function SkillsCard({ skills }) {
                     height={"140px"}
                     iconV={skillsIconV}
                     delay={HEIGHT * WIDTH * 0.0000012 + 2.15}
-                    transition={{ duration: 0 }}
+                    transition={
+                      !layoutComplete
+                        ? layoutTransition
+                        : {
+                            duration: 0,
+                          }
+                    }
                   />
                   <TreeIcon
                     width={"95px"}
@@ -308,7 +321,13 @@ export default function SkillsCard({ skills }) {
                     iconV={skillsIconV}
                     delay={HEIGHT * WIDTH * 0.0000012 + 2}
                     zIndex={3}
-                    transition={{ duration: 0 }}
+                    transition={
+                      !layoutComplete
+                        ? layoutTransition
+                        : {
+                            duration: 0,
+                          }
+                    }
                   />
                   <TreeIcon
                     width={"95px"}
@@ -322,7 +341,13 @@ export default function SkillsCard({ skills }) {
                     scale={0.8}
                     iconV={skillsIconV}
                     delay={HEIGHT * WIDTH * 0.0000012 + 2.3}
-                    transition={{ duration: 0 }}
+                    transition={
+                      !layoutComplete
+                        ? layoutTransition
+                        : {
+                            duration: 0,
+                          }
+                    }
                   />
                 </Trees>
               </CardWindow>
