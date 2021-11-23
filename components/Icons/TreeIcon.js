@@ -57,14 +57,14 @@ const trunkV = {
 const foliageV = {
   hidden: {
     scale: 0,
-    originY: 1,
+    originY: 0.65,
   },
   visible: (custom) => ({
     scale: 1,
-    originY: 1,
+    originY: 0.65,
     transition: {
       type: "spring",
-      stiffness: 75,
+      stiffness: 80,
       mass: 1.1,
       damping: 9.5,
       delay: custom,
