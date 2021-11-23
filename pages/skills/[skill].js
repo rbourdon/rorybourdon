@@ -169,24 +169,6 @@ const arrowV = {
   },
 };
 
-const pageLinks = [
-  {
-    name: "Projects",
-    href: "/projects",
-    onClick: null,
-  },
-  {
-    name: "Contact",
-    href: "/contact",
-    onClick: null,
-  },
-  {
-    name: "Resume",
-    href: "/",
-    onClick: null,
-  },
-];
-
 export default function Skill({ skill }) {
   const theme = useContext(ThemeContext);
   const convert = require("color-convert");
@@ -200,12 +182,34 @@ export default function Skill({ skill }) {
     skill.primaryColor.rgba.g,
     skill.primaryColor.rgba.b
   );
+
   const primaryColor = useMotionValue(
     `hsla(${primaryColorRGB[0]},${primaryColorRGB[1]}%,${primaryColorRGB[2]}%,1)`
   );
   const secondaryColor = useMotionValue(
     `hsla(${secondaryColorRGB[0]},${secondaryColorRGB[1]}%,${secondaryColorRGB[2]}%,1)`
   );
+
+  const pageLinks = [
+    {
+      name: "Projects",
+      href: "/projects",
+      color: secondaryColor,
+      onClick: null,
+    },
+    {
+      name: "Contact",
+      href: "/contact",
+      color: secondaryColor,
+      onClick: null,
+    },
+    {
+      name: "Resume",
+      href: "/",
+      color: secondaryColor,
+      onClick: null,
+    },
+  ];
 
   const tileBG = useMotionValue("hsla(0,0%,0%,0)");
 

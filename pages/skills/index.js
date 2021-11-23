@@ -196,26 +196,29 @@ const arrowV = {
   },
 };
 
-const pageLinks = [
-  {
-    name: "Projects",
-    href: "/projects",
-    onClick: null,
-  },
-  {
-    name: "Contact",
-    href: "/contact",
-    onClick: null,
-  },
-  {
-    name: "Resume",
-    href: "/",
-    onClick: null,
-  },
-];
-
 export default function Skills({ skills }) {
   const theme = useContext(ThemeContext);
+
+  const pageLinks = [
+    {
+      name: "Projects",
+      href: "/projects",
+      color: theme.teal,
+      onClick: null,
+    },
+    {
+      name: "Contact",
+      href: "/contact",
+      color: theme.teal,
+      onClick: null,
+    },
+    {
+      name: "Resume",
+      href: "/",
+      color: theme.teal,
+      onClick: null,
+    },
+  ];
 
   return (
     <MotionConfig
