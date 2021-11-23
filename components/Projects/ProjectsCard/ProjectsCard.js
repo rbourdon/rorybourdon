@@ -200,20 +200,32 @@ export default function ProjectsCard({ projects }) {
     }, 800);
   };
 
-  const cardEffects = width
-    ? [
-        { x: width * 0.05, y: height * 0.32, scale: 0.8 },
-        { x: width * 0.3, y: height * 0.41, scale: 0.6 },
-        { x: width * 0.4, y: height * 0.2, scale: 0.7 },
-        { x: width * 0.85, y: height * 0.25, scale: 0.9 },
-        { x: width * 0.24, y: height * 0.8, scale: 0.5 },
-        { x: width * 0.6, y: height * 0.9, scale: 1 },
-        { x: width * 0.03, y: height * 0.9, scale: 0.8 },
-        { x: width * 0.8, y: height * 0.8, scale: 0.4 },
-        { x: width * 0.2, y: height * 0.05, scale: 0.35 },
-        { x: width * 0.65, y: height * 0.1, scale: 0.45 },
-      ]
-    : [];
+  const cardEffects =
+    width && width > 800
+      ? [
+          { x: width * 0.05, y: height * 0.32, scale: 0.8 },
+          { x: width * 0.3, y: height * 0.41, scale: 0.6 },
+          { x: width * 0.4, y: height * 0.2, scale: 0.7 },
+          { x: width * 0.85, y: height * 0.25, scale: 0.9 },
+          { x: width * 0.24, y: height * 0.8, scale: 0.5 },
+          { x: width * 0.6, y: height * 0.9, scale: 1 },
+          { x: width * 0.03, y: height * 0.9, scale: 0.8 },
+          { x: width * 0.8, y: height * 0.8, scale: 0.4 },
+          { x: width * 0.2, y: height * 0.05, scale: 0.35 },
+          { x: width * 0.65, y: height * 0.1, scale: 0.45 },
+        ]
+      : width
+      ? [
+          { x: width * 0.4, y: height * 0.18, scale: 0.7 },
+          { x: width * 0.85, y: height * 0.45, scale: 0.9 },
+          { x: width * -0.1, y: height * 0.35, scale: 0.9 },
+          { x: width * 0.6, y: height * 0.95, scale: 1 },
+          { x: width * 0.03, y: height * 1.1, scale: 0.8 },
+          { x: width * 0.5, y: height * 1.1, scale: 0.4 },
+          { x: width * 0.2, y: height * 0.05, scale: 0.75 },
+          { x: width * 0.65, y: height * 0.1, scale: 0.45 },
+        ]
+      : [];
 
   return (
     <MotionConfig

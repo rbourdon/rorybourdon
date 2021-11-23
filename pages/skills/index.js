@@ -71,8 +71,6 @@ const Trees = styled(motion.div)`
   @media (max-width: 555px) {
     width: max-content;
     justify-self: center;
-    position: absolute;
-    bottom: -2vh;
     height: max-content;
   }
 `;

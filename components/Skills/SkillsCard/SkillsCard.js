@@ -179,23 +179,38 @@ export default function SkillsCard({ skills }) {
     threshold: 0.36,
   });
 
-  const cardEffects = width
-    ? [
-        { x: width * 0.7, y: height * 0.65, scale: 1 },
-        { x: width * 0.46, y: height * 0.3, scale: 0.55 },
-        { x: width * 0.025, y: height * 0.45, scale: 0.8 },
-        { x: width * 0.1, y: height * 0.8, scale: 0.5 },
-        { x: width * 0.15, y: height * 0.12, scale: 0.3 },
-        { x: width * 0.9, y: height * 0.55, scale: 0.4 },
-        { x: width * 0.78, y: height * 0.25, scale: 0.45 },
-        { x: width * 0.41, y: height * 0.78, scale: 0.65 },
-        { x: width * 0.65, y: height * 0.05, scale: 0.8 },
-        { x: width * 0.85, y: height * 0.88, scale: 0.75 },
-        { x: width * 0.25, y: height * 1.025, scale: 0.65 },
-        { x: width * 0.05, y: height * 0.05, scale: 0.6 },
-        { x: width * 0.65, y: height * 1.1, scale: 0.7 },
-      ]
-    : [];
+  const cardEffects =
+    width && width > 800
+      ? [
+          { x: width * 0.7, y: height * 0.65, scale: 1 },
+          { x: width * 0.46, y: height * 0.3, scale: 0.55 },
+          { x: width * 0.025, y: height * 0.45, scale: 0.8 },
+          { x: width * 0.1, y: height * 0.8, scale: 0.5 },
+          { x: width * 0.15, y: height * 0.12, scale: 0.3 },
+          { x: width * 0.9, y: height * 0.55, scale: 0.4 },
+          { x: width * 0.78, y: height * 0.25, scale: 0.45 },
+          { x: width * 0.41, y: height * 0.78, scale: 0.65 },
+          { x: width * 0.65, y: height * 0.05, scale: 0.8 },
+          { x: width * 0.85, y: height * 0.88, scale: 0.75 },
+          { x: width * 0.25, y: height * 1.025, scale: 0.65 },
+          { x: width * 0.05, y: height * 0.05, scale: 0.6 },
+          { x: width * 0.65, y: height * 1.1, scale: 0.7 },
+        ]
+      : width
+      ? [
+          { x: width * 0.7, y: height * 0.65, scale: 1 },
+          { x: width * 0.025, y: height * 0.49, scale: 0.8 },
+          { x: -width * 0.1, y: height * 0.8, scale: 0.5 },
+          { x: width * 0.25, y: height * 0.02, scale: 0.3 },
+          { x: width * 0.9, y: height * 0.55, scale: 0.4 },
+          { x: width * 0.78, y: height * 0.25, scale: 0.45 },
+          { x: width * 0.65, y: height * 0.05, scale: 0.8 },
+          { x: width * 0.85, y: height * 0.88, scale: 0.75 },
+          { x: width * 0.25, y: height * 1.125, scale: 0.65 },
+          { x: 0, y: height * 0.05, scale: 0.6 },
+          { x: 0, y: height * 1.15, scale: 0.3 },
+        ]
+      : [];
 
   return (
     <MotionConfig

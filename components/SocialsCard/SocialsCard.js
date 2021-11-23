@@ -188,20 +188,33 @@ export default function SocialsCard() {
     }, 800);
   };
 
-  const cardEffects = width
-    ? [
-        { x: width * 0.15, y: height * 0.15, scale: 0.75 },
-        { x: width * 0.5, y: height * 0.8, scale: 0.6 },
-        { x: width * 0.5, y: height * 0.12, scale: 1 },
-        { x: width * 0.7, y: height * 0.35, scale: 0.5 },
-        { x: width * 0.05, y: height * 0.75, scale: 0.45 },
-        { x: width * 0.88, y: height * 0.2, scale: 0.65 },
-        { x: width * 0.7, y: height * 0.9, scale: 0.75 },
-        { x: width * 0.03, y: height * 0.4, scale: 0.4 },
-        { x: width * 0.3, y: height * 0.85, scale: 0.9 },
-        { x: width * 0.3, y: height * 0.3, scale: 0.4 },
-      ]
-    : [];
+  const cardEffects =
+    width && width > 800
+      ? [
+          { x: width * 0.15, y: height * 0.15, scale: 0.75 },
+          { x: width * 0.5, y: height * 0.8, scale: 0.6 },
+          { x: width * 0.5, y: height * 0.12, scale: 1 },
+          { x: width * 0.7, y: height * 0.35, scale: 0.5 },
+          { x: width * 0.05, y: height * 0.75, scale: 0.45 },
+          { x: width * 0.88, y: height * 0.2, scale: 0.65 },
+          { x: width * 0.7, y: height * 0.9, scale: 0.75 },
+          { x: width * 0.03, y: height * 0.4, scale: 0.4 },
+          { x: width * 0.3, y: height * 0.85, scale: 0.9 },
+          { x: width * 0.3, y: height * 0.3, scale: 0.4 },
+        ]
+      : width
+      ? [
+          { x: width * 0.15, y: height * 0.15, scale: 0.75 },
+          { x: width * 0.2, y: height * 1.1, scale: 0.88 },
+          { x: width * 0.5, y: height * 0.05, scale: 1 },
+          { x: width * 0.7, y: height * 0.35, scale: 0.5 },
+          { x: width * 0.1, y: height * 0.75, scale: 0.45 },
+          { x: width * 0.84, y: height * 0.24, scale: 0.65 },
+          { x: width * 0.6, y: height * 0.8, scale: 0.75 },
+          { x: 0, y: height * 0.4, scale: 0.6 },
+          { x: width * 0.8, y: height * 1.15, scale: 0.9 },
+        ]
+      : [];
 
   return (
     <MotionConfig

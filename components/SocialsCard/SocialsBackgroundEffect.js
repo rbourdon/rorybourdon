@@ -7,6 +7,7 @@ const Container = styled(motion.div)`
   left: 0;
   pointer-events: none;
   top: 0;
+  will-change: opacity translate;
 `;
 
 const containerV = {
@@ -122,13 +123,13 @@ export default function SocialsBackgroundEffect({
         width={130}
         height={130}
       >
-        <path
-          fill="#b3b1b5"
+        <motion.path
+          fill={theme.primary_slightlydark}
           d="M63.86 127.53h-.09a63.75 63.75 0 1 1 44-17.63l12.83 14.38-.66.28c-10.64 4.51-21.41-1.64-25.81-4.72a63.58 63.58 0 0 1-30.27 7.69ZM63.77 1a62.75 62.75 0 1 0 30.16 117.79l.29-.15.26.18c4 2.85 14.25 8.93 24.41 5.06l-12.53-14 .36-.34A62.74 62.74 0 0 0 63.77 1Z"
         />
         <motion.path
           variants={lineV}
-          fill="#a3ba5a"
+          fill={theme.green}
           d="M83.52 53.33c-13.09-.13-26.17-.37-39.26-.54q-6.54-.09-13.09-.16c-3.76 0-3.77-5.88 0-5.85 13.09.14 26.17.38 39.26.55l13.09.16c3.75.04 3.76 5.88 0 5.84Z"
         />
         <motion.path
@@ -138,7 +139,7 @@ export default function SocialsBackgroundEffect({
         />
         <motion.path
           variants={lineV}
-          fill="#a3ba5a"
+          fill={theme.green}
           d="M97.85 80.61 45 80.06l-15-.15c-3.76 0-3.77-5.89 0-5.85l52.89.55 15 .16c3.72.03 3.73 5.88-.04 5.84Z"
         />
       </svg>
