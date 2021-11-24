@@ -237,16 +237,13 @@ export default function SkillsCard({ skills }) {
         {selected && (
           <Backing style={{ backgroundColor: theme.primary_light }} />
         )}
-        <CardEffect
-          position={selected ? "fixed" : "absolute"}
-          // delay={WIDTH * HEIGHT * 0.0000012 + 0.9 + (delay ? delay : 0)}
-        >
+        <CardEffect position={selected ? "fixed" : "absolute"} delay={1.6}>
           {cardEffects.map((effect, i) => {
             return (
               <SkillsBackgroundEffect
                 inView={inView}
                 key={effect.x + effect.y + effect.scale}
-                style={{ delay: i * 0.055 + 1, ...effect }}
+                style={{ delay: i * 0.035 + 1.55, ...effect }}
               />
             );
           })}

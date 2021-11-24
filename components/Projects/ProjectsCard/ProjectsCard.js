@@ -243,13 +243,13 @@ export default function ProjectsCard({ projects }) {
         exit="exit"
       >
         {selected && <Backing style={{ backgroundColor: backingColor }} />}
-        <CardEffect position={selected ? "fixed" : "absolute"}>
+        <CardEffect position={selected ? "fixed" : "absolute"} delay={1.85}>
           {cardEffects.map((effect, i) => {
             return (
               <ProjectsBackgroundEffect
                 inView={inView}
                 key={effect.x + effect.y + effect.scale}
-                style={{ delay: i * 0.055 + 1, ...effect }}
+                style={{ delay: i * 0.035 + 1.8, ...effect }}
               />
             );
           })}

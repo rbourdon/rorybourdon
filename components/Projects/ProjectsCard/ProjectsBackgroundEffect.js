@@ -1,10 +1,6 @@
-import {
-  animate,
-  motion,
-  useMotionValue,
-  useViewportScroll,
-} from "framer-motion";
-import { useState, useContext, useEffect } from "react";
+import useBackgroundEffect from "@/components/utils/useBackgroundEffect";
+import { motion, useMotionValue } from "framer-motion";
+import { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
 
 const Container = styled(motion.div)`
@@ -16,33 +12,19 @@ const Container = styled(motion.div)`
 `;
 
 const containerV = {
-  hidden: (custom) => ({
+  hidden: {
     opacity: 0,
-    y: custom.y + 150,
     transition: {
       type: "tween",
       duration: 0.2,
-      y: {
-        type: "spring",
-        stiffness: 40,
-        mass: 1.3,
-        damping: 8,
-      },
     },
-  }),
+  },
   visible: (custom) => ({
     opacity: 1,
-    y: custom.y,
     rotate: [0, 360],
     transition: {
       type: "tween",
       duration: 0.2,
-      y: {
-        type: "spring",
-        stiffness: 40,
-        mass: 1.3,
-        damping: 8,
-      },
       rotate: {
         type: "tween",
         duration: 35 * (custom.scale / 2),
@@ -64,42 +46,13 @@ export default function ProjectsBackgroundEffect({
   inView = false,
   style = { x: 0, y: 0, scale: 1, delay: 0 },
 }) {
-  const [animating, setAnimating] = useState(true);
   const theme = useContext(ThemeContext);
-  const { scrollY } = useViewportScroll();
+  const y = useBackgroundEffect(inView, style);
   const x = useMotionValue(style.x);
-  const y = useMotionValue(style.y + 150);
-
   const scale = useMotionValue(style.scale);
 
-  useEffect(() => {
-    const unsubscribeY = scrollY.onChange((progress) => {
-      inView &&
-        !animating &&
-        animate(
-          y,
-          y.get() - (progress - scrollY.prev) * 10.55 * (style.scale - 0.15),
-          {
-            type: "spring",
-            stiffness: 90,
-            mass: 3 * style.scale,
-            damping: 16 * style.scale,
-          }
-        );
-    });
-    return () => {
-      unsubscribeY();
-    };
-  }, [animating, inView, scrollY, style.scale, y]);
-
   return (
-    <Container
-      style={{ x, y, scale }}
-      variants={containerV}
-      custom={style}
-      onAnimationStart={() => setAnimating(true)}
-      onAnimationComplete={() => setAnimating(false)}
-    >
+    <Container style={{ x, y, scale }} variants={containerV} custom={style}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="-1 -1 170 170"
