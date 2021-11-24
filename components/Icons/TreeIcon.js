@@ -12,6 +12,7 @@ const Container = styled(motion.div)`
 `;
 
 const Foliage = styled(motion.div)`
+  width: 100%;
   max-width: 100%;
   max-height: 100%;
   position: absolute;
@@ -19,6 +20,7 @@ const Foliage = styled(motion.div)`
 `;
 
 const Trunk = styled(motion.div)`
+  width: 100%;
   max-width: 100%;
   max-height: 100%;
   position: absolute;
@@ -86,7 +88,7 @@ const foliageV = {
 //   visible: (custom) => ({
 //     rotate: 360,
 //     opacity: 1,
-//     x: "0%",
+//     x: "50%",
 //     y: 0,
 //     transition: {
 //       type: "tween",
@@ -160,90 +162,89 @@ export default function TreeIcon({
           />
         </svg>
       </Trunk>
-      {/* {tree.width && (
-        <>
-          <Leaf
-            initial="hidden"
-            animate="visible"
-            variants={leavesV}
-            custom={{
-              x: "50%",
-              y: -tree.height * 0.05,
-              delay: Math.random() * 2,
-              repeatDelay: Math.random() * 0.5,
-            }}
-          >
-            <motion.svg viewBox={"0 0 8 8"}>
-              <motion.polygon
-                points={`0,${Math.random() * 3} 4,${Math.random() * 3 + 5} 8,${
-                  Math.random() * 3
-                }`}
-                fill={colors.foliage}
-              />
-            </motion.svg>
-          </Leaf>
-          <Leaf
-            initial="hidden"
-            animate="visible"
-            variants={leavesV}
-            custom={{
-              x: tree.width * 0.45,
-              y: -tree.height * 0.05,
-              delay: Math.random() * 2,
-              repeatDelay: Math.random() * 0.5,
-            }}
-          >
-            <motion.svg viewBox={"0 0 8 8"} style={{ position: "absolute" }}>
-              <motion.polygon
-                points={`0,${Math.random() * 3} 4,${Math.random() * 3 + 5} 8,${
-                  Math.random() * 3
-                }`}
-                fill={colors.foliage}
-              />
-            </motion.svg>
-          </Leaf>
-          <Leaf
-            initial="hidden"
-            animate="visible"
-            variants={leavesV}
-            custom={{
-              x: tree.width * 0.7,
-              y: -tree.height * 0.05,
-              delay: Math.random() * 2,
-              repeatDelay: Math.random() * 0.5,
-            }}
-          >
-            <motion.svg viewBox={"0 0 8 8"} style={{ position: "absolute" }}>
-              <motion.polygon
-                points={`0,${Math.random() * 3} 4,${Math.random() * 3 + 5} 8,${
-                  Math.random() * 3
-                }`}
-                fill={colors.foliage}
-              />
-            </motion.svg>
-          </Leaf>
-          <Leaf
-            initial="hidden"
-            animate="visible"
-            variants={leavesV}
-            custom={{
-              x: tree.width * 0.8,
-              y: -tree.height * 0.05,
-              delay: Math.random() * 2,
-              repeatDelay: Math.random() * 0.5,
-            }}
-          >
-            <motion.svg viewBox={"0 0 8 8"} style={{ position: "absolute" }}>
-              <motion.polygon
-                points={`0,${Math.random() * 3} 4,${Math.random() * 3 + 5} 8,${
-                  Math.random() * 3
-                }`}
-                fill={colors.foliage}
-              />
-            </motion.svg>
-          </Leaf>
-        </>
-      )} */}
+
+      {/* <>
+        <Leaf
+          initial="hidden"
+          animate="visible"
+          variants={leavesV}
+          custom={{
+            x: "50%",
+            y: 0,
+            delay: Math.random() * 2,
+            repeatDelay: Math.random() * 0.5,
+          }}
+        >
+          <motion.svg viewBox={"0 0 8 8"}>
+            <motion.polygon
+              points={`0,${Math.random() * 3} 4,${Math.random() * 3 + 5} 8,${
+                Math.random() * 3
+              }`}
+              fill={colors.foliage}
+            />
+          </motion.svg>
+        </Leaf>
+        <Leaf
+          initial="hidden"
+          animate="visible"
+          variants={leavesV}
+          custom={{
+            x: "50%",
+            y: 0,
+            delay: Math.random() * 2,
+            repeatDelay: Math.random() * 0.5,
+          }}
+        >
+          <motion.svg viewBox={"0 0 8 8"} style={{ position: "absolute" }}>
+            <motion.polygon
+              points={`0,${Math.random() * 3} 4,${Math.random() * 3 + 5} 8,${
+                Math.random() * 3
+              }`}
+              fill={colors.foliage}
+            />
+          </motion.svg>
+        </Leaf>
+        <Leaf
+          initial="hidden"
+          animate="visible"
+          variants={leavesV}
+          custom={{
+            x: "50%",
+            y: 0,
+            delay: Math.random() * 2,
+            repeatDelay: Math.random() * 0.5,
+          }}
+        >
+          <motion.svg viewBox={"0 0 8 8"} style={{ position: "absolute" }}>
+            <motion.polygon
+              points={`0,${Math.random() * 3} 4,${Math.random() * 3 + 5} 8,${
+                Math.random() * 3
+              }`}
+              fill={colors.foliage}
+            />
+          </motion.svg>
+        </Leaf>
+        <Leaf
+          initial="hidden"
+          animate="visible"
+          variants={leavesV}
+          custom={{
+            x: "50%",
+            y: 0,
+            delay: Math.random() * 2,
+            repeatDelay: Math.random() * 0.5,
+          }}
+        >
+          <motion.svg viewBox={"0 0 8 8"} style={{ position: "absolute" }}>
+            <motion.polygon
+              points={`0,${Math.random() * 3} 4,${Math.random() * 3 + 5} 8,${
+                Math.random() * 3
+              }`}
+              fill={colors.foliage}
+            />
+          </motion.svg>
+        </Leaf>
+      </> */}
     </Container>
   );
 }

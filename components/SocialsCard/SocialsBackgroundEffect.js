@@ -1,4 +1,9 @@
-import { motion, useMotionValue, useViewportScroll } from "framer-motion";
+import {
+  animate,
+  motion,
+  useMotionValue,
+  useViewportScroll,
+} from "framer-motion";
 import { useState, useContext, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
 
@@ -100,8 +105,15 @@ export default function SocialsBackgroundEffect({
     const unsubscribeY = scrollY.onChange((progress) => {
       inView &&
         !animating &&
-        y.set(
-          y.get() - (progress - scrollY.prev) * 0.55 * (style.scale - 0.25)
+        animate(
+          y,
+          y.get() - (progress - scrollY.prev) * 10.55 * (style.scale - 0.15),
+          {
+            type: "spring",
+            stiffness: 90,
+            mass: 3 * style.scale,
+            damping: 16 * style.scale,
+          }
         );
     });
     return () => {
@@ -140,6 +152,8 @@ export default function SocialsBackgroundEffect({
         <motion.path
           variants={lineV}
           fill={theme.green}
+          onAnimationStart={() => setAnimating(true)}
+          onAnimationComplete={() => setAnimating(false)}
           d="M97.85 80.61 45 80.06l-15-.15c-3.76 0-3.77-5.89 0-5.85l52.89.55 15 .16c3.72.03 3.73 5.88-.04 5.84Z"
         />
       </svg>

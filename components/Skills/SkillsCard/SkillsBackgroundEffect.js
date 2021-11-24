@@ -1,4 +1,9 @@
-import { motion, useMotionValue, useViewportScroll } from "framer-motion";
+import {
+  animate,
+  motion,
+  useMotionValue,
+  useViewportScroll,
+} from "framer-motion";
 import { useState, useContext, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
 
@@ -22,7 +27,7 @@ const Check = styled(motion.div)`
 const containerV = {
   hidden: (custom) => ({
     opacity: 0,
-    y: custom + 150,
+    y: custom.y + 150,
     transition: {
       staggerChildren: 0.1,
       type: "tween",
@@ -38,7 +43,7 @@ const containerV = {
   }),
   visible: (custom) => ({
     opacity: 1,
-    y: custom,
+    y: custom.y,
     transition: {
       staggerChildren: 0.1,
       delayChildren: 0.25,
@@ -135,8 +140,15 @@ export default function SkillsBackgroundEffect({
     const unsubscribeY = scrollY.onChange((progress) => {
       inView &&
         !animating &&
-        y.set(
-          y.get() - (progress - scrollY.prev) * 0.55 * (style.scale - 0.25)
+        animate(
+          y,
+          y.get() - (progress - scrollY.prev) * 10.55 * (style.scale - 0.15),
+          {
+            type: "spring",
+            stiffness: 90,
+            mass: 3 * style.scale,
+            damping: 16 * style.scale,
+          }
         );
     });
     return () => {
@@ -146,9 +158,9 @@ export default function SkillsBackgroundEffect({
 
   return (
     <Container
-      style={{ x, y, scale }}
+      style={{ x, y, scale, opacity: style.scale }}
       variants={containerV}
-      custom={style.y}
+      custom={style}
       onAnimationStart={() => setAnimating(true)}
       onAnimationComplete={() => setAnimating(false)}
     >

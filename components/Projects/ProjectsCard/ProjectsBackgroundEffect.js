@@ -1,4 +1,9 @@
-import { motion, useMotionValue, useViewportScroll } from "framer-motion";
+import {
+  animate,
+  motion,
+  useMotionValue,
+  useViewportScroll,
+} from "framer-motion";
 import { useState, useContext, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
 
@@ -71,8 +76,15 @@ export default function ProjectsBackgroundEffect({
     const unsubscribeY = scrollY.onChange((progress) => {
       inView &&
         !animating &&
-        y.set(
-          y.get() - (progress - scrollY.prev) * 0.55 * (style.scale - 0.25)
+        animate(
+          y,
+          y.get() - (progress - scrollY.prev) * 10.55 * (style.scale - 0.15),
+          {
+            type: "spring",
+            stiffness: 90,
+            mass: 3 * style.scale,
+            damping: 16 * style.scale,
+          }
         );
     });
     return () => {
