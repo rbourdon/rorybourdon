@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Container = styled(motion.div)`
   width: 100%;
+  max-width: 100%;
   height: 130vh;
   position: absolute;
   top: 0;
@@ -16,12 +17,12 @@ const containerV = {
       staggerChildren: 0.08,
     },
   },
-  visible: {
+  visible: (custom) => ({
     transition: {
       staggerChildren: 0.08,
-      delayChildren: 1.4,
+      delayChildren: custom,
     },
-  },
+  }),
   selected: {
     transition: {
       staggerChildren: 0.04,
@@ -29,12 +30,17 @@ const containerV = {
   },
 };
 
-export default function CardEffect({ position = "absolute", children }) {
+export default function CardEffect({
+  position = "absolute",
+  children,
+  delay = 0,
+}) {
   return (
     <Container
       layout
       style={{ position: position }}
       variants={containerV}
+      custom={delay}
       transition={{ type: "spring", stiffness: 100, mass: 1, damping: 14 }}
     >
       {children}

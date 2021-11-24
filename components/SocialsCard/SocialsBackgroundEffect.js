@@ -1,11 +1,7 @@
-import {
-  animate,
-  motion,
-  useMotionValue,
-  useViewportScroll,
-} from "framer-motion";
-import { useState, useContext, useEffect } from "react";
+import { motion, useMotionValue } from "framer-motion";
+import { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
+import useBackgroundEffect from "../utils/useBackgroundEffect";
 
 const Container = styled(motion.div)`
   position: absolute;
@@ -16,39 +12,23 @@ const Container = styled(motion.div)`
 `;
 
 const containerV = {
-  hidden: (custom) => ({
+  hidden: {
     opacity: 0,
-    y: custom.y + 150,
-    scale: custom.scale,
     transition: {
       staggerChildren: 0.1,
       type: "tween",
       duration: 0.2,
-      y: {
-        type: "spring",
-        stiffness: 40,
-        mass: 1.3,
-        damping: 8,
-      },
     },
-  }),
-  visible: (custom) => ({
+  },
+  visible: {
     opacity: 1,
-    y: custom.y,
-    scale: custom.scale,
     transition: {
       staggerChildren: 0.1,
       delayChildren: 0.25,
       type: "tween",
       duration: 0.2,
-      y: {
-        type: "spring",
-        stiffness: 40,
-        mass: 1.3,
-        damping: 8,
-      },
     },
-  }),
+  },
   selected: {
     opacity: 0,
     transition: {
@@ -93,42 +73,14 @@ export default function SocialsBackgroundEffect({
   inView = false,
   style = { x: 0, y: 0, scale: 1, delay: 0 },
 }) {
-  const [animating, setAnimating] = useState(true);
   const theme = useContext(ThemeContext);
-  const { scrollY } = useViewportScroll();
   const x = useMotionValue(style.x);
-  const y = useMotionValue(style.y + 150);
+  const y = useBackgroundEffect(inView, style);
 
   const scale = useMotionValue(style.scale);
 
-  useEffect(() => {
-    const unsubscribeY = scrollY.onChange((progress) => {
-      inView &&
-        !animating &&
-        animate(
-          y,
-          y.get() - (progress - scrollY.prev) * 10.55 * (style.scale - 0.15),
-          {
-            type: "spring",
-            stiffness: 90,
-            mass: 3 * style.scale,
-            damping: 16 * style.scale,
-          }
-        );
-    });
-    return () => {
-      unsubscribeY();
-    };
-  }, [animating, inView, scrollY, style.scale, y]);
-
   return (
-    <Container
-      style={{ x, y, scale }}
-      variants={containerV}
-      custom={style}
-      onAnimationStart={() => setAnimating(true)}
-      onAnimationComplete={() => setAnimating(false)}
-    >
+    <Container style={{ x, y, scale }} variants={containerV} custom={style}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="-1 -1 130 130"
@@ -152,8 +104,6 @@ export default function SocialsBackgroundEffect({
         <motion.path
           variants={lineV}
           fill={theme.green}
-          onAnimationStart={() => setAnimating(true)}
-          onAnimationComplete={() => setAnimating(false)}
           d="M97.85 80.61 45 80.06l-15-.15c-3.76 0-3.77-5.89 0-5.85l52.89.55 15 .16c3.72.03 3.73 5.88-.04 5.84Z"
         />
       </svg>

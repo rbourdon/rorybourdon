@@ -6,6 +6,7 @@ import useWindowSize from "../utils/useWindowSize";
 const Effect = styled.div`
   width: max-content;
   min-width: 100%;
+  max-width: 100%;
   position: absolute;
   left: 0;
   pointer-events: none;
