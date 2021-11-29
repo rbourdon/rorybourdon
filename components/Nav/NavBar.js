@@ -4,6 +4,7 @@ import Logo from "@/components/Nav/Logo";
 import Link from "next/link";
 import NavLink from "./NavLink";
 import { useContext, useState } from "react";
+import HamburgerMenu from "./HamburgerMenu";
 
 const Container = styled(motion.nav)`
   width: 100%;
@@ -15,24 +16,43 @@ const Container = styled(motion.nav)`
   grid-template-columns: minmax(max-content, 8vw) 1fr;
   justify-items: flex-end;
   align-items: flex-end;
-  padding: 0 25px;
-  z-index: 3;
+  padding: 3vh 25px 0 25px;
+  z-index: 100;
 
   @media (max-width: 555px) {
     height: 7.5vh;
-    padding: 0 10px;
+    padding: 3vh 10px 0 10px;
   }
 `;
 
 const NavBox = styled(motion.div)`
-  width: min(100%, 750px);
-  padding: 0 0 0 min(200px, 5vw);
+  width: 100%;
+  height: max-content;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  align-self: center;
+`;
+
+const LinksContainer = styled(motion.div)`
+  width: min(100%, 800px);
   height: 70%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 
   @media (max-width: 555px) {
+    display: none;
+  }
+`;
+
+const Hamburger = styled(motion.div)`
+  height: max-content;
+  width: 21vw;
+  padding: 0 3vh;
+  z-index: 101;
+
+  @media (min-width: 555px) {
     display: none;
   }
 `;
@@ -44,6 +64,7 @@ const LogoContainer = styled(motion.a)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  z-index: 201;
 
   @media (max-width: 555px) {
     width: 100%;
@@ -73,35 +94,41 @@ export default function NavBar({ children, links = [] }) {
       <NavBox
         initial="hidden"
         animate="visible"
+        exit="exit"
         transition={{ delayChildren: 1.3, staggerChildren: 0.15 }}
       >
-        {links.map((link) => {
-          return (
-            <NavLink
-              key={link.name}
-              name={link.name}
-              href={link.href}
-              onClick={link.onClick}
-              setHoveredLink={setHoveredLink}
-            >
-              {hoveredLink === link.name && (
-                <Underline
-                  layoutId="linkUnderline"
-                  style={{
-                    backgroundColor: link.color || theme.primary_slightlydark,
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 85,
-                    mass: 0.8,
-                    damping: 12,
-                  }}
-                />
-              )}
-              {link.name}
-            </NavLink>
-          );
-        })}
+        <LinksContainer>
+          {links.map((link) => {
+            return (
+              <NavLink
+                key={link.name}
+                name={link.name}
+                href={link.href}
+                onClick={link.onClick}
+                setHoveredLink={setHoveredLink}
+              >
+                {hoveredLink === link.name && (
+                  <Underline
+                    layoutId="linkUnderline"
+                    style={{
+                      backgroundColor: link.color || theme.primary_slightlydark,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 85,
+                      mass: 0.8,
+                      damping: 12,
+                    }}
+                  />
+                )}
+                {link.name}
+              </NavLink>
+            );
+          })}
+        </LinksContainer>
+        <Hamburger>
+          <HamburgerMenu links={links} />
+        </Hamburger>
         {children}
       </NavBox>
     </Container>

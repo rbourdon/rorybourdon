@@ -42,7 +42,7 @@ const HeroBanner = styled(motion.header)`
 
 const HeroSection = styled(motion.section)`
   width: 100%;
-  min-height: 88vh;
+  min-height: 92vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
