@@ -100,6 +100,7 @@ const Title = styled(motion.h1)`
   font-weight: 100;
   line-height: 1;
   margin-left: 20px;
+  z-index: 1;
 `;
 
 const Detail = styled(motion.div)`
