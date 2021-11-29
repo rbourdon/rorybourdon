@@ -9,6 +9,7 @@ import { getAllSkills, getAllProjects } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import Head from "next/head";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
+import Footer from "@/components/Footer";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -136,6 +137,7 @@ export default function Home({ skills, projects }) {
           <SocialsCard />
         </Section>
       </Content>
+      <Footer />
     </Container>
   );
 }
