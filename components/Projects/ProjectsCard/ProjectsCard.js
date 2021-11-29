@@ -185,7 +185,6 @@ export default function ProjectsCard({ projects }) {
   });
 
   const portrait = width * 0.95 < WIDTH + STEMLENGTH + TAGLINESIZE;
-  console.log(portrait, width);
   const backing = useMotionValue(0);
   const backingColor = useTransform(
     [theme.primary, theme.primary_light, backing],
