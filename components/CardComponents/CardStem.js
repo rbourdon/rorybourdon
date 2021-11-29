@@ -38,7 +38,6 @@ export default function CardStem({
   bRadius,
   sWidth,
 }) {
-  console.log(stemLength);
   const stemStart = {
     x:
       stemLoc === 2 || stemLoc === 5
