@@ -4,11 +4,15 @@ import styled from "styled-components";
 const Container = styled(motion.div)`
   width: 100%;
   max-width: 100%;
-  height: 100%;
+  height: 130vh;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 31;
+
+  @media (max-width: 780px) {
+    height: 200vh;
+  }
 `;
 
 const containerV = {
