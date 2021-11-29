@@ -198,7 +198,6 @@ export default function CardBorder({
           strokeWidth={sWidth}
           fill="none"
           stroke={theme.primary_mediumdark}
-          style={{ zIndex: 3 }}
           variants={borderV}
         />
         <motion.path
@@ -206,7 +205,6 @@ export default function CardBorder({
           strokeWidth={sWidth}
           fill="none"
           stroke={color1}
-          style={{ zIndex: 3 }}
           variants={innerBorderV}
         />
       </motion.svg>
