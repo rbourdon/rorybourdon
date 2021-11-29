@@ -5,8 +5,10 @@ import BurgerButton from "@/components/Nav/BurgerButton";
 import NavLink from "@/components/Nav/NavLink";
 
 const Container = styled(motion.div)`
-  width: 100%;
-  height: 100%;
+  width: max-content;
+  height: max-content;
+  max-height: 100%;
+  max-width: 100%;
 `;
 
 const Backdrop = styled(motion.div)`

@@ -15,7 +15,7 @@ const Container = styled(motion.nav)`
   grid-template-rows: 100%;
   grid-template-columns: minmax(max-content, 8vw) 1fr;
   justify-items: flex-end;
-  align-items: flex-end;
+  align-items: center;
   padding: 3vh 25px 0 25px;
   z-index: 100;
 
@@ -41,18 +41,19 @@ const LinksContainer = styled(motion.div)`
   justify-content: space-evenly;
   align-items: center;
 
-  @media (max-width: 555px) {
+  @media (max-width: 655px) {
     display: none;
   }
 `;
 
 const Hamburger = styled(motion.div)`
   height: max-content;
-  width: 21vw;
-  padding: 0 3vh;
+  width: 3rem;
+  max-height: 100%;
+  padding: 0 0.5rem;
   z-index: 101;
 
-  @media (min-width: 555px) {
+  @media (min-width: 655px) {
     display: none;
   }
 `;

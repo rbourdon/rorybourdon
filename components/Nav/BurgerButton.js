@@ -11,8 +11,7 @@ import styled, { ThemeContext } from "styled-components";
 const Burger = styled(motion.button)`
   border: none;
   background: none;
-  height: 8vw;
-  width: 8vw;
+  max-width: 100%;
   max-height: 100%;
   z-index: 9999;
   position: relative;
@@ -21,7 +20,6 @@ const Burger = styled(motion.button)`
 const lineV = {
   hidden: {
     pathLength: 0,
-    transition: { type: "spring", duration: 0.1 },
   },
   visible: {
     pathLength: 1,
@@ -32,18 +30,22 @@ const lineV = {
     transition: {
       type: "spring",
       duration: 1.1,
-      opacity: { delay: 0.175, duration: 0.2 },
+      opacity: { type: "tween", delay: 0.175, duration: 0.2 },
     },
   },
   open: (custom) => ({
     rotate: custom,
     opacity: custom !== 0 ? 1 : 0,
-    x: custom === 45 ? -1.5 : -1.5,
-    y: custom === 45 ? -2 : 2,
+    x: custom === 45 ? -4 : -4,
+    y: custom === 45 ? 2 : 6,
     originX: 0.8,
     originY: 0.8,
     pathLength: 1,
-    transition: { type: "spring", duration: 0.1, opacity: { duration: 0.1 } },
+    transition: {
+      type: "spring",
+      duration: 1.1,
+      opacity: { type: "tween", duration: 0.2 },
+    },
   }),
 };
 
@@ -52,7 +54,6 @@ const iconV = {
     rotate: 180,
     originX: 0.5,
     originY: 0.5,
-    transition: { type: "spring", duration: 0.1 },
   },
   visible: {
     rotate: 0,
