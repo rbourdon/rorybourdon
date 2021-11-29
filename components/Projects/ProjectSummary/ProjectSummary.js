@@ -170,6 +170,7 @@ export default function ProjectSummary({
   intro = false,
   defaultBGColor,
   scrollerPos = 1,
+  drag = true,
 }) {
   const theme = useContext(ThemeContext);
   const hover = useMotionValue(0);
@@ -275,7 +276,7 @@ export default function ProjectSummary({
         backgroundColor,
       }}
       layoutId={`${id}_summary`}
-      drag="x"
+      drag={drag ? "x" : false}
       dragSnapToOrigin
       dragMomentum={false}
       dragElastic={true}
