@@ -4,7 +4,8 @@ import { useContext } from "react";
 
 const Text = styled(motion.p)`
   height: max-content;
-  min-width: max-content;
+  max-width: 80%;
+  text-align: center;
   font-weight: 300;
   font-size: 1.125rem;
   padding: ${(props) => props.$padding};
@@ -23,11 +24,17 @@ export default function Tagline({
     visible:
       stemLoc === 3 || stemLoc === 8
         ? (height - bRadius * 2) * 0.335 + bRadius / 2
-        : (height - bRadius * 2) * 0.665 + bRadius / 2,
+        : stemLoc === 4 || stemLoc === 7
+        ? (height - bRadius * 2) * 0.665 + bRadius / 2
+        : 0,
     hidden:
       stemLoc === 3 || stemLoc === 8
         ? (height - bRadius * 2) * 0.335 + bRadius / 2 + 50
-        : (height - bRadius * 2) * 0.665 + bRadius / 2 + 50,
+        : stemLoc === 4 || stemLoc === 7
+        ? (height - bRadius * 2) * 0.665 + bRadius / 2 + 50
+        : stemLoc === 1 || stemLoc === 2
+        ? -50
+        : 50,
   };
 
   return (

@@ -37,9 +37,6 @@ const CardContent = styled(motion.div)`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 43% 54%;
-  column-gap: 3%;
-  grid-template-rows: max-content 1fr;
   justify-items: center;
   align-items: center;
   position: relative;
@@ -47,11 +44,7 @@ const CardContent = styled(motion.div)`
   z-index: 3;
 
   @media (max-width: 757px) {
-    grid-template-columns: 100%;
-    grid-template-rows: 23% 23% 1fr 12%;
-    row-gap: 3%;
     align-content: center;
-    padding: 30px 25px;
   }
 `;
 
@@ -81,14 +74,15 @@ const Label = styled(motion.p)`
 
 const ProjectsBox = styled(motion.div)`
   width: 100%;
-  height: max-content;
+  height: 100%;
   font-size: 1.35rem;
   font-weight: 300;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   overflow: hidden;
+  position: relative;
 `;
 
 const Backing = styled(motion.div)`
@@ -97,7 +91,7 @@ const Backing = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 30;
 `;
 
 const ProjectsScene = styled(motion.div)`
@@ -176,6 +170,11 @@ const outlineV = {
   },
 };
 
+const WIDTH = 710;
+const HEIGHT = 358;
+const STEMLENGTH = 375;
+const TAGLINESIZE = 350;
+
 export default function ProjectsCard({ projects }) {
   const theme = useContext(ThemeContext);
   const [selected, setSelected] = useState(false);
@@ -185,6 +184,7 @@ export default function ProjectsCard({ projects }) {
     threshold: 0.4,
   });
 
+  const portrait = width * 0.95 < WIDTH + STEMLENGTH + TAGLINESIZE;
   const backing = useMotionValue(0);
   const backingColor = useTransform(
     [theme.primary, theme.primary_light, backing],
@@ -256,23 +256,30 @@ export default function ProjectsCard({ projects }) {
         </CardEffect>
         <Card
           id="projects"
-          $scrollMargin={"calc(50vh - " + (width < 757 ? 697 : 358) / 2 + "px)"}
+          $scrollMargin={
+            "calc(50vh - " +
+            (portrait ? WIDTH + STEMLENGTH * 0.15 : HEIGHT) / 2 +
+            "px)"
+          }
           variants={containerV}
           style={{
-            top: "calc(50vh - " + (width < 757 ? 697 : 358) / 2 + "px)",
+            top:
+              "calc(50vh - " +
+              (portrait ? WIDTH + STEMLENGTH + 125 : HEIGHT) / 2 +
+              "px)",
             position: selected ? "fixed" : "static",
-            zIndex: selected ? 4 : 1,
+            zIndex: selected ? 40 : 1,
           }}
           onLayoutAnimationComplete={() =>
             setLayoutComplete(selected ? true : false)
           }
         >
           <NavCard
-            height={width < 757 ? 697 : 358}
-            width={width < 757 ? 358 : 697}
-            stemDir="h"
-            stemLoc={7}
-            stemLength={375}
+            height={portrait ? WIDTH : HEIGHT}
+            width={portrait ? HEIGHT : WIDTH}
+            stemDir={portrait ? "v" : "h"}
+            stemLoc={portrait ? 1 : 7}
+            stemLength={portrait ? STEMLENGTH * 0.65 : STEMLENGTH}
             color1={theme.orange}
             color2={theme.orange}
             id="projects"
@@ -281,7 +288,19 @@ export default function ProjectsCard({ projects }) {
             intersectionRef={ref}
             stem
           >
-            <CardContent variants={projectsCardV}>
+            <CardContent
+              style={{
+                gridTemplateColumns: portrait ? "100%" : "43% 54%",
+                gridTemplateRows: portrait
+                  ? "21% 21% 1fr 12%"
+                  : "max-content 1fr",
+                rowGap: portrait ? "3%" : "0%",
+                columnGap: portrait ? "0%" : "3%",
+                padding: portrait ? "30px 25px" : "25px 30px",
+              }}
+              variants={projectsCardV}
+              layout
+            >
               <CardWindow
                 layoutId="projectCard_window"
                 style={{
@@ -294,19 +313,22 @@ export default function ProjectsCard({ projects }) {
                   <ProjectsSceneIcon scale={2.6} />
                 </ProjectsScene>
               </CardWindow>
-              <ProjectsBox variants={projectSummariesV}>
-                {inView && (
+              <ProjectsBox layout variants={projectSummariesV}>
+                {inView && width > 220 && (
                   <ProjectSummary
-                    id={"projectsCard_summary"}
+                    id={"projectsCard"}
                     project={projects[0]}
                     bgColor={theme.primary}
                     primaryColor={theme.primary_verydark}
                     outline={false}
+                    active={false}
+                    scrollerPos={0}
                     onHover={null}
                     outlineV={outlineV}
                     defaultBGColor={theme.primary_light}
-                    delay={358 * 697 * 0.0000012 + 2.4}
+                    delay={WIDTH * HEIGHT * 0.0000012 + 2.4}
                     intro
+                    drag={false}
                   />
                 )}
               </ProjectsBox>
@@ -316,7 +338,7 @@ export default function ProjectsCard({ projects }) {
                 color1={theme.orange}
                 href="/projects"
                 id="projects"
-                animationDelay={358 * 697 * 0.0000012 + 1.85}
+                animationDelay={WIDTH * HEIGHT * 0.0000012 + 1.85}
                 onClick={clickHandler}
               >
                 All Projects

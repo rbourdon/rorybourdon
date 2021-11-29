@@ -17,7 +17,7 @@ const stemV = {
   visible: {
     pathLength: 1,
     transition: {
-      duration: 0.3,
+      duration: 0.4,
       ease: "linear",
     },
   },
@@ -33,7 +33,6 @@ const stemV = {
 export default function CardStem({
   width,
   height,
-  stemDir,
   stemLength,
   stemLoc,
   bRadius,
@@ -55,7 +54,7 @@ export default function CardStem({
         ? (height - bRadius * 2 - sWidth / 2) * 0.665 + bRadius + sWidth / 2
         : stemLoc === 1 || stemLoc === 2
         ? 0
-        : height,
+        : stemLength,
   };
   const theme = useContext(ThemeContext);
   return (
@@ -64,16 +63,29 @@ export default function CardStem({
         xmlns="http://www.w3.org/2000/svg"
         viewBox={`0 0 ${width} ${height}`}
       >
-        <motion.path
+        <motion.line
           //Draw with stem, based on passed in location
-          d={`M${stemStart.x},${stemStart.y} ${stemDir}${
-            stemLoc === 3 || stemLoc === 4 || stemLoc === 5 || stemLoc === 6
+          custom={stemLength}
+          x1={stemStart.x}
+          y1={stemStart.y}
+          x2={
+            stemLoc === 3 || stemLoc === 4
               ? -stemLength
-              : stemLength
-          }`}
-          stroke={theme.primary_dark}
+              : stemLoc === 7 || stemLoc === 8
+              ? stemLength
+              : stemStart.x
+          }
+          y2={
+            stemLoc === 1 || stemLoc === 2
+              ? stemLength
+              : stemLoc === 5 || stemLoc === 6
+              ? 0
+              : stemStart.y
+          }
+          stroke={theme.primary_mediumdark}
           strokeWidth={sWidth}
           variants={stemV}
+          fill="none"
         />
       </motion.svg>
     </Container>

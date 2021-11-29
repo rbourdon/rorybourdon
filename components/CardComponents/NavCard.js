@@ -7,15 +7,15 @@ import CardBacking from "@/components/CardComponents/CardBacking";
 import CardBorder from "@/components/CardComponents/CardBorder";
 import Tagline from "@/components/CardComponents/Tagline";
 import { motion } from "framer-motion";
-import useWindowSize from "@/components/utils/useWindowSize";
 
 const Container = styled(motion.div)`
   display: flex;
-  justify-content: center;
-  align-items: start;
+  justify-content: ${(props) =>
+    props.$flexDir === "row" ? "center" : "start"};
+  align-items: ${(props) => (props.$flexDir === "row" ? "start" : "center")};
   flex-direction: ${(props) => props.$flexDir};
   width: max-content;
-  height: ${(props) => props.$height + "px"};
+  height: max-content;
   z-index: 10;
 `;
 
@@ -29,6 +29,7 @@ const cardV = {
   selected: {
     transition: {
       staggerChildren: 0.2,
+      staggerDirection: -1,
     },
   },
 };
@@ -91,9 +92,6 @@ export default function NavCard({
   intersectionRef,
   bgColor,
 }) {
-  const size = useWindowSize();
-  const finalStemLoc =
-    size.width * 0.95 < width + stemLength + 450 ? 2 : stemLoc;
   return (
     <Container
       $width={stem && stemDir === "h" ? stemLength + width : width}
@@ -104,27 +102,28 @@ export default function NavCard({
       custom={delay}
       layoutId={`${id}_navCardContainer`}
     >
-      {stem && (finalStemLoc === 7 || finalStemLoc === 8) && (
-        <>
-          <Tagline
-            height={height}
-            bRadius={borderRadius}
-            stemLoc={finalStemLoc}
-            variants={tagV}
-          >
-            {tagline}
-          </Tagline>
-          <CardStem
-            width={stemDir === "h" ? stemLength : width}
-            height={stemDir === "v" ? stemLength : height}
-            sWidth={strokeWidth}
-            bRadius={borderRadius}
-            stemDir={stemDir}
-            stemLength={stemLength}
-            stemLoc={finalStemLoc}
-          />
-        </>
-      )}
+      {stem &&
+        (stemLoc === 7 || stemLoc === 8 || stemLoc === 1 || stemLoc === 2) && (
+          <>
+            <Tagline
+              height={height}
+              bRadius={borderRadius}
+              stemLoc={stemLoc}
+              stemDir={stemDir}
+              variants={tagV}
+            >
+              {tagline}
+            </Tagline>
+            <CardStem
+              width={stemDir === "h" ? stemLength : width}
+              height={stemDir === "v" ? stemLength : height}
+              sWidth={strokeWidth}
+              bRadius={borderRadius}
+              stemLength={stemLength}
+              stemLoc={stemLoc}
+            />
+          </>
+        )}
       <Card variants={cardV} width={width} height={height} id={id}>
         <CardBorder
           color1={color1}
@@ -133,7 +132,7 @@ export default function NavCard({
           height={height}
           sWidth={strokeWidth}
           bRadius={borderRadius}
-          startLoc={finalStemLoc}
+          startLoc={stemLoc}
           borderV={{
             hidden: {
               pathLength: 0,
@@ -248,28 +247,28 @@ export default function NavCard({
           id={id}
         />
       </Card>
-      {stem && (finalStemLoc === 3 || finalStemLoc === 4) && (
-        <>
-          <CardStem
-            width={stemDir === "h" ? stemLength : width}
-            height={stemDir === "v" ? stemLength : height}
-            sWidth={strokeWidth}
-            bRadius={borderRadius}
-            stemDir={stemDir}
-            stemLength={stemLength}
-            stemLoc={finalStemLoc}
-          />
+      {stem &&
+        (stemLoc === 3 || stemLoc === 4 || stemLoc === 5 || stemLoc === 6) && (
+          <>
+            <CardStem
+              width={stemDir === "h" ? stemLength : width}
+              height={stemDir === "v" ? stemLength : height}
+              sWidth={strokeWidth}
+              bRadius={borderRadius}
+              stemLength={stemLength}
+              stemLoc={stemLoc}
+            />
 
-          <Tagline
-            height={height}
-            bRadius={borderRadius}
-            stemLoc={finalStemLoc}
-            variants={tagV}
-          >
-            {tagline}
-          </Tagline>
-        </>
-      )}
+            <Tagline
+              height={height}
+              bRadius={borderRadius}
+              stemLoc={stemLoc}
+              variants={tagV}
+            >
+              {tagline}
+            </Tagline>
+          </>
+        )}
     </Container>
   );
 }

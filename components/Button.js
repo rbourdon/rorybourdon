@@ -32,7 +32,7 @@ const Content = styled(motion.div)`
   align-items: center;
   font-weight: 300;
   font-size: 1.13rem;
-  padding-bottom: 2px;
+  padding: 0 0 2px 0;
 `;
 
 const borderV = {
@@ -141,7 +141,7 @@ export default function Button({
             " " +
             latestShadow1 +
             ", " +
-            "0px 0px 11px 0px " +
+            "0px 0px 10px 0px " +
             latestShadow2,
         ]
       )
@@ -168,10 +168,10 @@ export default function Button({
         onBlur={() => handleHoverEnd(hover)}
         onClick={onClick}
         layoutId={`${id}Button`}
-        style={{ scale }}
       >
         <Content
           style={{
+            color: theme.primary_dark,
             backgroundColor: theme.primary_light,
             boxShadow,
           }}
@@ -182,7 +182,7 @@ export default function Button({
           {children}
         </Content>
         <CardBorder
-          color1={theme.primary_dark}
+          color1={theme.primary_mediumdark}
           width={width * scale.get()}
           height={height * scale.get()}
           sWidth={sWidth}
@@ -191,7 +191,7 @@ export default function Button({
           borderV={borderV}
           frameV={frameV}
           innerBorderV={innerBorderV}
-          innerOffset={-8}
+          innerOffset={-0.1}
           id={id + "button"}
         />
       </Container>

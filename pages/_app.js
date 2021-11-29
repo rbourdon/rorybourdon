@@ -44,7 +44,6 @@ html {
   *
   {
     box-sizing: border-box;
-    z-index: 1;
   }
     button, input[type="submit"], input[type="reset"] {
       background: none;

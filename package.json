@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "color-convert": "^2.0.1",
-    "framer-motion": "^5.3.2",
+    "framer-motion": "^5.3.3",
     "graphql": "^15.6.1",
     "graphql-request": "^3.6.1",
     "next": "latest",
@@ -30,6 +30,6 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.0",
-    "prettier": "^2.3.2"
+    "prettier": "^2.5.0"
   }
 }

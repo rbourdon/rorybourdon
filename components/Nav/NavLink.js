@@ -14,6 +14,7 @@ const LinkText = styled(motion.a)`
   font-size: 1.2rem;
   font-weight: 100;
   position: relative;
+  z-index: 5;
   &:focus {
     outline: none;
   }
@@ -67,11 +68,11 @@ export default function NavLink({
     animate(hover, 1, {
       duration: 0.4,
     });
-    setHoveredLink(name);
+    setHoveredLink && setHoveredLink(name);
   };
 
   return href ? (
-    <Link href={href} passHref onClick={onClick}>
+    <Link href={href} passHref>
       <LinkText
         variants={navV}
         style={{ color }}
@@ -79,6 +80,7 @@ export default function NavLink({
         onHoverEnd={handleHoverEnd}
         onFocus={handleHoverStart}
         onBlur={handleHoverEnd}
+        onClick={onClick}
       >
         {children}
       </LinkText>

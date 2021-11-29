@@ -9,6 +9,7 @@ import { getAllSkills, getAllProjects } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import Head from "next/head";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
+import Footer from "@/components/Footer";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -42,7 +43,7 @@ const HeroBanner = styled(motion.header)`
 
 const HeroSection = styled(motion.section)`
   width: 100%;
-  min-height: 88vh;
+  min-height: 92vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -61,6 +62,10 @@ const Section = styled(motion.section)`
   justify-content: center;
   align-items: center;
   position: relative;
+
+  @media (max-width: 800px) {
+    height: 200vh;
+  }
 `;
 
 export default function Home({ skills, projects }) {
@@ -132,6 +137,7 @@ export default function Home({ skills, projects }) {
           <SocialsCard />
         </Section>
       </Content>
+      <Footer />
     </Container>
   );
 }
