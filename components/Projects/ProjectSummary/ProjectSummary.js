@@ -43,6 +43,7 @@ const ProjectDescription = styled(motion.p)`
   font-size: 0.9rem;
   font-weight: 200;
   user-select: none;
+  line-height: 1.25;
 `;
 
 const SkillChips = styled(motion.div)`
