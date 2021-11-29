@@ -265,7 +265,7 @@ export default function SkillsCard({ skills }) {
               (portrait ? HEIGHT + STEMLENGTH + 125 : HEIGHT) / 2 +
               "px)",
             position: selected ? "fixed" : "static",
-            zIndex: selected ? 40 : 1,
+            zIndex: selected ? 40 : 35,
           }}
           variants={containerV}
           layoutId="skillsCard_container"

@@ -286,7 +286,7 @@ export default function SocialsCard() {
               (portrait ? WIDTH + STEMLENGTH + 125 : HEIGHT) / 2 +
               "px)",
             position: selected ? "fixed" : "static",
-            zIndex: selected ? 40 : 1,
+            zIndex: selected ? 40 : 35,
           }}
           onLayoutAnimationComplete={() =>
             setLayoutComplete(selected ? true : false)
@@ -320,7 +320,7 @@ export default function SocialsCard() {
                 layoutId="socialsCard_window"
                 style={{
                   backgroundColor: theme.primary,
-                  zIndex: selected ? 4 : 1,
+                  zIndex: selected ? 40 : 35,
                 }}
               >
                 <Label layoutId="socialsCard_label">Socials</Label>

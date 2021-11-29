@@ -268,7 +268,7 @@ export default function ProjectsCard({ projects }) {
               (portrait ? WIDTH + STEMLENGTH + 125 : HEIGHT) / 2 +
               "px)",
             position: selected ? "fixed" : "static",
-            zIndex: selected ? 40 : 1,
+            zIndex: selected ? 40 : 35,
           }}
           onLayoutAnimationComplete={() =>
             setLayoutComplete(selected ? true : false)
@@ -305,7 +305,7 @@ export default function ProjectsCard({ projects }) {
                 layoutId="projectCard_window"
                 style={{
                   backgroundColor: theme.primary,
-                  zIndex: selected ? 4 : 1,
+                  zIndex: selected ? 40 : 35,
                 }}
               >
                 <Label layoutId="projectCard_label">Projects</Label>
