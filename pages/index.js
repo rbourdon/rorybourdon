@@ -61,6 +61,10 @@ const Section = styled(motion.section)`
   justify-content: center;
   align-items: center;
   position: relative;
+
+  @media (max-width: 800px) {
+    height: 200vh;
+  }
 `;
 
 export default function Home({ skills, projects }) {
