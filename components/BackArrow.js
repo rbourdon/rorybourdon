@@ -11,7 +11,8 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 
 const Container = styled(motion.button)`
-  width: ${(props) => props.$width + "px"};
+  width: 12vw;
+  max-width: ${(props) => props.$width + "px"};
   height: max-content;
   display: flex;
   justify-content: center;
