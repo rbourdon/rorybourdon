@@ -202,7 +202,7 @@ export default function CardBorder({
         />
         <motion.path
           d={getPath(startLocation, height, width, bRadius, sWidth, innerOff)}
-          strokeWidth={sWidth}
+          strokeWidth={sWidth * 0.6}
           fill="none"
           stroke={color1}
           variants={innerBorderV}
