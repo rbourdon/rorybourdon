@@ -45,7 +45,6 @@ const CardContent = styled(motion.div)`
 
   @media (max-width: 757px) {
     align-content: center;
-    padding: 30px 25px;
   }
 `;
 
@@ -75,14 +74,15 @@ const Label = styled(motion.p)`
 
 const ProjectsBox = styled(motion.div)`
   width: 100%;
-  height: max-content;
+  height: 100%;
   font-size: 1.35rem;
   font-weight: 300;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   overflow: hidden;
+  position: relative;
 `;
 
 const Backing = styled(motion.div)`
@@ -91,7 +91,7 @@ const Backing = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 30;
 `;
 
 const ProjectsScene = styled(motion.div)`
@@ -170,7 +170,7 @@ const outlineV = {
   },
 };
 
-const WIDTH = 697;
+const WIDTH = 710;
 const HEIGHT = 358;
 const STEMLENGTH = 375;
 const TAGLINESIZE = 350;
@@ -185,7 +185,7 @@ export default function ProjectsCard({ projects }) {
   });
 
   const portrait = width * 0.95 < WIDTH + STEMLENGTH + TAGLINESIZE;
-
+  console.log(portrait, width);
   const backing = useMotionValue(0);
   const backingColor = useTransform(
     [theme.primary, theme.primary_light, backing],
@@ -258,13 +258,18 @@ export default function ProjectsCard({ projects }) {
         <Card
           id="projects"
           $scrollMargin={
-            "calc(50vh - " + (width < 757 ? WIDTH : HEIGHT) / 2 + "px)"
+            "calc(50vh - " +
+            (portrait ? WIDTH + STEMLENGTH * 0.15 : HEIGHT) / 2 +
+            "px)"
           }
           variants={containerV}
           style={{
-            top: "calc(50vh - " + (width < 757 ? WIDTH : HEIGHT) / 2 + "px)",
+            top:
+              "calc(50vh - " +
+              (portrait ? WIDTH + STEMLENGTH + 125 : HEIGHT) / 2 +
+              "px)",
             position: selected ? "fixed" : "static",
-            zIndex: selected ? 4 : 1,
+            zIndex: selected ? 40 : 1,
           }}
           onLayoutAnimationComplete={() =>
             setLayoutComplete(selected ? true : false)
@@ -288,12 +293,14 @@ export default function ProjectsCard({ projects }) {
               style={{
                 gridTemplateColumns: portrait ? "100%" : "43% 54%",
                 gridTemplateRows: portrait
-                  ? "23% 23% 1fr 12%"
+                  ? "21% 21% 1fr 12%"
                   : "max-content 1fr",
                 rowGap: portrait ? "3%" : "0%",
                 columnGap: portrait ? "0%" : "3%",
+                padding: portrait ? "30px 25px" : "25px 30px",
               }}
               variants={projectsCardV}
+              layout
             >
               <CardWindow
                 layoutId="projectCard_window"
@@ -307,19 +314,22 @@ export default function ProjectsCard({ projects }) {
                   <ProjectsSceneIcon scale={2.6} />
                 </ProjectsScene>
               </CardWindow>
-              <ProjectsBox variants={projectSummariesV}>
-                {inView && (
+              <ProjectsBox layout variants={projectSummariesV}>
+                {inView && width > 220 && (
                   <ProjectSummary
-                    id={"projectsCard_summary"}
+                    id={"projectsCard"}
                     project={projects[0]}
                     bgColor={theme.primary}
                     primaryColor={theme.primary_verydark}
                     outline={false}
+                    active={false}
+                    scrollerPos={0}
                     onHover={null}
                     outlineV={outlineV}
                     defaultBGColor={theme.primary_light}
                     delay={WIDTH * HEIGHT * 0.0000012 + 2.4}
                     intro
+                    drag={false}
                   />
                 )}
               </ProjectsBox>

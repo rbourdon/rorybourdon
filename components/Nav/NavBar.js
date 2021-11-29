@@ -17,7 +17,6 @@ const Container = styled(motion.nav)`
   justify-items: flex-end;
   align-items: center;
   padding: 3vh 25px 0 25px;
-  z-index: 100;
 
   @media (max-width: 555px) {
     height: 7.5vh;
@@ -51,7 +50,7 @@ const Hamburger = styled(motion.div)`
   width: 3rem;
   max-height: 100%;
   padding: 0 0.5rem;
-  z-index: 101;
+  z-index: 2;
 
   @media (min-width: 655px) {
     display: none;
@@ -65,7 +64,7 @@ const LogoContainer = styled(motion.a)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  z-index: 201;
+  z-index: 20;
 
   @media (max-width: 555px) {
     width: 100%;

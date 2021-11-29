@@ -73,7 +73,7 @@ const Backing = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 30;
 `;
 
 const skillsCardV = {
@@ -162,6 +162,7 @@ const DELAY = 0.5;
 const WIDTH = 230;
 const HEIGHT = 710;
 const STEMLENGTH = 475;
+const TAGLINESIZE = 350;
 
 const layoutTransition = {
   type: "spring",
@@ -175,6 +176,8 @@ export default function SkillsCard({ skills }) {
   const [layoutComplete, setLayoutComplete] = useState(false);
   const theme = useContext(ThemeContext);
   const { width, height } = useWindowSize();
+
+  const portrait = width * 0.95 < WIDTH + STEMLENGTH + TAGLINESIZE;
 
   const clickHandler = () => {
     setSelected(true);
@@ -251,10 +254,18 @@ export default function SkillsCard({ skills }) {
         </CardEffect>
         <Card
           id="skills"
+          $scrollMargin={
+            "calc(50vh - " +
+            (portrait ? WIDTH + STEMLENGTH : HEIGHT) / 2 +
+            "px)"
+          }
           style={{
-            top: "calc(50vh - " + HEIGHT / 2 + "px)",
+            top:
+              "calc(50vh - " +
+              (portrait ? HEIGHT + STEMLENGTH + 125 : HEIGHT) / 2 +
+              "px)",
             position: selected ? "fixed" : "static",
-            zIndex: selected ? 4 : 1,
+            zIndex: selected ? 40 : 1,
           }}
           variants={containerV}
           layoutId="skillsCard_container"
@@ -265,13 +276,9 @@ export default function SkillsCard({ skills }) {
           <NavCard
             height={HEIGHT}
             width={WIDTH}
-            stemDir={width * 0.95 < WIDTH + STEMLENGTH + 350 ? "v" : "h"}
-            stemLoc={width * 0.95 < WIDTH + STEMLENGTH + 350 ? 2 : 3}
-            stemLength={
-              width * 0.95 < WIDTH + STEMLENGTH + 350
-                ? STEMLENGTH * 0.65
-                : STEMLENGTH
-            }
+            stemDir={portrait ? "v" : "h"}
+            stemLoc={portrait ? 2 : 3}
+            stemLength={portrait ? STEMLENGTH * 0.65 : STEMLENGTH}
             color1={theme.teal}
             color2={theme.teal}
             id="skills"

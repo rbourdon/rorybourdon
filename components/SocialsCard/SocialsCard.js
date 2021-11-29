@@ -41,7 +41,7 @@ const CardContent = styled(motion.div)`
 
   @media (max-width: 690px) {
     grid-template-columns: 100%;
-    grid-template-rows: 43% 1fr 13%;
+    grid-template-rows: 43% 1fr;
     row-gap: 3%;
     align-content: center;
     padding: 30px 25px;
@@ -89,12 +89,30 @@ const SocialsBox = styled(motion.div)`
   justify-content: center;
   align-content: center;
   column-gap: 20px;
+
+  @media (max-width: 690px) {
+    grid-template-columns: 35px;
+    grid-template-rows: repeat(auto-fit, 35px);
+    column-gap: 0px;
+    row-gap: 20px;
+  }
+`;
+
+const Content = styled(motion.div)`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr max-content;
+  grid-row: span 2;
   overflow: hidden;
 
   @media (max-width: 690px) {
     grid-row: span 1;
-    grid-template-columns: 35px;
-    grid-template-rows: repeat(auto-fit, 35px);
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr max-content;
     column-gap: 0px;
     row-gap: 20px;
   }
@@ -106,7 +124,7 @@ const Backing = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 30;
 `;
 
 const SocialsScene = styled(motion.div)`
@@ -256,12 +274,19 @@ export default function SocialsCard() {
         </CardEffect>
         <Card
           id="socials"
-          $scrollMargin={"calc(50vh - " + (width < 690 ? 631 : 180) / 2 + "px)"}
+          $scrollMargin={
+            "calc(50vh - " +
+            (portrait ? WIDTH + STEMLENGTH * 0.45 : HEIGHT) / 2 +
+            "px)"
+          }
           variants={containerV}
           style={{
-            top: "calc(50vh - " + (width < 690 ? 631 : 180) / 2 + "px)",
+            top:
+              "calc(50vh - " +
+              (portrait ? WIDTH + STEMLENGTH + 125 : HEIGHT) / 2 +
+              "px)",
             position: selected ? "fixed" : "static",
-            zIndex: selected ? 4 : 1,
+            zIndex: selected ? 40 : 1,
           }}
           onLayoutAnimationComplete={() =>
             setLayoutComplete(selected ? true : false)
@@ -276,6 +301,7 @@ export default function SocialsCard() {
             color1={theme.green}
             color2={theme.green}
             id="socials"
+            faceBands={[2, 6, 4]}
             delay={0.5}
             tagline="You can find me in most of the usual places"
             intersectionRef={ref}
@@ -284,7 +310,7 @@ export default function SocialsCard() {
             <CardContent
               style={{
                 gridTemplateColumns: portrait ? "100%" : "43% 54%",
-                gridTemplateRows: portrait ? "43% 1fr 13%" : "max-content 1fr",
+                gridTemplateRows: portrait ? "43% 1fr" : "max-content 1fr",
                 rowGap: portrait ? "3%" : "0%",
                 columnGap: portrait ? "0%" : "3%",
               }}
@@ -302,39 +328,41 @@ export default function SocialsCard() {
                   <SocialsSceneIcon scale={1.3} />
                 </SocialsScene>
               </CardWindow>
-              <SocialsBox variants={projectSummariesV}>
-                <SocialLink
-                  platform="twitter"
-                  hoverColor={theme.green}
-                  href="https://twitter.com/rorybourdon"
-                />
-                <SocialLink
-                  platform="linkedin"
-                  hoverColor={theme.green}
-                  href="https://www.linkedin.com/in/rorybourdon/"
-                />
-                <SocialLink
-                  platform="github"
-                  hoverColor={theme.green}
-                  href="https://github.com/rbourdon"
-                />
-                <SocialLink
-                  platform="instagram"
-                  hoverColor={theme.green}
-                  href="https://www.instagram.com/draxusd/"
-                />
-              </SocialsBox>
-              <Button
-                width={150}
-                height={50}
-                color1={theme.green}
-                href="/contact"
-                id="contact"
-                animationDelay={180 * 631 * 0.0000012 + 1.85}
-                onClick={clickHandler}
-              >
-                Contact Me
-              </Button>
+              <Content>
+                <SocialsBox variants={projectSummariesV}>
+                  <SocialLink
+                    platform="twitter"
+                    hoverColor={theme.green}
+                    href="https://twitter.com/rorybourdon"
+                  />
+                  <SocialLink
+                    platform="linkedin"
+                    hoverColor={theme.green}
+                    href="https://www.linkedin.com/in/rorybourdon/"
+                  />
+                  <SocialLink
+                    platform="github"
+                    hoverColor={theme.green}
+                    href="https://github.com/rbourdon"
+                  />
+                  <SocialLink
+                    platform="instagram"
+                    hoverColor={theme.green}
+                    href="https://www.instagram.com/draxusd/"
+                  />
+                </SocialsBox>
+                <Button
+                  width={portrait ? 120 : 150}
+                  height={50}
+                  color1={theme.green}
+                  href="/contact"
+                  id="contact"
+                  animationDelay={180 * 631 * 0.0000012 + 1.85}
+                  onClick={clickHandler}
+                >
+                  Contact Me
+                </Button>
+              </Content>
             </CardContent>
           </NavCard>
         </Card>
