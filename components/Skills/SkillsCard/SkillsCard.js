@@ -161,6 +161,7 @@ const skillsIconV = {
 const DELAY = 0.5;
 const WIDTH = 230;
 const HEIGHT = 710;
+const STEMLENGTH = 475;
 
 const layoutTransition = {
   type: "spring",
@@ -264,9 +265,13 @@ export default function SkillsCard({ skills }) {
           <NavCard
             height={HEIGHT}
             width={WIDTH}
-            stemDir="h"
-            stemLoc={3}
-            stemLength={475}
+            stemDir={width * 0.95 < WIDTH + STEMLENGTH + 350 ? "v" : "h"}
+            stemLoc={width * 0.95 < WIDTH + STEMLENGTH + 350 ? 2 : 3}
+            stemLength={
+              width * 0.95 < WIDTH + STEMLENGTH + 350
+                ? STEMLENGTH * 0.65
+                : STEMLENGTH
+            }
             color1={theme.teal}
             color2={theme.teal}
             id="skills"

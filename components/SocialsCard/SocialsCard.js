@@ -172,6 +172,11 @@ const containerV = {
   },
 };
 
+const WIDTH = 631;
+const HEIGHT = 180;
+const STEMLENGTH = 345;
+const TAGLINESIZE = 350;
+
 export default function SocialsCard() {
   const theme = useContext(ThemeContext);
   const [selected, setSelected] = useState(false);
@@ -180,6 +185,8 @@ export default function SocialsCard() {
   const { ref, inView } = useInView({
     threshold: 0.4,
   });
+
+  const portrait = width * 0.95 < WIDTH + STEMLENGTH + TAGLINESIZE;
 
   const clickHandler = () => {
     setSelected(true);
@@ -261,11 +268,11 @@ export default function SocialsCard() {
           }
         >
           <NavCard
-            height={width < 690 ? 631 : 180}
-            width={width < 690 ? 180 : 631}
-            stemDir="h"
-            stemLoc={4}
-            stemLength={345}
+            height={portrait ? WIDTH : HEIGHT}
+            width={portrait ? HEIGHT : WIDTH}
+            stemDir={portrait ? "v" : "h"}
+            stemLoc={portrait ? 1 : 4}
+            stemLength={portrait ? STEMLENGTH * 0.65 : STEMLENGTH}
             color1={theme.green}
             color2={theme.green}
             id="socials"
@@ -274,7 +281,15 @@ export default function SocialsCard() {
             intersectionRef={ref}
             stem
           >
-            <CardContent variants={projectsCardV}>
+            <CardContent
+              style={{
+                gridTemplateColumns: portrait ? "100%" : "43% 54%",
+                gridTemplateRows: portrait ? "43% 1fr 13%" : "max-content 1fr",
+                rowGap: portrait ? "3%" : "0%",
+                columnGap: portrait ? "0%" : "3%",
+              }}
+              variants={projectsCardV}
+            >
               <CardWindow
                 layoutId="socialsCard_window"
                 style={{

@@ -4,7 +4,8 @@ import { useContext } from "react";
 
 const Text = styled(motion.p)`
   height: max-content;
-  min-width: max-content;
+  max-width: 80%;
+  text-align: center;
   font-weight: 300;
   font-size: 1.125rem;
   padding: ${(props) => props.$padding};
