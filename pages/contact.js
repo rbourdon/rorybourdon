@@ -25,7 +25,7 @@ const Content = styled(motion.main)`
     align-items: start;
     grid-template-rows: max-content max-content 1fr;
     grid-template-columns: 100%;
-    padding: 2vh 8vw;
+    padding: 4vh 8vw;
   }
 `;
 
