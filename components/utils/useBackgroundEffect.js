@@ -7,70 +7,83 @@ import {
 } from "framer-motion";
 import { useEffect } from "react";
 
-function useBackgroundEffect(inView, style) {
+function useBackgroundEffect(inView, effectStyle) {
   const { scrollY } = useViewportScroll();
   const scrollOffsetY = useMotionValue(0);
-  const baseY = useMotionValue(style.y + 150);
+  const baseY = useMotionValue(200);
   const finalY = useTransform(
     [scrollOffsetY, baseY],
     ([latestOffset, latestBase]) =>
-      latestOffset * (style.scale - 0.125) + latestBase
+      effectStyle.y + latestOffset * (effectStyle.scale - 0.125) + latestBase
   );
 
-  const y = useSpring(finalY, {
+  const effectY = useSpring(finalY, {
     type: "spring",
-    stiffness: 140,
-    mass: 2.5 * style.scale,
-    damping: 22 * style.scale,
+    stiffness: 140 * effectStyle.scale,
+    mass: 2.5 * effectStyle.scale,
+    damping: 22 * effectStyle.scale,
   });
 
   useEffect(() => {
-    baseY.stop();
     if (!inView) {
-      animate(
+      const baseOut = animate(
         baseY,
         Math.abs(scrollOffsetY.get()) > 0
-          ? style.y + Math.sign(scrollOffsetY.get()) * 150
-          : style.y + 150,
+          ? Math.sign(scrollOffsetY.get()) * 200
+          : 150,
         {
-          type: "spring",
-          stiffness: 60,
-          mass: 1 * style.scale,
-          damping: 28 * style.scale,
+          type: "tween",
+          duration: 1.5 * effectStyle.scale,
+          ease: "linear",
         }
       );
-    } else {
-      //   baseY.set(
-      //     Math.abs(scrollOffsetY.get()) > 0
-      //       ? style.y + Math.sign(scrollOffsetY.get()) * 150
-      //       : style.y + 150
-      //   );
-      scrollOffsetY.set(0);
-      baseY.stop();
-      animate(baseY, style.y, {
-        delay: style.delay,
-        type: "spring",
-        stiffness: 60,
-        mass: 1 * style.scale,
-        damping: 28 * style.scale,
+
+      const scrollOut = animate(scrollOffsetY, 0, {
+        delay: effectStyle.delay,
+        type: "tween",
+        duration: 1.5 * effectStyle.scale,
+        ease: "linear",
       });
+
+      return () => {
+        scrollOut.stop();
+        baseOut.stop();
+      };
+    } else {
+      const baseIn = animate(baseY, 0, {
+        delay: effectStyle.delay,
+        type: "tween",
+        duration: 1.5 * effectStyle.scale,
+        ease: "linear",
+      });
+
+      return () => {
+        baseIn.stop();
+      };
     }
-  }, [inView, style.delay, style.y, baseY, scrollOffsetY, style.scale]);
+  }, [
+    baseY,
+    effectStyle.delay,
+    effectStyle.scale,
+    effectStyle.y,
+    inView,
+    scrollOffsetY,
+  ]);
 
   useEffect(() => {
     const unsubscribeY = scrollY.onChange((progress) => {
-      if (inView && !baseY.isAnimating()) {
+      if (inView && baseY.get() === 0) {
         scrollOffsetY.set(
-          scrollOffsetY.get() - (progress - scrollY.prev) * 0.325
+          scrollOffsetY.get() - (progress - scrollY.getPrevious()) * 0.325
         );
       }
     });
     return () => {
       unsubscribeY();
     };
-  }, [baseY, inView, scrollOffsetY, scrollY, style.scale, style.y]);
+  }, [baseY, effectStyle.y, inView, scrollOffsetY, scrollY]);
 
-  return y;
+  return effectY;
 }
 
 export default useBackgroundEffect;

@@ -6,22 +6,22 @@ import Layout from "@/components/layout";
 const GlobalStyle = createGlobalStyle`
 html {
     scrollbar-width: thin;
-    scrollbar-color: var(--color-purple_light) var(--color-primary_verylight);
+    scrollbar-color: var(--color-primary) var(--color-primary_slightlydark);
 
     &::-webkit-scrollbar {
-      width: 9px;
+      width: 10px;
     }
 
     &::-webkit-scrollbar-track {
-      background: var(--color-primary_verylight);
+      background: var(--color-primary);
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: var(--color-purple_light);
+      background-color: var(--color-primary_slightlydark);
     }
 
     &::-webkit-scrollbar-thumb:hover {
-      background-color: var(--color-purple_med);
+      background-color: var(--color-primary_mediumdark);
     }
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

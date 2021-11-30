@@ -28,7 +28,6 @@ const Container = styled(motion.article)`
 
 const Card = styled(motion.div)`
   top: calc(50vh - 358px / 2);
-  zindex: 1;
   scroll-margin-top: ${(props) => props.$scrollMargin};
   scroll-snap-margin: ${(props) => props.$scrollMargin};
 `;
@@ -248,8 +247,8 @@ export default function ProjectsCard({ projects }) {
             return (
               <ProjectsBackgroundEffect
                 inView={inView}
-                key={effect.x + effect.y + effect.scale}
-                style={{ delay: i * 0.035 + 1.8, ...effect }}
+                key={`projectEffect_${effect.x}_${effect.y}_${effect.scale}`}
+                effectStyle={{ delay: i * 0.035 + 1.8, ...effect }}
               />
             );
           })}
@@ -299,7 +298,6 @@ export default function ProjectsCard({ projects }) {
                 padding: portrait ? "30px 25px" : "25px 30px",
               }}
               variants={projectsCardV}
-              layout
             >
               <CardWindow
                 layoutId="projectCard_window"

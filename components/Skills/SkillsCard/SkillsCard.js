@@ -20,10 +20,8 @@ const Container = styled(motion.article)`
 `;
 
 const Card = styled(motion.div)`
-  top: calc(50vh - 710px / 2);
-  zindex: 1;
-  scroll-margin-top: calc(50vh - 710px / 2);
-  scroll-snap-margin: calc(50vh - 710px / 2);
+  scroll-margin-top: ${(props) => props.$scrollMargin};
+  scroll-snap-margin: ${(props) => props.$scrollMargin};
 `;
 
 const CardContent = styled(motion.div)`
@@ -246,8 +244,8 @@ export default function SkillsCard({ skills }) {
             return (
               <SkillsBackgroundEffect
                 inView={inView}
-                key={effect.x + effect.y + effect.scale}
-                style={{ delay: i * 0.035 + 1.55, ...effect }}
+                key={`skillEffect_${effect.x}_${effect.y}_${effect.scale}`}
+                effectStyle={{ delay: i * 0.035 + 1.55, ...effect }}
               />
             );
           })}

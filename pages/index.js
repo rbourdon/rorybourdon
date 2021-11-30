@@ -131,7 +131,10 @@ export default function Home({ skills, projects }) {
           <SkillsCard skills={skills} />
         </Section>
         <Section>
-          <ProjectsCard projects={projects} />
+          <ProjectsCard
+            projects={projects}
+            style={{ backgroundColor: theme.primary }}
+          />
         </Section>
         <Section style={{ backgroundColor: theme.primary_light }}>
           <SocialsCard />

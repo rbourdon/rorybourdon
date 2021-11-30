@@ -3,21 +3,21 @@ import { motion, useMotionValue } from "framer-motion";
 import { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
 
-const Container = styled(motion.div)`
+const Container = styled(motion.span)`
   position: absolute;
   left: 0;
-  pointer-events: none;
   top: 0;
+  pointer-events: none;
   will-change: opacity translate;
 `;
 
-const Check = styled(motion.div)`
+const Check = styled(motion.span)`
   position: absolute;
   height: 36px;
   width: 36px;
   right: 0;
-  pointer-events: none;
   top: 0;
+  pointer-events: none;
 `;
 
 const containerV = {
@@ -107,19 +107,16 @@ const checkV = {
 
 export default function SkillsBackgroundEffect({
   inView = false,
-  style = { x: 0, y: 0, scale: 1, delay: 0 },
+  effectStyle = { x: 0, y: 0, scale: 1, delay: 0 },
 }) {
   const theme = useContext(ThemeContext);
-  const x = useMotionValue(style.x);
-  const y = useBackgroundEffect(inView, style);
-  const scale = useMotionValue(style.scale);
+  const x = useMotionValue(effectStyle.x);
+  const y = useBackgroundEffect(inView, effectStyle);
+  const scale = useMotionValue(effectStyle.scale);
 
   return (
-    <Container
-      style={{ x, y, scale, opacity: style.scale }}
-      variants={containerV}
-    >
-      <svg
+    <Container style={{ x, y, scale }} variants={containerV}>
+      <motion.svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox={"-1 -1 165 109"}
         width={166}
@@ -149,7 +146,7 @@ export default function SkillsBackgroundEffect({
           fill={theme.primary_slightlydark}
           d="M117.49 82.63H31.81a3 3 0 0 1 0-5.94h85.68a3 3 0 0 1 0 5.94Z"
         />
-      </svg>
+      </motion.svg>
       <Check variants={checkV}>
         {/* Check */}
         <svg viewBox={"128 -1 36 36"}>
