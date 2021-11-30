@@ -30,9 +30,7 @@ const CardContent = styled(motion.div)`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 43% 54%;
-  column-gap: 3%;
-  grid-template-rows: 1fr max-content;
+
   justify-items: center;
   align-items: center;
   position: relative;
@@ -40,9 +38,6 @@ const CardContent = styled(motion.div)`
   z-index: 3;
 
   @media (max-width: 690px) {
-    grid-template-columns: 100%;
-    grid-template-rows: 43% 1fr;
-    row-gap: 3%;
     align-content: center;
     padding: 30px 25px;
   }
@@ -105,14 +100,14 @@ const Content = styled(motion.div)`
   align-items: center;
   justify-items: center;
   grid-template-columns: 100%;
-  grid-template-rows: 1fr max-content;
+  grid-template-rows: 1fr 45%;
   grid-row: span 2;
   overflow: hidden;
 
   @media (max-width: 690px) {
     grid-row: span 1;
     grid-template-columns: 100%;
-    grid-template-rows: 1fr max-content;
+    grid-template-rows: 1fr 45%;
     column-gap: 0px;
     row-gap: 20px;
   }
@@ -308,7 +303,7 @@ export default function SocialsCard() {
             <CardContent
               style={{
                 gridTemplateColumns: portrait ? "100%" : "43% 54%",
-                gridTemplateRows: portrait ? "43% 1fr" : "max-content 1fr",
+                gridTemplateRows: portrait ? "43% 1fr" : "100%",
                 rowGap: portrait ? "3%" : "0%",
                 columnGap: portrait ? "0%" : "3%",
               }}
