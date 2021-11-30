@@ -30,21 +30,19 @@ function useBackgroundEffect(inView, effectStyle) {
         baseY,
         Math.abs(scrollOffsetY.get()) > 0
           ? Math.sign(scrollOffsetY.get()) * 200
-          : 150,
+          : 200,
         {
           type: "tween",
           duration: 1.5 * effectStyle.scale,
           ease: "linear",
         }
       );
-
       const scrollOut = animate(scrollOffsetY, 0, {
         delay: effectStyle.delay,
         type: "tween",
         duration: 1.5 * effectStyle.scale,
         ease: "linear",
       });
-
       return () => {
         scrollOut.stop();
         baseOut.stop();
@@ -56,8 +54,14 @@ function useBackgroundEffect(inView, effectStyle) {
         duration: 1.5 * effectStyle.scale,
         ease: "linear",
       });
-
+      const scrollIn = animate(scrollOffsetY, 0, {
+        delay: effectStyle.delay,
+        type: "tween",
+        duration: 1.5 * effectStyle.scale,
+        ease: "linear",
+      });
       return () => {
+        scrollIn.stop();
         baseIn.stop();
       };
     }
