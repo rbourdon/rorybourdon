@@ -12,7 +12,7 @@ import CardEffect from "@/components/CardComponents/CardEffect";
 
 const Container = styled(motion.article)`
   width: 100%;
-  height: 100%;
+  height: max-content;
   padding: 0 5vw;
   display: flex;
   justify-content: center;
@@ -20,7 +20,7 @@ const Container = styled(motion.article)`
 `;
 
 const Card = styled(motion.article)`
-  top: calc(50vh - 358px / 2);
+  top: calc(50vh - 631 / 2);
   zindex: 1;
   scroll-margin-top: ${(props) => props.$scrollMargin};
   scroll-snap-margin: ${(props) => props.$scrollMargin};
@@ -275,9 +275,7 @@ export default function SocialsCard() {
         <Card
           id="socials"
           $scrollMargin={
-            "calc(50vh - " +
-            (portrait ? WIDTH + STEMLENGTH * 0.45 : HEIGHT) / 2 +
-            "px)"
+            "calc(50vh - " + (portrait ? WIDTH : HEIGHT) / 2 + "px)"
           }
           variants={containerV}
           style={{

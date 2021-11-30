@@ -12,7 +12,7 @@ import SkillsBackgroundEffect from "@/components/Skills/SkillsCard/SkillsBackgro
 
 const Container = styled(motion.article)`
   width: 100%;
-  height: 100%;
+  height: max-content;
   padding: 0 5vw;
   display: flex;
   justify-content: center;
