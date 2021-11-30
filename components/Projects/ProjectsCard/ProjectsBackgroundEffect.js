@@ -44,15 +44,19 @@ const containerV = {
 
 export default function ProjectsBackgroundEffect({
   inView = false,
-  style = { x: 0, y: 0, scale: 1, delay: 0 },
+  effectStyle = { x: 0, y: 0, scale: 1, delay: 0 },
 }) {
   const theme = useContext(ThemeContext);
-  const y = useBackgroundEffect(inView, style);
-  const x = useMotionValue(style.x);
-  const scale = useMotionValue(style.scale);
+  const y = useBackgroundEffect(inView, effectStyle);
+  const x = useMotionValue(effectStyle.x);
+  const scale = useMotionValue(effectStyle.scale);
 
   return (
-    <Container style={{ x, y, scale }} variants={containerV} custom={style}>
+    <Container
+      style={{ x, y, scale }}
+      variants={containerV}
+      custom={effectStyle}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="-1 -1 170 170"

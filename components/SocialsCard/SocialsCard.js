@@ -21,7 +21,6 @@ const Container = styled(motion.article)`
 
 const Card = styled(motion.article)`
   top: calc(50vh - 631 / 2);
-  zindex: 1;
   scroll-margin-top: ${(props) => props.$scrollMargin};
   scroll-snap-margin: ${(props) => props.$scrollMargin};
 `;
@@ -261,8 +260,8 @@ export default function SocialsCard() {
             return (
               <SocialsBackgroundEffect
                 inView={inView}
-                key={effect.x + effect.y + effect.scale}
-                style={{ delay: i * 0.035 + 1.65, ...effect }}
+                key={`socialsEffect_${effect.x}_${effect.y}_${effect.scale}`}
+                effectStyle={{ delay: i * 0.035 + 1.65, ...effect }}
               />
             );
           })}
