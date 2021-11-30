@@ -1,21 +1,13 @@
 import Head from "next/head";
-import styled, { ThemeContext } from "styled-components";
+import { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
 import { useContext } from "react";
-
-const Container = styled(motion.div)`
-  width: 100%;
-  min-height: 100vh;
-  max-width: 100%;
-  background-color: var(--color-primary);
-  overflow: hidden;
-`;
 
 function Layout({ children }) {
   const theme = useContext(ThemeContext);
 
   return (
-    <Container style={{ backgroundColor: theme.primary_light }}>
+    <motion.div style={{ backgroundColor: theme.primary_light }}>
       <Head>
         <link rel="stylesheet" href="https://use.typekit.net/ekd5pcq.css" />
 
@@ -134,7 +126,7 @@ function Layout({ children }) {
         />
       </Head>
       {children}
-    </Container>
+    </motion.div>
   );
 }
 

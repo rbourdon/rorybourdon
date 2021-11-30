@@ -280,6 +280,7 @@ export default function SocialsCard() {
             position: selected ? "fixed" : "static",
             zIndex: selected ? 40 : 35,
           }}
+          layoutId="socialsCard_container"
           onLayoutAnimationComplete={() =>
             setLayoutComplete(selected ? true : false)
           }

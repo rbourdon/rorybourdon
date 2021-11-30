@@ -6,7 +6,7 @@ import Layout from "@/components/layout";
 const GlobalStyle = createGlobalStyle`
 html {
     scrollbar-width: thin;
-    scrollbar-color: var(--color-primary) var(--color-primary_slightlydark);
+    scrollbar-color: var(--color-primary_mediumdark) var(--color-primary);
 
     &::-webkit-scrollbar {
       width: 10px;
@@ -17,11 +17,11 @@ html {
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: var(--color-primary_slightlydark);
+      background-color: var(--color-primary_mediumdark);
     }
 
     &::-webkit-scrollbar-thumb:hover {
-      background-color: var(--color-primary_mediumdark);
+      background-color: var(--color-primary_dark);
     }
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
