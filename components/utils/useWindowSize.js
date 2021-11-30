@@ -10,7 +10,7 @@ function useWindowSize() {
     function handleResize() {
       setWindowSize({
         width: window.innerWidth,
-        height: window.innerHeight,
+        height: window.screen.height,
       });
     }
 

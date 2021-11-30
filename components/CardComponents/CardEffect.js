@@ -8,7 +8,11 @@ const Container = styled(motion.div)`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 31;
+
+  @media (max-width: 780px) {
+    height: 200vh;
+  }
 `;
 
 const containerV = {

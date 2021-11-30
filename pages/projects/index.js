@@ -13,6 +13,7 @@ const Content = styled(motion.main)`
   width: 100%;
   min-width: 100%;
   height: 100%;
+  max-height: 100%;
   display: grid;
   flex: 1;
   grid-template-rows: max-content max-content;
@@ -23,9 +24,9 @@ const Content = styled(motion.main)`
   grid-auto-flow: dense;
 
   @media (max-width: 555px) {
-    row-gap: 10px;
+    row-gap: 2vh;
     align-items: start;
-    grid-template-rows: max-content max-content max-content;
+    grid-template-rows: max-content minmax(10vh, 1fr) 1fr;
     grid-template-columns: 100%;
     padding: 0 8vw;
   }
@@ -45,7 +46,7 @@ const Title = styled(motion.h1)`
   font-size: clamp(3.4rem, 15vw, 9rem);
   font-weight: 100;
   line-height: 1.2;
-  margin: 0 0 20px 20px;
+  margin: 0 0 10px 10px;
 `;
 
 const Detail = styled(motion.p)`
@@ -79,9 +80,13 @@ const HeadingBlock = styled(motion.div)`
 
 const ProjectsScene = styled(motion.div)`
   width: 100%;
-  height: max-content;
+  height: 100%;
   display: flex;
   justify-content: center;
+
+  @media (max-width: 555px) {
+    grid-row: 3;
+  }
 `;
 
 const ProjectsBlock = styled(motion.div)`
@@ -144,7 +149,7 @@ const arrowV = {
   },
 };
 
-export default function Skill({ projects }) {
+export default function Projects({ projects }) {
   const theme = useContext(ThemeContext);
 
   const pageLinks = [
@@ -218,8 +223,9 @@ export default function Skill({ projects }) {
 
             <DetailBlock>
               <Detail variants={detailsV} style={{ color: theme.primary_dark }}>
-                You can find various projects I have worked on below. I am
-                always building something new or improving on existing projects.
+                You can swipe through various projects I have worked on below. I
+                am always building something new or improving on existing
+                projects.
               </Detail>
             </DetailBlock>
           </HeadingBlock>

@@ -63,7 +63,7 @@ const Section = styled(motion.section)`
   align-items: center;
   position: relative;
 
-  @media (max-width: 800px) {
+  @media (max-width: 780px) {
     height: 200vh;
   }
 `;
