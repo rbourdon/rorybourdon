@@ -255,13 +255,13 @@ export default function SocialsCard() {
         {selected && (
           <Backing style={{ backgroundColor: theme.primary_light }} />
         )}
-        <CardEffect position={selected ? "fixed" : "absolute"} delay={1.7}>
+        <CardEffect position={selected ? "fixed" : "absolute"} delay={1.45}>
           {cardEffects.map((effect, i) => {
             return (
               <SocialsBackgroundEffect
                 inView={inView}
                 key={`socialsEffect_${effect.x}_${effect.y}_${effect.scale}`}
-                effectStyle={{ delay: i * 0.035 + 1.65, ...effect }}
+                effectStyle={{ delay: i * 0.035 + 1.4, ...effect }}
               />
             );
           })}
