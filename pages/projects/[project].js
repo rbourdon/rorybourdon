@@ -147,7 +147,7 @@ const pageLinks = [
   },
   {
     name: "Resume",
-    href: "/",
+    href: "/Rory_Bourdon_Resume_2021.pdf",
     onClick: null,
   },
 ];

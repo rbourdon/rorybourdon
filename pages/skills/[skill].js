@@ -205,7 +205,7 @@ export default function Skill({ skill }) {
     },
     {
       name: "Resume",
-      href: "/",
+      href: "/Rory_Bourdon_Resume_2021.pdf",
       color: secondaryColor,
       onClick: null,
     },

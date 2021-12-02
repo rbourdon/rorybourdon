@@ -99,17 +99,7 @@ const Content = styled(motion.div)`
   align-items: center;
   justify-items: center;
   grid-template-columns: 100%;
-  grid-template-rows: 1fr 45%;
-  grid-row: span 2;
   overflow: hidden;
-
-  @media (max-width: 690px) {
-    grid-row: span 1;
-    grid-template-columns: 100%;
-    grid-template-rows: 1fr 45%;
-    column-gap: 0px;
-    row-gap: 20px;
-  }
 `;
 
 const Backing = styled(motion.div)`
@@ -321,7 +311,13 @@ export default function SocialsCard() {
                   <SocialsSceneIcon scale={1.3} />
                 </SocialsScene>
               </CardWindow>
-              <Content>
+              <Content
+                style={{
+                  gridRow: portrait ? "span 1" : "span 2",
+                  gridTemplateRows: portrait ? "1fr 1fr" : "43% 1fr",
+                  rowGap: portrait ? "20px" : "0px",
+                }}
+              >
                 <SocialsBox variants={projectSummariesV}>
                   <SocialLink
                     platform="twitter"

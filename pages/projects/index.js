@@ -167,7 +167,7 @@ export default function Projects({ projects }) {
     },
     {
       name: "Resume",
-      href: "/",
+      href: "/Rory_Bourdon_Resume_2021.pdf",
       color: theme.orange,
       onClick: null,
     },

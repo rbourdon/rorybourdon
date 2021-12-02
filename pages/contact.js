@@ -143,7 +143,7 @@ export default function Contact() {
     },
     {
       name: "Resume",
-      href: "/",
+      href: "/Rory_Bourdon_Resume_2021.pdf",
       color: theme.green,
       onClick: null,
     },

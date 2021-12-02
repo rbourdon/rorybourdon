@@ -56,6 +56,7 @@ const HeroSection = styled(motion.section)`
 const Section = styled(motion.section)`
   width: 100%;
   height: 130vh;
+  min-height: 1200px;
   padding: 0 5vw;
   display: flex;
   justify-content: center;
@@ -90,7 +91,7 @@ export default function Home({ skills, projects }) {
     },
     {
       name: "Resume",
-      href: "/",
+      href: "/Rory_Bourdon_Resume_2021.pdf",
       color: theme.primary_slightlydark,
       onClick: null,
     },

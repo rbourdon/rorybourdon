@@ -103,7 +103,7 @@ const containerV = {
   exit: {
     opacity: 1,
     transition: {
-      duration: 0.9,
+      duration: 1,
     },
   },
 };
@@ -294,9 +294,7 @@ export default function SkillsCard({ skills }) {
               <CardWindow
                 layoutId="skillsCard_window"
                 style={{
-                  backgroundColor: selected
-                    ? theme.primary_verylight
-                    : theme.primary,
+                  backgroundColor: theme.primary,
                   zIndex: selected ? 4 : 1,
                 }}
               >
@@ -305,7 +303,7 @@ export default function SkillsCard({ skills }) {
                   <TreeIcon
                     colors={{
                       trunk: theme.primary_light,
-                      foliage: theme.primary_dark,
+                      foliage: theme.primary_verydark,
                     }}
                     layoutId="skills_tree_left"
                     margin="0 -70px 0 0"
@@ -323,6 +321,10 @@ export default function SkillsCard({ skills }) {
                     }
                   />
                   <TreeIcon
+                    colors={{
+                      trunk: theme.primary_verydark,
+                      foliage: theme.teal,
+                    }}
                     width={"95px"}
                     height={"140px"}
                     iconV={skillsIconV}
@@ -341,7 +343,7 @@ export default function SkillsCard({ skills }) {
                     height={"140px"}
                     colors={{
                       trunk: theme.primary_light,
-                      foliage: theme.primary_mediumdark,
+                      foliage: theme.primary_dark,
                     }}
                     layoutId="skills_tree_right"
                     margin="0 0 0 -70px"
