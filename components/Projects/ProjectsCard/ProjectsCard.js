@@ -56,7 +56,7 @@ const CardWindow = styled(motion.div)`
   align-items: center;
   justify-items: center;
   grid-template-columns: 100%;
-  grid-template-rows: 30% 70%;
+  grid-template-rows: 60px 1fr;
   grid-row: span 2;
   border-radius: 20px;
   position: relative;
@@ -174,11 +174,11 @@ const HEIGHT = 358;
 const STEMLENGTH = 375;
 const TAGLINESIZE = 350;
 
-export default function ProjectsCard({ projects }) {
+export default function ProjectsCard({ projects, sectionHeight = 1400 }) {
   const theme = useContext(ThemeContext);
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
-  const { width, height } = useWindowSize();
+  const { width } = useWindowSize();
   const { ref, inView } = useInView({
     threshold: 0.4,
   });
@@ -200,29 +200,29 @@ export default function ProjectsCard({ projects }) {
   };
 
   const cardEffects =
-    width && width > 800
+    width && !portrait
       ? [
-          { x: width * 0.05, y: height * 0.32, scale: 0.8 },
-          { x: width * 0.3, y: height * 0.41, scale: 0.6 },
-          { x: width * 0.4, y: height * 0.2, scale: 0.7 },
-          { x: width * 0.85, y: height * 0.25, scale: 0.9 },
-          { x: width * 0.24, y: height * 0.8, scale: 0.5 },
-          { x: width * 0.6, y: height * 0.9, scale: 1 },
-          { x: width * 0.03, y: height * 0.9, scale: 0.8 },
-          { x: width * 0.8, y: height * 0.8, scale: 0.4 },
-          { x: width * 0.2, y: height * 0.05, scale: 0.35 },
-          { x: width * 0.65, y: height * 0.1, scale: 0.45 },
+          { x: width * 0.05, y: sectionHeight * 0.22, scale: 0.8 },
+          { x: width * 0.3, y: sectionHeight * 0.31, scale: 0.6 },
+          { x: width * 0.4, y: sectionHeight * 0.1, scale: 0.7 },
+          { x: width * 0.85, y: sectionHeight * 0.15, scale: 0.9 },
+          { x: width * 0.24, y: sectionHeight * 0.7, scale: 0.5 },
+          { x: width * 0.6, y: sectionHeight * 0.8, scale: 1 },
+          { x: width * 0.03, y: sectionHeight * 0.8, scale: 0.8 },
+          { x: width * 0.8, y: sectionHeight * 0.7, scale: 0.4 },
+          { x: width * 0.2, y: sectionHeight * 0, scale: 0.35 },
+          { x: width * 0.65, y: sectionHeight * 0.05, scale: 0.45 },
         ]
       : width
       ? [
-          { x: width * 0.4, y: height * 0.18, scale: 0.7 },
-          { x: width * 0.85, y: height * 0.45, scale: 0.9 },
-          { x: width * -0.1, y: height * 0.35, scale: 0.9 },
-          { x: width * 0.6, y: height * 0.95, scale: 1 },
-          { x: width * 0.03, y: height * 1.1, scale: 0.8 },
-          { x: width * 0.5, y: height * 1.1, scale: 0.4 },
-          { x: width * 0.2, y: height * 0.05, scale: 0.75 },
-          { x: width * 0.65, y: height * 0.1, scale: 0.45 },
+          { x: width * 0.4, y: sectionHeight * 0.08, scale: 0.7 },
+          { x: width * 0.85, y: sectionHeight * 0.35, scale: 0.9 },
+          { x: width * -0.1, y: sectionHeight * 0.25, scale: 0.9 },
+          { x: width * 0.6, y: sectionHeight * 0.85, scale: 1 },
+          { x: width * 0.03, y: sectionHeight * 1, scale: 0.8 },
+          { x: width * 0.5, y: sectionHeight * 1, scale: 0.4 },
+          { x: width * 0.2, y: sectionHeight * 0, scale: 0.75 },
+          { x: width * 0.65, y: sectionHeight * 0.05, scale: 0.45 },
         ]
       : [];
 

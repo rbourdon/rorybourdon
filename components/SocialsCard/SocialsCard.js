@@ -51,7 +51,7 @@ const CardWindow = styled(motion.div)`
   align-items: center;
   justify-items: center;
   grid-template-columns: 100%;
-  grid-template-rows: 30% 70%;
+  grid-template-rows: 35% 65%;
   grid-row: span 2;
   border-radius: 20px;
   position: relative;
@@ -179,11 +179,11 @@ const HEIGHT = 180;
 const STEMLENGTH = 345;
 const TAGLINESIZE = 350;
 
-export default function SocialsCard() {
+export default function SocialsCard({ sectionHeight = 1400 }) {
   const theme = useContext(ThemeContext);
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
-  const { width, height } = useWindowSize();
+  const { width } = useWindowSize();
   const { ref, inView } = useInView({
     threshold: 0.4,
   });
@@ -198,32 +198,32 @@ export default function SocialsCard() {
   };
 
   const cardEffects =
-    width && width > 800
+    width && !portrait
       ? [
-          { x: width * 0.35, y: height * 0.35, scale: 0.75 },
-          { x: width * 0.5, y: height * 0.8, scale: 0.6 },
-          { x: width * 0.5, y: height * 0.12, scale: 1 },
-          { x: width * 0.7, y: height * 0.35, scale: 0.5 },
-          { x: width * 0, y: height * 0.75, scale: 0.55 },
-          { x: width * 0.88, y: height * 0.2, scale: 0.65 },
-          { x: width * 0.7, y: height * 0.9, scale: 0.75 },
-          { x: width * 0.03, y: height * 0.4, scale: 0.4 },
-          { x: width * 0.3, y: height * 1, scale: 0.9 },
-          { x: width * 0.2, y: height * 0.85, scale: 0.3 },
-          { x: width * 0.2, y: height * 0.1, scale: 0.4 },
-          { x: width * 0.55, y: height * 1.1, scale: 0.36 },
+          { x: width * 0.35, y: sectionHeight * 0.25, scale: 0.75 },
+          { x: width * 0.5, y: sectionHeight * 0.7, scale: 0.6 },
+          { x: width * 0.5, y: sectionHeight * 0.02, scale: 1 },
+          { x: width * 0.7, y: sectionHeight * 0.25, scale: 0.5 },
+          { x: width * 0, y: sectionHeight * 0.65, scale: 0.55 },
+          { x: width * 0.88, y: sectionHeight * 0.1, scale: 0.65 },
+          { x: width * 0.7, y: sectionHeight * 0.8, scale: 0.75 },
+          { x: width * 0.03, y: sectionHeight * 0.3, scale: 0.4 },
+          { x: width * 0.3, y: sectionHeight * 0.9, scale: 0.9 },
+          { x: width * 0.2, y: sectionHeight * 0.75, scale: 0.3 },
+          { x: width * 0.2, y: sectionHeight * 0, scale: 0.4 },
+          { x: width * 0.55, y: sectionHeight * 1, scale: 0.36 },
         ]
       : width
       ? [
-          { x: width * 0.15, y: height * 0.15, scale: 0.75 },
-          { x: width * 0.2, y: height * 1.1, scale: 0.88 },
-          { x: width * 0.5, y: height * 0.05, scale: 1 },
-          { x: width * 0.7, y: height * 0.35, scale: 0.5 },
-          { x: width * 0.1, y: height * 0.75, scale: 0.45 },
-          { x: width * 0.84, y: height * 0.24, scale: 0.65 },
-          { x: width * 0.6, y: height * 0.8, scale: 0.75 },
-          { x: 0, y: height * 0.4, scale: 0.6 },
-          { x: width * 0.8, y: height * 1.15, scale: 0.9 },
+          { x: width * 0.1, y: sectionHeight * 0.15, scale: 0.75 },
+          { x: width * 0.2, y: sectionHeight * 1, scale: 0.88 },
+          { x: width * 0.5, y: sectionHeight * 0, scale: 1 },
+          { x: width * 0.7, y: sectionHeight * 0.25, scale: 0.5 },
+          { x: width * 0.1, y: sectionHeight * 0.65, scale: 0.45 },
+          { x: width * 0.84, y: sectionHeight * 0.14, scale: 0.65 },
+          { x: width * 0.6, y: sectionHeight * 0.7, scale: 0.75 },
+          { x: 0, y: sectionHeight * 0.4, scale: 0.5 },
+          { x: width * 0.8, y: sectionHeight * 1.05, scale: 0.9 },
         ]
       : [];
 
