@@ -98,8 +98,8 @@ const Title = styled(motion.h1)`
   width: max-content;
   font-size: clamp(3.4rem, 15vw, 9rem);
   font-weight: 100;
-  line-height: 1;
-  margin-left: 20px;
+  line-height: clamp(3.4rem, 13vw, 9rem);
+  margin-left: 2vw;
   z-index: 1;
 `;
 
