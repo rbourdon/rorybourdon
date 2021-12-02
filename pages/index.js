@@ -90,7 +90,7 @@ export default function Home({ skills, projects }) {
     },
     {
       name: "Resume",
-      href: "/",
+      href: "/Rory_Bourdon_Resume_2021.pdf",
       color: theme.primary_slightlydark,
       onClick: null,
     },
