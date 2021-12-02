@@ -1,5 +1,5 @@
 import styled, { ThemeContext } from "styled-components";
-import { LayoutGroup, motion, useIsPresent } from "framer-motion";
+import { motion, useIsPresent } from "framer-motion";
 import SkillBubble from "@/components/Skills/SkillBubble";
 import { useContext, useState } from "react";
 import useInterval from "@/components/utils/useInterval";
@@ -46,46 +46,44 @@ export default function SkillRoller({
 
   return (
     <Roller variants={variants}>
-      <LayoutGroup>
-        {[
-          ...skills.slice(rollerPos, rollerPos + numSkills),
-          ...skills.slice(
-            0,
-            numSkills - skills.slice(rollerPos, rollerPos + numSkills).length
-          ),
-        ].map((skill, index) => {
-          return (
-            <SkillBubble
-              title={skill.title}
-              id={skill.slug}
-              key={skill.slug}
-              top={index === 0 ? true : false}
-              bottom={index === numSkills - 1 ? true : false}
-              hoverColor={{
-                bg: theme.teal,
-                text: theme.primary_dark,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 130,
-                mass: 1,
-                damping: 15,
-              }}
-              outlineTransition={{
-                type: "spring",
-                stiffness: 150,
-                mass: 0.8,
-                damping: 15,
-              }}
-              select={selectBubble}
-              canHover={true}
-              selected={selectedBubble === skill.title}
-            >
-              {skill.title}
-            </SkillBubble>
-          );
-        })}
-      </LayoutGroup>
+      {[
+        ...skills.slice(rollerPos, rollerPos + numSkills),
+        ...skills.slice(
+          0,
+          numSkills - skills.slice(rollerPos, rollerPos + numSkills).length
+        ),
+      ].map((skill, index) => {
+        return (
+          <SkillBubble
+            title={skill.title}
+            id={skill.slug}
+            key={skill.slug}
+            top={index === 0 ? true : false}
+            bottom={index === numSkills - 1 ? true : false}
+            hoverColor={{
+              bg: theme.teal,
+              text: theme.primary_dark,
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 130,
+              mass: 1,
+              damping: 15,
+            }}
+            outlineTransition={{
+              type: "spring",
+              stiffness: 150,
+              mass: 0.8,
+              damping: 15,
+            }}
+            select={selectBubble}
+            canHover={true}
+            selected={selectedBubble === skill.title}
+          >
+            {skill.title}
+          </SkillBubble>
+        );
+      })}
     </Roller>
   );
 }
