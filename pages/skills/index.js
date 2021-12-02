@@ -68,7 +68,7 @@ const Trees = styled(motion.div)`
   align-self: flex-end;
   display: flex;
   position: relative;
-  zindex: 0;
+  pointer-events: none;
   margin-top: 50px;
 
   @media (max-width: 555px) {
@@ -271,7 +271,7 @@ export default function Skills({ skills }) {
 
           <Trees initial="visible">
             <TreeIcon
-              zIndex={2}
+              zIndex={10}
               colors={{
                 trunk: theme.primary_light,
                 foliage: theme.primary_dark,
@@ -293,7 +293,7 @@ export default function Skills({ skills }) {
                 trunk: theme.primary_verydark,
                 foliage: theme.teal,
               }}
-              zIndex={3}
+              zIndex={11}
               transition={{
                 type: "spring",
                 stiffness: 35,
@@ -305,7 +305,7 @@ export default function Skills({ skills }) {
               custom={0}
             />
             <TreeIcon
-              zIndex={2}
+              zIndex={10}
               colors={{
                 trunk: theme.primary_light,
                 foliage: theme.primary_mediumdark,
