@@ -56,6 +56,7 @@ const HeroSection = styled(motion.section)`
 const Section = styled(motion.section)`
   width: 100%;
   height: 130vh;
+  min-height: 1200px;
   padding: 0 5vw;
   display: flex;
   justify-content: center;
