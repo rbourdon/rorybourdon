@@ -13,24 +13,24 @@ const Container = styled(motion.div)`
 
 const containerV = {
   hidden: {
-    opacity: 0,
+    scale: 0,
     transition: {
       staggerChildren: 0.1,
       type: "tween",
       duration: 0.2,
     },
   },
-  visible: {
-    opacity: 1,
+  visible: (custom) => ({
+    scale: custom.scale,
     transition: {
       staggerChildren: 0.1,
-      delayChildren: 0.25,
+      delayChildren: 0.7,
       type: "tween",
-      duration: 0.2,
+      duration: 0.8,
     },
-  },
+  }),
   selected: {
-    opacity: 0,
+    scale: 0,
     transition: {
       staggerChildren: 0.05,
       type: "tween",
@@ -77,14 +77,8 @@ export default function SocialsBackgroundEffect({
   const x = useMotionValue(effectStyle.x);
   const y = useBackgroundEffect(inView, effectStyle);
 
-  const scale = useMotionValue(effectStyle.scale);
-
   return (
-    <Container
-      style={{ x, y, scale }}
-      variants={containerV}
-      custom={effectStyle}
-    >
+    <Container style={{ x, y }} variants={containerV} custom={effectStyle}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="-1 -1 130 130"
