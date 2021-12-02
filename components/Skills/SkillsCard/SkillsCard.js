@@ -103,7 +103,7 @@ const containerV = {
   exit: {
     opacity: 1,
     transition: {
-      duration: 0.9,
+      duration: 1,
     },
   },
 };

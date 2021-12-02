@@ -152,7 +152,7 @@ const containerV = {
   exit: {
     opacity: 1,
     transition: {
-      duration: 1.35,
+      duration: 1.45,
     },
   },
 };
