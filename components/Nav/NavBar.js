@@ -34,7 +34,7 @@ const NavBox = styled(motion.div)`
 `;
 
 const LinksContainer = styled(motion.div)`
-  width: min(100%, 800px);
+  width: min(100%, 700px);
   height: 70%;
   display: flex;
   justify-content: space-evenly;

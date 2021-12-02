@@ -83,6 +83,8 @@ const ProjectsScene = styled(motion.div)`
   height: 100%;
   display: flex;
   justify-content: center;
+  z-index: 12;
+  pointer-events: none;
 
   @media (max-width: 555px) {
     grid-row: 3;

@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Container = styled(motion.span)`
   width: 100%;
   max-width: 100%;
-  height: 130vh;
+  height: 1400px;
   position: absolute;
   top: 0;
   left: 0;

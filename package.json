@@ -11,6 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.6.0",
     "color-convert": "^2.0.1",
     "framer-motion": "^5.3.3",
     "graphql": "^15.6.1",

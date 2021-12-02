@@ -6,6 +6,7 @@ import Head from "next/head";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
 import BackArrow from "@/components/BackArrow";
 import SocialsSceneIcon from "@/components/Icons/SocialsSceneIcon";
+import ContactForm from "@/components/ContactForm";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -13,12 +14,13 @@ const Content = styled(motion.main)`
   height: max-content;
   display: grid;
   flex: 1;
-  grid-template-rows: max-content;
+  grid-template-rows: 30% 60%;
   grid-template-columns: 52% 1fr;
-  padding: 0 12vw;
+  padding: 0 10vw;
   grid-auto-flow: dense;
-
   align-content: center;
+  justify-items: start;
+  align-items: center;
 
   @media (max-width: 555px) {
     row-gap: 10px;
@@ -26,6 +28,7 @@ const Content = styled(motion.main)`
     grid-template-rows: max-content max-content 1fr;
     grid-template-columns: 100%;
     padding: 4vh 8vw;
+    justify-items: center;
   }
 `;
 
@@ -42,13 +45,13 @@ const Title = styled(motion.h1)`
   width: max-content;
   font-size: clamp(3.4rem, 15vw, 9rem);
   font-weight: 100;
-  line-height: 1;
-  margin-left: 20px;
+  line-height: clamp(4.4rem, 13vw, 9rem);
+  margin-left: 2vw;
 `;
 
 const Detail = styled(motion.div)`
   padding: 0 0 10vh 0;
-  max-width: 610px;
+  max-width: 710px;
   font-size: clamp(1rem, 4vw, 1.3525rem);
   font-weight: 100;
   line-height: clamp(1rem, 4.5vw, 1.55rem);
@@ -63,6 +66,7 @@ const SocialsScene = styled(motion.div)`
   width: 100%;
   display: flex;
   justify-content: center;
+  grid-row: span 2;
 `;
 
 const TitleBlock = styled(motion.div)`
@@ -199,6 +203,7 @@ export default function Contact() {
           <SocialsScene>
             <SocialsSceneIcon scale={1} collapsed={false} />
           </SocialsScene>
+          <ContactForm />
         </Content>
       </Container>
     </MotionConfig>

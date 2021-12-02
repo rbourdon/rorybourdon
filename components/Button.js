@@ -10,7 +10,21 @@ import Link from "next/link";
 import CardBorder from "@/components/CardComponents/CardBorder";
 import { useContext } from "react";
 
-const Container = styled(motion.a)`
+const LinkContainer = styled(motion.a)`
+  width: ${(props) => props.$width + "px"};
+  height: ${(props) => props.$height + "px"};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 99;
+  -webkit-tap-highlight-color: transparent;
+  &:focus {
+    outline: none;
+  }
+`;
+
+const ButtonContainer = styled(motion.button)`
   width: ${(props) => props.$width + "px"};
   height: ${(props) => props.$height + "px"};
   display: flex;
@@ -101,6 +115,7 @@ export default function Button({
   height = 50,
   sWidth = 1.1,
   bRadius = 23,
+  type = "link",
   id,
   animationDelay = 0,
   onClick,
@@ -157,9 +172,9 @@ export default function Button({
     },
   };
 
-  return (
+  return type === "link" ? (
     <Link href={href ? href : "/"} passHref scroll={false}>
-      <Container
+      <LinkContainer
         $width={width}
         $height={height}
         onHoverStart={() => handleHoverStart(hover)}
@@ -194,7 +209,45 @@ export default function Button({
           innerOffset={-0.1}
           id={id + "button"}
         />
-      </Container>
+      </LinkContainer>
     </Link>
+  ) : (
+    <ButtonContainer
+      $width={width}
+      $height={height}
+      onHoverStart={() => handleHoverStart(hover)}
+      onHoverEnd={() => handleHoverEnd(hover)}
+      onFocus={() => handleHoverStart(hover)}
+      onBlur={() => handleHoverEnd(hover)}
+      onClick={onClick}
+      type="submit"
+      layoutId={`${id}Button`}
+    >
+      <Content
+        style={{
+          color: theme.primary_dark,
+          backgroundColor: theme.primary_light,
+          boxShadow,
+        }}
+        custom={{ bRadius: bRadius, animationDelay: animationDelay }}
+        variants={contentV}
+        layoutId={`${id}ButtonContent`}
+      >
+        {children}
+      </Content>
+      <CardBorder
+        color1={theme.primary_mediumdark}
+        width={width * scale.get()}
+        height={height * scale.get()}
+        sWidth={sWidth}
+        bRadius={bRadius}
+        startLoc={3}
+        borderV={borderV}
+        frameV={frameV}
+        innerBorderV={innerBorderV}
+        innerOffset={-0.1}
+        id={id + "button"}
+      />
+    </ButtonContainer>
   );
 }
