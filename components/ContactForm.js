@@ -64,6 +64,7 @@ const ConfirmationContainer = styled(motion.div)`
 
 const Confirmation = styled(motion.div)`
   width: 420px;
+  max-width: 90vw;
   height: 100px;
   border-radius: 23px;
   display: flex;
@@ -171,7 +172,6 @@ export default function ContactForm() {
         height={50}
         color1={theme.green}
         type="submit"
-        onClick={() => setSent(true)}
         id="contactForm"
         animationDelay={0}
       >
@@ -195,7 +195,7 @@ export default function ContactForm() {
         onClick={() => setSent(true)}
         layoutId={"contactFormButtonContent"}
       >
-        <motion.span layoutId="contactButtonText">Send</motion.span>
+        <motion.span layoutId="contactButtonText">Sent</motion.span>
         <Thanks
           initial="hidden"
           animate="visible"
