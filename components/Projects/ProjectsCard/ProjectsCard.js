@@ -101,6 +101,11 @@ const ProjectsScene = styled(motion.div)`
   position: relative;
 `;
 
+const WIDTH = 710;
+const HEIGHT = 358;
+const STEMLENGTH = 375;
+const TAGLINESIZE = 350;
+
 const projectsCardV = {
   hidden: {
     opacity: 0,
@@ -111,7 +116,7 @@ const projectsCardV = {
   visible: {
     opacity: 1,
     transition: {
-      delay: 358 * 697 * 0.0000012 + 2.05,
+      delay: HEIGHT * WIDTH * 0.0000012 + 2,
       duration: 0.4,
     },
   },
@@ -130,7 +135,7 @@ const projectSummariesV = {
   visible: {
     opacity: 1,
     transition: {
-      delay: 358 * 697 * 0.0000012 + 1.85,
+      delay: HEIGHT * WIDTH * 0.0000012 + 1.85,
       duration: 0.5,
     },
   },
@@ -168,11 +173,6 @@ const outlineV = {
     },
   },
 };
-
-const WIDTH = 710;
-const HEIGHT = 358;
-const STEMLENGTH = 375;
-const TAGLINESIZE = 350;
 
 export default function ProjectsCard({ projects, sectionHeight = 1400 }) {
   const theme = useContext(ThemeContext);
@@ -336,7 +336,7 @@ export default function ProjectsCard({ projects, sectionHeight = 1400 }) {
                 color1={theme.orange}
                 href="/projects"
                 id="projects"
-                animationDelay={WIDTH * HEIGHT * 0.0000012 + 1.85}
+                animationDelay={WIDTH * HEIGHT * 0.0000012 + 2.1}
                 onClick={clickHandler}
               >
                 All Projects
