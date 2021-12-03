@@ -11,6 +11,8 @@ const Effect = styled.div`
   left: 0;
   pointer-events: none;
   top: 0;
+  z-index: 0;
+  isolation: isolate;
 `;
 
 const lineV = {
@@ -102,49 +104,6 @@ export default function HorizonEffects({ lines = [], circles = [] }) {
   useEffect(() => {
     width && strokeWidth.set(0.33 - width * 0.0001);
   }, [strokeWidth, width]);
-
-  // return lines.map((line, index) => {
-  //   return (
-  //     <React.Fragment key={line.yLoc + "_frag_" + index}>
-  //       <Effect key={line.yLoc + "_container1_" + index}>
-  //         <svg xmlns="http://www.w3.org/2000/svg" viewBox={"0 0 200 200"}>
-  //           <motion.path
-  //             variants={line1V}
-  //             d={`M0,${line.yLoc - 1} l200,${line.slope}`}
-  //             stroke={theme.primary_slightlydark}
-  //             style={{ strokeWidth }}
-  //             strokeDasharray="0 1"
-  //             fill="none"
-  //           />
-  //         </svg>
-  //       </Effect>
-  //       <Effect key={line.yLoc + "_container2_" + index}>
-  //         <svg xmlns="http://www.w3.org/2000/svg" viewBox={"0 0 200 200"}>
-  //           <motion.path
-  //             variants={lineV}
-  //             d={`M0,${line.yLoc} l200,${line.slope}`}
-  //             stroke={theme.primary_slightlydark}
-  //             style={{ strokeWidth }}
-  //             strokeDasharray="0 1"
-  //             fill="none"
-  //           />
-  //         </svg>
-  //       </Effect>
-  //       <Effect key={line.yLoc + "_container3_" + index}>
-  //         <svg xmlns="http://www.w3.org/2000/svg" viewBox={"0 0 200 200"}>
-  //           <motion.path
-  //             variants={line2V}
-  //             d={`M0,${line.yLoc + 1} l200,${line.slope}`}
-  //             stroke={theme.primary_slightlydark}
-  //             style={{ strokeWidth }}
-  //             strokeDasharray="0 1"
-  //             fill="none"
-  //           />
-  //         </svg>
-  //       </Effect>
-  //     </React.Fragment>
-  //   );
-  // });
 
   return (
     <Effect>

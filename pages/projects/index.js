@@ -25,10 +25,10 @@ const Content = styled(motion.main)`
 
   @media (max-width: 555px) {
     row-gap: 2vh;
-    align-items: start;
+    align-items: center;
     grid-template-rows: max-content minmax(10vh, 1fr) 1fr;
     grid-template-columns: 100%;
-    padding: 0 8vw;
+    padding: 1vh 6vw;
   }
 `;
 
@@ -36,8 +36,8 @@ const Container = styled(motion.div)`
   width: 100%;
   height: 100vh;
   display: flex;
-  flex-direction: column;
   overflow: hidden;
+  flex-direction: column;
   position: relative;
 `;
 
@@ -47,6 +47,7 @@ const Title = styled(motion.h1)`
   font-weight: 100;
   line-height: 1.2;
   margin: 0 0 10px 10px;
+  z-index: 1;
 `;
 
 const Detail = styled(motion.p)`
@@ -83,8 +84,9 @@ const ProjectsScene = styled(motion.div)`
   height: 100%;
   display: flex;
   justify-content: center;
-  z-index: 12;
   pointer-events: none;
+  position: relative;
+  z-index: 2;
 
   @media (max-width: 555px) {
     grid-row: 3;
@@ -237,7 +239,7 @@ export default function Projects({ projects }) {
           <ProjectsBlock>
             <ProjectsScroller
               projects={projects}
-              primaryColor={theme.primary_dark}
+              primaryColor={theme.primary_verydark}
               bgColor={theme.orange}
             />
           </ProjectsBlock>

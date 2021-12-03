@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 // import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const Container = styled(motion.div)`
+const Container = styled(motion.span)`
   width: 100%;
   height: 100%;
   z-index: ${(props) => props.$zIndex};
@@ -11,16 +11,18 @@ const Container = styled(motion.div)`
   position: relative;
 `;
 
-const Foliage = styled(motion.div)`
+const Foliage = styled(motion.span)`
   width: 100%;
+  height: 100%;
   max-width: 100%;
   max-height: 100%;
   position: absolute;
   bottom: -5px;
 `;
 
-const Trunk = styled(motion.div)`
+const Trunk = styled(motion.span)`
   width: 100%;
+  height: 100%;
   max-width: 100%;
   max-height: 100%;
   position: absolute;
@@ -74,36 +76,10 @@ const foliageV = {
   }),
   selected: {
     scale: 1,
+    originY: 0.65,
     transition: { duration: 0 },
   },
 };
-
-// const leavesV = {
-//   hidden: (custom) => ({
-//     rotate: 0,
-//     opacity: 1,
-//     y: 0, //custom.y,
-//     x: custom.x,
-//   }),
-//   visible: (custom) => ({
-//     rotate: 360,
-//     opacity: 1,
-//     x: "50%",
-//     y: 0,
-//     transition: {
-//       type: "tween",
-//       ease: "linear",
-//       repeat: Infinity,
-//       duration: 2,
-//       delay: custom.delay,
-//       repeatDelay: custom.repeatDelay,
-//     },
-//   }),
-//   selected: {
-//     opacity: 1,
-//     y: 80,
-//   },
-// };
 
 export default function TreeIcon({
   iconV,
@@ -129,12 +105,7 @@ export default function TreeIcon({
       $height={height}
       style={{ scale }}
     >
-      <Foliage
-        layout
-        variants={foliageV}
-        custom={delay + 0.4}
-        transition={transition}
-      >
+      <Foliage variants={foliageV} custom={delay + 0.4} transition={transition}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -30 125 192">
           <motion.path
             d="M95 81.3c0 35.8-21.2 48.3-47.5 48.3S0 117.1 0 81.3 47.5 0 47.5 0s47.6 45.5 47.6 81.3Z"
@@ -148,7 +119,7 @@ export default function TreeIcon({
           /> */}
         </svg>
       </Foliage>
-      <Trunk layout variants={trunkV} custom={delay} transition={transition}>
+      <Trunk variants={trunkV} custom={delay} transition={transition}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -30 125 192">
           {/* <motion.path
             variants={foliageV}

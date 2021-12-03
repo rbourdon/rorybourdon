@@ -22,6 +22,31 @@ const Container = styled(motion.a)`
   }
 `;
 
+const socialLinkV = {
+  hidden: {
+    y: -120,
+    transition: {
+      type: "spring",
+      duration: 0.3,
+    },
+  },
+  visible: {
+    y: 0,
+    transition: {
+      type: "spring",
+      duration: 0.5,
+    },
+  },
+  selected: {
+    y: 0,
+    opacity: 0,
+    transition: {
+      type: "tween",
+      duration: 0.3,
+    },
+  },
+};
+
 export default function SocialLink({ href = "/", platform, hoverColor }) {
   const theme = useContext(ThemeContext);
 
@@ -49,6 +74,7 @@ export default function SocialLink({ href = "/", platform, hoverColor }) {
         onHoverStart={handleHoverStart}
         onHoverEnd={handleHoverEnd}
         style={{ color }}
+        variants={socialLinkV}
       >
         {
           {

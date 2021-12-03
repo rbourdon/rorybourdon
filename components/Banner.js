@@ -12,9 +12,8 @@ const Container = styled(motion.div)`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-column: 100%;
+  grid-template-columns: 100%;
   grid-template-rows: 1fr max-content;
-
   align-items: center;
 `;
 
@@ -22,10 +21,9 @@ const Title = styled(motion.h1)`
   width: 100%;
   height: 100%;
   font-weight: 800;
-
+  align-items: flex-end;
   display: flex;
   overflow: hidden;
-  margin: 0 0 1vw 0;
 `;
 
 const BG = styled(motion.div)`
@@ -44,7 +42,7 @@ const BG = styled(motion.div)`
 const Letter = styled(motion.div)`
   userselect: none;
   position: relative;
-  padding: 0 0.5vw;
+  padding: 1vw 0.5vw;
   mix-blend-mode: multiply;
 `;
 
@@ -64,20 +62,21 @@ const titleV = {
   visible: (custom) => ({
     transition: {
       delayChildren: custom,
-      staggerChildren: 0.25,
+      staggerChildren: 0.15,
     },
   }),
 };
 
 const letterV = {
   hidden: {
-    y: 190,
+    y: 150,
   },
   visible: {
     y: 0,
     transition: {
-      duration: 1.25,
-      bounce: 0.3,
+      stiffness: 30,
+      mass: 1.25,
+      damping: 7,
       type: "spring",
     },
   },

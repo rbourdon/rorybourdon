@@ -74,6 +74,12 @@ const Backing = styled(motion.div)`
   z-index: 30;
 `;
 
+const DELAY = 0.5;
+const WIDTH = 230;
+const HEIGHT = 710;
+const STEMLENGTH = 475;
+const TAGLINESIZE = 350;
+
 const skillsCardV = {
   hidden: {
     opacity: 0,
@@ -84,7 +90,7 @@ const skillsCardV = {
   visible: {
     opacity: 1,
     transition: {
-      delay: 710 * 230 * 0.0000012 + 1.85,
+      delay: HEIGHT * WIDTH * 0.0000012 + 1.85,
       duration: 0.5,
     },
   },
@@ -118,7 +124,7 @@ const rollerV = {
   visible: {
     opacity: 1,
     transition: {
-      delay: 710 * 230 * 0.0000012 + 1.85,
+      delay: HEIGHT * WIDTH * 0.0000012 + 1.85,
       duration: 0.5,
     },
   },
@@ -132,35 +138,33 @@ const rollerV = {
 
 const skillsIconV = {
   hidden: (custom) => ({
-    originY: 1,
+    originY: 0.65,
+    y: -14,
     scale: custom,
     transition: {
       duration: 0,
     },
   }),
   visible: (custom) => ({
-    originY: 1,
+    originY: 0.65,
+    y: 15,
     scale: custom,
     transition: {
-      delayChildren: 710 * 230 * 0.0000012 + 0.5,
+      delay: HEIGHT * WIDTH * 0.0000012 + 2,
+      delayChildren: HEIGHT * WIDTH * 0.0000012 + 0.5,
       staggerChildren: 0.75,
-      duration: 0,
+      duration: 0.8,
     },
   }),
   selected: (custom) => ({
-    originY: 1,
+    originY: 0.65,
+    y: 15,
     scale: custom,
     transition: {
       duration: 0,
     },
   }),
 };
-
-const DELAY = 0.5;
-const WIDTH = 230;
-const HEIGHT = 710;
-const STEMLENGTH = 475;
-const TAGLINESIZE = 350;
 
 const layoutTransition = {
   type: "spring",

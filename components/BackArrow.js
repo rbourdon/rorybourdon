@@ -18,7 +18,7 @@ const Container = styled(motion.button)`
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 99;
+  z-index: 1;
   background: none;
   color: inherit;
   border: none;

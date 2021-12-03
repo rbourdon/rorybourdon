@@ -50,7 +50,7 @@ const Hamburger = styled(motion.div)`
   width: 3rem;
   max-height: 100%;
   padding: 0 0.5rem;
-  z-index: 2;
+  z-index: 3;
 
   @media (min-width: 655px) {
     display: none;

@@ -21,7 +21,6 @@ const Bubbles = styled(motion.ul)`
   margin: 0;
   cursor: grab;
   grid-auto-rows: 40px;
-  z-index: 6;
   touch-action: none;
 
   @media (max-width: 555px) {

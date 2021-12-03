@@ -271,7 +271,7 @@ export default function ProjectSummary({
       onFocus={handleHoverStart}
       onBlur={handleHoverEnd}
       style={{
-        zIndex: outline ? 3 : 1,
+        zIndex: outline ? 1 : 0,
         boxShadow,
         scale,
         backgroundColor,

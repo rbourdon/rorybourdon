@@ -7,7 +7,9 @@ function Layout({ children }) {
   const theme = useContext(ThemeContext);
 
   return (
-    <motion.div style={{ backgroundColor: theme.primary_light }}>
+    <motion.div
+      style={{ backgroundColor: theme.primary_light, overflow: "hidden" }}
+    >
       <Head>
         <link rel="stylesheet" href="https://use.typekit.net/ekd5pcq.css" />
 

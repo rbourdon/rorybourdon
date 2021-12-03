@@ -13,7 +13,7 @@ import Footer from "@/components/Footer";
 
 const Container = styled(motion.div)`
   width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 `;
@@ -27,7 +27,8 @@ const Content = styled(motion.main)`
 
 const HeroBanner = styled(motion.header)`
   width: 100%;
-  height: max-content;
+  height: 25vh;
+  min-height: max-content;
   display: flex;
   flex-direction: column;
 `;
