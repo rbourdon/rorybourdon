@@ -36,6 +36,7 @@ const Container = styled(motion.div)`
   width: 100%;
   height: 100vh;
   display: flex;
+  overflow: hidden;
   flex-direction: column;
   position: relative;
 `;
@@ -83,7 +84,6 @@ const ProjectsScene = styled(motion.div)`
   height: 100%;
   display: flex;
   justify-content: center;
-  isolation: isolate;
   pointer-events: none;
   position: relative;
   z-index: 2;
