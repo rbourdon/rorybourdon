@@ -98,6 +98,7 @@ const Content = styled(motion.div)`
   display: grid;
   align-items: center;
   justify-items: center;
+  align-content: center;
   grid-template-columns: 100%;
   overflow: hidden;
 `;
@@ -118,7 +119,12 @@ const SocialsScene = styled(motion.div)`
   position: relative;
 `;
 
-const projectsCardV = {
+const WIDTH = 631;
+const HEIGHT = 180;
+const STEMLENGTH = 345;
+const TAGLINESIZE = 350;
+
+const socialsCardV = {
   hidden: {
     opacity: 0,
     transition: {
@@ -128,7 +134,7 @@ const projectsCardV = {
   visible: {
     opacity: 1,
     transition: {
-      delay: 180 * 631 * 0.0000012 + 2.05,
+      delay: HEIGHT * WIDTH * 0.0000012 + 2.05,
       duration: 0.4,
     },
   },
@@ -137,24 +143,17 @@ const projectsCardV = {
   },
 };
 
-const projectSummariesV = {
-  hidden: {
-    opacity: 0,
-    transition: {
-      duration: 0.5,
-    },
-  },
+const socialIconsV = {
   visible: {
-    opacity: 1,
     transition: {
-      delay: 180 * 631 * 0.0000012 + 1.85,
-      duration: 0.5,
+      delayChildren: HEIGHT * WIDTH * 0.0000012 + 0.25,
+      staggerChildren: 0.1,
     },
   },
   selected: {
-    opacity: 0,
     transition: {
-      duration: 0.4,
+      delayChildren: 0.2,
+      staggerChildren: 0.1,
     },
   },
 };
@@ -173,11 +172,6 @@ const containerV = {
     },
   },
 };
-
-const WIDTH = 631;
-const HEIGHT = 180;
-const STEMLENGTH = 345;
-const TAGLINESIZE = 350;
 
 export default function SocialsCard({ sectionHeight = 1400 }) {
   const theme = useContext(ThemeContext);
@@ -297,7 +291,7 @@ export default function SocialsCard({ sectionHeight = 1400 }) {
                 rowGap: portrait ? "3%" : "0%",
                 columnGap: portrait ? "0%" : "3%",
               }}
-              variants={projectsCardV}
+              variants={socialsCardV}
             >
               <CardWindow
                 layoutId="socialsCard_window"
@@ -314,11 +308,11 @@ export default function SocialsCard({ sectionHeight = 1400 }) {
               <Content
                 style={{
                   gridRow: portrait ? "span 1" : "span 2",
-                  gridTemplateRows: portrait ? "1fr 1fr" : "43% 1fr",
-                  rowGap: portrait ? "20px" : "0px",
+                  gridTemplateRows: portrait ? "1fr 1fr" : "40% 40%",
+                  rowGap: portrait ? "20px" : "10px",
                 }}
               >
-                <SocialsBox variants={projectSummariesV}>
+                <SocialsBox variants={socialIconsV}>
                   <SocialLink
                     platform="twitter"
                     hoverColor={theme.green}
@@ -341,12 +335,13 @@ export default function SocialsCard({ sectionHeight = 1400 }) {
                   />
                 </SocialsBox>
                 <Button
-                  width={portrait ? 120 : 150}
-                  height={50}
+                  width={portrait ? 120 : 160}
+                  height={40}
+                  bRadius={19}
                   color1={theme.green}
                   href="/contact"
                   id="contact"
-                  animationDelay={180 * 631 * 0.0000012 + 1.85}
+                  animationDelay={HEIGHT * WIDTH * 0.0000012 + 2.25}
                   onClick={clickHandler}
                 >
                   Contact Me
