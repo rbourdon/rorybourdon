@@ -19,7 +19,7 @@ const Form = styled.form`
   align-items: center;
   justify-content: space-between;
   padding: 2vh;
-  z-index: 30;
+  z-index: 1;
 `;
 
 const Input = styled(motion.textarea)`
@@ -59,7 +59,7 @@ const ConfirmationContainer = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 30;
+  z-index: 1;
 `;
 
 const Confirmation = styled(motion.div)`
@@ -74,7 +74,7 @@ const Confirmation = styled(motion.div)`
   line-height: 1;
   font-size: 1.15rem;
   padding: 0 0 2px 0;
-  z-index: 30;
+  z-index: 1;
 `;
 
 const Thanks = styled(motion.span)`

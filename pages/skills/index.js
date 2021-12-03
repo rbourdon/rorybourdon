@@ -24,7 +24,7 @@ const Content = styled(motion.main)`
   align-content: center;
 
   @media (max-width: 555px) {
-    row-gap: 10px;
+    row-gap: 2vh;
     align-items: start;
     grid-template-rows: max-content max-content 1fr;
     grid-template-columns: 100%;
@@ -69,7 +69,7 @@ const Trees = styled(motion.div)`
   display: flex;
   position: relative;
   pointer-events: none;
-  margin-top: 50px;
+  isolation: isolate;
 
   @media (max-width: 555px) {
     margin-top: 0;
@@ -87,7 +87,7 @@ const TreeShadow = styled(motion.div)`
   position: absolute;
   bottom: -37px;
   clip-path: ellipse(50% 35% at 50% 50%);
-  zindex: 1;
+  z-index: 0;
 
   @media (max-width: 555px) {
     height: 104px;
@@ -124,8 +124,8 @@ const TitleBlock = styled(motion.div)`
 
 const treeV = {
   hidden: (custom) => ({
-    originY: 0.65,
-    y: -20,
+    originY: 0.5,
+    y: 0,
     x: custom,
   }),
   visible: {
@@ -271,10 +271,10 @@ export default function Skills({ skills }) {
 
           <Trees initial="visible">
             <TreeIcon
-              zIndex={10}
+              zIndex={1}
               colors={{
                 trunk: theme.primary_light,
-                foliage: theme.primary_dark,
+                foliage: theme.primary_verydark,
               }}
               layoutId="skills_tree_left"
               transition={{
@@ -293,7 +293,7 @@ export default function Skills({ skills }) {
                 trunk: theme.primary_verydark,
                 foliage: theme.teal,
               }}
-              zIndex={11}
+              zIndex={2}
               transition={{
                 type: "spring",
                 stiffness: 35,
@@ -305,10 +305,10 @@ export default function Skills({ skills }) {
               custom={0}
             />
             <TreeIcon
-              zIndex={10}
+              zIndex={1}
               colors={{
                 trunk: theme.primary_light,
-                foliage: theme.primary_mediumdark,
+                foliage: theme.primary_dark,
               }}
               layoutId="skills_tree_right"
               transition={{

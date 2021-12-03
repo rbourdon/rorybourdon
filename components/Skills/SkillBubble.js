@@ -23,7 +23,6 @@ const Bubble = styled(motion.li)`
   user-select: none;
   position: relative;
   cursor: pointer;
-  z-index: 4;
   -webkit-tap-highlight-color: transparent;
   touch-action: none;
 `;
@@ -43,7 +42,6 @@ const BubbleLink = styled(motion.a)`
   user-select: none;
   width: 100%;
   height: 100%;
-  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -231,7 +229,7 @@ export default function SkillBubble({
         onBlur={handleHoverEnd}
         style={{
           boxShadow,
-          zIndex: selected ? 10 : 2,
+          zIndex: selected ? 1 : 0,
           opacity,
           border,
           backgroundColor,
