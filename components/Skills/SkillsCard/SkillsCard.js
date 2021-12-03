@@ -147,7 +147,7 @@ const skillsIconV = {
   }),
   visible: (custom) => ({
     originY: 0.65,
-    y: 14,
+    y: 15,
     scale: custom,
     transition: {
       delay: HEIGHT * WIDTH * 0.0000012 + 2,
@@ -158,7 +158,7 @@ const skillsIconV = {
   }),
   selected: (custom) => ({
     originY: 0.65,
-    y: 14,
+    y: 15,
     scale: custom,
     transition: {
       duration: 0,
