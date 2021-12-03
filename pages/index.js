@@ -13,7 +13,7 @@ import Footer from "@/components/Footer";
 
 const Container = styled(motion.div)`
   width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 `;
