@@ -64,20 +64,21 @@ const titleV = {
   visible: (custom) => ({
     transition: {
       delayChildren: custom,
-      staggerChildren: 0.25,
+      staggerChildren: 0.15,
     },
   }),
 };
 
 const letterV = {
   hidden: {
-    y: 190,
+    y: 150,
   },
   visible: {
     y: 0,
     transition: {
-      duration: 1.25,
-      bounce: 0.3,
+      stiffness: 50,
+      mass: 1.8,
+      damping: 10,
       type: "spring",
     },
   },
