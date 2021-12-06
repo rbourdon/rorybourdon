@@ -40,7 +40,6 @@ const CardContent = styled(motion.div)`
   align-items: center;
   position: relative;
   padding: 25px 30px;
-  z-index: 3;
 
   @media (max-width: 757px) {
     align-content: center;
@@ -303,7 +302,6 @@ export default function ProjectsCard({ projects, sectionHeight = 1400 }) {
                 layoutId="projectCard_window"
                 style={{
                   backgroundColor: theme.primary,
-                  zIndex: selected ? 40 : 35,
                 }}
               >
                 <Label layoutId="projectCard_label">Projects</Label>
@@ -312,6 +310,7 @@ export default function ProjectsCard({ projects, sectionHeight = 1400 }) {
                 </ProjectsScene>
               </CardWindow>
               <ProjectsBox layout variants={projectSummariesV}>
+                <p>Featured Project</p>
                 {inView && width > 220 && (
                   <ProjectSummary
                     id={"projectsCard"}

@@ -11,8 +11,6 @@ const Effect = styled.div`
   left: 0;
   pointer-events: none;
   top: 0;
-  z-index: 0;
-  isolation: isolate;
 `;
 
 const lineV = {

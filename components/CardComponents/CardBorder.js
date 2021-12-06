@@ -11,7 +11,8 @@ const Container = styled(motion.div)`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 3;
+  z-index: 2;
+  pointer-events: none;
 `;
 
 function getPath(startLoc, height, width, bRadius, sWidth, offset) {

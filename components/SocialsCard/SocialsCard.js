@@ -29,12 +29,10 @@ const CardContent = styled(motion.div)`
   width: 100%;
   height: 100%;
   display: grid;
-
   justify-items: center;
   align-items: center;
   position: relative;
   padding: 25px 30px;
-  z-index: 3;
 
   @media (max-width: 690px) {
     align-content: center;
@@ -68,7 +66,6 @@ const Label = styled(motion.p)`
   font-weight: 100;
   width: max-content;
   height: max-content;
-  z-index: 3;
 `;
 
 const SocialsBox = styled(motion.div)`
@@ -297,7 +294,6 @@ export default function SocialsCard({ sectionHeight = 1400 }) {
                 layoutId="socialsCard_window"
                 style={{
                   backgroundColor: theme.primary,
-                  zIndex: selected ? 40 : 35,
                 }}
               >
                 <Label layoutId="socialsCard_label">Socials</Label>

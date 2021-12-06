@@ -1,6 +1,3 @@
-import SkillsCard from "@/components/Skills/SkillsCard/SkillsCard";
-import ProjectsCard from "@/components/Projects/ProjectsCard/ProjectsCard";
-import SocialsCard from "@/components/SocialsCard/SocialsCard";
 import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
 import { useContext } from "react";
@@ -8,8 +5,24 @@ import Banner from "@/components/Banner";
 import { getAllSkills, getAllProjects } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import Head from "next/head";
-import HorizonEffects from "@/components/Icons/HorizonEffects";
 import Footer from "@/components/Footer";
+import dynamic from "next/dynamic";
+
+const SkillsCard = dynamic(() =>
+  import("@/components/Skills/SkillsCard/SkillsCard")
+);
+
+const ProjectsCard = dynamic(() =>
+  import("@/components/Projects/ProjectsCard/ProjectsCard")
+);
+
+const SocialsCard = dynamic(() =>
+  import("@/components/SocialsCard/SocialsCard")
+);
+
+const HorizonEffects = dynamic(() =>
+  import("@/components/Icons/HorizonEffects")
+);
 
 const Container = styled(motion.div)`
   width: 100%;

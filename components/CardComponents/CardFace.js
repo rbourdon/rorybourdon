@@ -9,7 +9,6 @@ const Container = styled(motion.div)`
   align-items: center;
   overflow: hidden;
   position: absolute;
-  z-index: 3;
   top: 0;
   left: 0;
   pointer-events: none;
@@ -42,6 +41,10 @@ const gradientBandV = {
   }),
 };
 
+const BAND_THICKNESS = 30;
+const FIRST_BAND_DIST = 50;
+const BAND_POINT = BAND_THICKNESS + FIRST_BAND_DIST;
+
 export default function CardFace({
   width,
   height,
@@ -55,8 +58,8 @@ export default function CardFace({
     switch (band) {
       case 1:
         return {
-          start: "path('M-75,-25 l50,-50 h20 l-70,70 z')",
-          end: "path('M0,50 l50,-50 h20 l-70,70 z')",
+          start: `polygon(-${FIRST_BAND_DIST} 0, 0 -${FIRST_BAND_DIST}, ${BAND_THICKNESS} -${FIRST_BAND_DIST}, -${FIRST_BAND_DIST} ${BAND_THICKNESS})`, //"path('M-75,-25 l50,-50 h20 l-70,70 z')",
+          end: `polygon(0 ${FIRST_BAND_DIST}, ${FIRST_BAND_DIST} 0, ${BAND_POINT} 0, 0 ${BAND_POINT})`, //"path('M0,50 l50,-50 h20 l-70,70 z')",
         };
       case 2:
         return {
