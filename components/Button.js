@@ -17,7 +17,7 @@ const LinkContainer = styled(motion.a)`
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 99;
+  z-index: 1;
   -webkit-tap-highlight-color: transparent;
   &:focus {
     outline: none;
@@ -31,7 +31,7 @@ const ButtonContainer = styled(motion.button)`
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 99;
+  z-index: 1;
   -webkit-tap-highlight-color: transparent;
   &:focus {
     outline: none;
@@ -39,14 +39,13 @@ const ButtonContainer = styled(motion.button)`
 `;
 
 const Content = styled(motion.div)`
-  width: 100%;
-  height: 100%;
+  width: 99%;
+  height: 99%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 300;
   font-size: 1.13rem;
-  padding: 0 0 2px 0;
 `;
 
 const borderV = {
@@ -121,20 +120,20 @@ export default function Button({
   onClick,
 }) {
   const theme = useContext(ThemeContext);
-  const hover = useMotionValue(0);
+  const hover = useMotionValue(1);
 
-  const scale = useTransform(hover, [0, 1], [1, 1.025]);
+  const scale = useTransform(hover, [0, 1], [1, 1.04]);
 
   const handleHoverStart = () => {
     animate(hover, 1, {
-      duration: 0.2,
+      duration: 0.25,
       type: "tween",
     });
   };
 
   const handleHoverEnd = () => {
     animate(hover, 0, {
-      duration: 0.2,
+      duration: 0.25,
       type: "tween",
     });
   };
@@ -152,11 +151,11 @@ export default function Button({
             ", " +
             "0px 0px 0x 0px " +
             latestShadow2,
-          "1px 2px 0px 0px " +
+          "2px 2px 1px 0px " +
             " " +
             latestShadow1 +
             ", " +
-            "0px 0px 10px 0px " +
+            "0px 0px 15px 0px " +
             latestShadow2,
         ]
       )
@@ -183,12 +182,16 @@ export default function Button({
         onBlur={() => handleHoverEnd(hover)}
         onClick={onClick}
         layoutId={`${id}Button`}
+        style={{
+          scale,
+        }}
       >
         <Content
           style={{
             color: theme.primary_dark,
             backgroundColor: theme.primary_light,
             boxShadow,
+            borderRadius: bRadius,
           }}
           custom={{ bRadius: bRadius, animationDelay: animationDelay }}
           variants={contentV}
@@ -198,11 +201,11 @@ export default function Button({
         </Content>
         <CardBorder
           color1={theme.primary_mediumdark}
-          width={width * scale.get()}
-          height={height * scale.get()}
+          width={width}
+          height={height}
           sWidth={sWidth}
           bRadius={bRadius}
-          startLoc={3}
+          startLoc={6}
           borderV={borderV}
           frameV={frameV}
           innerBorderV={innerBorderV}
