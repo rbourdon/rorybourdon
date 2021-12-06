@@ -34,7 +34,6 @@ const CardContent = styled(motion.div)`
   justify-items: center;
   align-items: center;
   padding: 35px 35px;
-  z-index: 3;
 `;
 
 const CardWindow = styled(motion.div)`
@@ -299,7 +298,6 @@ export default function SkillsCard({ skills, sectionHeight = 1400 }) {
                 layoutId="skillsCard_window"
                 style={{
                   backgroundColor: theme.primary,
-                  zIndex: selected ? 4 : 1,
                 }}
               >
                 <Label layoutId="skillsCard_label">Skills</Label>

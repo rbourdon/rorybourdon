@@ -62,6 +62,7 @@ const Details = styled(motion.h3)`
   align-self: start;
   grid-row: span 3;
   grid-column: 2;
+  z-index: 1;
   @media (max-width: 555px) {
     grid-row: span 1;
     grid-column: 1;
@@ -70,7 +71,6 @@ const Details = styled(motion.h3)`
 
 const ProjectContent = styled(motion.article)`
   width: 100%;
-  min-height: 100vh;
   justify-self: end;
   height: max-content;
   font-size: clamp(1rem, 4vw, 1.3525rem);
@@ -81,6 +81,7 @@ const ProjectContent = styled(motion.article)`
   flex-direction: column;
   align-items: end;
   padding: 4vw 2vw;
+  z-index: 1;
 
   @media (max-width: 555px) {
     padding: 4vw 0;
@@ -93,6 +94,7 @@ const TitleBlock = styled(motion.div)`
   display: flex;
   align-items: center;
   grid-column: span 2;
+  z-index: 1;
 
   @media (max-width: 555px) {
     grid-column: span 1;
