@@ -13,7 +13,7 @@
   "dependencies": {
     "@sendgrid/mail": "^7.6.0",
     "color-convert": "^2.0.1",
-    "framer-motion": "^5.3.3",
+    "framer-motion": "^5.4.1",
     "graphql": "^16.0.1",
     "graphql-request": "^3.7.0",
     "next": "latest",
@@ -26,7 +26,7 @@
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
+    "eslint": "^8.4.0",
     "eslint-config-next": "latest",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
