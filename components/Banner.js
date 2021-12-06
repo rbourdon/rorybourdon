@@ -42,7 +42,7 @@ const BG = styled(motion.div)`
 const Letter = styled(motion.div)`
   userselect: none;
   position: relative;
-  padding: 1vw 0.5vw;
+  padding: 1.25vw 0.5vw;
   mix-blend-mode: multiply;
 `;
 
@@ -75,8 +75,8 @@ const letterV = {
     y: 0,
     transition: {
       stiffness: 30,
-      mass: 1.25,
-      damping: 7,
+      mass: 0.5,
+      damping: 5.5,
       type: "spring",
     },
   },
