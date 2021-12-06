@@ -12,6 +12,10 @@ const Container = styled(motion.figure)`
   display: flex;
   flex-direction: column;
   position: relative;
+
+  @media (max-width: 555px) {
+    margin: 10vw 0 4vw 0;
+  }
 `;
 
 const VideoContainer = styled(motion.figure)`

@@ -11,6 +11,7 @@ const Container = styled(motion.section)`
   @media (max-width: 555px) {
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
   }
 `;
 
