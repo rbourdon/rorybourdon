@@ -33,6 +33,7 @@ const Outline = styled(motion.div)`
   width: calc(100% + 10px);
   border-radius: 30px;
   user-select: none;
+  pointer-events: none;
 `;
 
 const BubbleLink = styled(motion.a)`
