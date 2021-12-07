@@ -36,7 +36,7 @@ const line1V = {
     transition: {
       delay: 3.5,
       type: "tween",
-      duration: 35.5,
+      duration: 75.5,
       repeat: Infinity,
       repeatType: "reverse",
       ease: "linear",
@@ -53,7 +53,7 @@ const line2V = {
     pathLength: [0, 0.15, 0],
     transition: {
       type: "tween",
-      duration: 37.5,
+      duration: 77.5,
       repeat: Infinity,
       repeatType: "reverse",
       ease: "linear",
@@ -72,7 +72,7 @@ const circleV = {
     transition: {
       delay: 1.5,
       type: "tween",
-      duration: 35,
+      duration: 75,
       repeat: Infinity,
       ease: "linear",
       repeatType: "reverse",
