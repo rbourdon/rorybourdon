@@ -151,7 +151,7 @@ export default function Banner({ title = "Rory Bourdon" }) {
               variants={letterV}
               key={letter + index}
               style={{
-                color: theme.primary_superdark,
+                color: theme.primary_verydark,
                 backgroundColor: "#ffffff",
               }}
             >
