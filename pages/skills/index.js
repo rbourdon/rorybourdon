@@ -9,6 +9,7 @@ import Head from "next/head";
 import TreeIcon from "@/components/Icons/TreeIcon";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
 import BackArrow from "@/components/BackArrow";
+import TitleBlock from "@/components/PageTitleBlock";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -100,7 +101,6 @@ const Title = styled(motion.h1)`
   font-weight: 100;
   line-height: clamp(3.4rem, 13vw, 9rem);
   margin-left: 2vw;
-  z-index: 1;
 `;
 
 const Detail = styled(motion.div)`
@@ -110,16 +110,11 @@ const Detail = styled(motion.div)`
   font-weight: 100;
   line-height: clamp(1rem, 4.5vw, 1.55rem);
   grid-column: 1;
+  z-index: 1;
 
   @media (max-width: 555px) {
     padding: 0;
   }
-`;
-
-const TitleBlock = styled(motion.div)`
-  width: 100%;
-  display: flex;
-  align-items: center;
 `;
 
 const treeV = {
