@@ -40,7 +40,7 @@ const BG = styled(motion.div)`
 `;
 
 const Letter = styled(motion.div)`
-  userselect: none;
+  user-select: none;
   position: relative;
   padding: 1.25vw 0.2vw;
   mix-blend-mode: multiply;
