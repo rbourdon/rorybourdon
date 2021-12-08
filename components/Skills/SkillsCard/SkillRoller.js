@@ -4,7 +4,7 @@ import SkillBubble from "@/components/Skills/SkillBubble";
 import { useContext, useState } from "react";
 import useInterval from "@/components/utils/useInterval";
 
-const TICK_RATE = 2000;
+const TICK_RATE = 1000;
 
 const Roller = styled(motion.ul)`
   width: 140%;
@@ -66,9 +66,9 @@ export default function SkillRoller({
             }}
             transition={{
               type: "spring",
-              stiffness: 130,
-              mass: 1,
-              damping: 15,
+              stiffness: 60,
+              mass: 0.2,
+              damping: 18,
             }}
             outlineTransition={{
               type: "spring",

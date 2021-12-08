@@ -71,12 +71,12 @@ html {
   }
   h1 {
     margin: 0;
-    font-size: clamp(2.5rem, 11vw, 8.5rem);
+    font-size: clamp(2.7rem, 11vw, 8.5rem);
     line-height: 1;
     font-weight: 100;
   }
   h2 {
-    font-size: clamp(1.2rem, 4.5vw, 1.7rem);
+    font-size: clamp(1.2rem, 4.5vw, 1.8rem);
     line-height: clamp(1.2rem, 7vw, 2rem);
     margin: 0;
     font-weight: 100;

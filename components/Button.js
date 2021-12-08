@@ -120,7 +120,7 @@ export default function Button({
   onClick,
 }) {
   const theme = useContext(ThemeContext);
-  const hover = useMotionValue(1);
+  const hover = useMotionValue(0);
 
   const scale = useTransform(hover, [0, 1], [1, 1.04]);
 

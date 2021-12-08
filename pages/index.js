@@ -59,8 +59,7 @@ const HeroSection = styled(motion.section)`
   min-height: 92vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  padding: 0 10vw 5vh 10vw;
+  padding: 20vh 10vw 5vh 10vw;
 
   @media (max-width: 555px) {
     padding: 0 6vw 5vh 6vw;

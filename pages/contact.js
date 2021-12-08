@@ -7,6 +7,7 @@ import HorizonEffects from "@/components/Icons/HorizonEffects";
 import BackArrow from "@/components/BackArrow";
 import SocialsSceneIcon from "@/components/Icons/SocialsSceneIcon";
 import ContactForm from "@/components/ContactForm";
+import TitleBlock from "@/components/PageTitleBlock";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -56,6 +57,7 @@ const Detail = styled(motion.div)`
   font-weight: 100;
   line-height: clamp(1rem, 4.5vw, 1.55rem);
   grid-column: 1;
+  z-index: 1;
 
   @media (max-width: 555px) {
     padding: 0;
@@ -67,12 +69,6 @@ const SocialsScene = styled(motion.div)`
   display: flex;
   justify-content: center;
   grid-row: span 2;
-`;
-
-const TitleBlock = styled(motion.div)`
-  width: 100%;
-  display: flex;
-  align-items: center;
 `;
 
 const HeadingBlock = styled(motion.div)`

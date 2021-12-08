@@ -32,7 +32,7 @@ const BG = styled(motion.div)`
   right: 0;
   bottom: 0;
   left: 0;
-  width: 95%;
+  width: 97%;
 
   pointer-events: none;
 
@@ -40,18 +40,19 @@ const BG = styled(motion.div)`
 `;
 
 const Letter = styled(motion.div)`
-  userselect: none;
+  user-select: none;
   position: relative;
-  padding: 1.25vw 0.5vw;
+  padding: 1.25vw 0.2vw;
   mix-blend-mode: multiply;
 `;
 
 const Spacer = styled(motion.div)`
-  width: 3vw;
-  height: 3vw;
+  width: 2.5vw;
+  height: 2.5vw;
 `;
 
-const Subtitle = styled(motion.h3)`
+const Subtitle = styled(motion.h2)`
+  padding: 0 0.6vw;
   width: 100%;
   height: 100%;
   height: max-content;
@@ -69,7 +70,7 @@ const titleV = {
 
 const letterV = {
   hidden: {
-    y: 150,
+    y: 165,
   },
   visible: {
     y: 0,
@@ -77,7 +78,9 @@ const letterV = {
       stiffness: 30,
       mass: 0.5,
       damping: 5.5,
-      type: "spring",
+      duration: 0.6,
+      ease: "easeOut",
+      type: "tween",
     },
   },
 };
@@ -104,13 +107,13 @@ const bgV = {
     },
   },
   visible: {
-    scaleY: [0, 1],
+    scaleY: [0, 0.85],
     originY: 1,
     transition: {
       repeat: Infinity,
-      repeatDelay: 0.5,
       repeatType: "reverse",
-      duration: 1.5,
+      duration: 2,
+      ease: "linear",
     },
   },
 };
@@ -130,7 +133,7 @@ export default function Banner({ title = "Rory Bourdon" }) {
       )
   );
   useEffect(() => {
-    animate(phase, [0, 0, 1, 1, 2, 2, 3, 3], {
+    animate(phase, [1, 1, 2, 2, 3, 3], {
       type: "tween",
       ease: "linear",
       repeat: Infinity,
@@ -148,7 +151,7 @@ export default function Banner({ title = "Rory Bourdon" }) {
               variants={letterV}
               key={letter + index}
               style={{
-                color: theme.primary_superdark,
+                color: theme.primary_verydark,
                 backgroundColor: "#ffffff",
               }}
             >
@@ -158,7 +161,9 @@ export default function Banner({ title = "Rory Bourdon" }) {
           );
         })}
       </Title>
-      <Subtitle variants={subtitleV}>Web Developer & Visual Artist</Subtitle>
+      <Subtitle style={{ color: theme.primary_dark }} variants={subtitleV}>
+        Web Developer & Visual Artist
+      </Subtitle>
     </Container>
   );
 }

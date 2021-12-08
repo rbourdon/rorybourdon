@@ -8,6 +8,7 @@ import BackArrow from "@/components/BackArrow";
 import ProjectsScroller from "@/components/Projects/ProjectsScroller";
 import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
+import TitleBlock from "@/components/PageTitleBlock";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -65,12 +66,6 @@ const DetailBlock = styled(motion.div)`
   line-height: clamp(1rem, 4.5vw, 1.55rem);
   grid-column: 1;
   display: flex;
-`;
-
-const TitleBlock = styled(motion.div)`
-  width: 100%;
-  display: flex;
-  align-items: center;
 `;
 
 const HeadingBlock = styled(motion.div)`
