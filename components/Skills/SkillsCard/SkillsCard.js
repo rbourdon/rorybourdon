@@ -172,7 +172,7 @@ const layoutTransition = {
   damping: 14,
 };
 
-export default function SkillsCard({ skills, sectionHeight = 1400 }) {
+export default function SkillsCard({ skills, sectionHeight = 1400, children }) {
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
   const theme = useContext(ThemeContext);
@@ -381,6 +381,7 @@ export default function SkillsCard({ skills, sectionHeight = 1400 }) {
             </CardContent>
           </NavCard>
         </Card>
+        {children}
       </Container>
     </MotionConfig>
   );
