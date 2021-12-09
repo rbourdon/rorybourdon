@@ -4,7 +4,7 @@ import React, { useContext, useMemo } from "react";
 import { getProjectList, getProjectDetails } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import Head from "next/head";
-import BackArrow from "@/components/BackArrow";
+import BackArrow from "@/components/Nav/BackArrow";
 import SkillList from "@/components/Projects/ProjectInfoPanel/SkillList";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";

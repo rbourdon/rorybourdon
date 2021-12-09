@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { getProjectList } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import Head from "next/head";
-import BackArrow from "@/components/BackArrow";
+import BackArrow from "@/components/Nav/BackArrow";
 import ProjectsScroller from "@/components/Projects/ProjectsScroller";
 import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
