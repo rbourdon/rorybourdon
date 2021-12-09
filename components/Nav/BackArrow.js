@@ -6,7 +6,7 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import ArrowIcon from "./Icons/ArrowIcon";
+import ArrowIcon from "../Icons/ArrowIcon";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 
