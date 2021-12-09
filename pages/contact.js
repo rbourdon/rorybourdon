@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import NavBar from "@/components/Nav/NavBar";
 import Head from "next/head";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
-import BackArrow from "@/components/BackArrow";
+import BackArrow from "@/components/Nav/BackArrow";
 import SocialsSceneIcon from "@/components/Icons/SocialsSceneIcon";
 import ContactForm from "@/components/ContactForm";
 import TitleBlock from "@/components/PageTitleBlock";

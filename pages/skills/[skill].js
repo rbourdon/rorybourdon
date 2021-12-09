@@ -5,7 +5,7 @@ import { getSkillList, getSkillDetails } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import Head from "next/head";
 import Image from "next/image";
-import BackArrow from "@/components/BackArrow";
+import BackArrow from "@/components/Nav/BackArrow";
 import ProjectsScroller from "@/components/Projects/ProjectsScroller";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
 import TitleBlock from "@/components/PageTitleBlock";

@@ -3,7 +3,7 @@ import { motion, MotionConfig } from "framer-motion";
 import NavCard from "@/components/CardComponents/NavCard";
 import { useContext, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import Button from "@/components/Button";
+import Button from "@/components/Nav/Button";
 import useWindowSize from "@/components/utils/useWindowSize";
 import SocialLink from "@/components/SocialsCard/SocialLink";
 import SocialsSceneIcon from "../Icons/SocialsSceneIcon";

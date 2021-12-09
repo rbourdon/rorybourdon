@@ -11,7 +11,7 @@ import NavCard from "@/components/CardComponents/NavCard";
 import { useContext, useState } from "react";
 import ProjectSummary from "@/components/Projects/ProjectSummary/ProjectSummary";
 import { useInView } from "react-intersection-observer";
-import Button from "@/components/Button";
+import Button from "@/components/Nav/Button";
 import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
 import useWindowSize from "@/components/utils/useWindowSize";
 import ProjectsBackgroundEffect from "@/components/Projects/ProjectsCard/ProjectsBackgroundEffect";
@@ -68,6 +68,7 @@ const Label = styled(motion.p)`
   font-weight: 100;
   width: max-content;
   height: max-content;
+  user-select: none;
 `;
 
 const ProjectsBox = styled(motion.div)`
