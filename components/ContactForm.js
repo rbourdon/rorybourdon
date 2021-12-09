@@ -7,7 +7,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useContext, useState } from "react";
-import Button from "./Button";
+import Button from "@/Components/Nav/Button";
 
 const Form = styled.form`
   width: 100%;
