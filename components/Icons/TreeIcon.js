@@ -2,137 +2,103 @@ import { motion } from "framer-motion";
 // import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const Container = styled(motion.span)`
-  width: 100%;
+const Container = styled(motion.div)`
   height: 100%;
+  width: 50%;
   z-index: ${(props) => props.$zIndex};
-  margin: ${(props) => props.$margin};
   pointer-events: none;
-  position: relative;
-`;
-
-const Foliage = styled(motion.span)`
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
   position: absolute;
-  bottom: -5px;
+  display: flex;
+  align-items: flex-end;
+  bottom: 0;
+  right: 0;
+  isolation: isolate;
 `;
 
-const Trunk = styled(motion.span)`
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  position: absolute;
-  bottom: -5px;
-`;
-
-// const Leaf = styled(motion.div)`
+// const Leaf = styled(motion.span)`
 //   position: absolute;
 //   width: 8px;
 //   height: 8px;
 // `;
 
 const trunkV = {
-  hidden: {
-    scale: 0,
-    originY: 1,
-  },
+  hidden: { scale: 0, originY: 1 },
   visible: (custom) => ({
-    scale: 1,
+    scale: custom.scale,
     originY: 1,
     transition: {
       type: "spring",
       stiffness: 50,
       mass: 1.2,
       damping: 11,
-      delay: custom,
+      delay: custom.delay,
     },
   }),
-  selected: {
-    scale: 1,
-    originY: 1,
-    transition: { duration: 0 },
-  },
+  selected: (custom) => ({
+    scale: custom.scale,
+  }),
 };
 
 const foliageV = {
   hidden: {
     scale: 0,
-    originY: 0.65,
+    originY: 1,
   },
   visible: (custom) => ({
-    scale: 1,
-    originY: 0.65,
+    scale: custom.scale,
+    originY: 1,
     transition: {
       type: "spring",
       stiffness: 80,
       mass: 1.1,
       damping: 9.5,
-      delay: custom,
+      delay: custom.delay,
     },
   }),
-  selected: {
-    scale: 1,
-    originY: 0.65,
-    transition: { duration: 0 },
-  },
+  selected: (custom) => ({
+    scale: custom.scale,
+    originY: 1,
+  }),
 };
 
 export default function TreeIcon({
-  iconV,
   delay = 0,
   layoutId = "treeIcon",
   colors = { trunk: "#494949", foliage: "#45b6bf" },
-  margin = "0",
   zIndex = 1,
   scale = 1,
   transition = { type: "spring", stiffness: 40, mass: 2, damping: 12 },
-  width,
-  height,
+  width = "50%",
+  height = "30%",
+  pos = { left: "auto", right: "auto", bottom: 0 },
 }) {
   return (
     <Container
-      variants={iconV}
-      custom={scale}
       layoutId={layoutId}
       transition={transition}
-      $margin={margin}
       $zIndex={zIndex}
-      $width={width}
-      $height={height}
-      style={{ scale }}
+      style={{
+        width,
+        height,
+        right: pos.right,
+        bottom: pos.bottom,
+        left: pos.left,
+      }}
     >
-      <Foliage variants={foliageV} custom={delay + 0.4} transition={transition}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -30 125 192">
-          <motion.path
-            d="M95 81.3c0 35.8-21.2 48.3-47.5 48.3S0 117.1 0 81.3 47.5 0 47.5 0s47.6 45.5 47.6 81.3Z"
-            fill={colors.foliage}
-          />
-          {/* <motion.path
-            variants={trunkV}
-            custom={delay}
-            fill={colors.trunk}
-            d="m45.8 124.2.5-30 20.3-37.1-20.2 32.4.2-13.5 14-26.8-14 23.3.4-24.3 15-21.3-14.9 17.5.2-44.4-1.5 58.8.1-2.4-15.2-23.3 15 27.9-1.4 27.1-.1-.7-17.5-24.5 17.5 27-.2 3.4v.3l-3.6 68.7h4.8l.6-35.5 17.4-26.9-17.4 24.3z"
-          /> */}
-        </svg>
-      </Foliage>
-      <Trunk variants={trunkV} custom={delay} transition={transition}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -30 125 192">
-          {/* <motion.path
-            variants={foliageV}
-            custom={delay + 0.4}
-            d="M95 81.3c0 35.8-21.2 48.3-47.5 48.3S0 117.1 0 81.3 47.5 0 47.5 0s47.6 45.5 47.6 81.3Z"
-            fill={colors.foliage}
-          /> */}
-          <motion.path
-            fill={colors.trunk}
-            d="m45.8 124.2.5-30 20.3-37.1-20.2 32.4.2-13.5 14-26.8-14 23.3.4-24.3 15-21.3-14.9 17.5.2-44.4-1.5 58.8.1-2.4-15.2-23.3 15 27.9-1.4 27.1-.1-.7-17.5-24.5 17.5 27-.2 3.4v.3l-3.6 68.7h4.8l.6-35.5 17.4-26.9-17.4 24.3z"
-          />
-        </svg>
-      </Trunk>
+      <motion.svg viewBox="-15 -30 125 192">
+        <motion.path
+          variants={foliageV}
+          custom={{ delay: delay + 0.4, scale }}
+          d="M95 81.3c0 35.8-21.2 48.3-47.5 48.3S0 117.1 0 81.3 47.5 0 47.5 0s47.6 45.5 47.6 81.3Z"
+          fill={colors.foliage}
+        />
+        <motion.path
+          variants={trunkV}
+          custom={{ delay, scale }}
+          fill={colors.trunk}
+          d="m45.8 124.2.5-30 20.3-37.1-20.2 32.4.2-13.5 14-26.8-14 23.3.4-24.3 15-21.3-14.9 17.5.2-44.4-1.5 58.8.1-2.4-15.2-23.3 15 27.9-1.4 27.1-.1-.7-17.5-24.5 17.5 27-.2 3.4v.3l-3.6 68.7h4.8l.6-35.5 17.4-26.9-17.4 24.3z"
+        />
+      </motion.svg>
 
       {/* <>
         <Leaf

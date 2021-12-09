@@ -8,7 +8,7 @@ import Highlight from "@/components/Highlight";
 import Head from "next/head";
 import TreeIcon from "@/components/Icons/TreeIcon";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
-import BackArrow from "@/components/BackArrow";
+import BackArrow from "@/components/Nav/BackArrow";
 import TitleBlock from "@/components/PageTitleBlock";
 
 const Content = styled(motion.main)`
@@ -29,7 +29,7 @@ const Content = styled(motion.main)`
     align-items: start;
     grid-template-rows: max-content max-content 1fr;
     grid-template-columns: 100%;
-    padding: 2vh 8vw;
+    padding: 5vh 8vw;
   }
 `;
 
@@ -64,7 +64,7 @@ const Trees = styled(motion.div)`
   height: 35vh;
   max-height: 100%;
   align-items: flex-end;
-  justify-content: center;
+  justify-content: space-evenly;
   justify-self: flex-end;
   align-self: flex-end;
   display: flex;
@@ -73,10 +73,10 @@ const Trees = styled(motion.div)`
   isolation: isolate;
 
   @media (max-width: 555px) {
-    margin-top: 0;
-    width: 100%;
+    margin-top: calc(170px - 24%);
+    width: 135%;
+    max-width: 500px;
     justify-self: center;
-    height: 35vh;
   }
 `;
 
@@ -116,19 +116,6 @@ const Detail = styled(motion.div)`
     padding: 0;
   }
 `;
-
-const treeV = {
-  hidden: (custom) => ({
-    originY: 0.5,
-    y: 0,
-    x: custom,
-  }),
-  visible: {
-    originY: 0.65,
-    y: -20,
-    x: 0,
-  },
-};
 
 const detailsV = {
   hidden: {
@@ -264,58 +251,59 @@ export default function Skills({ skills }) {
             <SkillScroller skills={skills} />
           </SkillsColumn>
 
-          <Trees initial="visible">
+          <Trees layout initial="visible" animate="visible">
             <TreeIcon
-              zIndex={1}
               colors={{
                 trunk: theme.primary_light,
                 foliage: theme.primary_verydark,
               }}
+              delay={1}
+              width={"240px"}
+              height={"384px"}
+              pos={{ left: -10, right: "auto", bottom: 15 }}
               layoutId="skills_tree_left"
               transition={{
                 type: "spring",
-                stiffness: 30,
+                stiffness: 33,
                 mass: 2,
                 damping: 14,
               }}
-              margin="0 -100px 0 0"
               scale={0.95}
-              iconV={treeV}
-              custom={50}
             />
             <TreeIcon
               colors={{
                 trunk: theme.primary_verydark,
                 foliage: theme.teal,
               }}
+              width={"240px"}
+              height={"384px"}
+              delay={1}
               zIndex={2}
               transition={{
                 type: "spring",
-                stiffness: 35,
+                stiffness: 38,
                 mass: 1.9,
                 damping: 14,
               }}
               scale={1.1}
-              iconV={treeV}
-              custom={0}
             />
             <TreeIcon
-              zIndex={1}
               colors={{
                 trunk: theme.primary_light,
                 foliage: theme.primary_dark,
               }}
+              delay={1}
+              width={"240px"}
+              height={"384px"}
+              pos={{ left: "auto", right: -10, bottom: 15 }}
               layoutId="skills_tree_right"
               transition={{
                 type: "spring",
-                stiffness: 40,
+                stiffness: 43,
                 mass: 1.8,
                 damping: 14,
               }}
-              margin="0 0 0 -100px"
               scale={0.85}
-              iconV={treeV}
-              custom={-50}
             />
             <TreeShadow
               initial="hidden"

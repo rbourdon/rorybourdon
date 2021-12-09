@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import SkillRoller from "@/components/Skills/SkillsCard/SkillRoller";
 import CardEffect from "@/components/CardComponents/CardEffect";
 import { useInView } from "react-intersection-observer";
-import Button from "@/components/Button";
+import Button from "@/components/Nav/Button";
 import useWindowSize from "@/components/utils/useWindowSize";
 import SkillsBackgroundEffect from "@/components/Skills/SkillsCard/SkillsBackgroundEffect";
 
@@ -54,6 +54,7 @@ const Trees = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  isolation: isolate;
 `;
 
 const Label = styled(motion.p)`
@@ -62,6 +63,7 @@ const Label = styled(motion.p)`
   font-weight: 100;
   width: max-content;
   height: max-content;
+  user-select: none;
 `;
 
 const Backing = styled(motion.div)`
@@ -133,36 +135,6 @@ const rollerV = {
       duration: 0.3,
     },
   },
-};
-
-const skillsIconV = {
-  hidden: (custom) => ({
-    originY: 0.65,
-    y: -14,
-    scale: custom,
-    transition: {
-      duration: 0,
-    },
-  }),
-  visible: (custom) => ({
-    originY: 0.65,
-    y: 15,
-    scale: custom,
-    transition: {
-      delay: HEIGHT * WIDTH * 0.0000012 + 2,
-      delayChildren: HEIGHT * WIDTH * 0.0000012 + 0.5,
-      staggerChildren: 0.75,
-      duration: 0.8,
-    },
-  }),
-  selected: (custom) => ({
-    originY: 0.65,
-    y: 15,
-    scale: custom,
-    transition: {
-      duration: 0,
-    },
-  }),
 };
 
 const layoutTransition = {
@@ -301,18 +273,17 @@ export default function SkillsCard({ skills, sectionHeight = 1400, children }) {
                 }}
               >
                 <Label layoutId="skillsCard_label">Skills</Label>
-                <Trees>
+                <Trees layout>
                   <TreeIcon
                     colors={{
                       trunk: theme.primary_light,
                       foliage: theme.primary_verydark,
                     }}
                     layoutId="skills_tree_left"
-                    margin="0 -70px 0 0"
                     scale={0.9}
-                    width={"95px"}
-                    height={"140px"}
-                    iconV={skillsIconV}
+                    width={"90px"}
+                    height={"108px"}
+                    pos={{ left: 0, right: "auto", bottom: 0 }}
                     delay={HEIGHT * WIDTH * 0.0000012 + 2.15}
                     transition={
                       !layoutComplete
@@ -327,11 +298,10 @@ export default function SkillsCard({ skills, sectionHeight = 1400, children }) {
                       trunk: theme.primary_verydark,
                       foliage: theme.teal,
                     }}
-                    width={"95px"}
-                    height={"140px"}
-                    iconV={skillsIconV}
+                    width={"90px"}
+                    height={"108px"}
                     delay={HEIGHT * WIDTH * 0.0000012 + 2}
-                    zIndex={3}
+                    zIndex={2}
                     transition={
                       !layoutComplete
                         ? layoutTransition
@@ -341,16 +311,15 @@ export default function SkillsCard({ skills, sectionHeight = 1400, children }) {
                     }
                   />
                   <TreeIcon
-                    width={"95px"}
-                    height={"140px"}
                     colors={{
                       trunk: theme.primary_light,
                       foliage: theme.primary_dark,
                     }}
+                    width={"90px"}
+                    height={"108px"}
+                    pos={{ left: "auto", right: 0, bottom: 0 }}
                     layoutId="skills_tree_right"
-                    margin="0 0 0 -70px"
                     scale={0.8}
-                    iconV={skillsIconV}
                     delay={HEIGHT * WIDTH * 0.0000012 + 2.3}
                     transition={
                       !layoutComplete
