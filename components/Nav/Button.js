@@ -108,14 +108,14 @@ const contentV = {
 };
 
 export default function Button({
-  href,
+  href = "/",
   children,
   width = 175,
   height = 50,
   sWidth = 1.1,
   bRadius = 23,
   type = "link",
-  id,
+  id = "button",
   animationDelay = 0,
   onClick,
 }) {
@@ -172,7 +172,7 @@ export default function Button({
   };
 
   return type === "link" ? (
-    <Link href={href ? href : "/"} passHref scroll={false}>
+    <Link href={href} passHref scroll={false}>
       <LinkContainer
         $width={width}
         $height={height}
