@@ -22,15 +22,17 @@ const style = {
   width: "100%",
   height: "60vh",
   background: "rgb(219, 216, 222)",
+  cursor: "grab",
 };
 
 const config = {
   autoRotate: -4,
   autoLoad: true,
-  draggable: true,
+  draggable: false,
   showControls: false,
   escapeHTML: true,
   autoRotateInactivityDelay: 3000,
+  author: "Rory Bourdon",
 };
 
 export default function PostPano({ src, children }) {
@@ -39,16 +41,17 @@ export default function PostPano({ src, children }) {
   const yaw = useMotionValue(0);
 
   useEffect(() => {
-    pitch.onChange((latest) => {
+    const unsubPitch = pitch.onChange((latest) => {
       setPitch(latest, false);
     });
-  }, [pitch]);
-
-  useEffect(() => {
-    yaw.onChange((latest) => {
+    const unsubYaw = yaw.onChange((latest) => {
       setYaw(latest, false);
     });
-  }, [yaw]);
+    return () => {
+      unsubPitch();
+      unsubYaw();
+    };
+  }, [pitch, yaw]);
 
   const handlePan = (e, pointInfo) => {
     pitch.set(pitch.get() + pointInfo.delta.y / 5);
@@ -56,8 +59,8 @@ export default function PostPano({ src, children }) {
   };
 
   const handlePanStart = () => {
-    stopAutoRotate();
     pitch.stop();
+    stopAutoRotate();
     yaw.set(getYaw());
     pitch.set(getPitch());
   };
