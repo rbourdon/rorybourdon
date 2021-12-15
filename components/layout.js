@@ -8,7 +8,11 @@ function Layout({ children }) {
 
   return (
     <motion.div
-      style={{ backgroundColor: theme.primary_light, overflow: "hidden" }}
+      style={{
+        backgroundColor: theme.primary_light,
+        overflow: "hidden",
+        width: "100%",
+      }}
     >
       <Head>
         <link rel="stylesheet" href="https://use.typekit.net/ekd5pcq.css" />
