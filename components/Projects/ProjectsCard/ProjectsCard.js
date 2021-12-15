@@ -174,7 +174,11 @@ const outlineV = {
   },
 };
 
-export default function ProjectsCard({ projects, sectionHeight = 1400 }) {
+export default function ProjectsCard({
+  projects,
+  sectionHeight = 1400,
+  children,
+}) {
   const theme = useContext(ThemeContext);
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
@@ -344,6 +348,7 @@ export default function ProjectsCard({ projects, sectionHeight = 1400 }) {
             </CardContent>
           </NavCard>
         </Card>
+        {children}
       </Container>
     </MotionConfig>
   );
