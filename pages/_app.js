@@ -36,6 +36,7 @@ html {
     font-style: normal;
     font-family:  proxima-nova, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     color: hsla(0,0%,28.63%,1);
+    min-height: 100vh;
   }
   a {
     color: inherit;

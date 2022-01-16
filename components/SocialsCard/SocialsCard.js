@@ -170,7 +170,7 @@ const containerV = {
   },
 };
 
-export default function SocialsCard({ sectionHeight = 1400 }) {
+export default function SocialsCard({ sectionHeight = 1400, children }) {
   const theme = useContext(ThemeContext);
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
@@ -346,6 +346,7 @@ export default function SocialsCard({ sectionHeight = 1400 }) {
             </CardContent>
           </NavCard>
         </Card>
+        {children}
       </Container>
     </MotionConfig>
   );
