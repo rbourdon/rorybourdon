@@ -3,10 +3,7 @@ module.exports = {
   swcMinify: true,
   formats: ["image/avif", "image/webp"],
   images: {
+    dangerouslyAllowSVG: true,
     domains: ["media.graphcms.com"],
-  },
-  experimental: {
-    // Enables the styled-components SWC transform
-    styledComponents: true,
   },
 };
