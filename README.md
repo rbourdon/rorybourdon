@@ -22,3 +22,31 @@ This is my personal portfolio website, intended to showcase my design and develo
 **[Vercel](https://vercel.com/)** - The best Next.js integration, analytics, a generous hobby plan, and UX that sparks joy
 
 **[GraphCMS](https://graphcms.com/)** - Nice headless CMS with a GraphQL API, generous free tier and great tools
+
+&nbsp;
+
+### 📖 Documentation
+
+This portfolio got me hired and now I'm super busy so documentation will be added as I have time.
+
+Click the button below to clone my GraphCMS schema to a new project which you can fill out with your own content.
+### [![Clone project](https://graphcms.com/button)](https://app.graphcms.com/clone/1c307b6a56ea471f88368b1e42dd7191?name=rorybourdon)
+
+&nbsp;
+
+There are a few MDX components you can use in the project page content field. Here's how the begining of the VRBG Project MDX looks, for example.
+
+```
+<Title>Multiplayer VR Battle Royale Prototype </Title>
+<Post>
+<PostVideo src={images[0].url}><Caption>A fly-through of part of the map I built. I used a mix of DEM data, procedural generation and hand sculpting.</Caption></PostVideo>
+<Content>This is a prototype virtual reality multiplayer battle royale game built for the HTC Vive using Unreal Engine 4. I built this prototype entirely with blueprints and no marketplace assets. I modeled, rigged and textured everything in Blender and used blend shapes in UE4 to do animations. </Content>
+<Content>Because I built so much for this project, I'll break it down into sections, starting with the map.</Content>
+</Post>
+
+<Title>The Map</Title>
+<Post>
+<PostImage src={images[1].url} quality={100} width={1081} height={1081}><Caption>DEM data used to create a heightmap for the landscape.</Caption></PostImage>
+<Content>I started with some DEM data of an area that looked interesting in Maine, approximately 1.8km² in size. This was then modified in Photoshop to exaggerate and stylize some of the features. I brought the final image into UE4 and used it as a heightmap with the landscape system to generate the terrain.</Content>
+</Post>
+```
