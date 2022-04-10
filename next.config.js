@@ -4,6 +4,6 @@ module.exports = {
   formats: ["image/avif", "image/webp"],
   images: {
     dangerouslyAllowSVG: true,
-    domains: ["media.graphcms.com"],
+    domains: ["media.graphcms.com", "media.graphassets.com"],
   },
 };
