@@ -34,7 +34,7 @@ html {
     font-size: 1rem;
     font-weight: 100;
     font-style: normal;
-    font-family:  proxima-nova, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     color: hsla(0,0%,28.63%,1);
     min-height: 100vh;
   }
