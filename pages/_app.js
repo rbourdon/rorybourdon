@@ -23,8 +23,6 @@ html {
     &::-webkit-scrollbar-thumb:hover {
       background-color: var(--color-primary_dark);
     }
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
   }
   body {
@@ -34,7 +32,7 @@ html {
     font-size: 1rem;
     font-weight: 100;
     font-style: normal;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Raleway', sans-serif;
     color: hsla(0,0%,28.63%,1);
     min-height: 100vh;
   }
