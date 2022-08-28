@@ -15,7 +15,7 @@
     "color-convert": "^2.0.1",
     "framer-motion": "^6.0.0",
     "graphql": "^16.0.1",
-    "graphql-request": "^4.0.0",
+    "graphql-request": "^5.0.0",
     "next": "latest",
     "next-mdx-remote": "^4.0.2",
     "next-sitemap": "^3.1.20",
