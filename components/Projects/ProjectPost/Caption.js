@@ -6,7 +6,7 @@ const ImageCaption = styled(motion.figcaption)`
   height: max-content;
   width: 100%;
   font-size: clamp(0.9rem, 0.9vw, 1.3525rem);
-  font-weight: 100;
+  font-weight: 200;
   line-height: clamp(1rem, 1.5vw, 1.55rem);
   padding: 5px 0;
 `;

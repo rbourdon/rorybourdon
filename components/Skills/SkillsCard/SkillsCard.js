@@ -60,7 +60,7 @@ const Trees = styled(motion.div)`
 const Label = styled(motion.p)`
   font-size: 2.25rem;
   line-height: 1;
-  font-weight: 100;
+  font-weight: 200;
   width: max-content;
   height: max-content;
   user-select: none;

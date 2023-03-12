@@ -30,7 +30,7 @@ html {
     padding: 0;
     box-sizing: border-box;
     font-size: 1rem;
-    font-weight: 100;
+    font-weight: 200;
     font-style: normal;
     font-family: 'Raleway', sans-serif;
     color: hsla(0,0%,28.63%,1);
@@ -56,7 +56,7 @@ html {
   p {
     margin: 0;
     font-size: clamp(1rem, .85vw, 1.3rem);
-    font-weight: 100;
+    font-weight: 200;
   }
   figure {
     margin: 0;
@@ -72,25 +72,25 @@ html {
     margin: 0;
     font-size: clamp(2.7rem, 11vw, 8.5rem);
     line-height: 1;
-    font-weight: 100;
+    font-weight: 200;
   }
   h2 {
     font-size: clamp(1.2rem, 4.5vw, 1.8rem);
     line-height: clamp(1.2rem, 7vw, 2rem);
     margin: 0;
-    font-weight: 100;
+    font-weight: 200;
   }
   h3 {
     margin: 0;
     font-size: clamp(1.15rem, 1.66vw, 1.425rem);
     line-height: clamp(1.25rem, 1.66vw, 1.8rem);
-    font-weight: 100;
+    font-weight: 200;
   }
   h4 {
     font-size: 1rem;
     margin: 0 0 4px 0;
     line-height: 1;
-    font-weight: 100;
+    font-weight: 200;
   }
   
 `;
