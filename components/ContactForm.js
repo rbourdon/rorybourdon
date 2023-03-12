@@ -28,7 +28,7 @@ const Input = styled(motion.textarea)`
   max-height: 200px;
   padding: 20px;
   font-size: 1rem;
-  font-weight: 100;
+  font-weight: 200;
   resize: none;
   scrollbar-width: thin;
   scrollbar-color: var(--color-primary_mediumdark) var(--color-primary);
@@ -70,7 +70,7 @@ const Confirmation = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 100;
+  font-weight: 200;
   line-height: 1;
   font-size: 1.15rem;
   padding: 0 0 2px 0;
@@ -78,7 +78,7 @@ const Confirmation = styled(motion.div)`
 `;
 
 const Thanks = styled(motion.span)`
-  font-weight: 100;
+  font-weight: 200;
   font-size: 1.2rem;
   line-height: 1;
   margin-left: 0.5rem;

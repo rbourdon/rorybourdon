@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useContext } from "react";
 
 const PostTitle = styled(motion.h2)`
-  font-weight: 100;
+  font-weight: 200;
   width: 100%;
   text-align: center;
   padding: 3vw 0 3vw 0;

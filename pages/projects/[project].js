@@ -54,7 +54,7 @@ const Container = styled(motion.div)`
 
 const PageTitle = styled(motion.h1)`
   width: max-content;
-  font-weight: 100;
+  font-weight: 200;
   margin: 0 0 30px 30px;
 `;
 
@@ -74,7 +74,7 @@ const ProjectContent = styled(motion.article)`
   justify-self: end;
   height: max-content;
   font-size: clamp(1rem, 4vw, 1.3525rem);
-  font-weight: 100;
+  font-weight: 200;
   line-height: clamp(1rem, 4.5vw, 1.55rem);
   grid-column: 1;
   display: flex;

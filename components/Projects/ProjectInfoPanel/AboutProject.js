@@ -19,7 +19,7 @@ const Label = styled(motion.p)`
 
 const Text = styled(motion.p)`
   font-size: clamp(0.9rem, 0.9vw, 1.3525rem);
-  font-weight: 100;
+  font-weight: 200;
   line-height: clamp(1rem, 1.2vw, 1.55rem);
 `;
 

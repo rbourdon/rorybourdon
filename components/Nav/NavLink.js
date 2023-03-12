@@ -12,7 +12,7 @@ import { useContext } from "react";
 const LinkText = styled(motion.a)`
   text-align: center;
   font-size: 1.2rem;
-  font-weight: 100;
+  font-weight: 200;
   position: relative;
   z-index: 5;
   &:focus {
@@ -23,7 +23,7 @@ const LinkText = styled(motion.a)`
 const Text = styled(motion.button)`
   text-align: center;
   font-size: 1.2rem;
-  font-weight: 100;
+  font-weight: 200;
   cursor: pointer;
   border: none;
   background: none;
