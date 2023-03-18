@@ -1,15 +1,12 @@
 import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import Banner from "@/components/Banner";
 import { getAllSkills, getAllProjects } from "@/lib/graphcms";
 import NavBar from "@/components/Nav/NavBar";
 import Head from "next/head";
 import Footer from "@/components/Footer";
 import dynamic from "next/dynamic";
-import GridGuide from "@/components/GridGuide";
-import { useInView } from "react-intersection-observer";
-import useGuide from "@/components/utils/useGuide";
 
 const SkillsCard = dynamic(() =>
   import("@/components/Skills/SkillsCard/SkillsCard")
@@ -49,13 +46,13 @@ const HeroBanner = styled(motion.header)`
   flex-direction: column;
 `;
 
-const HeroBody = styled(motion.div)`
-  width: 100%;
-  height: 25vh;
-  display: flex;
-  justify-content: center;
-  margin-top: 5vh;
-`;
+// const HeroBody = styled(motion.div)`
+//   width: 100%;
+//   height: max-content;
+//   display: flex;
+//   justify-content: end;
+//   margin-top: 1vh;
+// `;
 
 const HeroSection = styled(motion.section)`
   width: 100%;
@@ -63,7 +60,6 @@ const HeroSection = styled(motion.section)`
   display: flex;
   flex-direction: column;
   padding: 20vh 10vw 5vh 10vw;
-  position: relative;
 
   @media (max-width: 555px) {
     padding: 0 6vw 5vh 6vw;
@@ -86,31 +82,6 @@ const Section = styled(motion.section)`
 
 export default function Home({ skills, projects }) {
   const theme = useContext(ThemeContext);
-  // const { width } = useWindowSize();
-  // const mousePosX = useMotionValue();
-  // const mousePosY = useMotionValue();
-  const [heroRef, heroInView] = useInView({ threshold: 0.5 });
-  const [skillsRef, skillsInView] = useInView({ threshold: 0.5 });
-  const [projectsRef, projectsInView] = useInView({ threshold: 0.5 });
-  const [socialsRef, socialsInView] = useInView({ threshold: 0.5 });
-  const [activeGuide, setActiveGuide] = useState({
-    type: "hero",
-    pose: "defaultPose",
-  });
-  useEffect(() => {
-    if (heroInView) {
-      activeGuide.type !== "hero" && setActiveGuide({ type: "hero" });
-    } else if (skillsInView) {
-      activeGuide.type !== "skills" && setActiveGuide({ type: "skills" });
-    } else if (projectsInView) {
-      activeGuide.type !== "projects" && setActiveGuide({ type: "projects" });
-    } else if (socialsInView) {
-      activeGuide.type !== "socials" && setActiveGuide({ type: "socials" });
-    }
-  }, [activeGuide, heroInView, projectsInView, skillsInView, socialsInView]);
-
-  const { guideDispatch, guideState, x, y, rotate } = useGuide();
-
   const pageLinks = [
     {
       name: "Skills",
@@ -137,17 +108,12 @@ export default function Home({ skills, projects }) {
       onClick: null,
     },
   ];
-
   return (
     <Container
       initial="hidden"
       animate="visible"
       exit="exit"
       style={{ backgroundColor: theme.primary }}
-      // onMouseMove={(e) => {
-      //   mousePosX.set(e.pageX);
-      //   mousePosY.set(e.pageY);
-      // }}
     >
       <Head>
         <title>Rory Bourdon | Web Developer & Visual Artist</title>
@@ -171,82 +137,19 @@ export default function Home({ skills, projects }) {
           <HeroBanner>
             <Banner />
           </HeroBanner>
-          <HeroBody ref={heroRef}>
-            {activeGuide.type === "hero" && (
-              <GridGuide
-                guideDispatch={guideDispatch}
-                guideState={guideState}
-                x={x}
-                y={y}
-                rotate={rotate}
-                hoverPose="expandPose"
-                clickPose="arrowPose"
-                defaultPose="neutralPose"
-                defaultBehavior="wander"
-                hoverBehavior="spin"
-              />
-            )}
-          </HeroBody>
+          {/* <HeroBody /> */}
         </HeroSection>
-        <Section
-          ref={skillsRef}
-          style={{ backgroundColor: theme.primary_light }}
-        >
-          <SkillsCard skills={skills}>
-            {activeGuide.type === "skills" && (
-              <GridGuide
-                guideDispatch={guideDispatch}
-                guideState={guideState}
-                x={x}
-                y={y}
-                rotate={rotate}
-                hoverPose="expandPose"
-                clickPose="arrowPose"
-                defaultPose="treePose"
-                defaultBehavior="tree"
-                clickBehavior="point"
-              />
-            )}
-          </SkillsCard>
+        <Section style={{ backgroundColor: theme.primary_light }}>
+          <SkillsCard skills={skills} />
         </Section>
-        <Section ref={projectsRef}>
+        <Section>
           <ProjectsCard
             projects={projects}
             style={{ backgroundColor: theme.primary }}
-          >
-            {activeGuide.type === "projects" && (
-              <GridGuide
-                guideDispatch={guideDispatch}
-                guideState={guideState}
-                x={x}
-                y={y}
-                rotate={rotate}
-                hoverPose="expandPose"
-                clickPose="arrowPose"
-                defaultPose="gearPose"
-              />
-            )}
-          </ProjectsCard>
+          />
         </Section>
-        <Section
-          ref={socialsRef}
-          style={{ backgroundColor: theme.primary_light }}
-        >
-          <SocialsCard>
-            {activeGuide.type === "socials" && (
-              <GridGuide
-                guideDispatch={guideDispatch}
-                guideState={guideState}
-                x={x}
-                y={y}
-                rotate={rotate}
-                hoverPose="expandPose"
-                clickPose="neutralPose"
-                defaultPose="neutralPose"
-                clickBehavior="wander"
-              />
-            )}
-          </SocialsCard>
+        <Section style={{ backgroundColor: theme.primary_light }}>
+          <SocialsCard />
         </Section>
       </Content>
       <Footer />
