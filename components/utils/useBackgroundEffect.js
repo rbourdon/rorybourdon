@@ -1,14 +1,14 @@
 import {
   animate,
   useMotionValue,
+  useScroll,
   useSpring,
   useTransform,
-  useViewportScroll,
 } from "framer-motion";
 import { useEffect } from "react";
 
 function useBackgroundEffect(inView, effectStyle) {
-  const { scrollY } = useViewportScroll();
+  const { scrollY } = useScroll();
   const scrollOffsetY = useMotionValue(0);
   const baseY = useMotionValue(200);
   const finalY = useTransform(
