@@ -2,6 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import { createGlobalStyle } from "styled-components";
 import { ThemeControlProvider } from "@/lib/Context/ThemeContext";
 import Layout from "@/components/layout";
+import Head from "next/head";
 
 const GlobalStyle = createGlobalStyle`
 html {
@@ -103,17 +104,29 @@ function handleExitComplete() {
 
 function MyApp({ Component, pageProps, router }) {
   return (
-    <ThemeControlProvider>
-      <GlobalStyle />
-      <Layout>
-        <AnimatePresence
-          exitBeforeEnter
-          onExitComplete={() => handleExitComplete()}
-        >
-          <Component {...pageProps} key={router.route} />
-        </AnimatePresence>
-      </Layout>
-    </ThemeControlProvider>
+    <>
+      <Head>
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#00aba9" />
+        <meta name="theme-color" content="#ffffff" />
+
+        <meta name="author" content="Rory Bourdon" />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <ThemeControlProvider>
+        <GlobalStyle />
+        <Layout>
+          <AnimatePresence
+            exitBeforeEnter
+            onExitComplete={() => handleExitComplete()}
+          >
+            <Component {...pageProps} key={router.route} />
+          </AnimatePresence>
+        </Layout>
+      </ThemeControlProvider>
+    </>
   );
 }
 

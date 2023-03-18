@@ -172,7 +172,7 @@ export default function Button({
   };
 
   return type === "link" ? (
-    <Link href={href} passHref scroll={false}>
+    <Link href={href} passHref scroll={false} legacyBehavior>
       <LinkContainer
         $width={width}
         $height={height}

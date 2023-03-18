@@ -72,7 +72,7 @@ export default function NavLink({
   };
 
   return href ? (
-    <Link href={href} passHref>
+    <Link href={href} passHref legacyBehavior>
       <LinkText
         variants={navV}
         style={{ color }}

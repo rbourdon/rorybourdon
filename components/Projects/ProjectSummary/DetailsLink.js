@@ -101,7 +101,7 @@ export default function DetailsLink({ href, linkColor }) {
   };
 
   return (
-    <Link href={href} passHref>
+    <Link href={href} passHref legacyBehavior>
       <Container
         onHoverStart={() => handleHover(1)}
         onHoverEnd={() => handleHover(0)}
