@@ -67,7 +67,7 @@ export default function SocialLink({ href = "/", platform, hoverColor }) {
   );
 
   return (
-    <Link href={href} passHref>
+    <Link href={href} passHref legacyBehavior>
       <Container
         rel="noopener"
         target="_blank"

@@ -73,7 +73,7 @@ export default function ProjectLink({ type = "Demo", href = "", iconColor }) {
   };
 
   return href ? (
-    <Link href={href} passHref>
+    <Link href={href} passHref legacyBehavior>
       <LinkContainer
         rel="noopener"
         target="_blank"

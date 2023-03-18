@@ -1,91 +1,102 @@
-import styled from "styled-components";
-import { animate, motion, useMotionValue } from "framer-motion";
-import ReactPannellum, {
-  setPitch,
-  setYaw,
-  getYaw,
-  getPitch,
-  stopAutoRotate,
-  startAutoRotate,
-} from "react-pannellum";
-import { useEffect, useRef } from "react";
+import styled, { ThemeContext } from "styled-components";
+import { AnimatePresence, motion } from "framer-motion";
+import { useContext, useState } from "react";
+import dynamic from "next/dynamic";
+import Logo from "@/components/Nav/Logo";
 
 const Container = styled(motion.figure)`
   width: 100%;
-  height: max-content;
+  height: 60vh;
+  position: relative;
   margin: 3vw 0 1vw 0;
   z-index: 5;
   cursor: grab;
 `;
 
-const style = {
-  width: "100%",
-  height: "60vh",
-  background: "rgb(219, 216, 222)",
-  cursor: "grab",
+const PlaceholderImage = styled(motion.span)`
+  width: 100%;
+  height: 60vh;
+  max-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+`;
+
+const placeholderV = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      type: "tween",
+      duration: 0.5,
+    },
+  },
 };
 
-const config = {
-  autoRotate: -4,
-  autoLoad: true,
-  draggable: false,
-  showControls: false,
-  escapeHTML: true,
-  autoRotateInactivityDelay: 3000,
-  author: "Rory Bourdon",
+const logoV = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      type: "tween",
+      ease: "linear",
+      duration: 1,
+    },
+  },
 };
+
+const ReactPhotoSphereViewer = dynamic(
+  () =>
+    import("react-photo-sphere-viewer").then(
+      (mod) => mod.ReactPhotoSphereViewer
+    ),
+  {
+    ssr: false,
+  }
+);
 
 export default function PostPano({ src, children }) {
-  const viewerRef = useRef(null);
-  const pitch = useMotionValue(0);
-  const yaw = useMotionValue(0);
-
-  useEffect(() => {
-    const unsubPitch = pitch.onChange((latest) => {
-      setPitch(latest, false);
-    });
-    const unsubYaw = yaw.onChange((latest) => {
-      setYaw(latest, false);
-    });
-    return () => {
-      unsubPitch();
-      unsubYaw();
-    };
-  }, [pitch, yaw]);
-
-  const handlePan = (e, pointInfo) => {
-    pitch.set(pitch.get() + pointInfo.delta.y / 5);
-    yaw.set(yaw.get() + (pointInfo.delta.x * -1) / 5);
-  };
-
-  const handlePanStart = () => {
-    pitch.stop();
-    stopAutoRotate();
-    yaw.set(getYaw());
-    pitch.set(getPitch());
-  };
-  const handlePanEnd = () => {
-    animate(pitch, 0, {
-      duration: 2,
-      ease: "easeInOut",
-      onComplete: startAutoRotate,
-    });
-  };
+  const [isReady, setIsReady] = useState(false);
+  const theme = useContext(ThemeContext);
 
   return (
-    <Container
-      onPan={handlePan}
-      onPanStart={handlePanStart}
-      onPanEnd={handlePanEnd}
-      ref={viewerRef}
-    >
-      <ReactPannellum
-        id={src}
-        sceneId="home"
-        imageSource={src}
-        config={config}
-        style={style}
+    <Container>
+      <ReactPhotoSphereViewer
+        keyboard="fullscreen"
+        src={src}
+        height={"60vh"}
+        width={"100%"}
+        //navbar={false}
+        onReady={() => setIsReady(true)}
+        //plugins={[AutorotatePlugin]}
       />
+      <AnimatePresence>
+        {!isReady && (
+          <PlaceholderImage
+            key={`${src}_placeholder`}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={placeholderV}
+            style={{
+              backgroundColor: theme.primary_superdark,
+            }}
+          >
+            <Logo variants={logoV} color={theme.primary_light} />
+          </PlaceholderImage>
+        )}
+      </AnimatePresence>
       {children}
     </Container>
   );

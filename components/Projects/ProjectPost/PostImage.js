@@ -5,6 +5,7 @@ import Image from "next/image";
 const Container = styled(motion.figure)`
   width: 100%;
   height: max-content;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,12 +25,14 @@ export default function PostImage({
     <Container>
       {src !== "" && (
         <Image
+          style={{ maxWidth: "100%", height: "100%", objectFit: "contain" }}
           src={src}
-          width={width}
-          height={height}
           alt={alt}
-          quality={quality}
           priority={priority}
+          height={height}
+          width={width}
+          quality={quality}
+          sizes="100vw"
         />
       )}
       {children}

@@ -86,7 +86,7 @@ export default function NavBar({ children, links = [] }) {
 
   return (
     <Container>
-      <Link href="/" passHref>
+      <Link href="/" passHref legacyBehavior>
         <LogoContainer>
           <Logo />
         </LogoContainer>
