@@ -236,10 +236,18 @@ export default function SkillBubble({
           backgroundColor,
         }}
       >
-        <Link href={`/skills/${id}`} passHref scroll={false} legacyBehavior>
+        <Link
+          draggable={false}
+          href={`/skills/${id}`}
+          passHref
+          scroll={false}
+          legacyBehavior
+        >
           <BubbleLink
+            draggable={false}
             onClick={canHover ? null : disableLinkDrag}
             onTapStart={disableLinkDrag}
+            onDragStart={disableLinkDrag}
             initial="hidden"
             animate={hovering ? "hover" : "visible"}
           >

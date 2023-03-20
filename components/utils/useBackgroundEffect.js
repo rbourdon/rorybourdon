@@ -75,7 +75,7 @@ function useBackgroundEffect(inView, effectStyle) {
   ]);
 
   useEffect(() => {
-    const unsubscribeY = scrollY.onChange((progress) => {
+    const unsubscribeY = scrollY.on("change", (progress) => {
       if (inView && baseY.get() === 0) {
         scrollOffsetY.set(
           scrollOffsetY.get() - (progress - scrollY.getPrevious()) * 0.325
