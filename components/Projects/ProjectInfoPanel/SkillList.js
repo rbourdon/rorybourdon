@@ -35,7 +35,7 @@ export default function SkillList({ skills, bubbleColor, textColor }) {
           return (
             <SkillBubble
               title={skill.title}
-              key={skill.slug}
+              key={`${skill.slug}_skilllist`}
               custom={index}
               hoverColor={{
                 bg: bubbleColor,

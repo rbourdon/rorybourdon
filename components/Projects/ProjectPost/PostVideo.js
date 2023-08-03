@@ -128,7 +128,7 @@ export default function PostVideo({
         <AnimatePresence>
           {!playing && (
             <PlaceholderImage
-              key={`${src}_placeholder`}
+              key={`${src}_placeholder_video`}
               initial="hidden"
               animate="visible"
               exit="exit"
