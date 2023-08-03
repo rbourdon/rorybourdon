@@ -2,7 +2,7 @@ import { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 
-function Layout({ children }) {
+function Layout({ children, className }) {
   const theme = useContext(ThemeContext);
 
   return (
@@ -12,6 +12,7 @@ function Layout({ children }) {
         overflow: "scroll",
         width: "100%",
       }}
+      className={className}
     >
       {children}
     </motion.div>
