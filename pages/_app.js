@@ -119,7 +119,7 @@ function MyApp({ Component, pageProps, router }) {
         <GlobalStyle />
         <Layout>
           <AnimatePresence
-            exitBeforeEnter
+            mode="wait"
             onExitComplete={() => handleExitComplete()}
           >
             <Component {...pageProps} key={router.route} />

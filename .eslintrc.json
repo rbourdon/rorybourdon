@@ -6,7 +6,6 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:prettier/recommended",
     "plugin:@next/next/recommended",
     "next/core-web-vitals"
   ],
@@ -19,12 +18,6 @@
   },
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "auto"
-      }
-    ],
     "react/prop-types": 0,
     "no-useless-escape": "off"
   },

@@ -8,7 +8,7 @@ This is my personal portfolio website, intended to showcase my design and develo
 
 ### :wrench: Technologies
 
-**[Next.js](https://github.com/vercel/next.js)** - React, but *better:tm:*
+**[Next.js](https://github.com/vercel/next.js)** - React, but _better:tm:_
 
 **[Framer Motion](https://github.com/framer/motion)** - Slick animation and layout transitions
 
@@ -19,9 +19,10 @@ This is my personal portfolio website, intended to showcase my design and develo
 &nbsp;
 
 ### :electric_plug: Services
+
 **[Vercel](https://vercel.com/)** - The best Next.js integration, analytics, a generous hobby plan, and UX that sparks joy
 
-**[GraphCMS](https://graphcms.com/)** - Nice headless CMS with a GraphQL API, generous free tier and great tools
+**[Hygraph (formerly GraphCMS)](https://hygraph.com/)** - Nice headless CMS with a GraphQL API, generous free tier and great tools
 
 &nbsp;
 
@@ -30,7 +31,8 @@ This is my personal portfolio website, intended to showcase my design and develo
 This portfolio got me hired and now I'm super busy so documentation will be added as I have time.
 
 Click the button below to clone my GraphCMS schema to a new project which you can fill out with your own content.
-### [![Clone project](https://graphcms.com/button)](https://app.graphcms.com/clone/1c307b6a56ea471f88368b1e42dd7191?name=rorybourdon)
+
+### [![Clone project](https://hygraph.com/button)](https://app.hygraph.com/clone/1c307b6a56ea471f88368b1e42dd7191?name=rorybourdon)
 
 &nbsp;
 

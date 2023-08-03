@@ -63,7 +63,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
   }, []);
 
   useEffect(() => {
-    panPos.onChange((latest) => {
+    const pan = panPos.on("change", (latest) => {
       if (Math.abs(latest) >= 245) {
         setRollerPos((prev) =>
           prev + Math.sign(latest * -1) > projects.length - 1
@@ -75,6 +75,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
         panPos.set(Math.sign(latest) * -150);
       }
     });
+    return () => pan();
   }, [panPos, projects.length]);
 
   const handlePan = (e, pointInfo) => {
