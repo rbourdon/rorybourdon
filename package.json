@@ -1,7 +1,7 @@
 {
   "name": "rorybourdon",
   "author": "Rory Bourdon <rorybourdon@gmail.com> (https://rorybourdon.com)",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -23,8 +23,7 @@
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.2.0",
     "react-photo-sphere-viewer": "^3.3.5-psv5.1.4",
-    "styled-components": "^6.0.6",
-    "stylis": "^4.0.0"
+    "styled-components": "^6.0.6"
   },
   "devDependencies": {
     "eslint": "^8.4.1",
