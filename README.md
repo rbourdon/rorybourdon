@@ -2,7 +2,7 @@
 
 <p align="center"><a href="https://www.rorybourdon.com">www.rorybourdon.com</a></p>
 
-This is my personal portfolio website, intended to showcase my design and development skills as well as allow me to display and discuss the various projects I've worked on. I designed this site in Adobe Illustrator and built it in Visual Studio Code using Next.js.
+This is my personal portfolio website, built in late 2021 and intended to showcase my design and development skills as well as allow me to display and discuss the various projects I've worked on. I designed this site in Adobe Illustrator and built it in Visual Studio Code using Next.js.
 
 &nbsp;
 
@@ -28,9 +28,9 @@ This is my personal portfolio website, intended to showcase my design and develo
 
 ### 📖 Documentation
 
-This portfolio got me hired and now I'm super busy so documentation will be added as I have time.
+This portfolio got me hired and now I'm super busy so documentation will be added as I have time, maybe.
 
-Click the button below to clone my GraphCMS schema to a new project which you can fill out with your own content.
+Click the button below to clone my Hygraph schema to a new project which you can fill out with your own content.
 
 ### [![Clone project](https://hygraph.com/button)](https://app.hygraph.com/clone/1c307b6a56ea471f88368b1e42dd7191?name=rorybourdon)
 
