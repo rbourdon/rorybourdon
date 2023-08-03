@@ -84,7 +84,7 @@ export default function PostPano({ src, children }) {
       <AnimatePresence>
         {!isReady && (
           <PlaceholderImage
-            key={`${src}_placeholder`}
+            key={`${src}_placeholder_pano`}
             initial="hidden"
             animate="visible"
             exit="exit"

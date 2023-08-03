@@ -121,13 +121,26 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
           onPanStart={handlePanStart}
           onPan={handlePan}
           onPanEnd={handlePanEnd}
-          style={{ cursor: panning ? "grabbing" : "grab" }}
+          style={{
+            cursor: panning ? "grabbing" : "grab",
+            gridTemplateColumns: `repeat(${Math.min(
+              3,
+              projects.length
+            )}, 340px)`,
+          }}
         >
           {[
-            ...projects.slice(rollerPos, rollerPos + 3),
+            ...projects.slice(
+              rollerPos,
+              rollerPos + Math.min(3, projects.length)
+            ),
             ...projects.slice(
               0,
-              3 - projects.slice(rollerPos, rollerPos + 3).length
+              Math.min(3, projects.length) -
+                projects.slice(
+                  rollerPos,
+                  rollerPos + Math.min(3, projects.length)
+                ).length
             ),
           ].map((project, index) => {
             return (

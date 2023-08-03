@@ -141,7 +141,7 @@ export default function SkillScroller({ skills }) {
           return (
             <SkillBubble
               title={skill.title}
-              key={skill.slug}
+              key={`${skill.slug}_scroller`}
               variants={bubbleV}
               custom={index}
               bgColor={theme.primary}

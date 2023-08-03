@@ -3,6 +3,7 @@ import { createGlobalStyle } from "styled-components";
 import { ThemeControlProvider } from "@/lib/Context/ThemeContext";
 import Layout from "@/components/layout";
 import Head from "next/head";
+import { Raleway } from "next/font/google";
 
 const GlobalStyle = createGlobalStyle`
 html {
@@ -33,7 +34,6 @@ html {
     font-size: 1rem;
     font-weight: 200;
     font-style: normal;
-    font-family: 'Raleway', sans-serif;
     color: hsla(0,0%,28.63%,1);
     min-height: 100vh;
   }
@@ -102,6 +102,8 @@ function handleExitComplete() {
   }
 }
 
+const raleway = Raleway({ subsets: ["latin"] });
+
 function MyApp({ Component, pageProps, router }) {
   return (
     <>
@@ -110,14 +112,13 @@ function MyApp({ Component, pageProps, router }) {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#00aba9" />
         <meta name="theme-color" content="#ffffff" />
-
         <meta name="author" content="Rory Bourdon" />
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <ThemeControlProvider>
         <GlobalStyle />
-        <Layout>
+        <Layout className={raleway.className}>
           <AnimatePresence
             mode="wait"
             onExitComplete={() => handleExitComplete()}

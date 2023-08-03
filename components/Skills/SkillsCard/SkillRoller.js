@@ -57,7 +57,7 @@ export default function SkillRoller({
           <SkillBubble
             title={skill.title}
             id={skill.slug}
-            key={skill.slug}
+            key={`${skill.slug}_roller`}
             top={index === 0 ? true : false}
             bottom={index === numSkills - 1 ? true : false}
             hoverColor={{
