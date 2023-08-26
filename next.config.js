@@ -8,8 +8,4 @@ module.exports = {
     dangerouslyAllowSVG: true,
     domains: ["media.graphcms.com", "media.graphassets.com"],
   },
-  experimental: {
-    workerThreads: false,
-    cpus: 1,
-  },
 };
