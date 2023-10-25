@@ -22,13 +22,13 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.2.0",
-    "react-photo-sphere-viewer": "^3.3.5-psv5.1.4",
+    "react-photo-sphere-viewer": "^3.4.0-psv5.4.0",
     "styled-components": "^6.0.6"
   },
   "devDependencies": {
     "eslint": "^8.4.1",
     "eslint-config-next": "^13.2.4",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.26.0",
     "prettier": "^3.0.0"
