@@ -6,10 +6,20 @@ module.exports = {
   },
   images: {
     dangerouslyAllowSVG: true,
-    domains: ["media.graphcms.com", "media.graphassets.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "media.graphcms.com",
+      },
+      {
+        protocol: "https",
+        hostname: "media.graphassets.com",
+      },
+    ],
   },
   experimental: {
     workerThreads: false,
     cpus: 1,
+    esmExternals: "loose",
   },
 };

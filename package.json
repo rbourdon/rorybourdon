@@ -1,7 +1,7 @@
 {
   "name": "rorybourdon",
   "author": "Rory Bourdon <rorybourdon@gmail.com> (https://rorybourdon.com)",
-  "version": "0.9.1",
+  "version": "0.9.3",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -16,18 +16,18 @@
     "framer-motion": "^10.6.0",
     "graphql": "^16.0.1",
     "graphql-request": "^6.1.0",
-    "next": "^13.2.4",
+    "next": "^14.0.0",
     "next-mdx-remote": "^4.0.2",
     "next-sitemap": "^4.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.2.0",
-    "react-photo-sphere-viewer": "^3.4.0-psv5.4.0",
+    "react-photo-sphere-viewer": "^4.0.2-psv5.4.4",
     "styled-components": "^6.0.6"
   },
   "devDependencies": {
     "eslint": "^8.4.1",
-    "eslint-config-next": "^13.2.4",
+    "eslint-config-next": "^14.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.26.0",
