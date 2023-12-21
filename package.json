@@ -1,7 +1,7 @@
 {
   "name": "rorybourdon",
   "author": "Rory Bourdon <rorybourdon@gmail.com> (https://rorybourdon.com)",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,7 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@sendgrid/mail": "^7.6.0",
+    "@sendgrid/mail": "^8.1.0",
     "color-convert": "^2.0.1",
     "framer-motion": "^10.6.0",
     "graphql": "^16.0.1",
