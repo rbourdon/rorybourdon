@@ -110,7 +110,3 @@ export default function SkillChip({
     </Chip>
   );
 }
-
-SkillChip.defaultProps = {
-  transition: { type: "spring", stiffness: 30 },
-};
