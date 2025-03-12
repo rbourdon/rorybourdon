@@ -1,4 +1,11 @@
-module.exports = {
+const withTM = require("next-transpile-modules")([
+  // Add this 2 modules
+  "@photo-sphere-viewer/core",
+  "react-photo-sphere-viewer",
+]);
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   compiler: {
@@ -20,6 +27,6 @@ module.exports = {
   experimental: {
     workerThreads: false,
     cpus: 1,
-    esmExternals: "loose",
   },
 };
+module.exports = withTM(nextConfig);

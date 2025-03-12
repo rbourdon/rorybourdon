@@ -11,18 +11,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@photo-sphere-viewer/core": "^5.12.1",
     "@sendgrid/mail": "^8.1.0",
-    "color-convert": "^2.0.1",
+    "color-convert": "^3.0.0",
     "framer-motion": "^10.6.0",
     "graphql": "^16.0.1",
-    "graphql-request": "^6.1.0",
+    "graphql-request": "^7.0.0",
     "next": "^14.0.0",
     "next-mdx-remote": "^4.0.2",
     "next-sitemap": "^4.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.2.0",
-    "react-photo-sphere-viewer": "^4.0.2-psv5.4.4",
+    "react-photo-sphere-viewer": "^6.0.0",
     "styled-components": "^6.0.6"
   },
   "devDependencies": {
@@ -31,6 +32,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.26.0",
+    "next-transpile-modules": "^10.0.1",
     "prettier": "^3.0.0"
   }
 }

@@ -9,6 +9,7 @@ import BackArrow from "@/components/Nav/BackArrow";
 import ProjectsScroller from "@/components/Projects/ProjectsScroller";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
 import TitleBlock from "@/components/PageTitleBlock";
+import convert from "color-convert";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -167,7 +168,7 @@ const arrowV = {
 
 export default function Skill({ skill }) {
   const theme = useContext(ThemeContext);
-  const convert = require("color-convert");
+  
   const secondaryColorRGB = convert.rgb.hsl(
     skill.secondaryColor.rgba.r,
     skill.secondaryColor.rgba.g,

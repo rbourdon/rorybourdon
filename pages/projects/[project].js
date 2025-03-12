@@ -22,6 +22,7 @@ import AboutProject from "@/components/Projects/ProjectInfoPanel/AboutProject";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
 import ProjectLinkBox from "@/components/Projects/ProjectInfoPanel/LinkBox";
 import PostPano from "@/components/Projects/ProjectPost/PostPano";
+import convert from "color-convert";
 
 const PageContent = styled(motion.main)`
   width: 100%;
@@ -156,7 +157,7 @@ const pageLinks = [
 
 export default function Project({ project, source }) {
   const theme = useContext(ThemeContext);
-  const convert = require("color-convert");
+ 
   const secondaryColorRGB = useMemo(() => {
     return project.secondaryColor
       ? convert.rgb.hsl(
@@ -165,7 +166,7 @@ export default function Project({ project, source }) {
           project.secondaryColor.rgba.b
         )
       : [0, 0, 0, 0];
-  }, [convert.rgb, project.secondaryColor]);
+  }, [project.secondaryColor]);
 
   const primaryColorRGB = useMemo(() => {
     return project.primaryColor
@@ -175,7 +176,7 @@ export default function Project({ project, source }) {
           project.primaryColor.rgba.b
         )
       : [0, 0, 0, 0];
-  }, [convert.rgb, project.primaryColor]);
+  }, [project.primaryColor]);
 
   const color1 = useMotionValue(
     `hsla(${primaryColorRGB[0]},${primaryColorRGB[1]}%,${primaryColorRGB[2]}%,1)`
