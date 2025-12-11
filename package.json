@@ -17,7 +17,7 @@
     "framer-motion": "11.0.0",
     "graphql": "^16.0.1",
     "graphql-request": "^7.0.0",
-    "next": "^15.0.0",
+    "next": "15.0.5",
     "next-mdx-remote": "^4.0.2",
     "next-sitemap": "^4.0.6",
     "react": "^18.2.0",
