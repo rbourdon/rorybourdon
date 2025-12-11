@@ -1,11 +1,6 @@
-const withTM = require("next-transpile-modules")([
-  // Add this 2 modules
-  "@photo-sphere-viewer/core",
-  "react-photo-sphere-viewer",
-]);
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports =  {
   reactStrictMode: true,
   compiler: {
     styledComponents: true,
@@ -27,5 +22,8 @@ const nextConfig = {
     workerThreads: false,
     cpus: 1,
   },
+  transpilePackages: [
+    "@photo-sphere-viewer/core",
+    "react-photo-sphere-viewer",
+  ],
 };
-module.exports = withTM(nextConfig);
