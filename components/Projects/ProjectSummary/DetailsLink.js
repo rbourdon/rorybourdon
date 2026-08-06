@@ -1,4 +1,3 @@
-import styled, { ThemeContext } from "styled-components";
 import {
   animate,
   motion,
@@ -6,8 +5,9 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import { useContext } from "react";
 import Link from "next/link";
+import { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
 
 const Container = styled(motion.a)`
@@ -58,8 +58,8 @@ export default function DetailsLink({ href, linkColor }) {
         [
           latestColor1,
           transform(latestHover, [0, 1], [latestColor2, latestColor3]),
-        ]
-      )
+        ],
+      ),
   );
 
   const detailsLinkV = {

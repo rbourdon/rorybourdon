@@ -1,9 +1,9 @@
 import { AnimatePresence } from "framer-motion";
-import { createGlobalStyle } from "styled-components";
-import { ThemeControlProvider } from "@/lib/Context/ThemeContext";
-import Layout from "@/components/layout";
-import Head from "next/head";
 import { Raleway } from "next/font/google";
+import Head from "next/head";
+import { createGlobalStyle } from "styled-components";
+import Layout from "@/components/layout";
+import { ThemeControlProvider } from "@/lib/Context/ThemeContext";
 
 const GlobalStyle = createGlobalStyle`
 html {

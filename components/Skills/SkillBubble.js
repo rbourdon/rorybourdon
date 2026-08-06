@@ -1,15 +1,15 @@
-import styled, { ThemeContext } from "styled-components";
 import {
   animate,
-  motion,
   MotionConfig,
+  motion,
   transform,
   useMotionTemplate,
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
+import { useContext, useEffect, useState } from "react";
+import styled, { ThemeContext } from "styled-components";
 import ArrowIcon from "../Icons/ArrowIcon";
 
 const Bubble = styled(motion.li)`
@@ -178,18 +178,18 @@ export default function SkillBubble({
   const backgroundColor = useTransform(
     [bgColor || theme.primary_light, hoverColor?.bg || theme.teal, hover],
     ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2])
+      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
   );
 
   const outlineColor = useTransform(
     [theme.primary_dark, hoverColor?.bg || theme.teal, hover],
     ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2])
+      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
   );
 
   const border = useTransform(
     theme.primary_dark,
-    (latestColor1) => "thin solid " + latestColor1
+    (latestColor1) => "thin solid " + latestColor1,
   );
 
   const boxShadowNormal = useMotionTemplate`0px 0px 0px 0px ${theme.shadow_key}, 0px 0px 0x 0px ${theme.shadow_ambient}`;
@@ -202,8 +202,8 @@ export default function SkillBubble({
       transform(
         latestHover,
         [0, 1],
-        [latestBoxShadowNormal, latestBoxShadowHover]
-      )
+        [latestBoxShadowNormal, latestBoxShadowHover],
+      ),
   );
 
   const outlineOffset = useTransform(hover, [0, 1], ["0px", "-7px"]);
@@ -212,7 +212,7 @@ export default function SkillBubble({
   const titleColor = useTransform(
     [theme.primary_verydark, hoverColor.text || theme.primary_dark, hover],
     ([latestColor3, latestColor4, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor3, latestColor4])
+      transform(latestHover, [0, 1], [latestColor3, latestColor4]),
   );
 
   return (

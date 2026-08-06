@@ -1,4 +1,3 @@
-import styled, { ThemeContext } from "styled-components";
 import {
   animate,
   motion,
@@ -6,9 +5,10 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import ArrowIcon from "../Icons/ArrowIcon";
 import { useRouter } from "next/router";
 import { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
+import ArrowIcon from "../Icons/ArrowIcon";
 
 const Container = styled(motion.button)`
   width: 12vw;
@@ -43,7 +43,7 @@ export default function BackArrow({ width = 70, id = "generic", variants }) {
   const arrowColor = useTransform(
     [theme.primary_dark, theme.primary_mediumdark, hover],
     ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2])
+      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
   );
 
   const scale = useTransform(hover, [0, 1], [1, 1.07]);

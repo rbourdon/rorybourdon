@@ -1,14 +1,14 @@
-import styled, { ThemeContext } from "styled-components";
-import { motion, MotionConfig } from "framer-motion";
-import React, { useContext } from "react";
-import { getProjectList } from "@/lib/graphcms";
-import NavBar from "@/components/Nav/NavBar";
+import { MotionConfig, motion } from "framer-motion";
 import Head from "next/head";
-import BackArrow from "@/components/Nav/BackArrow";
-import ProjectsScroller from "@/components/Projects/ProjectsScroller";
-import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
+import React, { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
+import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
+import BackArrow from "@/components/Nav/BackArrow";
+import NavBar from "@/components/Nav/NavBar";
 import TitleBlock from "@/components/PageTitleBlock";
+import ProjectsScroller from "@/components/Projects/ProjectsScroller";
+import { getProjectList } from "@/lib/graphcms";
 
 const Content = styled(motion.main)`
   width: 100%;

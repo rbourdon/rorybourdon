@@ -1,6 +1,6 @@
-import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
 import { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 
 const ImageCaption = styled(motion.figcaption)`
   height: max-content;

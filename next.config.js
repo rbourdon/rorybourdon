@@ -1,6 +1,5 @@
-
 /** @type {import('next').NextConfig} */
-module.exports =  {
+module.exports = {
   reactStrictMode: true,
   compiler: {
     styledComponents: true,
@@ -22,8 +21,5 @@ module.exports =  {
     workerThreads: false,
     cpus: 1,
   },
-  transpilePackages: [
-    "@photo-sphere-viewer/core",
-    "react-photo-sphere-viewer",
-  ],
+  transpilePackages: ["@photo-sphere-viewer/core", "react-photo-sphere-viewer"],
 };

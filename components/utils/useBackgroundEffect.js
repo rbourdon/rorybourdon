@@ -14,7 +14,7 @@ function useBackgroundEffect(inView, effectStyle) {
   const finalY = useTransform(
     [scrollOffsetY, baseY],
     ([latestOffset, latestBase]) =>
-      effectStyle.y + latestOffset * (effectStyle.scale - 0.125) + latestBase
+      effectStyle.y + latestOffset * (effectStyle.scale - 0.125) + latestBase,
   );
 
   const effectY = useSpring(finalY, {
@@ -35,7 +35,7 @@ function useBackgroundEffect(inView, effectStyle) {
           type: "tween",
           duration: 1.5 * effectStyle.scale,
           ease: "linear",
-        }
+        },
       );
       const scrollOut = animate(scrollOffsetY, 0, {
         delay: effectStyle.delay,
@@ -78,7 +78,7 @@ function useBackgroundEffect(inView, effectStyle) {
     const unsubscribeY = scrollY.on("change", (progress) => {
       if (inView && baseY.get() === 0) {
         scrollOffsetY.set(
-          scrollOffsetY.get() - (progress - scrollY.getPrevious()) * 0.325
+          scrollOffsetY.get() - (progress - scrollY.getPrevious()) * 0.325,
         );
       }
     });

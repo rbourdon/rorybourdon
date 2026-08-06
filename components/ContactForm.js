@@ -1,4 +1,3 @@
-import styled, { ThemeContext } from "styled-components";
 import {
   animate,
   motion,
@@ -7,6 +6,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useContext, useState } from "react";
+import styled, { ThemeContext } from "styled-components";
 import Button from "@/components/Nav/Button";
 
 const Form = styled.form`
@@ -114,17 +114,17 @@ export default function ContactForm() {
   const color = useTransform(
     [theme.primary_slightlydark, theme.primary_mediumdark, hover],
     ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2])
+      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
   );
 
   const border = useTransform(
     color,
-    (latestColor1) => "thin solid " + latestColor1
+    (latestColor1) => "thin solid " + latestColor1,
   );
 
   const border2 = useTransform(
     theme.primary_slightlydark,
-    (latestColor1) => "1px solid " + latestColor1
+    (latestColor1) => "1px solid " + latestColor1,
   );
 
   const handleSubmit = async (e) => {

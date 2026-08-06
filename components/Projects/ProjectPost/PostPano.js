@@ -1,8 +1,8 @@
-import styled, { ThemeContext } from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
-import { useContext, useState } from "react";
-import Logo from "@/components/Nav/Logo";
 import dynamic from "next/dynamic";
+import { useContext, useState } from "react";
+import styled, { ThemeContext } from "styled-components";
+import Logo from "@/components/Nav/Logo";
 
 const Container = styled(motion.figure)`
   width: 100%;
@@ -56,7 +56,6 @@ const logoV = {
   },
 };
 
-
 export default function PostPano({ src, children }) {
   const [isReady, setIsReady] = useState(false);
   const theme = useContext(ThemeContext);
@@ -64,11 +63,11 @@ export default function PostPano({ src, children }) {
   const ReactPhotoSphereViewer = dynamic(
     () =>
       import("react-photo-sphere-viewer").then(
-        (mod) => mod.ReactPhotoSphereViewer
+        (mod) => mod.ReactPhotoSphereViewer,
       ),
     {
       ssr: false,
-    }
+    },
   );
 
   return (

@@ -1,7 +1,7 @@
-import styled, { ThemeContext } from "styled-components";
 import { motion, useIsPresent } from "framer-motion";
-import SkillBubble from "@/components/Skills/SkillBubble";
 import { useContext, useState } from "react";
+import styled, { ThemeContext } from "styled-components";
+import SkillBubble from "@/components/Skills/SkillBubble";
 import useInterval from "@/components/utils/useInterval";
 
 const TICK_RATE = 1000;
@@ -37,7 +37,7 @@ export default function SkillRoller({
     () => {
       setRollerPos((prev) => (prev + 1 > skills.length - 1 ? 0 : prev + 1));
     },
-    selected || !isPresent ? null : TICK_RATE
+    selected || !isPresent ? null : TICK_RATE,
   );
 
   const selectBubble = (bub) => {
@@ -50,7 +50,7 @@ export default function SkillRoller({
         ...skills.slice(rollerPos, rollerPos + numSkills),
         ...skills.slice(
           0,
-          numSkills - skills.slice(rollerPos, rollerPos + numSkills).length
+          numSkills - skills.slice(rollerPos, rollerPos + numSkills).length,
         ),
       ].map((skill, index) => {
         return (

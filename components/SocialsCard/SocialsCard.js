@@ -1,14 +1,14 @@
-import styled, { ThemeContext } from "styled-components";
-import { motion, MotionConfig } from "framer-motion";
-import NavCard from "@/components/CardComponents/NavCard";
+import { MotionConfig, motion } from "framer-motion";
 import { useContext, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import Button from "@/components/Nav/Button";
-import useWindowSize from "@/components/utils/useWindowSize";
-import SocialLink from "@/components/SocialsCard/SocialLink";
-import SocialsSceneIcon from "../Icons/SocialsSceneIcon";
-import SocialsBackgroundEffect from "@/components/SocialsCard/SocialsBackgroundEffect";
+import styled, { ThemeContext } from "styled-components";
 import CardEffect from "@/components/CardComponents/CardEffect";
+import NavCard from "@/components/CardComponents/NavCard";
+import Button from "@/components/Nav/Button";
+import SocialLink from "@/components/SocialsCard/SocialLink";
+import SocialsBackgroundEffect from "@/components/SocialsCard/SocialsBackgroundEffect";
+import useWindowSize from "@/components/utils/useWindowSize";
+import SocialsSceneIcon from "../Icons/SocialsSceneIcon";
 
 const Container = styled(motion.article)`
   width: 100%;
@@ -205,18 +205,18 @@ export default function SocialsCard({ sectionHeight = 1400, children }) {
           { x: width * 0.55, y: sectionHeight * 1, scale: 0.36 },
         ]
       : width
-      ? [
-          { x: width * 0.1, y: sectionHeight * 0.15, scale: 0.75 },
-          { x: width * 0.2, y: sectionHeight * 1, scale: 0.88 },
-          { x: width * 0.5, y: sectionHeight * 0, scale: 1 },
-          { x: width * 0.7, y: sectionHeight * 0.25, scale: 0.5 },
-          { x: width * 0.1, y: sectionHeight * 0.65, scale: 0.45 },
-          { x: width * 0.84, y: sectionHeight * 0.14, scale: 0.65 },
-          { x: width * 0.6, y: sectionHeight * 0.7, scale: 0.75 },
-          { x: 0, y: sectionHeight * 0.4, scale: 0.5 },
-          { x: width * 0.8, y: sectionHeight * 1.05, scale: 0.9 },
-        ]
-      : [];
+        ? [
+            { x: width * 0.1, y: sectionHeight * 0.15, scale: 0.75 },
+            { x: width * 0.2, y: sectionHeight * 1, scale: 0.88 },
+            { x: width * 0.5, y: sectionHeight * 0, scale: 1 },
+            { x: width * 0.7, y: sectionHeight * 0.25, scale: 0.5 },
+            { x: width * 0.1, y: sectionHeight * 0.65, scale: 0.45 },
+            { x: width * 0.84, y: sectionHeight * 0.14, scale: 0.65 },
+            { x: width * 0.6, y: sectionHeight * 0.7, scale: 0.75 },
+            { x: 0, y: sectionHeight * 0.4, scale: 0.5 },
+            { x: width * 0.8, y: sectionHeight * 1.05, scale: 0.9 },
+          ]
+        : [];
 
   return (
     <MotionConfig

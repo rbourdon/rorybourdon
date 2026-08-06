@@ -1,4 +1,3 @@
-import styled, { ThemeContext } from "styled-components";
 import {
   animate,
   motion,
@@ -7,6 +6,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 
 const Chip = styled(motion.div)`
   height: 20px;
@@ -60,8 +60,8 @@ export default function SkillChip({
         [
           latestColor1,
           transform(latestHover, [0, 1], [latestColor2, latestColor3]),
-        ]
-      )
+        ],
+      ),
   );
 
   const color = useTransform(
@@ -73,8 +73,8 @@ export default function SkillChip({
         [
           latestColor1,
           transform(latestHover, [0, 1], [latestColor2, latestColor3]),
-        ]
-      )
+        ],
+      ),
   );
 
   const handleHover = (to) => {

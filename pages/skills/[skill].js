@@ -1,15 +1,15 @@
-import styled, { ThemeContext } from "styled-components";
-import { animate, motion, MotionConfig, useMotionValue } from "framer-motion";
-import React, { useContext, useEffect } from "react";
-import { getSkillList, getSkillDetails } from "@/lib/graphcms";
-import NavBar from "@/components/Nav/NavBar";
+import convert from "color-convert";
+import { animate, MotionConfig, motion, useMotionValue } from "framer-motion";
 import Head from "next/head";
 import Image from "next/image";
-import BackArrow from "@/components/Nav/BackArrow";
-import ProjectsScroller from "@/components/Projects/ProjectsScroller";
+import React, { useContext, useEffect } from "react";
+import styled, { ThemeContext } from "styled-components";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
+import BackArrow from "@/components/Nav/BackArrow";
+import NavBar from "@/components/Nav/NavBar";
 import TitleBlock from "@/components/PageTitleBlock";
-import convert from "color-convert";
+import ProjectsScroller from "@/components/Projects/ProjectsScroller";
+import { getSkillDetails, getSkillList } from "@/lib/graphcms";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -168,23 +168,23 @@ const arrowV = {
 
 export default function Skill({ skill }) {
   const theme = useContext(ThemeContext);
-  
+
   const secondaryColorRGB = convert.rgb.hsl(
     skill.secondaryColor.rgba.r,
     skill.secondaryColor.rgba.g,
-    skill.secondaryColor.rgba.b
+    skill.secondaryColor.rgba.b,
   );
   const primaryColorRGB = convert.rgb.hsl(
     skill.primaryColor.rgba.r,
     skill.primaryColor.rgba.g,
-    skill.primaryColor.rgba.b
+    skill.primaryColor.rgba.b,
   );
 
   const primaryColor = useMotionValue(
-    `hsla(${primaryColorRGB[0]},${primaryColorRGB[1]}%,${primaryColorRGB[2]}%,1)`
+    `hsla(${primaryColorRGB[0]},${primaryColorRGB[1]}%,${primaryColorRGB[2]}%,1)`,
   );
   const secondaryColor = useMotionValue(
-    `hsla(${secondaryColorRGB[0]},${secondaryColorRGB[1]}%,${secondaryColorRGB[2]}%,1)`
+    `hsla(${secondaryColorRGB[0]},${secondaryColorRGB[1]}%,${secondaryColorRGB[2]}%,1)`,
   );
 
   const pageLinks = [

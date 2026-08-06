@@ -1,6 +1,6 @@
-import { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
 import { useContext } from "react";
+import { ThemeContext } from "styled-components";
 
 function Layout({ children, className }) {
   const theme = useContext(ThemeContext);

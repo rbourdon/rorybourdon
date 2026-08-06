@@ -1,6 +1,6 @@
-import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
 import { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 
 const Text = styled(motion.p)`
   height: max-content;
@@ -25,16 +25,16 @@ export default function Tagline({
       stemLoc === 3 || stemLoc === 8
         ? (height - bRadius * 2) * 0.335 + bRadius / 2
         : stemLoc === 4 || stemLoc === 7
-        ? (height - bRadius * 2) * 0.665 + bRadius / 2
-        : 0,
+          ? (height - bRadius * 2) * 0.665 + bRadius / 2
+          : 0,
     hidden:
       stemLoc === 3 || stemLoc === 8
         ? (height - bRadius * 2) * 0.335 + bRadius / 2 + 50
         : stemLoc === 4 || stemLoc === 7
-        ? (height - bRadius * 2) * 0.665 + bRadius / 2 + 50
-        : stemLoc === 1 || stemLoc === 2
-        ? -50
-        : 50,
+          ? (height - bRadius * 2) * 0.665 + bRadius / 2 + 50
+          : stemLoc === 1 || stemLoc === 2
+            ? -50
+            : 50,
   };
 
   return (
@@ -43,8 +43,8 @@ export default function Tagline({
         stemLoc === 3 || stemLoc === 4
           ? "2px 0 0 10px"
           : stemLoc === 7 || stemLoc === 8
-          ? "2px 10px 0 0"
-          : "2px 0 0 0"
+            ? "2px 10px 0 0"
+            : "2px 0 0 0"
       }
       custom={y}
       variants={variants}

@@ -43,18 +43,18 @@ export default function CardStem({
       stemLoc === 2 || stemLoc === 5
         ? (width - bRadius * 2 - sWidth / 2) * 0.665 + bRadius + sWidth / 2
         : stemLoc === 1 || stemLoc === 6
-        ? (width - bRadius * 2 - sWidth / 2) * 0.335 + bRadius + sWidth / 2
-        : stemLoc === 7 || stemLoc === 8
-        ? 0
-        : stemLength,
+          ? (width - bRadius * 2 - sWidth / 2) * 0.335 + bRadius + sWidth / 2
+          : stemLoc === 7 || stemLoc === 8
+            ? 0
+            : stemLength,
     y:
       stemLoc === 3 || stemLoc === 8
         ? (height - bRadius * 2 - sWidth / 2) * 0.335 + bRadius + sWidth / 2
         : stemLoc === 4 || stemLoc === 7
-        ? (height - bRadius * 2 - sWidth / 2) * 0.665 + bRadius + sWidth / 2
-        : stemLoc === 1 || stemLoc === 2
-        ? 0
-        : stemLength,
+          ? (height - bRadius * 2 - sWidth / 2) * 0.665 + bRadius + sWidth / 2
+          : stemLoc === 1 || stemLoc === 2
+            ? 0
+            : stemLength,
   };
   const theme = useContext(ThemeContext);
   return (
@@ -72,15 +72,15 @@ export default function CardStem({
             stemLoc === 3 || stemLoc === 4
               ? -stemLength
               : stemLoc === 7 || stemLoc === 8
-              ? stemLength
-              : stemStart.x
+                ? stemLength
+                : stemStart.x
           }
           y2={
             stemLoc === 1 || stemLoc === 2
               ? stemLength
               : stemLoc === 5 || stemLoc === 6
-              ? 0
-              : stemStart.y
+                ? 0
+                : stemStart.y
           }
           stroke={theme.primary_mediumdark}
           strokeWidth={sWidth}

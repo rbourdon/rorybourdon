@@ -1,7 +1,7 @@
-import useBackgroundEffect from "@/components/utils/useBackgroundEffect";
 import { motion, useMotionValue } from "framer-motion";
 import { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
+import useBackgroundEffect from "@/components/utils/useBackgroundEffect";
 
 const Container = styled(motion.div)`
   position: absolute;

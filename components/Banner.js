@@ -1,4 +1,3 @@
-import styled, { ThemeContext } from "styled-components";
 import {
   animate,
   motion,
@@ -7,6 +6,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useContext, useEffect } from "react";
+import styled, { ThemeContext } from "styled-components";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -129,8 +129,8 @@ export default function Banner({ title = "Rory Bourdon" }) {
       transform(
         latestPhase,
         [0, 1, 2, 3],
-        [latestColor1, latestColor2, latestColor3, latestColor4]
-      )
+        [latestColor1, latestColor2, latestColor3, latestColor4],
+      ),
   );
   useEffect(() => {
     animate(phase, [1, 1, 2, 2, 3, 3], {

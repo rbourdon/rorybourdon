@@ -1,7 +1,7 @@
-import styled, { ThemeContext } from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import styled, { ThemeContext } from "styled-components";
 import Logo from "@/components/Nav/Logo";
 
 const Container = styled(motion.figure)`
