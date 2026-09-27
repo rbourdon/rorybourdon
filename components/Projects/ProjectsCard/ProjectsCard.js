@@ -80,7 +80,11 @@ const ProjectsBox = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  /* Clip only sideways (the summary slides in from the right). Clipping
+     vertically cut off the top of the "Featured Project" label whenever the
+     summary made the content a few pixels taller than the box. */
+  overflow-x: clip;
+  overflow-y: visible;
   position: relative;
 `;
 
