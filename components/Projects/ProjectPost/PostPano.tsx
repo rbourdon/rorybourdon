@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import type { ReactNode } from "react";
 import { useState } from "react";
+import { useInView } from "react-intersection-observer";
 import styled, { useTheme } from "styled-components";
 import Logo from "@/components/Nav/Logo";
 
@@ -58,6 +59,19 @@ const logoV: Variants = {
   },
 };
 
+// Declared once at module scope: calling dynamic() during render made a new
+// component type every render, so the viewer remounted (and re-downloaded the
+// panorama) whenever this component re-rendered, e.g. right after onReady.
+const ReactPhotoSphereViewer = dynamic(
+  () =>
+    import("react-photo-sphere-viewer").then(
+      (mod) => mod.ReactPhotoSphereViewer,
+    ),
+  {
+    ssr: false,
+  },
+);
+
 interface PostPanoProps {
   src: string;
   children?: ReactNode;
@@ -66,28 +80,22 @@ interface PostPanoProps {
 export default function PostPano({ src, children }: PostPanoProps) {
   const [isReady, setIsReady] = useState(false);
   const theme = useTheme();
-
-  const ReactPhotoSphereViewer = dynamic(
-    () =>
-      import("react-photo-sphere-viewer").then(
-        (mod) => mod.ReactPhotoSphereViewer,
-      ),
-    {
-      ssr: false,
-    },
-  );
+  // Panoramas are large, so only start loading once the reader scrolls near.
+  const { ref, inView } = useInView({ triggerOnce: true, rootMargin: "50%" });
 
   return (
-    <Container>
-      <ReactPhotoSphereViewer
-        keyboard="fullscreen"
-        src={src}
-        height={"60vh"}
-        width={"100%"}
-        //navbar={false}
-        onReady={() => setIsReady(true)}
-        //plugins={[AutorotatePlugin]}
-      />
+    <Container ref={ref}>
+      {inView && (
+        <ReactPhotoSphereViewer
+          keyboard="fullscreen"
+          src={src}
+          height={"60vh"}
+          width={"100%"}
+          //navbar={false}
+          onReady={() => setIsReady(true)}
+          //plugins={[AutorotatePlugin]}
+        />
+      )}
       <AnimatePresence>
         {!isReady && (
           <PlaceholderImage

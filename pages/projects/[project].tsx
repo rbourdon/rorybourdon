@@ -289,7 +289,10 @@ export async function getStaticProps({
   const project = (await getProjectDetails(params.project)) || [];
   const source =
     project.content || `<Post><Title>Add project content!</Title></Post>`;
-  const mdxSource = await serialize(source);
+  // Posts reference assets with expressions like src={images[1].url}.
+  // next-mdx-remote 6 strips every {expression} unless blockJS is off; the
+  // content is our own CMS entries and blockDangerousJS stays on.
+  const mdxSource = await serialize(source, { blockJS: false });
   return {
     props: { project: project, source: mdxSource },
   };
