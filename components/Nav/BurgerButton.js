@@ -78,7 +78,7 @@ function BurgerButton({ open = false, onClick }) {
   const color = useTransform(
     [theme.primary_dark, theme.primary_slightlydark, hover],
     ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2])
+      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
   );
 
   const handleHoverEnd = () => {

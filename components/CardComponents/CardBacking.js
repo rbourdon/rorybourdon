@@ -1,6 +1,6 @@
-import styled, { ThemeContext } from "styled-components";
 import { motion, useTransform } from "framer-motion";
 import { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 
 const Container = styled(motion.div)`
   width: ${(props) => props.$width + "px"};
@@ -32,7 +32,7 @@ export default function CardBacking({
       latestShadow1 +
       ", " +
       "0px 0px 30px 0px " +
-      latestShadow2
+      latestShadow2,
   );
   return (
     <Container

@@ -1,12 +1,12 @@
-import styled, { ThemeContext } from "styled-components";
-import { motion, MotionConfig } from "framer-motion";
-import React, { useContext } from "react";
-import NavBar from "@/components/Nav/NavBar";
+import { MotionConfig, motion } from "framer-motion";
 import Head from "next/head";
-import HorizonEffects from "@/components/Icons/HorizonEffects";
-import BackArrow from "@/components/Nav/BackArrow";
-import SocialsSceneIcon from "@/components/Icons/SocialsSceneIcon";
+import React, { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 import ContactForm from "@/components/ContactForm";
+import HorizonEffects from "@/components/Icons/HorizonEffects";
+import SocialsSceneIcon from "@/components/Icons/SocialsSceneIcon";
+import BackArrow from "@/components/Nav/BackArrow";
+import NavBar from "@/components/Nav/NavBar";
 import TitleBlock from "@/components/PageTitleBlock";
 
 const Content = styled(motion.main)`

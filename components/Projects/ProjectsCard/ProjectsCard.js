@@ -1,21 +1,21 @@
-import styled, { ThemeContext } from "styled-components";
 import {
   animate,
-  motion,
   MotionConfig,
+  motion,
   transform,
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import NavCard from "@/components/CardComponents/NavCard";
 import { useContext, useState } from "react";
-import ProjectSummary from "@/components/Projects/ProjectSummary/ProjectSummary";
 import { useInView } from "react-intersection-observer";
-import Button from "@/components/Nav/Button";
-import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
-import useWindowSize from "@/components/utils/useWindowSize";
-import ProjectsBackgroundEffect from "@/components/Projects/ProjectsCard/ProjectsBackgroundEffect";
+import styled, { ThemeContext } from "styled-components";
 import CardEffect from "@/components/CardComponents/CardEffect";
+import NavCard from "@/components/CardComponents/NavCard";
+import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
+import Button from "@/components/Nav/Button";
+import ProjectSummary from "@/components/Projects/ProjectSummary/ProjectSummary";
+import ProjectsBackgroundEffect from "@/components/Projects/ProjectsCard/ProjectsBackgroundEffect";
+import useWindowSize from "@/components/utils/useWindowSize";
 
 const Container = styled(motion.article)`
   width: 100%;
@@ -192,7 +192,7 @@ export default function ProjectsCard({
   const backingColor = useTransform(
     [theme.primary, theme.primary_light, backing],
     ([latestPrimary, latestPrimaryLight, latestBacking]) =>
-      transform(latestBacking, [0, 1], [latestPrimary, latestPrimaryLight])
+      transform(latestBacking, [0, 1], [latestPrimary, latestPrimaryLight]),
   );
 
   const clickHandler = () => {
@@ -218,17 +218,17 @@ export default function ProjectsCard({
           { x: width * 0.65, y: sectionHeight * 0.05, scale: 0.45 },
         ]
       : width
-      ? [
-          { x: width * 0.4, y: sectionHeight * 0.08, scale: 0.7 },
-          { x: width * 0.85, y: sectionHeight * 0.35, scale: 0.9 },
-          { x: width * -0.1, y: sectionHeight * 0.25, scale: 0.9 },
-          { x: width * 0.6, y: sectionHeight * 0.85, scale: 1 },
-          { x: width * 0.03, y: sectionHeight * 1, scale: 0.8 },
-          { x: width * 0.5, y: sectionHeight * 1, scale: 0.4 },
-          { x: width * 0.2, y: sectionHeight * 0, scale: 0.75 },
-          { x: width * 0.65, y: sectionHeight * 0.05, scale: 0.45 },
-        ]
-      : [];
+        ? [
+            { x: width * 0.4, y: sectionHeight * 0.08, scale: 0.7 },
+            { x: width * 0.85, y: sectionHeight * 0.35, scale: 0.9 },
+            { x: width * -0.1, y: sectionHeight * 0.25, scale: 0.9 },
+            { x: width * 0.6, y: sectionHeight * 0.85, scale: 1 },
+            { x: width * 0.03, y: sectionHeight * 1, scale: 0.8 },
+            { x: width * 0.5, y: sectionHeight * 1, scale: 0.4 },
+            { x: width * 0.2, y: sectionHeight * 0, scale: 0.75 },
+            { x: width * 0.65, y: sectionHeight * 0.05, scale: 0.45 },
+          ]
+        : [];
 
   return (
     <MotionConfig

@@ -1,7 +1,7 @@
-import styled, { ThemeContext } from "styled-components";
-import { motion, LayoutGroup } from "framer-motion";
-import SkillBubble from "@/components/Skills/SkillBubble";
+import { LayoutGroup, motion } from "framer-motion";
 import { useContext, useState } from "react";
+import styled, { ThemeContext } from "styled-components";
+import SkillBubble from "@/components/Skills/SkillBubble";
 
 const Bubbles = styled(motion.ul)`
   max-width: 100%;

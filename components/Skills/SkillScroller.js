@@ -1,8 +1,8 @@
-import styled, { ThemeContext } from "styled-components";
 import { LayoutGroup, motion, useMotionValue } from "framer-motion";
-import SkillBubble from "@/components/Skills/SkillBubble";
 import { useContext, useState } from "react";
+import styled, { ThemeContext } from "styled-components";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
+import SkillBubble from "@/components/Skills/SkillBubble";
 import useWindowSize from "../utils/useWindowSize";
 
 const SCROLL_MULTIPLIER = 35;
@@ -74,10 +74,10 @@ export default function SkillScroller({ skills }) {
         ? skills.length - LIST_BUFFER
         : (size.height - 450) / 50
       : (size.height - 600) / 50 > skills.length - LIST_BUFFER
-      ? skills.length - LIST_BUFFER
-      : (size.height - 600) / 50 < 3
-      ? 3
-      : (size.height - 600) / 50;
+        ? skills.length - LIST_BUFFER
+        : (size.height - 600) / 50 < 3
+          ? 3
+          : (size.height - 600) / 50;
   const theme = useContext(ThemeContext);
   const panPos = useMotionValue(0);
   const [panning, setPanning] = useState(false);
@@ -96,8 +96,8 @@ export default function SkillScroller({ skills }) {
         prev - notchesToMove < 0
           ? skills.length - 1
           : prev - notchesToMove > skills.length - 1
-          ? 0
-          : prev - notchesToMove
+            ? 0
+            : prev - notchesToMove,
       );
       panPos.set(0);
     }
@@ -113,8 +113,8 @@ export default function SkillScroller({ skills }) {
       prev + dir < 0
         ? skills.length - 1
         : prev + dir > skills.length - 1
-        ? 0
-        : prev + dir
+          ? 0
+          : prev + dir,
     );
   };
   return (
@@ -135,7 +135,7 @@ export default function SkillScroller({ skills }) {
           ...skills.slice(rollerPos, rollerPos + numSkills),
           ...skills.slice(
             0,
-            numSkills - skills.slice(rollerPos, rollerPos + numSkills).length
+            numSkills - skills.slice(rollerPos, rollerPos + numSkills).length,
           ),
         ].map((skill, index) => {
           return (

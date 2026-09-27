@@ -1,7 +1,7 @@
-import styled from "styled-components";
 import { motion } from "framer-motion";
-import GridGuideCell from "./GridGuideCell";
 import { useEffect } from "react";
+import styled from "styled-components";
+import GridGuideCell from "./GridGuideCell";
 
 const GRID_GAP = 3;
 
@@ -89,12 +89,12 @@ export default function GridGuide({
           guideState.currBehavior === clickBehavior ||
             guideState.prevBehavior === clickBehavior
             ? defaultBehavior
-            : clickBehavior
+            : clickBehavior,
         );
         updatePose(
           guideState.currPose === clickPose || guideState.prevPose === clickPose
             ? defaultPose
-            : clickPose
+            : clickPose,
         );
       }}
       style={{ x, y, rotate }}

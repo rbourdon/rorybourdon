@@ -1,6 +1,6 @@
-import styled, { ThemeContext } from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { useContext, useState } from "react";
+import styled, { ThemeContext } from "styled-components";
 import BurgerButton from "@/components/Nav/BurgerButton";
 import NavLink from "@/components/Nav/NavLink";
 

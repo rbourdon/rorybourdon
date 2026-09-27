@@ -1,12 +1,12 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import Card from "@/components/CardComponents/Card";
-import CardStem from "@/components/CardComponents/CardStem";
-import CardFace from "@/components/CardComponents/CardFace";
-import ShineBand from "@/components/CardComponents/ShineBand";
 import CardBacking from "@/components/CardComponents/CardBacking";
 import CardBorder from "@/components/CardComponents/CardBorder";
+import CardFace from "@/components/CardComponents/CardFace";
+import CardStem from "@/components/CardComponents/CardStem";
+import ShineBand from "@/components/CardComponents/ShineBand";
 import Tagline from "@/components/CardComponents/Tagline";
-import { motion } from "framer-motion";
 
 const Container = styled(motion.div)`
   display: flex;

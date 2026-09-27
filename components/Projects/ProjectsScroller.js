@@ -1,9 +1,9 @@
-import styled, { ThemeContext } from "styled-components";
 import { LayoutGroup, motion, useMotionValue } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
+import styled, { ThemeContext } from "styled-components";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
-import ProjectSummary from "./ProjectSummary/ProjectSummary";
 import useWindowSize from "../utils/useWindowSize";
+import ProjectSummary from "./ProjectSummary/ProjectSummary";
 
 const Projects = styled(motion.div)`
   width: 100%;
@@ -69,8 +69,8 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
           prev + Math.sign(latest * -1) > projects.length - 1
             ? 0
             : prev + Math.sign(latest * -1) < 0
-            ? projects.length - 1
-            : prev + Math.sign(latest * -1)
+              ? projects.length - 1
+              : prev + Math.sign(latest * -1),
         );
         panPos.set(Math.sign(latest) * -150);
       }
@@ -125,22 +125,22 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
             cursor: panning ? "grabbing" : "grab",
             gridTemplateColumns: `repeat(${Math.min(
               3,
-              projects.length
+              projects.length,
             )}, 340px)`,
           }}
         >
           {[
             ...projects.slice(
               rollerPos,
-              rollerPos + Math.min(3, projects.length)
+              rollerPos + Math.min(3, projects.length),
             ),
             ...projects.slice(
               0,
               Math.min(3, projects.length) -
                 projects.slice(
                   rollerPos,
-                  rollerPos + Math.min(3, projects.length)
-                ).length
+                  rollerPos + Math.min(3, projects.length),
+                ).length,
             ),
           ].map((project, index) => {
             return (

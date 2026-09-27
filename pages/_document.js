@@ -1,4 +1,4 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import Document, { Head, Html, Main, NextScript } from "next/document";
 import Script from "next/script";
 import { ServerStyleSheet } from "styled-components";
 
@@ -31,6 +31,7 @@ export default class MyDocument extends Document {
           <Script
             id="theme-script"
             strategy="beforeInteractive"
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: static inline script that applies the saved theme before first paint
             dangerouslySetInnerHTML={{
               __html: `
             (function () {

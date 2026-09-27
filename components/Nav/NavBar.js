@@ -1,10 +1,10 @@
-import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
-import Logo from "@/components/Nav/Logo";
 import Link from "next/link";
-import NavLink from "./NavLink";
 import { useContext, useState } from "react";
+import styled, { ThemeContext } from "styled-components";
+import Logo from "@/components/Nav/Logo";
 import HamburgerMenu from "./HamburgerMenu";
+import NavLink from "./NavLink";
 
 const Container = styled(motion.nav)`
   width: 100%;

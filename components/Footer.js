@@ -1,8 +1,8 @@
-import styled, { ThemeContext } from "styled-components";
 import { motion } from "framer-motion";
 import { useContext } from "react";
-import Logo from "./Nav/Logo";
+import styled, { ThemeContext } from "styled-components";
 import Highlight from "./Highlight";
+import Logo from "./Nav/Logo";
 
 const Container = styled(motion.div)`
   width: 100%;

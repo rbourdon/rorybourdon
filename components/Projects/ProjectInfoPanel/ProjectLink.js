@@ -1,4 +1,3 @@
-import styled, { ThemeContext } from "styled-components";
 import {
   animate,
   motion,
@@ -6,10 +5,11 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import CodeIcon from "@/components/Icons/CodeIcon";
-import ExternalLinkIcon from "@/components/Icons/ExternalLinkIcon";
 import Link from "next/link";
 import { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
+import CodeIcon from "@/components/Icons/CodeIcon";
+import ExternalLinkIcon from "@/components/Icons/ExternalLinkIcon";
 
 const LinkContainer = styled(motion.a)`
   max-width: 100%;
@@ -55,13 +55,13 @@ export default function ProjectLink({ type = "Demo", href = "", iconColor }) {
   const color = useTransform(
     [theme.primary_dark, iconColor || theme.primary_light, hover],
     ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2])
+      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
   );
 
   const iconRotate = useTransform(
     hover,
     [0, 1],
-    [0, type === "Demo" ? -20 : 20]
+    [0, type === "Demo" ? -20 : 20],
   );
 
   const handleHoverStart = () => {

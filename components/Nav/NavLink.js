@@ -1,4 +1,3 @@
-import styled, { ThemeContext } from "styled-components";
 import {
   animate,
   motion,
@@ -8,6 +7,7 @@ import {
 } from "framer-motion";
 import Link from "next/link";
 import { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 
 const LinkText = styled(motion.a)`
   text-align: center;
@@ -55,7 +55,7 @@ export default function NavLink({
   const color = useTransform(
     [theme.primary_dark, theme.primary_slightlydark, hover],
     ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2])
+      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
   );
 
   const handleHoverEnd = () => {
