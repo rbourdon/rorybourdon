@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "next-sitemap --config next-sitemap-config.js",
+    "postbuild": "next-sitemap --config next-sitemap-config.mts",
     "start": "next start",
     "lint": "biome check .",
     "typecheck": "tsc --noEmit",
