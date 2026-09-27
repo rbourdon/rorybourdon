@@ -313,8 +313,11 @@ export default function ProjectSummary({
           }}
         />
       )}
+      {/* No layout/layoutId on the children below: they were measured mid-way
+          through the page's shared "projectCard_window" morph and kept a
+          stale offset afterwards. The summary's own layoutId still animates
+          reordering in the scroller. */}
       <ProjectTitle
-        layoutId={`${id}_title`}
         variants={titleV}
         style={{ color }}
         custom={scrollerPos === 0 ? (!intro ? -1 : 1) : !intro ? 1 : 1}
@@ -328,7 +331,6 @@ export default function ProjectSummary({
         {project.title}
       </ProjectTitle>
       <ProjectDescription
-        layoutId={`${id}_description`}
         variants={descV}
         style={{ color }}
         custom={scrollerPos === 0 ? (!intro ? -1 : 1) : !intro ? 1 : 1}
@@ -342,7 +344,6 @@ export default function ProjectSummary({
         {project.shortDescription}
       </ProjectDescription>
       <SkillChips
-        layout
         variants={skillChipsV}
         transition={{
           type: "spring",

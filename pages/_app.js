@@ -98,7 +98,9 @@ html {
 
 function handleExitComplete() {
   if (typeof window !== "undefined") {
-    window.scrollTo({ top: 0, left: 0 });
+    // Must be instant: html has scroll-behavior: smooth, and a smooth scroll
+    // here keeps moving while the next page measures its layout animations.
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }
 }
 
