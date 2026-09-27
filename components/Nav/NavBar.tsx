@@ -1,8 +1,8 @@
 import { type MotionValue, motion } from "framer-motion";
-import Link from "next/link";
 import { type ReactNode, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import Logo from "@/components/Nav/Logo";
+import MotionLink from "@/components/utils/MotionLink";
 import HamburgerMenu from "./HamburgerMenu";
 import NavLink from "./NavLink";
 
@@ -57,7 +57,7 @@ const Hamburger = styled(motion.div)`
   }
 `;
 
-const LogoContainer = styled(motion.a)`
+const LogoContainer = styled(MotionLink)`
   width: 70%;
   height: 70%;
   display: flex;
@@ -98,11 +98,9 @@ export default function NavBar({ children, links = [] }: NavBarProps) {
 
   return (
     <Container>
-      <Link href="/" passHref legacyBehavior>
-        <LogoContainer>
-          <Logo />
-        </LogoContainer>
-      </Link>
+      <LogoContainer href="/">
+        <Logo />
+      </LogoContainer>
       <NavBox
         initial="hidden"
         animate="visible"

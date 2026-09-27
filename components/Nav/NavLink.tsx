@@ -7,12 +7,12 @@ import {
   useTransform,
   type Variants,
 } from "framer-motion";
-import Link from "next/link";
 import type { ReactNode } from "react";
 
 import styled, { useTheme } from "styled-components";
+import MotionLink from "@/components/utils/MotionLink";
 
-const LinkText = styled(motion.a)`
+const LinkText = styled(MotionLink)`
   text-align: center;
   font-size: 1.2rem;
   font-weight: 200;
@@ -89,19 +89,18 @@ export default function NavLink({
   };
 
   return href ? (
-    <Link href={href} passHref legacyBehavior>
-      <LinkText
-        variants={navV}
-        style={{ color }}
-        onHoverStart={handleHoverStart}
-        onHoverEnd={handleHoverEnd}
-        onFocus={handleHoverStart}
-        onBlur={handleHoverEnd}
-        onClick={onClick ?? undefined}
-      >
-        {children}
-      </LinkText>
-    </Link>
+    <LinkText
+      href={href}
+      variants={navV}
+      style={{ color }}
+      onHoverStart={handleHoverStart}
+      onHoverEnd={handleHoverEnd}
+      onFocus={handleHoverStart}
+      onBlur={handleHoverEnd}
+      onClick={onClick ?? undefined}
+    >
+      {children}
+    </LinkText>
   ) : (
     <Text
       variants={navV}

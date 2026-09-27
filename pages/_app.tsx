@@ -116,7 +116,6 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <meta name="msapplication-TileColor" content="#00aba9" />
         <meta name="theme-color" content="#ffffff" />
         <meta name="author" content="Rory Bourdon" />
-        <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <ThemeControlProvider>

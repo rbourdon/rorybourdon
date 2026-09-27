@@ -7,13 +7,13 @@ import {
   useTransform,
   type Variants,
 } from "framer-motion";
-import Link from "next/link";
 import type { ReactNode } from "react";
 
 import styled, { useTheme } from "styled-components";
 import CardBorder from "@/components/CardComponents/CardBorder";
+import MotionLink from "@/components/utils/MotionLink";
 
-const LinkContainer = styled(motion.a)<{ $width: number; $height: number }>`
+const LinkContainer = styled(MotionLink)<{ $width: number; $height: number }>`
   width: ${(props) => props.$width + "px"};
   height: ${(props) => props.$height + "px"};
   display: flex;
@@ -200,48 +200,48 @@ export default function Button({
   };
 
   return type === "link" ? (
-    <Link href={href} passHref scroll={false} legacyBehavior>
-      <LinkContainer
-        $width={width}
-        $height={height}
-        onHoverStart={() => handleHoverStart()}
-        onHoverEnd={() => handleHoverEnd()}
-        onFocus={() => handleHoverStart()}
-        onBlur={() => handleHoverEnd()}
-        onClick={onClick}
-        layoutId={`${id}Button`}
+    <LinkContainer
+      href={href}
+      scroll={false}
+      $width={width}
+      $height={height}
+      onHoverStart={() => handleHoverStart()}
+      onHoverEnd={() => handleHoverEnd()}
+      onFocus={() => handleHoverStart()}
+      onBlur={() => handleHoverEnd()}
+      onClick={onClick}
+      layoutId={`${id}Button`}
+      style={{
+        scale,
+      }}
+    >
+      <Content
         style={{
-          scale,
+          color: theme.primary_dark,
+          backgroundColor: theme.primary_light,
+          boxShadow,
+          borderRadius: bRadius,
         }}
+        custom={{ bRadius: bRadius, animationDelay: animationDelay }}
+        variants={contentV}
+        layoutId={`${id}ButtonContent`}
       >
-        <Content
-          style={{
-            color: theme.primary_dark,
-            backgroundColor: theme.primary_light,
-            boxShadow,
-            borderRadius: bRadius,
-          }}
-          custom={{ bRadius: bRadius, animationDelay: animationDelay }}
-          variants={contentV}
-          layoutId={`${id}ButtonContent`}
-        >
-          {children}
-        </Content>
-        <CardBorder
-          color1={theme.primary_mediumdark}
-          width={width}
-          height={height}
-          sWidth={sWidth}
-          bRadius={bRadius}
-          startLoc={6}
-          borderV={borderV}
-          frameV={frameV}
-          innerBorderV={innerBorderV}
-          innerOffset={-0.1}
-          id={id + "button"}
-        />
-      </LinkContainer>
-    </Link>
+        {children}
+      </Content>
+      <CardBorder
+        color1={theme.primary_mediumdark}
+        width={width}
+        height={height}
+        sWidth={sWidth}
+        bRadius={bRadius}
+        startLoc={6}
+        borderV={borderV}
+        frameV={frameV}
+        innerBorderV={innerBorderV}
+        innerOffset={-0.1}
+        id={id + "button"}
+      />
+    </LinkContainer>
   ) : (
     <ButtonContainer
       $width={width}

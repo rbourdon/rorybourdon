@@ -10,7 +10,6 @@ import {
   useTransform,
   type Variants,
 } from "framer-motion";
-import Link from "next/link";
 import {
   type ReactNode,
   type SyntheticEvent,
@@ -18,6 +17,7 @@ import {
   useState,
 } from "react";
 import styled, { useTheme } from "styled-components";
+import MotionLink from "@/components/utils/MotionLink";
 import ArrowIcon from "../Icons/ArrowIcon";
 
 const Bubble = styled(motion.li)<{ $height: number }>`
@@ -44,7 +44,7 @@ const Outline = styled(motion.div)`
   pointer-events: none;
 `;
 
-const BubbleLink = styled(motion.a)`
+const BubbleLink = styled(MotionLink)`
   -webkit-user-drag: none;
   -moz-user-drag: none;
   user-drag: none;
@@ -289,38 +289,29 @@ export default function SkillBubble({
           backgroundColor,
         }}
       >
-        <Link
-          draggable={false}
+        <BubbleLink
           href={`/skills/${id}`}
-          passHref
           scroll={false}
-          legacyBehavior
+          draggable={false}
+          onClick={canHover ? undefined : disableLinkDrag}
+          onTapStart={disableLinkDrag}
+          onDragStart={disableLinkDrag}
+          initial="hidden"
+          animate={hovering ? "hover" : "visible"}
         >
-          <BubbleLink
-            draggable={false}
-            onClick={canHover ? undefined : disableLinkDrag}
-            onTapStart={disableLinkDrag}
-            onDragStart={disableLinkDrag}
-            initial="hidden"
-            animate={hovering ? "hover" : "visible"}
+          <Title
+            layoutId={`${id}_bubbleLinkTitle`}
+            style={{ color: titleColor }}
+            variants={titleV}
           >
-            <Title
-              layoutId={`${id}_bubbleLinkTitle`}
-              style={{ color: titleColor }}
-              variants={titleV}
-            >
-              {title}
-            </Title>
-            {selected && hovering && (
-              <Arrow
-                variants={arrowV}
-                style={{ color: titleColor, rotate: 90 }}
-              >
-                <ArrowIcon />
-              </Arrow>
-            )}
-          </BubbleLink>
-        </Link>
+            {title}
+          </Title>
+          {selected && hovering && (
+            <Arrow variants={arrowV} style={{ color: titleColor, rotate: 90 }}>
+              <ArrowIcon />
+            </Arrow>
+          )}
+        </BubbleLink>
         {selected && (
           <Outline
             layoutId="bubbleOutline"

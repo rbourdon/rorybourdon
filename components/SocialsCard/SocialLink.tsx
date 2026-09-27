@@ -7,7 +7,6 @@ import {
   useTransform,
   type Variants,
 } from "framer-motion";
-import Link from "next/link";
 
 import styled, { useTheme } from "styled-components";
 import GithubIcon from "./Icons/GithubIcon";
@@ -89,24 +88,23 @@ export default function SocialLink({
   );
 
   return (
-    <Link href={href} passHref legacyBehavior>
-      <Container
-        rel="noopener"
-        target="_blank"
-        onHoverStart={handleHoverStart}
-        onHoverEnd={handleHoverEnd}
-        style={{ color }}
-        variants={socialLinkV}
-      >
+    <Container
+      href={href}
+      rel="noopener"
+      target="_blank"
+      onHoverStart={handleHoverStart}
+      onHoverEnd={handleHoverEnd}
+      style={{ color }}
+      variants={socialLinkV}
+    >
+      {
         {
-          {
-            twitter: <TwitterIcon />,
-            github: <GithubIcon />,
-            instagram: <InstagramIcon />,
-            linkedin: <LinkedInIcon />,
-          }[platform]
-        }
-      </Container>
-    </Link>
+          twitter: <TwitterIcon />,
+          github: <GithubIcon />,
+          instagram: <InstagramIcon />,
+          linkedin: <LinkedInIcon />,
+        }[platform]
+      }
+    </Container>
   );
 }
