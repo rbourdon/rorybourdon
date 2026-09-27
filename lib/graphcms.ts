@@ -2,6 +2,7 @@ import { GraphQLClient } from "graphql-request";
 import type {
   ProjectDetails,
   ProjectSummaryData,
+  SitemapEntry,
   SkillBasics,
   SkillDetails,
   SkillRef,
@@ -239,6 +240,43 @@ export async function getProjectList(
     console.error(e);
     return [];
   }
+}
+
+//Get the slug and last edit time of every statically generated project and
+//skill page, matching what getStaticPaths builds.
+export async function getSitemapEntries(): Promise<{
+  projects: SitemapEntry[];
+  skills: SitemapEntry[];
+}> {
+  if (!hasApi) return { projects: [], skills: [] };
+  const data = await requestWithRetry<{
+    projectList: { projects: SitemapEntry[] } | null;
+    skillList: { skills: SitemapEntry[] } | null;
+  }>(
+    `
+    query getSitemapEntries {
+      projectList(where: {slug: "all"}) {
+        projects {
+          slug
+          updatedAt
+        }
+      }
+      skillList(where: {slug: "skill-scroller"}) {
+        skills {
+          slug
+          updatedAt
+        }
+      }
+    }`,
+    {
+      preview: false,
+      stage: "PUBLISHED",
+    },
+  );
+  return {
+    projects: data.projectList?.projects ?? [],
+    skills: data.skillList?.skills ?? [],
+  };
 }
 
 export async function getProjectDetails(slug: string): Promise<ProjectDetails> {

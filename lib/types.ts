@@ -5,6 +5,11 @@ export interface SkillRef {
   title: string;
 }
 
+export interface SitemapEntry {
+  slug: string;
+  updatedAt: string;
+}
+
 export interface Color {
   rgba: { r: number; g: number; b: number; a: number };
 }
