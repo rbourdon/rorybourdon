@@ -58,8 +58,8 @@ export default function CardFace({
     switch (band) {
       case 1:
         return {
-          start: `polygon(-${FIRST_BAND_DIST} 0, 0 -${FIRST_BAND_DIST}, ${BAND_THICKNESS} -${FIRST_BAND_DIST}, -${FIRST_BAND_DIST} ${BAND_THICKNESS})`, //"path('M-75,-25 l50,-50 h20 l-70,70 z')",
-          end: `polygon(0 ${FIRST_BAND_DIST}, ${FIRST_BAND_DIST} 0, ${BAND_POINT} 0, 0 ${BAND_POINT})`, //"path('M0,50 l50,-50 h20 l-70,70 z')",
+          start: `path('M-${FIRST_BAND_DIST},0 l${FIRST_BAND_DIST},-${FIRST_BAND_DIST} h${BAND_THICKNESS} l-${BAND_POINT},${BAND_POINT} z')`,
+          end: `path('M0,${FIRST_BAND_DIST} l${FIRST_BAND_DIST},-${FIRST_BAND_DIST} h${BAND_THICKNESS} l-${BAND_POINT},${BAND_POINT} z')`,
         };
       case 2:
         return {
