@@ -1,4 +1,3 @@
-import styled, { ThemeContext } from "styled-components";
 import {
   animate,
   motion,
@@ -6,12 +5,13 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import { useContext } from "react";
 import Link from "next/link";
-import TwitterIcon from "./Icons/TwitterIcon";
-import LinkedInIcon from "./Icons/LinkedInIcon";
+import { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 import GithubIcon from "./Icons/GithubIcon";
 import InstagramIcon from "./Icons/InstagramIcon";
+import LinkedInIcon from "./Icons/LinkedInIcon";
+import TwitterIcon from "./Icons/TwitterIcon";
 
 const Container = styled(motion.a)`
   height: 100%;
@@ -63,7 +63,7 @@ export default function SocialLink({ href = "/", platform, hoverColor }) {
   const color = useTransform(
     [hover, theme.primary_verydark, hoverColor || theme.primary_mediumdark],
     ([latestHover, latestColor1, latestColor2]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2])
+      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
   );
 
   return (

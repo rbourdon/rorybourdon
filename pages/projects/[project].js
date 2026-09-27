@@ -1,28 +1,28 @@
-import styled, { ThemeContext } from "styled-components";
-import { motion, MotionConfig, useMotionValue } from "framer-motion";
-import React, { useContext, useMemo } from "react";
-import { getProjectList, getProjectDetails } from "@/lib/graphcms";
-import NavBar from "@/components/Nav/NavBar";
+import convert from "color-convert";
+import { MotionConfig, motion, useMotionValue } from "framer-motion";
 import Head from "next/head";
-import BackArrow from "@/components/Nav/BackArrow";
-import SkillList from "@/components/Projects/ProjectInfoPanel/SkillList";
-import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
-import Post from "@/components/Projects/ProjectPost/Post";
-import Title from "@/components/Projects/ProjectPost/Title";
-import PostImage from "@/components/Projects/ProjectPost/PostImage";
-import PostVideo from "@/components/Projects/ProjectPost/PostVideo";
-import Caption from "@/components/Projects/ProjectPost/Caption";
-import Content from "@/components/Projects/ProjectPost/Content";
+import { serialize } from "next-mdx-remote/serialize";
+import React, { useContext, useMemo } from "react";
+import styled, { ThemeContext } from "styled-components";
 import Highlight from "@/components/Highlight";
+import HorizonEffects from "@/components/Icons/HorizonEffects";
+import BackArrow from "@/components/Nav/BackArrow";
+import NavBar from "@/components/Nav/NavBar";
+import AboutProject from "@/components/Projects/ProjectInfoPanel/AboutProject";
+import ProjectLinkBox from "@/components/Projects/ProjectInfoPanel/LinkBox";
 import ProjectInfoPanel from "@/components/Projects/ProjectInfoPanel/ProjectInfoPanel";
 import ProjectLink from "@/components/Projects/ProjectInfoPanel/ProjectLink";
-import Spacer from "@/components/Spacer";
-import AboutProject from "@/components/Projects/ProjectInfoPanel/AboutProject";
-import HorizonEffects from "@/components/Icons/HorizonEffects";
-import ProjectLinkBox from "@/components/Projects/ProjectInfoPanel/LinkBox";
+import SkillList from "@/components/Projects/ProjectInfoPanel/SkillList";
+import Caption from "@/components/Projects/ProjectPost/Caption";
+import Content from "@/components/Projects/ProjectPost/Content";
+import Post from "@/components/Projects/ProjectPost/Post";
+import PostImage from "@/components/Projects/ProjectPost/PostImage";
 import PostPano from "@/components/Projects/ProjectPost/PostPano";
-import convert from "color-convert";
+import PostVideo from "@/components/Projects/ProjectPost/PostVideo";
+import Title from "@/components/Projects/ProjectPost/Title";
+import Spacer from "@/components/Spacer";
+import { getProjectDetails, getProjectList } from "@/lib/graphcms";
 
 const PageContent = styled(motion.main)`
   width: 100%;
@@ -157,13 +157,13 @@ const pageLinks = [
 
 export default function Project({ project, source }) {
   const theme = useContext(ThemeContext);
- 
+
   const secondaryColorRGB = useMemo(() => {
     return project.secondaryColor
       ? convert.rgb.hsl(
           project.secondaryColor.rgba.r,
           project.secondaryColor.rgba.g,
-          project.secondaryColor.rgba.b
+          project.secondaryColor.rgba.b,
         )
       : [0, 0, 0, 0];
   }, [project.secondaryColor]);
@@ -173,16 +173,16 @@ export default function Project({ project, source }) {
       ? convert.rgb.hsl(
           project.primaryColor.rgba.r,
           project.primaryColor.rgba.g,
-          project.primaryColor.rgba.b
+          project.primaryColor.rgba.b,
         )
       : [0, 0, 0, 0];
   }, [project.primaryColor]);
 
   const color1 = useMotionValue(
-    `hsla(${primaryColorRGB[0]},${primaryColorRGB[1]}%,${primaryColorRGB[2]}%,1)`
+    `hsla(${primaryColorRGB[0]},${primaryColorRGB[1]}%,${primaryColorRGB[2]}%,1)`,
   );
   const color2 = useMotionValue(
-    `hsla(${secondaryColorRGB[0]},${secondaryColorRGB[1]}%,${secondaryColorRGB[2]}%,1)`
+    `hsla(${secondaryColorRGB[0]},${secondaryColorRGB[1]}%,${secondaryColorRGB[2]}%,1)`,
   );
 
   return (

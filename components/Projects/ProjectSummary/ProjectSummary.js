@@ -1,4 +1,3 @@
-import styled, { ThemeContext } from "styled-components";
 import {
   animate,
   motion,
@@ -6,9 +5,10 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import SkillChip from "@/components/Projects/ProjectSummary/SkillChip";
 import { useContext, useEffect } from "react";
+import styled, { ThemeContext } from "styled-components";
 import DetailsLink from "@/components/Projects/ProjectSummary/DetailsLink";
+import SkillChip from "@/components/Projects/ProjectSummary/SkillChip";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -202,13 +202,13 @@ export default function ProjectSummary({
   const outlineColor = useTransform(
     [theme.primary_verydark, bgColor, hover],
     ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2])
+      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
   );
 
   const backgroundColor = useTransform(
     [defaultBGColor, bgColor, hover],
     ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2])
+      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
   );
 
   const boxShadow = useTransform(
@@ -230,38 +230,38 @@ export default function ProjectSummary({
             ", " +
             "0px 0px 25px 8px " +
             latestShadow2,
-        ]
-      )
+        ],
+      ),
   );
 
   const linkColor = useTransform(
     [theme.primary_verydark, primaryColor, hover],
     ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2])
+      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
   );
 
   const color = useTransform(
     [theme.primary_verydark, primaryColor, hover],
     ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2])
+      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
   );
 
   const chipTextColor = useTransform(
     [theme.primary_verydark, bgColor, hover],
     ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2])
+      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
   );
 
   const chipBGColor = useTransform(
     [theme.primary_light, primaryColor, hover],
     ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2])
+      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
   );
 
   const chipBorderColor = useTransform(
     [theme.primary_slightlydark, primaryColor, hover],
     ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2])
+      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
   );
   return (
     <Container
@@ -313,8 +313,11 @@ export default function ProjectSummary({
           }}
         />
       )}
+      {/* No layout/layoutId on the children below: they were measured mid-way
+          through the page's shared "projectCard_window" morph and kept a
+          stale offset afterwards. The summary's own layoutId still animates
+          reordering in the scroller. */}
       <ProjectTitle
-        layoutId={`${id}_title`}
         variants={titleV}
         style={{ color }}
         custom={scrollerPos === 0 ? (!intro ? -1 : 1) : !intro ? 1 : 1}
@@ -328,7 +331,6 @@ export default function ProjectSummary({
         {project.title}
       </ProjectTitle>
       <ProjectDescription
-        layoutId={`${id}_description`}
         variants={descV}
         style={{ color }}
         custom={scrollerPos === 0 ? (!intro ? -1 : 1) : !intro ? 1 : 1}
@@ -342,7 +344,6 @@ export default function ProjectSummary({
         {project.shortDescription}
       </ProjectDescription>
       <SkillChips
-        layout
         variants={skillChipsV}
         transition={{
           type: "spring",
@@ -364,8 +365,8 @@ export default function ProjectSummary({
                         ? -120
                         : 120
                       : !intro
-                      ? 120
-                      : 120,
+                        ? 120
+                        : 120,
                   delay: intro
                     ? delay + 0.35 + index * 0.1
                     : 0.35 + index * 0.1,

@@ -1,4 +1,3 @@
-import styled, { ThemeContext } from "styled-components";
 import {
   animate,
   motion,
@@ -7,8 +6,9 @@ import {
   useTransform,
 } from "framer-motion";
 import Link from "next/link";
-import CardBorder from "@/components/CardComponents/CardBorder";
 import { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
+import CardBorder from "@/components/CardComponents/CardBorder";
 
 const LinkContainer = styled(motion.a)`
   width: ${(props) => props.$width + "px"};
@@ -157,8 +157,8 @@ export default function Button({
             ", " +
             "0px 0px 15px 0px " +
             latestShadow2,
-        ]
-      )
+        ],
+      ),
   );
 
   const frameV = {

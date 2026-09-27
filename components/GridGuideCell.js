@@ -1,4 +1,3 @@
-import { ThemeContext } from "styled-components";
 import {
   animate,
   motion,
@@ -7,6 +6,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useContext, useEffect } from "react";
+import { ThemeContext } from "styled-components";
 
 export default function GridGuideCell({
   variants = { x: 550, y: 550 },
@@ -22,8 +22,8 @@ export default function GridGuideCell({
       transform(
         latestPhase,
         [0, 1, 2, 3],
-        [latestColor1, latestColor2, latestColor3, latestColor4]
-      )
+        [latestColor1, latestColor2, latestColor3, latestColor4],
+      ),
   );
   useEffect(() => {
     animate(phase, [1, 1, 2, 2, 3, 3], {

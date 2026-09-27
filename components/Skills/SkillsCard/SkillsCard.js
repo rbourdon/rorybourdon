@@ -1,14 +1,14 @@
+import { MotionConfig, motion } from "framer-motion";
+import { useContext, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import styled, { ThemeContext } from "styled-components";
-import { motion, MotionConfig } from "framer-motion";
+import CardEffect from "@/components/CardComponents/CardEffect";
 import NavCard from "@/components/CardComponents/NavCard";
 import TreeIcon from "@/components/Icons/TreeIcon";
-import { useContext, useState } from "react";
-import SkillRoller from "@/components/Skills/SkillsCard/SkillRoller";
-import CardEffect from "@/components/CardComponents/CardEffect";
-import { useInView } from "react-intersection-observer";
 import Button from "@/components/Nav/Button";
-import useWindowSize from "@/components/utils/useWindowSize";
+import SkillRoller from "@/components/Skills/SkillsCard/SkillRoller";
 import SkillsBackgroundEffect from "@/components/Skills/SkillsCard/SkillsBackgroundEffect";
+import useWindowSize from "@/components/utils/useWindowSize";
 
 const Container = styled(motion.article)`
   width: 100%;
@@ -181,20 +181,20 @@ export default function SkillsCard({ skills, sectionHeight = 1400, children }) {
           { x: width * 0.65, y: sectionHeight * 1, scale: 0.7 },
         ]
       : width
-      ? [
-          { x: width * 0.7, y: sectionHeight * 0.55, scale: 1 },
-          { x: width * 0.025, y: sectionHeight * 0.39, scale: 0.8 },
-          { x: -width * 0.1, y: sectionHeight * 0.7, scale: 0.5 },
-          { x: width * 0.25, y: sectionHeight * 0, scale: 0.3 },
-          { x: width * 0.9, y: sectionHeight * 0.45, scale: 0.4 },
-          { x: width * 0.78, y: sectionHeight * 0.15, scale: 0.45 },
-          { x: width * 0.65, y: sectionHeight * 0, scale: 0.8 },
-          { x: width * 0.85, y: sectionHeight * 0.78, scale: 0.75 },
-          { x: width * 0.25, y: sectionHeight * 1, scale: 0.65 },
-          { x: 0, y: sectionHeight * 0.05, scale: 0.5 },
-          { x: 0, y: sectionHeight * 1.15, scale: 0.2 },
-        ]
-      : [];
+        ? [
+            { x: width * 0.7, y: sectionHeight * 0.55, scale: 1 },
+            { x: width * 0.025, y: sectionHeight * 0.39, scale: 0.8 },
+            { x: -width * 0.1, y: sectionHeight * 0.7, scale: 0.5 },
+            { x: width * 0.25, y: sectionHeight * 0, scale: 0.3 },
+            { x: width * 0.9, y: sectionHeight * 0.45, scale: 0.4 },
+            { x: width * 0.78, y: sectionHeight * 0.15, scale: 0.45 },
+            { x: width * 0.65, y: sectionHeight * 0, scale: 0.8 },
+            { x: width * 0.85, y: sectionHeight * 0.78, scale: 0.75 },
+            { x: width * 0.25, y: sectionHeight * 1, scale: 0.65 },
+            { x: 0, y: sectionHeight * 0.05, scale: 0.5 },
+            { x: 0, y: sectionHeight * 1.15, scale: 0.2 },
+          ]
+        : [];
 
   return (
     <MotionConfig

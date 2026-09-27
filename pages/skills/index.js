@@ -1,15 +1,15 @@
-import styled, { ThemeContext } from "styled-components";
-import { motion, MotionConfig } from "framer-motion";
-import React, { useContext } from "react";
-import { getSkillList } from "@/lib/graphcms";
-import NavBar from "@/components/Nav/NavBar";
-import SkillScroller from "@/components/Skills/SkillScroller";
-import Highlight from "@/components/Highlight";
+import { MotionConfig, motion } from "framer-motion";
 import Head from "next/head";
-import TreeIcon from "@/components/Icons/TreeIcon";
+import React, { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
+import Highlight from "@/components/Highlight";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
+import TreeIcon from "@/components/Icons/TreeIcon";
 import BackArrow from "@/components/Nav/BackArrow";
+import NavBar from "@/components/Nav/NavBar";
 import TitleBlock from "@/components/PageTitleBlock";
+import SkillScroller from "@/components/Skills/SkillScroller";
+import { getSkillList } from "@/lib/graphcms";
 
 const Content = styled(motion.main)`
   width: 100%;
