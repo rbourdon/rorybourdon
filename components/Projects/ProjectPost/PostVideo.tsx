@@ -135,7 +135,7 @@ export default function PostVideo({
             onPlaying={() => setPlaying(true)}
             preload="auto"
           >
-            <source data-src={src} type="video/mp4" />
+            <source data-src={src} />
             {alt}
           </Video>
         )}
@@ -154,7 +154,6 @@ export default function PostVideo({
               <Logo variants={logoV} color={theme.primary_light} />
             </PlaceholderImage>
           )}
-          )
         </AnimatePresence>
       </VideoContainer>
       {children}

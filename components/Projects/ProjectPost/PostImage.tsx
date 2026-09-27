@@ -19,6 +19,8 @@ interface PostImageProps {
   height: number;
   alt?: string;
   quality?: number;
+  preload?: boolean;
+  /** Older CMS posts still pass `priority`; treated the same as `preload`. */
   priority?: boolean;
   children?: ReactNode;
 }
@@ -29,6 +31,7 @@ export default function PostImage({
   height,
   alt = "",
   quality = 90,
+  preload = false,
   priority = false,
   children,
 }: PostImageProps) {
@@ -39,11 +42,13 @@ export default function PostImage({
           style={{ maxWidth: "100%", height: "100%", objectFit: "contain" }}
           src={src}
           alt={alt}
-          priority={priority}
+          preload={preload || priority}
           height={height}
           width={width}
           quality={quality}
-          sizes="100vw"
+          // Posts sit in the article column, which is at most ~70% of the
+          // viewport on desktop and full width on phones.
+          sizes="(max-width: 555px) 100vw, 70vw"
         />
       )}
       {children}

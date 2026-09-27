@@ -285,7 +285,7 @@ export default function Skill({ skill }: SkillPageProps) {
                     <Image
                       width={130}
                       height={130}
-                      priority
+                      preload
                       alt={`${skill.title} Logo`}
                       src={skill.image.url}
                     />
