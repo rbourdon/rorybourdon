@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 import styled from "styled-components";
 
 const Container = styled(motion.section)`
@@ -15,6 +16,10 @@ const Container = styled(motion.section)`
   }
 `;
 
-export default function ProjectInfoPanel({ children }) {
+export default function ProjectInfoPanel({
+  children,
+}: {
+  children?: ReactNode;
+}) {
   return <Container>{children}</Container>;
 }

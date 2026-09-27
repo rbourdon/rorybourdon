@@ -1,6 +1,11 @@
+import type { MotionValue } from "framer-motion";
 import { motion } from "framer-motion";
 
-export default function ArrowIcon({ color }) {
+interface ArrowIconProps {
+  color?: MotionValue<string> | string;
+}
+
+export default function ArrowIcon({ color }: ArrowIconProps) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.4 15.5">
       <motion.g

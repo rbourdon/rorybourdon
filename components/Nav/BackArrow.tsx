@@ -1,16 +1,18 @@
 import {
   animate,
+  type MotionValue,
   motion,
   transform,
   useMotionValue,
   useTransform,
+  type Variants,
 } from "framer-motion";
 import { useRouter } from "next/router";
 
 import styled, { useTheme } from "styled-components";
 import ArrowIcon from "../Icons/ArrowIcon";
 
-const Container = styled(motion.button)`
+const Container = styled(motion.button)<{ $width: number }>`
   width: 12vw;
   max-width: ${(props) => props.$width + "px"};
   height: max-content;
@@ -35,15 +37,31 @@ const Backdrop = styled(motion.div)`
   border-radius: 5px;
 `;
 
-export default function BackArrow({ width = 70, id = "generic", variants }) {
+interface BackArrowProps {
+  width?: number;
+  id?: string;
+  variants?: Variants;
+}
+
+export default function BackArrow({
+  width = 70,
+  id = "generic",
+  variants,
+}: BackArrowProps) {
   const theme = useTheme();
   const hover = useMotionValue(0);
   const router = useRouter();
 
   const arrowColor = useTransform(
-    [theme.primary_dark, theme.primary_mediumdark, hover],
-    ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
+    [theme.primary_dark, theme.primary_mediumdark, hover] as MotionValue<
+      string | number
+    >[],
+    ([latestColor1, latestColor2, latestHover]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor1 as string, latestColor2 as string],
+      ),
   );
 
   const scale = useTransform(hover, [0, 1], [1, 1.07]);
@@ -68,10 +86,10 @@ export default function BackArrow({ width = 70, id = "generic", variants }) {
   return (
     <Container
       $width={width}
-      onHoverStart={() => handleHoverStart(hover)}
-      onHoverEnd={() => handleHoverEnd(hover)}
-      onFocus={() => handleHoverStart(hover)}
-      onBlur={() => handleHoverEnd(hover)}
+      onHoverStart={() => handleHoverStart()}
+      onHoverEnd={() => handleHoverEnd()}
+      onFocus={() => handleHoverStart()}
+      onBlur={() => handleHoverEnd()}
       onClick={() => router.back()}
       style={{ rotate: -90, scale, x }}
       layoutId={`${id}_backArrow`}

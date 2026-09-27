@@ -1,3 +1,4 @@
+import type { MotionValue } from "framer-motion";
 import {
   animate,
   motion,
@@ -48,14 +49,33 @@ const Container = styled(motion.div)`
   }
 `;
 
-export default function ProjectLink({ type = "Demo", href = "", iconColor }) {
+interface ProjectLinkProps {
+  type?: string;
+  href?: string | null;
+  iconColor?: MotionValue<string>;
+}
+
+export default function ProjectLink({
+  type = "Demo",
+  href = "",
+  iconColor,
+}: ProjectLinkProps) {
   const theme = useTheme();
   const hover = useMotionValue(0);
 
   const color = useTransform(
-    [theme.primary_dark, iconColor || theme.primary_light, hover],
-    ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
+    // Mixed string/number inputs; the tuple type below reads them back.
+    [
+      theme.primary_dark,
+      iconColor || theme.primary_light,
+      hover,
+    ] as MotionValue<string | number>[],
+    ([latestColor1, latestColor2, latestHover]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor1 as string, latestColor2 as string],
+      ),
   );
 
   const iconRotate = useTransform(

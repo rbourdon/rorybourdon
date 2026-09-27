@@ -1,4 +1,4 @@
-import { MotionConfig, motion } from "framer-motion";
+import { MotionConfig, motion, type Variants } from "framer-motion";
 import Head from "next/head";
 import React from "react";
 import styled, { useTheme } from "styled-components";
@@ -9,6 +9,7 @@ import NavBar from "@/components/Nav/NavBar";
 import TitleBlock from "@/components/PageTitleBlock";
 import ProjectsScroller from "@/components/Projects/ProjectsScroller";
 import { getProjectList } from "@/lib/graphcms";
+import type { ProjectSummaryData } from "@/lib/types";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -99,7 +100,7 @@ const ProjectsBlock = styled(motion.div)`
   }
 `;
 
-const detailsV = {
+const detailsV: Variants = {
   hidden: {
     opacity: 0,
     x: "70%",
@@ -124,7 +125,7 @@ const detailsV = {
   },
 };
 
-const arrowV = {
+const arrowV: Variants = {
   hidden: {
     opacity: 1,
     x: 400,
@@ -148,7 +149,11 @@ const arrowV = {
   },
 };
 
-export default function Projects({ projects }) {
+interface ProjectsPageProps {
+  projects: ProjectSummaryData[];
+}
+
+export default function Projects({ projects }: ProjectsPageProps) {
   const theme = useTheme();
 
   const pageLinks = [

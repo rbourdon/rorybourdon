@@ -1,4 +1,5 @@
 import { AnimatePresence } from "framer-motion";
+import type { AppProps } from "next/app";
 import { Raleway } from "next/font/google";
 import Head from "next/head";
 import { createGlobalStyle } from "styled-components";
@@ -106,7 +107,7 @@ function handleExitComplete() {
 
 const raleway = Raleway({ subsets: ["latin"] });
 
-function MyApp({ Component, pageProps, router }) {
+function MyApp({ Component, pageProps, router }: AppProps) {
   return (
     <>
       <Head>

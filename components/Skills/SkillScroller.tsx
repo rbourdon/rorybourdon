@@ -1,8 +1,15 @@
-import { LayoutGroup, motion, useMotionValue } from "framer-motion";
+import {
+  LayoutGroup,
+  motion,
+  type PanInfo,
+  useMotionValue,
+  type Variants,
+} from "framer-motion";
 import { useState } from "react";
 import styled, { useTheme } from "styled-components";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
 import SkillBubble from "@/components/Skills/SkillBubble";
+import type { SkillRef } from "@/lib/types";
 import useWindowSize from "../utils/useWindowSize";
 
 const SCROLL_MULTIPLIER = 35;
@@ -39,8 +46,8 @@ const Arrow = styled(motion.button)`
   margin: 0;
 `;
 
-const bubbleV = {
-  hidden: (custom) => ({
+const bubbleV: Variants = {
+  hidden: (custom: number) => ({
     x: 300,
     y: 0,
     opacity: 0,
@@ -52,7 +59,7 @@ const bubbleV = {
       damping: 20,
     },
   }),
-  visible: (custom) => ({
+  visible: (custom: number) => ({
     x: 0,
     y: 0,
     opacity: 1,
@@ -66,29 +73,36 @@ const bubbleV = {
   }),
 };
 
-export default function SkillScroller({ skills }) {
+interface SkillScrollerProps {
+  skills: SkillRef[];
+}
+
+export default function SkillScroller({ skills }: SkillScrollerProps) {
   const size = useWindowSize();
+  // Before mount these are undefined; the maths then yields false/NaN, as in the JS version.
+  const width = size.width as number;
+  const height = size.height as number;
   const numSkills =
-    size.width > 555
-      ? (size.height - 450) / 50 > skills.length - LIST_BUFFER
+    width > 555
+      ? (height - 450) / 50 > skills.length - LIST_BUFFER
         ? skills.length - LIST_BUFFER
-        : (size.height - 450) / 50
-      : (size.height - 600) / 50 > skills.length - LIST_BUFFER
+        : (height - 450) / 50
+      : (height - 600) / 50 > skills.length - LIST_BUFFER
         ? skills.length - LIST_BUFFER
-        : (size.height - 600) / 50 < 3
+        : (height - 600) / 50 < 3
           ? 3
-          : (size.height - 600) / 50;
+          : (height - 600) / 50;
   const theme = useTheme();
   const panPos = useMotionValue(0);
   const [panning, setPanning] = useState(false);
   const [rollerPos, setRollerPos] = useState(0);
-  const [selectedSkill, setSelectedSkill] = useState(false);
+  const [selectedSkill, setSelectedSkill] = useState<string | false>(false);
 
-  const handleSkillSelect = (skill) => {
+  const handleSkillSelect = (skill: string) => {
     !panning && setSelectedSkill(skill);
   };
 
-  const handlePan = (e, pointInfo) => {
+  const handlePan = (e: PointerEvent, pointInfo: PanInfo) => {
     panPos.set(panPos.get() + pointInfo.delta.y);
     const notchesToMove = Math.round(panPos.get() / SCROLL_MULTIPLIER);
     if (Math.abs(panPos.get()) > SCROLL_MULTIPLIER) {
@@ -108,7 +122,7 @@ export default function SkillScroller({ skills }) {
     setTimeout(() => setPanning(false), 75);
   };
 
-  const handleClick = (dir) => {
+  const handleClick = (dir: number) => {
     setRollerPos((prev) =>
       prev + dir < 0
         ? skills.length - 1

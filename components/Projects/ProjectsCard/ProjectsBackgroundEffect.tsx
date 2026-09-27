@@ -1,7 +1,10 @@
+import type { Variants } from "framer-motion";
 import { motion, useMotionValue } from "framer-motion";
 
 import styled, { useTheme } from "styled-components";
-import useBackgroundEffect from "@/components/utils/useBackgroundEffect";
+import useBackgroundEffect, {
+  type EffectStyle,
+} from "@/components/utils/useBackgroundEffect";
 
 const Container = styled(motion.div)`
   position: absolute;
@@ -11,7 +14,7 @@ const Container = styled(motion.div)`
   will-change: rotate opacity translate;
 `;
 
-const containerV = {
+const containerV: Variants = {
   hidden: {
     opacity: 0,
     transition: {
@@ -19,7 +22,7 @@ const containerV = {
       duration: 0.2,
     },
   },
-  visible: (custom) => ({
+  visible: (custom: EffectStyle) => ({
     opacity: 1,
     rotate: [0, 360],
     transition: {
@@ -42,10 +45,15 @@ const containerV = {
   },
 };
 
+interface ProjectsBackgroundEffectProps {
+  inView?: boolean;
+  effectStyle?: EffectStyle;
+}
+
 export default function ProjectsBackgroundEffect({
   inView = false,
   effectStyle = { x: 0, y: 0, scale: 1, delay: 0 },
-}) {
+}: ProjectsBackgroundEffectProps) {
   const theme = useTheme();
   const y = useBackgroundEffect(inView, effectStyle);
   const x = useMotionValue(effectStyle.x);

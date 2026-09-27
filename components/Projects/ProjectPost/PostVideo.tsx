@@ -1,4 +1,6 @@
+import type { Variants } from "framer-motion";
 import { AnimatePresence, motion } from "framer-motion";
+import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import styled, { useTheme } from "styled-components";
@@ -42,7 +44,7 @@ const PlaceholderImage = styled(motion.span)`
   overflow: hidden;
 `;
 
-const placeholderV = {
+const placeholderV: Variants = {
   hidden: {
     opacity: 0,
   },
@@ -58,7 +60,7 @@ const placeholderV = {
   },
 };
 
-const logoV = {
+const logoV: Variants = {
   hidden: {
     opacity: 0,
   },
@@ -75,6 +77,15 @@ const logoV = {
   },
 };
 
+interface PostVideoProps {
+  src: string;
+  alt?: string;
+  children?: ReactNode;
+  priority?: boolean;
+  width?: number;
+  height?: number;
+}
+
 export default function PostVideo({
   src,
   alt = "Sorry, your browser doesn't support embedded videos.",
@@ -82,12 +93,12 @@ export default function PostVideo({
   priority = false,
   width = 1908,
   height = 1004,
-}) {
+}: PostVideoProps) {
   const theme = useTheme();
   const [loaded, setLoaded] = useState(false);
   const [allowPlay, setAllowPlay] = useState(false);
   const [playing, setPlaying] = useState(false);
-  const vidRef = useRef();
+  const vidRef = useRef<HTMLVideoElement>(null);
   const { ref, inView } = useInView({ threshold: 0.1 });
 
   useEffect(() => {
@@ -97,8 +108,11 @@ export default function PostVideo({
   useEffect(() => {
     if ((inView || priority) && !loaded && allowPlay) {
       const loadVid = setTimeout(() => {
-        vidRef.current.children[0].src = vidRef.current.children[0].dataset.src;
-        vidRef.current.load();
+        // The video is mounted by the time this runs (allowPlay is true).
+        const vid = vidRef.current as HTMLVideoElement;
+        const source = vid.children[0] as HTMLSourceElement;
+        source.src = source.dataset.src as string;
+        vid.load();
         setLoaded(true);
       }, 100);
       return () => {

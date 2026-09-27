@@ -1,6 +1,7 @@
+import type { Variants } from "framer-motion";
 import { motion } from "framer-motion";
 
-const pathV = {
+const pathV: Variants = {
   hidden: {
     pathLength: 0,
   },
@@ -14,7 +15,7 @@ const pathV = {
   },
 };
 
-const path2V = {
+const path2V: Variants = {
   hidden: {
     pathLength: 0,
   },
@@ -28,12 +29,12 @@ const path2V = {
   },
 };
 
-const gearV = {
+const gearV: Variants = {
   hidden: {
     rotate: 0,
     scale: 0.25,
   },
-  visible: (custom) => ({
+  visible: (custom: number) => ({
     rotate: [0, custom],
     scale: 1,
     transition: {
@@ -52,7 +53,11 @@ const gearV = {
   },
 };
 
-export default function ProjectsIcon({ iconV }) {
+interface ProjectsIconProps {
+  iconV?: Variants;
+}
+
+export default function ProjectsIcon({ iconV }: ProjectsIconProps) {
   return (
     <motion.svg
       xmlns="http://www.w3.org/2000/svg"

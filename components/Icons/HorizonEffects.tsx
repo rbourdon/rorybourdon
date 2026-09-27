@@ -1,3 +1,4 @@
+import type { Variants } from "framer-motion";
 import { motion, useMotionValue } from "framer-motion";
 import React, { useEffect } from "react";
 import styled, { useTheme } from "styled-components";
@@ -13,7 +14,7 @@ const Effect = styled.div`
   top: 0;
 `;
 
-const lineV = {
+const lineV: Variants = {
   hidden: {
     pathLength: 0,
   },
@@ -26,7 +27,7 @@ const lineV = {
   },
 };
 
-const line1V = {
+const line1V: Variants = {
   hidden: {
     pathLength: 0,
   },
@@ -44,7 +45,7 @@ const line1V = {
   },
 };
 
-const line2V = {
+const line2V: Variants = {
   hidden: {
     pathLength: 0,
   },
@@ -61,7 +62,7 @@ const line2V = {
   },
 };
 
-const circleV = {
+const circleV: Variants = {
   hidden: {
     pathLength: 0,
     pathOffset: 1,
@@ -80,7 +81,7 @@ const circleV = {
   },
 };
 
-const circle2V = {
+const circle2V: Variants = {
   hidden: {
     pathLength: 0,
   },
@@ -94,7 +95,29 @@ const circle2V = {
   },
 };
 
-export default function HorizonEffects({ lines = [], circles = [] }) {
+interface HorizonLine {
+  yLoc: number;
+  slope: number;
+}
+
+interface HorizonCircle {
+  cx: number | string;
+  cy: number | string;
+  r: number;
+}
+
+interface HorizonEffectsProps {
+  lines?: HorizonLine[];
+  circles?: HorizonCircle[];
+  // Unused, but still passed by some pages.
+  slope?: number;
+  yLoc?: number;
+}
+
+export default function HorizonEffects({
+  lines = [],
+  circles = [],
+}: HorizonEffectsProps) {
   const theme = useTheme();
   const { width } = useWindowSize();
   const strokeWidth = useMotionValue(0.5);

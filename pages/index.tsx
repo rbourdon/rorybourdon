@@ -7,6 +7,7 @@ import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/Nav/NavBar";
 import { getAllProjects, getAllSkills } from "@/lib/graphcms";
+import type { ProjectSummaryData, SkillRef } from "@/lib/types";
 
 const SkillsCard = dynamic(
   () => import("@/components/Skills/SkillsCard/SkillsCard"),
@@ -80,7 +81,12 @@ const Section = styled(motion.section)`
   }
 `;
 
-export default function Home({ skills, projects }) {
+interface HomeProps {
+  skills: SkillRef[];
+  projects: ProjectSummaryData[];
+}
+
+export default function Home({ skills, projects }: HomeProps) {
   const theme = useTheme();
   const pageLinks = [
     {

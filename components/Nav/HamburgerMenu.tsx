@@ -1,7 +1,8 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { useState } from "react";
 import styled, { useTheme } from "styled-components";
 import BurgerButton from "@/components/Nav/BurgerButton";
+import type { NavLinkData } from "@/components/Nav/NavBar";
 import NavLink from "@/components/Nav/NavLink";
 
 const Container = styled(motion.div)`
@@ -41,7 +42,7 @@ const Links = styled(motion.div)`
   justify-content: space-evenly;
 `;
 
-const contentV = {
+const contentV: Variants = {
   hidden: {
     opacity: 1,
   },
@@ -60,7 +61,7 @@ const contentV = {
   },
 };
 
-const backdropV = {
+const backdropV: Variants = {
   hidden: {
     clipPath: "circle(0 at 100% 0%)",
   },
@@ -80,7 +81,7 @@ const backdropV = {
   },
 };
 
-export default function HamburgerMenu({ links }) {
+export default function HamburgerMenu({ links }: { links: NavLinkData[] }) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 

@@ -1,5 +1,10 @@
-import { MotionConfig, motion } from "framer-motion";
-import { useState } from "react";
+import {
+  MotionConfig,
+  motion,
+  type Transition,
+  type Variants,
+} from "framer-motion";
+import { type ReactNode, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import styled, { useTheme } from "styled-components";
 import CardEffect from "@/components/CardComponents/CardEffect";
@@ -9,6 +14,7 @@ import Button from "@/components/Nav/Button";
 import SkillRoller from "@/components/Skills/SkillsCard/SkillRoller";
 import SkillsBackgroundEffect from "@/components/Skills/SkillsCard/SkillsBackgroundEffect";
 import useWindowSize from "@/components/utils/useWindowSize";
+import type { SkillRef } from "@/lib/types";
 
 const Container = styled(motion.article)`
   width: 100%;
@@ -19,7 +25,7 @@ const Container = styled(motion.article)`
   align-items: center;
 `;
 
-const Card = styled(motion.div)`
+const Card = styled(motion.div)<{ $scrollMargin: string }>`
   scroll-margin-top: ${(props) => props.$scrollMargin};
   scroll-snap-margin: ${(props) => props.$scrollMargin};
 `;
@@ -81,7 +87,7 @@ const HEIGHT = 710;
 const STEMLENGTH = 475;
 const TAGLINESIZE = 350;
 
-const skillsCardV = {
+const skillsCardV: Variants = {
   hidden: {
     opacity: 0,
     transition: {
@@ -100,7 +106,7 @@ const skillsCardV = {
   },
 };
 
-const containerV = {
+const containerV: Variants = {
   hidden: {
     opacity: 1,
   },
@@ -115,7 +121,7 @@ const containerV = {
   },
 };
 
-const rollerV = {
+const rollerV: Variants = {
   hidden: {
     opacity: 0,
     transition: {
@@ -137,20 +143,31 @@ const rollerV = {
   },
 };
 
-const layoutTransition = {
+const layoutTransition: Transition = {
   type: "spring",
   stiffness: 100,
   mass: 1,
   damping: 14,
 };
 
-export default function SkillsCard({ skills, sectionHeight = 1400, children }) {
+interface SkillsCardProps {
+  skills: SkillRef[];
+  sectionHeight?: number;
+  children?: ReactNode;
+}
+
+export default function SkillsCard({
+  skills,
+  sectionHeight = 1400,
+  children,
+}: SkillsCardProps) {
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
   const theme = useTheme();
   const { width } = useWindowSize();
 
-  const portrait = width * 0.95 < WIDTH + STEMLENGTH + TAGLINESIZE;
+  // width is undefined before mount; NaN keeps portrait false, as in the JS version.
+  const portrait = (width as number) * 0.95 < WIDTH + STEMLENGTH + TAGLINESIZE;
 
   const clickHandler = () => {
     setSelected(true);

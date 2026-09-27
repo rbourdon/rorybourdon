@@ -1,9 +1,11 @@
 import {
   animate,
+  type MotionValue,
   motion,
   transform,
   useMotionValue,
   useTransform,
+  type Variants,
 } from "framer-motion";
 import { useEffect } from "react";
 import styled, { useTheme } from "styled-components";
@@ -59,8 +61,8 @@ const Subtitle = styled(motion.h2)`
   user-select: none;
 `;
 
-const titleV = {
-  visible: (custom) => ({
+const titleV: Variants = {
+  visible: (custom: number) => ({
     transition: {
       delayChildren: custom,
       staggerChildren: 0.15,
@@ -68,7 +70,7 @@ const titleV = {
   }),
 };
 
-const letterV = {
+const letterV: Variants = {
   hidden: {
     y: 165,
   },
@@ -85,7 +87,7 @@ const letterV = {
   },
 };
 
-const subtitleV = {
+const subtitleV: Variants = {
   hidden: {
     opacity: 0,
   },
@@ -98,7 +100,7 @@ const subtitleV = {
   },
 };
 
-const bgV = {
+const bgV: Variants = {
   hidden: {
     scaleY: 0,
     originY: 1,
@@ -118,18 +120,32 @@ const bgV = {
   },
 };
 
-export default function Banner({ title = "Rory Bourdon" }) {
+export default function Banner({ title = "Rory Bourdon" }: { title?: string }) {
   const theme = useTheme();
 
   const phase = useMotionValue(0);
 
   const backgroundColor = useTransform(
-    [theme.primary_slightlydark, theme.teal, theme.orange, theme.green, phase],
-    ([latestColor1, latestColor2, latestColor3, latestColor4, latestPhase]) =>
+    [
+      theme.primary_slightlydark,
+      theme.teal,
+      theme.orange,
+      theme.green,
+      phase,
+    ] as MotionValue<string | number>[],
+    ([latestColor1, latestColor2, latestColor3, latestColor4, latestPhase]: (
+      | string
+      | number
+    )[]) =>
       transform(
-        latestPhase,
+        latestPhase as number,
         [0, 1, 2, 3],
-        [latestColor1, latestColor2, latestColor3, latestColor4],
+        [
+          latestColor1 as string,
+          latestColor2 as string,
+          latestColor3 as string,
+          latestColor4 as string,
+        ],
       ),
   );
   useEffect(() => {

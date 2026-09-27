@@ -1,11 +1,14 @@
 import {
   animate,
+  type MotionValue,
   motion,
   transform,
   useMotionValue,
   useTransform,
+  type Variants,
 } from "framer-motion";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 import styled, { useTheme } from "styled-components";
 
@@ -30,7 +33,7 @@ const Text = styled(motion.button)`
   position: relative;
 `;
 
-const navV = {
+const navV: Variants = {
   hidden: {
     opacity: 0,
   },
@@ -42,20 +45,34 @@ const navV = {
   },
 };
 
+interface NavLinkProps {
+  children: ReactNode;
+  href?: string;
+  name: string;
+  setHoveredLink: ((name: string) => void) | null;
+  onClick?: (() => void) | null;
+}
+
 export default function NavLink({
   children,
   href,
   name,
   setHoveredLink,
   onClick,
-}) {
+}: NavLinkProps) {
   const theme = useTheme();
   const hover = useMotionValue(0);
 
   const color = useTransform(
-    [theme.primary_dark, theme.primary_slightlydark, hover],
-    ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
+    [theme.primary_dark, theme.primary_slightlydark, hover] as MotionValue<
+      string | number
+    >[],
+    ([latestColor1, latestColor2, latestHover]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor1 as string, latestColor2 as string],
+      ),
   );
 
   const handleHoverEnd = () => {
@@ -80,7 +97,7 @@ export default function NavLink({
         onHoverEnd={handleHoverEnd}
         onFocus={handleHoverStart}
         onBlur={handleHoverEnd}
-        onClick={onClick}
+        onClick={onClick ?? undefined}
       >
         {children}
       </LinkText>
@@ -88,7 +105,7 @@ export default function NavLink({
   ) : (
     <Text
       variants={navV}
-      onClick={onClick}
+      onClick={onClick ?? undefined}
       style={{ color }}
       onHoverStart={handleHoverStart}
       onHoverEnd={handleHoverEnd}

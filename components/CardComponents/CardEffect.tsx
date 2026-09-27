@@ -1,4 +1,6 @@
+import type { Variants } from "framer-motion";
 import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 import styled from "styled-components";
 
 const Container = styled(motion.span)`
@@ -15,13 +17,13 @@ const Container = styled(motion.span)`
   }
 `;
 
-const containerV = {
+const containerV: Variants = {
   hidden: {
     transition: {
       staggerChildren: 0.08,
     },
   },
-  visible: (custom) => ({
+  visible: (custom: number) => ({
     transition: {
       staggerChildren: 0.08,
       delayChildren: custom,
@@ -34,11 +36,17 @@ const containerV = {
   },
 };
 
+interface CardEffectProps {
+  position?: "absolute" | "fixed";
+  children?: ReactNode;
+  delay?: number;
+}
+
 export default function CardEffect({
   position = "absolute",
   children,
   delay = 0,
-}) {
+}: CardEffectProps) {
   return (
     <Container
       layout

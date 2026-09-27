@@ -1,3 +1,4 @@
+import type { MotionValue, Variants } from "framer-motion";
 import { motion } from "framer-motion";
 
 import styled, { useTheme } from "styled-components";
@@ -15,7 +16,14 @@ const Container = styled(motion.div)`
   pointer-events: none;
 `;
 
-function getPath(startLoc, height, width, bRadius, sWidth, offset) {
+function getPath(
+  startLoc: number,
+  height: number,
+  width: number,
+  bRadius: number,
+  sWidth: number,
+  offset: number,
+) {
   const arc = bRadius - offset * -0.335;
   const smallVMove = Math.max(0, (height + offset - arc * 2 - sWidth) * 0.335);
   const largeVMove = Math.max(0, (height + offset - arc * 2 - sWidth) * 0.665);
@@ -172,6 +180,21 @@ function getPath(startLoc, height, width, bRadius, sWidth, offset) {
   }
 }
 
+interface CardBorderProps {
+  bRadius: number;
+  sWidth: number;
+  width: number;
+  height: number;
+  borderV?: Variants;
+  startLoc?: number;
+  frameV?: Variants;
+  innerBorderV?: Variants;
+  color1?: MotionValue<string>;
+  color2?: MotionValue<string>;
+  innerOffset?: number;
+  id?: string;
+}
+
 export default function CardBorder({
   bRadius,
   sWidth,
@@ -183,7 +206,7 @@ export default function CardBorder({
   innerBorderV,
   color1,
   innerOffset,
-}) {
+}: CardBorderProps) {
   const startLocation = startLoc ? startLoc : 8;
   const innerOff = innerOffset ? innerOffset : -10;
   const theme = useTheme();

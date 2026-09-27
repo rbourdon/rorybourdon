@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
+import { type MotionValue, motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import Logo from "@/components/Nav/Logo";
 import HamburgerMenu from "./HamburgerMenu";
@@ -80,9 +80,21 @@ const Underline = styled(motion.span)`
   left: 0;
 `;
 
-export default function NavBar({ children, links = [] }) {
+export interface NavLinkData {
+  name: string;
+  href?: string;
+  color?: MotionValue<string>;
+  onClick?: (() => void) | null;
+}
+
+interface NavBarProps {
+  children?: ReactNode;
+  links?: NavLinkData[];
+}
+
+export default function NavBar({ children, links = [] }: NavBarProps) {
   const theme = useTheme();
-  const [hoveredLink, setHoveredLink] = useState(null);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   return (
     <Container>

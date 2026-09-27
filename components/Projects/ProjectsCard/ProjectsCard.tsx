@@ -1,3 +1,9 @@
+import type {
+  MotionStyle,
+  MotionValue,
+  ValueAnimationTransition,
+  Variants,
+} from "framer-motion";
 import {
   animate,
   MotionConfig,
@@ -6,6 +12,7 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { useInView } from "react-intersection-observer";
 import styled, { useTheme } from "styled-components";
@@ -16,6 +23,7 @@ import Button from "@/components/Nav/Button";
 import ProjectSummary from "@/components/Projects/ProjectSummary/ProjectSummary";
 import ProjectsBackgroundEffect from "@/components/Projects/ProjectsCard/ProjectsBackgroundEffect";
 import useWindowSize from "@/components/utils/useWindowSize";
+import type { ProjectSummaryData } from "@/lib/types";
 
 const Container = styled(motion.article)`
   width: 100%;
@@ -26,7 +34,7 @@ const Container = styled(motion.article)`
   align-items: center;
 `;
 
-const Card = styled(motion.div)`
+const Card = styled(motion.div)<{ $scrollMargin: string }>`
   top: calc(50vh - 358px / 2);
   scroll-margin-top: ${(props) => props.$scrollMargin};
   scroll-snap-margin: ${(props) => props.$scrollMargin};
@@ -110,7 +118,7 @@ const HEIGHT = 358;
 const STEMLENGTH = 375;
 const TAGLINESIZE = 350;
 
-const projectsCardV = {
+const projectsCardV: Variants = {
   hidden: {
     opacity: 0,
     transition: {
@@ -129,7 +137,7 @@ const projectsCardV = {
   },
 };
 
-const projectSummariesV = {
+const projectSummariesV: Variants = {
   hidden: {
     opacity: 0,
     transition: {
@@ -151,7 +159,7 @@ const projectSummariesV = {
   },
 };
 
-const containerV = {
+const containerV: Variants = {
   hidden: {
     opacity: 1,
   },
@@ -166,7 +174,7 @@ const containerV = {
   },
 };
 
-const outlineV = {
+const outlineV: Variants = {
   hidden: {
     opacity: 0,
   },
@@ -178,11 +186,19 @@ const outlineV = {
   },
 };
 
+interface ProjectsCardProps {
+  projects: ProjectSummaryData[];
+  sectionHeight?: number;
+  children?: ReactNode;
+  // Passed by the home page but not used here.
+  style?: MotionStyle;
+}
+
 export default function ProjectsCard({
   projects,
   sectionHeight = 1400,
   children,
-}) {
+}: ProjectsCardProps) {
   const theme = useTheme();
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
@@ -191,17 +207,29 @@ export default function ProjectsCard({
     threshold: 0.4,
   });
 
-  const portrait = width * 0.95 < WIDTH + STEMLENGTH + TAGLINESIZE;
+  const portrait =
+    width !== undefined && width * 0.95 < WIDTH + STEMLENGTH + TAGLINESIZE;
   const backing = useMotionValue(0);
   const backingColor = useTransform(
-    [theme.primary, theme.primary_light, backing],
-    ([latestPrimary, latestPrimaryLight, latestBacking]) =>
-      transform(latestBacking, [0, 1], [latestPrimary, latestPrimaryLight]),
+    // Mixed string/number inputs; the tuple type below reads them back.
+    [theme.primary, theme.primary_light, backing] as MotionValue<
+      string | number
+    >[],
+    ([latestPrimary, latestPrimaryLight, latestBacking]: (string | number)[]) =>
+      transform(
+        latestBacking as number,
+        [0, 1],
+        [latestPrimary as string, latestPrimaryLight as string],
+      ),
   );
 
   const clickHandler = () => {
     setSelected(true);
-    animate(backing, 1, { transition: { duration: 1 } });
+    // A nested `transition` is not a ValueAnimationTransition key; kept as-is
+    // to avoid changing behaviour.
+    animate(backing, 1, {
+      transition: { duration: 1 },
+    } as ValueAnimationTransition<number>);
     setTimeout(() => {
       window.scrollTo({ top: 0, left: 0 });
     }, 800);
@@ -320,7 +348,7 @@ export default function ProjectsCard({
               </CardWindow>
               <ProjectsBox layout variants={projectSummariesV}>
                 <p>Featured Project</p>
-                {inView && width > 220 && (
+                {inView && width !== undefined && width > 220 && (
                   <ProjectSummary
                     id={"projectsCard"}
                     project={projects[0]}

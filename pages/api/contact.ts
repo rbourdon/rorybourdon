@@ -1,15 +1,21 @@
 import sgMail from "@sendgrid/mail";
+import type { NextApiRequest, NextApiResponse } from "next";
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// Unset key fails at send time, as before.
+sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 
-export default async function Contact(req, res) {
-  const { message } = req.body;
+export default async function Contact(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  const { message } = req.body as { message: string };
 
   const msg = {
     to: "rorybourdon@gmail.com",
     from: "contact@rorybourdon.com",
-    template_id: "d-e62d0066c4a7406e86cc0fc0f5e28ccb",
-    dynamic_template_data: {
+    // SendGrid camel-cases snake_case keys itself, so this is the same payload.
+    templateId: "d-e62d0066c4a7406e86cc0fc0f5e28ccb",
+    dynamicTemplateData: {
       body: message,
     },
   };

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 import styled, { useTheme } from "styled-components";
 import Highlight from "./Highlight";
@@ -31,8 +31,8 @@ const Credit = styled(motion.p)`
   justify-content: center;
 `;
 
-const titleV = {
-  visible: (custom) => ({
+const titleV: Variants = {
+  visible: (custom: number) => ({
     transition: {
       delayChildren: custom,
       staggerChildren: 0.1,

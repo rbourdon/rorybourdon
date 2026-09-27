@@ -1,7 +1,9 @@
+import type { MotionValue } from "framer-motion";
 import { LayoutGroup, motion } from "framer-motion";
 import { useState } from "react";
 import styled, { useTheme } from "styled-components";
 import SkillBubble from "@/components/Skills/SkillBubble";
+import type { SkillRef } from "@/lib/types";
 
 const Bubbles = styled(motion.ul)`
   max-width: 100%;
@@ -20,11 +22,24 @@ const Bubbles = styled(motion.ul)`
   z-index: 6;
 `;
 
-export default function SkillList({ skills, bubbleColor, textColor }) {
+interface SkillListProps {
+  skills: SkillRef[];
+  bubbleColor?: MotionValue<string>;
+  textColor?: MotionValue<string>;
+  // Passed by the project page but not used here.
+  selected?: boolean;
+  numSkills?: number;
+}
+
+export default function SkillList({
+  skills,
+  bubbleColor,
+  textColor,
+}: SkillListProps) {
   const theme = useTheme();
   const [selectedSkill, setSelectedSkill] = useState("");
 
-  const handleSkillSelect = (skill) => {
+  const handleSkillSelect = (skill: string) => {
     setSelectedSkill(skill);
   };
 

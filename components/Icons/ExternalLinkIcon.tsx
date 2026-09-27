@@ -1,10 +1,17 @@
+import type { MotionValue } from "framer-motion";
 import { motion } from "framer-motion";
+
+interface ExternalLinkIconProps {
+  width?: number;
+  height?: number;
+  rotate?: number | MotionValue<number>;
+}
 
 export default function ExternalLinkIcon({
   width = 23,
   height = 23,
   rotate = 0,
-}) {
+}: ExternalLinkIconProps) {
   return (
     <motion.svg
       xmlns="http://www.w3.org/2000/svg"

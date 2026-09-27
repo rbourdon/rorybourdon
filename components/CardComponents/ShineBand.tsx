@@ -1,7 +1,8 @@
+import type { Variants } from "framer-motion";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-const Container = styled(motion.div)`
+const Container = styled(motion.div)<{ $width: number; $height: number }>`
   width: ${(props) => props.$width + "px"};
   height: ${(props) => props.$height + "px"};
   overflow: hidden;
@@ -12,7 +13,7 @@ const Container = styled(motion.div)`
   pointer-events: none;
 `;
 
-const Band = styled(motion.div)`
+const Band = styled(motion.div)<{ $width: number; $height: number }>`
   width: ${(props) => props.$width + "px"};
   height: ${(props) => props.$height + "px"};
   position: absolute;
@@ -21,29 +22,34 @@ const Band = styled(motion.div)`
   pointer-events: none;
 `;
 
-const shineV = {
-  hidden: (custom) => ({
+interface ShineSize {
+  width: number;
+  height: number;
+}
+
+const shineV: Variants = {
+  hidden: (custom: ShineSize) => ({
     transition: {
       delayChildren: custom.width * custom.height * 0.0000012 - 0.75,
     },
   }),
-  visible: (custom) => ({
+  visible: (custom: ShineSize) => ({
     transition: {
       delayChildren: custom.width * custom.height * 0.0000012 - 0.75,
     },
   }),
-  selected: (custom) => ({
+  selected: (custom: ShineSize) => ({
     transition: {
       delayChildren: custom.width * custom.height * 0.0000012 - 0.75,
     },
   }),
 };
 
-const bandV = {
-  hidden: (custom) => ({
+const bandV: Variants = {
+  hidden: (custom: ShineSize) => ({
     x: -custom.width,
   }),
-  visible: (custom) => ({
+  visible: (custom: ShineSize) => ({
     x: [-custom.width, custom.width * 2],
     transition: {
       type: "tween",
@@ -53,7 +59,7 @@ const bandV = {
       repeatDelay: 5,
     },
   }),
-  selected: (custom) => ({
+  selected: (custom: ShineSize) => ({
     x: custom.width * 2,
     transition: {
       type: "tween",
@@ -65,7 +71,15 @@ const bandV = {
   }),
 };
 
-export default function ShineBand({ width, height, bRadius }) {
+interface ShineBandProps {
+  width: number;
+  height: number;
+  bRadius: number;
+  sWidth?: number;
+  id?: string;
+}
+
+export default function ShineBand({ width, height, bRadius }: ShineBandProps) {
   return (
     <Container
       variants={shineV}

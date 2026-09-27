@@ -1,6 +1,17 @@
+import type { MotionValue } from "framer-motion";
 import { motion } from "framer-motion";
 
-export default function CodeIcon({ width = 23, height = 23, rotate = 0 }) {
+interface CodeIconProps {
+  width?: number;
+  height?: number;
+  rotate?: number | MotionValue<number>;
+}
+
+export default function CodeIcon({
+  width = 23,
+  height = 23,
+  rotate = 0,
+}: CodeIconProps) {
   return (
     <motion.svg
       xmlns="http://www.w3.org/2000/svg"

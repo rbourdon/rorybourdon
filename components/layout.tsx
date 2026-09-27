@@ -1,8 +1,14 @@
 import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 
 import { useTheme } from "styled-components";
 
-function Layout({ children, className }) {
+interface LayoutProps {
+  children: ReactNode;
+  className?: string;
+}
+
+function Layout({ children, className }: LayoutProps) {
   const theme = useTheme();
 
   return (

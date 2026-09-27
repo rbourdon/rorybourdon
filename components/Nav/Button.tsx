@@ -1,16 +1,19 @@
 import {
   animate,
+  type MotionValue,
   motion,
   transform,
   useMotionValue,
   useTransform,
+  type Variants,
 } from "framer-motion";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 import styled, { useTheme } from "styled-components";
 import CardBorder from "@/components/CardComponents/CardBorder";
 
-const LinkContainer = styled(motion.a)`
+const LinkContainer = styled(motion.a)<{ $width: number; $height: number }>`
   width: ${(props) => props.$width + "px"};
   height: ${(props) => props.$height + "px"};
   display: flex;
@@ -24,7 +27,10 @@ const LinkContainer = styled(motion.a)`
   }
 `;
 
-const ButtonContainer = styled(motion.button)`
+const ButtonContainer = styled(motion.button)<{
+  $width: number;
+  $height: number;
+}>`
   width: ${(props) => props.$width + "px"};
   height: ${(props) => props.$height + "px"};
   display: flex;
@@ -48,7 +54,7 @@ const Content = styled(motion.div)`
   font-size: 1.13rem;
 `;
 
-const borderV = {
+const borderV: Variants = {
   hidden: {
     pathLength: 0,
   },
@@ -66,7 +72,7 @@ const borderV = {
   },
 };
 
-const innerBorderV = {
+const innerBorderV: Variants = {
   hidden: {
     pathLength: 0,
   },
@@ -84,12 +90,17 @@ const innerBorderV = {
   },
 };
 
-const contentV = {
-  hidden: (custom) => ({
+interface ContentCustom {
+  bRadius: number;
+  animationDelay: number;
+}
+
+const contentV: Variants = {
+  hidden: (custom: ContentCustom) => ({
     borderRadius: custom.bRadius,
     opacity: 0,
   }),
-  visible: (custom) => ({
+  visible: (custom: ContentCustom) => ({
     borderRadius: custom.bRadius,
     opacity: 1,
     transition: {
@@ -97,7 +108,7 @@ const contentV = {
       duration: 0.3,
     },
   }),
-  selected: (custom) => ({
+  selected: (custom: ContentCustom) => ({
     borderRadius: custom.bRadius,
     opacity: 0,
     transition: {
@@ -106,6 +117,21 @@ const contentV = {
     },
   }),
 };
+
+interface ButtonProps {
+  href?: string;
+  children: ReactNode;
+  width?: number;
+  height?: number;
+  sWidth?: number;
+  bRadius?: number;
+  type?: "link" | "submit";
+  id?: string;
+  animationDelay?: number;
+  onClick?: () => void;
+  /** Accepted from callers but not currently used. */
+  color1?: MotionValue<string>;
+}
 
 export default function Button({
   href = "/",
@@ -118,7 +144,7 @@ export default function Button({
   id = "button",
   animationDelay = 0,
   onClick,
-}) {
+}: ButtonProps) {
   const theme = useTheme();
   const hover = useMotionValue(0);
 
@@ -139,10 +165,12 @@ export default function Button({
   };
 
   const boxShadow = useTransform(
-    [hover, theme.shadow_key, theme.shadow_ambient],
-    ([latestHover, latestShadow1, latestShadow2]) =>
+    [hover, theme.shadow_key, theme.shadow_ambient] as MotionValue<
+      string | number
+    >[],
+    ([latestHover, latestShadow1, latestShadow2]: (string | number)[]) =>
       transform(
-        latestHover,
+        latestHover as number,
         [0, 1],
         [
           "0px 0px 0px 0px " +
@@ -161,7 +189,7 @@ export default function Button({
       ),
   );
 
-  const frameV = {
+  const frameV: Variants = {
     visible: {
       transition: {
         staggerChildren: 0.15,
@@ -176,10 +204,10 @@ export default function Button({
       <LinkContainer
         $width={width}
         $height={height}
-        onHoverStart={() => handleHoverStart(hover)}
-        onHoverEnd={() => handleHoverEnd(hover)}
-        onFocus={() => handleHoverStart(hover)}
-        onBlur={() => handleHoverEnd(hover)}
+        onHoverStart={() => handleHoverStart()}
+        onHoverEnd={() => handleHoverEnd()}
+        onFocus={() => handleHoverStart()}
+        onBlur={() => handleHoverEnd()}
         onClick={onClick}
         layoutId={`${id}Button`}
         style={{
@@ -218,10 +246,10 @@ export default function Button({
     <ButtonContainer
       $width={width}
       $height={height}
-      onHoverStart={() => handleHoverStart(hover)}
-      onHoverEnd={() => handleHoverEnd(hover)}
-      onFocus={() => handleHoverStart(hover)}
-      onBlur={() => handleHoverEnd(hover)}
+      onHoverStart={() => handleHoverStart()}
+      onHoverEnd={() => handleHoverEnd()}
+      onFocus={() => handleHoverStart()}
+      onBlur={() => handleHoverEnd()}
       onClick={onClick}
       type="submit"
       layoutId={`${id}Button`}

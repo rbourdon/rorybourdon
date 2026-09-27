@@ -1,5 +1,6 @@
 import {
   animate,
+  type SpringOptions,
   useMotionValue,
   useScroll,
   useSpring,
@@ -7,13 +8,20 @@ import {
 } from "framer-motion";
 import { useEffect } from "react";
 
-function useBackgroundEffect(inView, effectStyle) {
+export interface EffectStyle {
+  x: number;
+  y: number;
+  scale: number;
+  delay: number;
+}
+
+function useBackgroundEffect(inView: boolean, effectStyle: EffectStyle) {
   const { scrollY } = useScroll();
   const scrollOffsetY = useMotionValue(0);
   const baseY = useMotionValue(200);
   const finalY = useTransform(
     [scrollOffsetY, baseY],
-    ([latestOffset, latestBase]) =>
+    ([latestOffset, latestBase]: number[]) =>
       effectStyle.y + latestOffset * (effectStyle.scale - 0.125) + latestBase,
   );
 
@@ -22,7 +30,8 @@ function useBackgroundEffect(inView, effectStyle) {
     stiffness: 140 * effectStyle.scale,
     mass: 2.5 * effectStyle.scale,
     damping: 22 * effectStyle.scale,
-  });
+    // `type` is not in SpringOptions; kept as-is to avoid touching behaviour
+  } as SpringOptions);
 
   useEffect(() => {
     if (!inView) {
@@ -78,7 +87,8 @@ function useBackgroundEffect(inView, effectStyle) {
     const unsubscribeY = scrollY.on("change", (progress) => {
       if (inView && baseY.get() === 0) {
         scrollOffsetY.set(
-          scrollOffsetY.get() - (progress - scrollY.getPrevious()) * 0.325,
+          scrollOffsetY.get() -
+            (progress - (scrollY.getPrevious() as number)) * 0.325,
         );
       }
     });

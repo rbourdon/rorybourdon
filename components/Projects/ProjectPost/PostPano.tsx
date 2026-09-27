@@ -1,5 +1,7 @@
+import type { Variants } from "framer-motion";
 import { AnimatePresence, motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import styled, { useTheme } from "styled-components";
 import Logo from "@/components/Nav/Logo";
@@ -23,7 +25,7 @@ const PlaceholderImage = styled(motion.span)`
   overflow: hidden;
 `;
 
-const placeholderV = {
+const placeholderV: Variants = {
   hidden: {
     opacity: 0,
   },
@@ -39,7 +41,7 @@ const placeholderV = {
   },
 };
 
-const logoV = {
+const logoV: Variants = {
   hidden: {
     opacity: 0,
   },
@@ -56,7 +58,12 @@ const logoV = {
   },
 };
 
-export default function PostPano({ src, children }) {
+interface PostPanoProps {
+  src: string;
+  children?: ReactNode;
+}
+
+export default function PostPano({ src, children }: PostPanoProps) {
   const [isReady, setIsReady] = useState(false);
   const theme = useTheme();
 

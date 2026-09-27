@@ -1,7 +1,12 @@
 import convert from "color-convert";
-import { MotionConfig, motion, useMotionValue } from "framer-motion";
+import {
+  MotionConfig,
+  motion,
+  useMotionValue,
+  type Variants,
+} from "framer-motion";
 import Head from "next/head";
-import { MDXRemote } from "next-mdx-remote";
+import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import React, { useMemo } from "react";
 import styled, { useTheme } from "styled-components";
@@ -23,6 +28,7 @@ import PostVideo from "@/components/Projects/ProjectPost/PostVideo";
 import Title from "@/components/Projects/ProjectPost/Title";
 import Spacer from "@/components/Spacer";
 import { getProjectDetails, getProjectList } from "@/lib/graphcms";
+import type { ProjectDetails } from "@/lib/types";
 
 const PageContent = styled(motion.main)`
   width: 100%;
@@ -102,7 +108,7 @@ const TitleBlock = styled(motion.div)`
   }
 `;
 
-const arrowV = {
+const arrowV: Variants = {
   hidden: {
     opacity: 1,
     x: 600,
@@ -155,7 +161,12 @@ const pageLinks = [
   },
 ];
 
-export default function Project({ project, source }) {
+interface ProjectPageProps {
+  project: ProjectDetails;
+  source: MDXRemoteSerializeResult;
+}
+
+export default function Project({ project, source }: ProjectPageProps) {
   const theme = useTheme();
 
   const secondaryColorRGB = useMemo(() => {
@@ -270,7 +281,11 @@ export default function Project({ project, source }) {
   );
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({
+  params,
+}: {
+  params: { project: string };
+}) {
   const project = (await getProjectDetails(params.project)) || [];
   const source =
     project.content || `<Post><Title>Add project content!</Title></Post>`;

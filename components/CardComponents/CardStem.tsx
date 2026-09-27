@@ -1,8 +1,9 @@
+import type { Variants } from "framer-motion";
 import { motion } from "framer-motion";
 
 import styled, { useTheme } from "styled-components";
 
-const Container = styled(motion.div)`
+const Container = styled(motion.div)<{ $width: string; $height: string }>`
   width: ${(props) => props.$width};
   height: ${(props) => props.$height};
   display: flex;
@@ -10,7 +11,7 @@ const Container = styled(motion.div)`
   align-items: center;
 `;
 
-const stemV = {
+const stemV: Variants = {
   hidden: {
     pathLength: 0,
   },
@@ -30,6 +31,15 @@ const stemV = {
   },
 };
 
+interface CardStemProps {
+  width: number;
+  height: number;
+  stemLength: number;
+  stemLoc: number;
+  bRadius: number;
+  sWidth: number;
+}
+
 export default function CardStem({
   width,
   height,
@@ -37,7 +47,7 @@ export default function CardStem({
   stemLoc,
   bRadius,
   sWidth,
-}) {
+}: CardStemProps) {
   const stemStart = {
     x:
       stemLoc === 2 || stemLoc === 5

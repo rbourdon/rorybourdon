@@ -1,4 +1,13 @@
-import { motion } from "framer-motion";
+import { type MotionValue, motion, type Variants } from "framer-motion";
+
+interface UnderlineProps {
+  variants?: Variants;
+  width: number;
+  sWidth: number;
+  id?: string;
+  color1: MotionValue<string>;
+  color2: MotionValue<string>;
+}
 
 export default function Underline({
   variants,
@@ -7,7 +16,7 @@ export default function Underline({
   id,
   color1,
   color2,
-}) {
+}: UnderlineProps) {
   return (
     <motion.svg
       xmlns="http://www.w3.org/2000/svg"

@@ -1,8 +1,10 @@
+import type { Variants } from "framer-motion";
 import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 
 import styled, { useTheme } from "styled-components";
 
-const Text = styled(motion.p)`
+const Text = styled(motion.p)<{ $padding: string }>`
   height: max-content;
   max-width: 80%;
   text-align: center;
@@ -12,13 +14,22 @@ const Text = styled(motion.p)`
   user-select: none;
 `;
 
+interface TaglineProps {
+  children?: ReactNode;
+  height: number;
+  bRadius: number;
+  stemLoc: number;
+  stemDir?: string;
+  variants?: Variants;
+}
+
 export default function Tagline({
   children,
   height,
   bRadius,
   stemLoc,
   variants,
-}) {
+}: TaglineProps) {
   const theme = useTheme();
   const y = {
     visible:

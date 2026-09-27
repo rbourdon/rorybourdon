@@ -23,7 +23,11 @@ const Text = styled(motion.p)`
   line-height: clamp(1rem, 1.2vw, 1.55rem);
 `;
 
-export default function AboutProject({ description = "" }) {
+interface AboutProjectProps {
+  description?: string;
+}
+
+export default function AboutProject({ description = "" }: AboutProjectProps) {
   const theme = useTheme();
   const hover = useMotionValue(0);
 

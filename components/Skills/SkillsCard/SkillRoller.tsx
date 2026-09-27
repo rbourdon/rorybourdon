@@ -1,8 +1,9 @@
-import { motion, useIsPresent } from "framer-motion";
+import { motion, useIsPresent, type Variants } from "framer-motion";
 import { useState } from "react";
 import styled, { useTheme } from "styled-components";
 import SkillBubble from "@/components/Skills/SkillBubble";
 import useInterval from "@/components/utils/useInterval";
+import type { SkillRef } from "@/lib/types";
 
 const TICK_RATE = 1000;
 
@@ -22,16 +23,23 @@ const Roller = styled(motion.ul)`
   padding: 0;
 `;
 
+interface SkillRollerProps {
+  skills: SkillRef[];
+  selected: boolean;
+  variants?: Variants;
+  numSkills?: number;
+}
+
 export default function SkillRoller({
   skills,
   selected,
   variants,
   numSkills = 7,
-}) {
+}: SkillRollerProps) {
   const theme = useTheme();
   const [rollerPos, setRollerPos] = useState(0);
 
-  const [selectedBubble, setSelectedBubble] = useState(false);
+  const [selectedBubble, setSelectedBubble] = useState<string | false>(false);
   const isPresent = useIsPresent();
   useInterval(
     () => {
@@ -40,7 +48,7 @@ export default function SkillRoller({
     selected || !isPresent ? null : TICK_RATE,
   );
 
-  const selectBubble = (bub) => {
+  const selectBubble = (bub: string) => {
     setSelectedBubble(bub);
   };
 

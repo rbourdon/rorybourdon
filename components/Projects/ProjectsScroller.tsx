@@ -1,7 +1,9 @@
+import type { MotionValue, PanInfo } from "framer-motion";
 import { LayoutGroup, motion, useMotionValue } from "framer-motion";
 import { useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
+import type { ProjectSummaryData } from "@/lib/types";
 import useWindowSize from "../utils/useWindowSize";
 import ProjectSummary from "./ProjectSummary/ProjectSummary";
 
@@ -49,10 +51,20 @@ const Arrow = styled(motion.button)`
   padding: 0;
 `;
 
-export default function ProjectScroller({ projects, bgColor, primaryColor }) {
+interface ProjectScrollerProps {
+  projects: ProjectSummaryData[];
+  bgColor: MotionValue<string>;
+  primaryColor: MotionValue<string>;
+}
+
+export default function ProjectScroller({
+  projects,
+  bgColor,
+  primaryColor,
+}: ProjectScrollerProps) {
   const theme = useTheme();
   const [intro, setIntro] = useState(true);
-  const [hovering, setHovering] = useState(false);
+  const [hovering, setHovering] = useState<string | false>(false);
   const [rollerPos, setRollerPos] = useState(0);
   const panPos = useMotionValue(0);
   const [panning, setPanning] = useState(false);
@@ -78,7 +90,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
     return () => pan();
   }, [panPos, projects.length]);
 
-  const handlePan = (e, pointInfo) => {
+  const handlePan = (_e: PointerEvent, pointInfo: PanInfo) => {
     panPos.set(panPos.get() + pointInfo.delta.x);
   };
 
@@ -87,7 +99,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
     panPos.set(0);
   };
 
-  const handlePanEnd = (e, pointInfo) => {
+  const handlePanEnd = (_e: PointerEvent, pointInfo: PanInfo) => {
     if (pointInfo.velocity.x < -500) {
       incrementRollerPos();
     } else if (pointInfo.velocity.x > 500) {
@@ -108,7 +120,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
   return (
     <LayoutGroup>
       <Projects>
-        {size.width > 555 && (
+        {size.width !== undefined && size.width > 555 && (
           <Arrow
             onClick={decrementRollerPos}
             layout
@@ -151,7 +163,8 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
                 bgColor={bgColor}
                 primaryColor={primaryColor}
                 outline={
-                  hovering === project.slug || (size.width < 555 && index === 1)
+                  hovering === project.slug ||
+                  (size.width !== undefined && size.width < 555 && index === 1)
                 }
                 active={!panning}
                 intro={intro}
@@ -163,7 +176,7 @@ export default function ProjectScroller({ projects, bgColor, primaryColor }) {
             );
           })}
         </Summaries>
-        {size.width > 555 && (
+        {size.width !== undefined && size.width > 555 && (
           <Arrow
             layout
             style={{ rotate: 90, color: theme.primary_dark }}

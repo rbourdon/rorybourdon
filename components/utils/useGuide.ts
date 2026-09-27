@@ -1,12 +1,64 @@
+import type { Variants } from "framer-motion";
 import { useMotionValue } from "framer-motion";
-import { useReducer } from "react";
+import { type Dispatch, useReducer } from "react";
 import useWindowSize from "@/components/utils/useWindowSize";
 
 const CELL_WIDTH = 25;
 const CELL_HEIGHT = 25;
 const GAP = 3;
 
-const poses = {
+export type PoseName =
+  | "startPose"
+  | "neutralPose"
+  | "expandPose"
+  | "arrowPose"
+  | "treePose"
+  | "gearPose";
+
+export type BehaviorName =
+  | "wander"
+  | "point"
+  | "still"
+  | "spin"
+  | "tree"
+  | "gear"
+  | "init";
+
+export interface Pose {
+  id: PoseName;
+  cellDelay: number;
+  cells: { variants: Variants }[];
+}
+
+export interface Behavior {
+  id: BehaviorName;
+  poseDelay: number;
+  variants: Variants;
+}
+
+export interface GuideReducerState {
+  prevPose: PoseName;
+  currPose: PoseName;
+  prevBehavior: BehaviorName;
+  currBehavior: BehaviorName;
+}
+
+export type GuideAction =
+  | { type: "updatePose"; pose: PoseName }
+  | { type: "previousPose"; pose: PoseName }
+  | { type: "updateBehavior"; behavior: BehaviorName }
+  | { type: "previousBehavior"; behavior: BehaviorName }
+  | { type: "updateAll"; pose: PoseName; behavior: BehaviorName }
+  | { type: "previousAll"; pose: PoseName; behavior: BehaviorName };
+
+export interface GuideState extends GuideReducerState {
+  pose: Pose;
+  behavior: Behavior;
+}
+
+export type GuideDispatch = Dispatch<GuideAction>;
+
+const poses: Record<PoseName, Pose> = {
   startPose: {
     id: "startPose",
     cellDelay: 0,
@@ -214,7 +266,7 @@ const poses = {
       {
         variants: {
           hidden: { x: 1 * (CELL_WIDTH + GAP), y: -1 * (CELL_HEIGHT + GAP) },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: 1 * (CELL_WIDTH + GAP),
             y: -1 * (CELL_HEIGHT + GAP),
             transition: { type: "spring", duration: 1, delay: custom },
@@ -224,7 +276,7 @@ const poses = {
       {
         variants: {
           hidden: { x: 0, y: 0 },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: 0,
             y: 0,
             transition: { type: "spring", duration: 1, delay: custom },
@@ -234,7 +286,7 @@ const poses = {
       {
         variants: {
           hidden: { x: -1 * (CELL_WIDTH + GAP), y: -2 * (CELL_HEIGHT + GAP) },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: -1 * (CELL_WIDTH + GAP),
             y: -2 * (CELL_HEIGHT + GAP),
             transition: { type: "spring", duration: 1, delay: custom },
@@ -244,7 +296,7 @@ const poses = {
       {
         variants: {
           hidden: { x: -1 * (CELL_WIDTH + GAP), y: -1 * (CELL_HEIGHT + GAP) },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: -1 * (CELL_WIDTH + GAP),
             y: -1 * (CELL_HEIGHT + GAP),
             transition: { type: "spring", duration: 1, delay: custom },
@@ -254,7 +306,7 @@ const poses = {
       {
         variants: {
           hidden: { x: 0, y: 0 },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: 0,
             y: 0,
             transition: { type: "spring", duration: 1, delay: custom },
@@ -267,7 +319,7 @@ const poses = {
             x: 1 * (CELL_WIDTH + GAP),
             y: -1 * (CELL_HEIGHT + GAP),
           },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: 1 * (CELL_WIDTH + GAP),
             y: -1 * (CELL_HEIGHT + GAP),
             transition: { type: "spring", duration: 1, delay: custom },
@@ -280,7 +332,7 @@ const poses = {
             x: -0.25 * (CELL_WIDTH + GAP),
             y: -1 * (CELL_HEIGHT + GAP),
           },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: -0.25 * (CELL_WIDTH + GAP),
             y: -1 * (CELL_HEIGHT + GAP),
             transition: { type: "spring", duration: 1, delay: custom },
@@ -290,7 +342,7 @@ const poses = {
       {
         variants: {
           hidden: { x: 0, y: 0 },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: 0,
             y: 0,
             transition: { type: "spring", duration: 1, delay: custom },
@@ -300,7 +352,7 @@ const poses = {
       {
         variants: {
           hidden: { x: 0.25 * (CELL_WIDTH + GAP), y: -1 * (CELL_HEIGHT + GAP) },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: 0.25 * (CELL_WIDTH + GAP),
             y: -1 * (CELL_HEIGHT + GAP),
             transition: { type: "spring", duration: 1, delay: custom },
@@ -320,7 +372,7 @@ const poses = {
             x: -0.2 * (CELL_WIDTH + GAP),
             y: -2.5 * (CELL_HEIGHT + GAP),
           },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: -0.2 * (CELL_WIDTH + GAP),
             y: -2.5 * (CELL_HEIGHT + GAP),
             transition: { type: "spring", duration: 1, delay: custom },
@@ -330,7 +382,7 @@ const poses = {
       {
         variants: {
           hidden: { x: 0, y: 0 },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: 0,
             y: 0,
             transition: { type: "spring", duration: 1, delay: custom },
@@ -343,7 +395,7 @@ const poses = {
             x: 0.15 * (CELL_WIDTH + GAP),
             y: -2.5 * (CELL_HEIGHT + GAP),
           },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: 0.15 * (CELL_WIDTH + GAP),
             y: -2.5 * (CELL_HEIGHT + GAP),
             transition: { type: "spring", duration: 1, delay: custom },
@@ -356,7 +408,7 @@ const poses = {
             x: 0.1 * (CELL_WIDTH + GAP),
             y: -2.4 * (CELL_HEIGHT + GAP),
           },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: 0.1 * (CELL_WIDTH + GAP),
             y: -2.4 * (CELL_HEIGHT + GAP),
             transition: { type: "spring", duration: 1, delay: custom },
@@ -366,7 +418,7 @@ const poses = {
       {
         variants: {
           hidden: { x: 0, y: 0 },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: 0,
             y: 0,
             transition: { type: "spring", duration: 1, delay: custom },
@@ -379,7 +431,7 @@ const poses = {
             x: 0.4 * (CELL_WIDTH + GAP),
             y: -2.4 * (CELL_HEIGHT + GAP),
           },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: 0.4 * (CELL_WIDTH + GAP),
             y: -2.4 * (CELL_HEIGHT + GAP),
             transition: { type: "spring", duration: 1, delay: custom },
@@ -389,7 +441,7 @@ const poses = {
       {
         variants: {
           hidden: { x: 0, y: -2.3 * (CELL_HEIGHT + GAP) },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: 0,
             y: -2.3 * (CELL_HEIGHT + GAP),
             transition: { type: "spring", duration: 1, delay: custom },
@@ -399,7 +451,7 @@ const poses = {
       {
         variants: {
           hidden: { x: 0, y: 0 },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: 0,
             y: 0,
             transition: { type: "spring", duration: 1, delay: custom },
@@ -409,7 +461,7 @@ const poses = {
       {
         variants: {
           hidden: { x: 0, y: -2.3 * (CELL_HEIGHT + GAP) },
-          visible: (custom) => ({
+          visible: (custom: number) => ({
             x: 0,
             y: -2.3 * (CELL_HEIGHT + GAP),
             transition: { type: "spring", duration: 1, delay: custom },
@@ -598,7 +650,10 @@ const poses = {
   },
 };
 
-function guideReducer(guideState, action) {
+function guideReducer(
+  guideState: GuideReducerState,
+  action: GuideAction,
+): GuideReducerState {
   switch (action.type) {
     case "updatePose":
       return {
@@ -643,17 +698,23 @@ function guideReducer(guideState, action) {
         currPose: guideState.prevPose,
       };
     default:
-      throw new Error(action.type);
+      // unreachable for typed callers; kept for untyped dispatches
+      throw new Error((action as { type: string }).type);
   }
 }
 
 function useGuide() {
-  const { width, height } = useWindowSize();
+  // Before the first resize effect these are undefined and the maths yields
+  // NaN, exactly as the original JS did.
+  const { width, height } = useWindowSize() as {
+    width: number;
+    height: number;
+  };
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotate = useMotionValue(0);
 
-  const behaviors = {
+  const behaviors: Record<BehaviorName, Behavior> = {
     wander: {
       id: "wander",
       poseDelay: 0,

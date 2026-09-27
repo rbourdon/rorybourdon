@@ -1,7 +1,8 @@
+import type { MotionValue, Variants } from "framer-motion";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-const Container = styled(motion.div)`
+const Container = styled(motion.div)<{ $width: number; $height: number }>`
   width: ${(props) => props.$width + "px"};
   height: ${(props) => props.$height + "px"};
   display: flex;
@@ -14,8 +15,13 @@ const Container = styled(motion.div)`
   pointer-events: none;
 `;
 
-const gradientBandV = {
-  hidden: (custom) => ({
+interface BandPath {
+  start: string;
+  end: string;
+}
+
+const gradientBandV: Variants = {
+  hidden: (custom: BandPath) => ({
     clipPath: custom.start,
     transition: {
       type: "spring",
@@ -23,7 +29,7 @@ const gradientBandV = {
       bounce: 0.4,
     },
   }),
-  visible: (custom) => ({
+  visible: (custom: BandPath) => ({
     clipPath: custom.end,
     transition: {
       type: "spring",
@@ -31,7 +37,7 @@ const gradientBandV = {
       bounce: 0.3,
     },
   }),
-  selected: (custom) => ({
+  selected: (custom: BandPath) => ({
     clipPath: custom.start,
     transition: {
       type: "spring",
@@ -45,6 +51,16 @@ const BAND_THICKNESS = 30;
 const FIRST_BAND_DIST = 50;
 const BAND_POINT = BAND_THICKNESS + FIRST_BAND_DIST;
 
+interface CardFaceProps {
+  width: number;
+  height: number;
+  bRadius: number;
+  sWidth: number;
+  faceV: Variants;
+  color1?: MotionValue<string>;
+  bands?: number[];
+}
+
 export default function CardFace({
   width,
   height,
@@ -53,7 +69,7 @@ export default function CardFace({
   faceV,
   color1,
   bands = [6, 2, 4],
-}) {
+}: CardFaceProps) {
   const bandPaths = bands.map((band) => {
     switch (band) {
       case 1:
@@ -118,7 +134,7 @@ export default function CardFace({
         {bandPaths.map((band) => {
           return (
             <motion.rect
-              key={band.end}
+              key={(band as BandPath).end} // bands are always 1-8
               x={sWidth / 2 + "px"}
               y={sWidth / 2 + "px"}
               width={width - sWidth * 1.5 + "px"}

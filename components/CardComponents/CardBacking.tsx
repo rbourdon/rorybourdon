@@ -1,8 +1,9 @@
+import type { MotionValue, Variants } from "framer-motion";
 import { motion, useTransform } from "framer-motion";
 
 import styled, { useTheme } from "styled-components";
 
-const Container = styled(motion.div)`
+const Container = styled(motion.div)<{ $width: number; $height: number }>`
   width: ${(props) => props.$width + "px"};
   height: ${(props) => props.$height + "px"};
   display: flex;
@@ -14,6 +15,16 @@ const Container = styled(motion.div)`
   z-index: 0;
 `;
 
+interface CardBackingProps {
+  width: number;
+  height: number;
+  bRadius: number;
+  sWidth: number;
+  backingV: Variants;
+  keyShadow: string;
+  bgColor?: MotionValue<string>;
+}
+
 export default function CardBacking({
   width,
   height,
@@ -22,7 +33,7 @@ export default function CardBacking({
   backingV,
   keyShadow,
   bgColor,
-}) {
+}: CardBackingProps) {
   const theme = useTheme();
   const boxShadow = useTransform(
     [theme.shadow_key, theme.shadow_ambient],

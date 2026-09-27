@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 
+import type { ReactNode } from "react";
 import styled, { useTheme } from "styled-components";
 
 const ImageCaption = styled(motion.figcaption)`
@@ -11,7 +12,7 @@ const ImageCaption = styled(motion.figcaption)`
   padding: 5px 0;
 `;
 
-export default function Caption({ children }) {
+export default function Caption({ children }: { children?: ReactNode }) {
   const theme = useTheme();
   return (
     <ImageCaption style={{ color: theme.primary_mediumdark }}>

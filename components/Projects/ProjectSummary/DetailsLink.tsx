@@ -1,3 +1,4 @@
+import type { MotionValue, Variants } from "framer-motion";
 import {
   animate,
   motion,
@@ -42,7 +43,12 @@ const Arrow = styled(motion.div)`
   padding: 0 8px;
 `;
 
-export default function DetailsLink({ href, linkColor }) {
+interface DetailsLinkProps {
+  href: string;
+  linkColor: MotionValue<string>;
+}
+
+export default function DetailsLink({ href, linkColor }: DetailsLinkProps) {
   const theme = useTheme();
   const hover = useMotionValue(0);
 
@@ -50,19 +56,32 @@ export default function DetailsLink({ href, linkColor }) {
   const rotate = useTransform(hover, [0, 1], [90, 270]);
 
   const color = useTransform(
-    [linkColor, theme.primary_light, theme.primary_verydark, hover],
-    ([latestColor1, latestColor2, latestColor3, latestHover]) =>
+    // Mixed string/number inputs; the tuple type below reads them back.
+    [
+      linkColor,
+      theme.primary_light,
+      theme.primary_verydark,
+      hover,
+    ] as MotionValue<string | number>[],
+    ([latestColor1, latestColor2, latestColor3, latestHover]: (
+      | string
+      | number
+    )[]) =>
       transform(
-        latestHover,
+        latestHover as number,
         [0, 1],
         [
-          latestColor1,
-          transform(latestHover, [0, 1], [latestColor2, latestColor3]),
+          latestColor1 as string,
+          transform(
+            latestHover as number,
+            [0, 1],
+            [latestColor2 as string, latestColor3 as string],
+          ),
         ],
       ),
   );
 
-  const detailsLinkV = {
+  const detailsLinkV: Variants = {
     hidden: {
       opacity: 0,
       x: -130,
@@ -78,7 +97,7 @@ export default function DetailsLink({ href, linkColor }) {
     },
   };
 
-  const arrowV = {
+  const arrowV: Variants = {
     hidden: {
       opacity: 0,
       x: -100,
@@ -93,7 +112,7 @@ export default function DetailsLink({ href, linkColor }) {
     },
   };
 
-  const handleHover = (to) => {
+  const handleHover = (to: number) => {
     animate(hover, to, {
       type: "tween",
       ease: "easeInOut",

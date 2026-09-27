@@ -1,9 +1,11 @@
 import {
   animate,
+  type MotionValue,
   motion,
   transform,
   useMotionValue,
   useTransform,
+  type Variants,
 } from "framer-motion";
 
 import styled, { useTheme } from "styled-components";
@@ -19,7 +21,7 @@ const Burger = styled(motion.button)`
   position: relative;
 `;
 
-const lineV = {
+const lineV: Variants = {
   hidden: {
     pathLength: 0,
   },
@@ -35,7 +37,7 @@ const lineV = {
       opacity: { type: "tween", delay: 0.175, duration: 0.2 },
     },
   },
-  open: (custom) => ({
+  open: (custom: number) => ({
     rotate: custom,
     opacity: custom !== 0 ? 1 : 0,
     x: custom === 45 ? -4 : -4,
@@ -51,7 +53,7 @@ const lineV = {
   }),
 };
 
-const iconV = {
+const iconV: Variants = {
   hidden: {
     rotate: 180,
     originX: 0.5,
@@ -71,14 +73,25 @@ const iconV = {
   },
 };
 
-function BurgerButton({ open = false, onClick }) {
+interface BurgerButtonProps {
+  open?: boolean;
+  onClick: () => void;
+}
+
+function BurgerButton({ open = false, onClick }: BurgerButtonProps) {
   const theme = useTheme();
   const hover = useMotionValue(0);
 
   const color = useTransform(
-    [theme.primary_dark, theme.primary_slightlydark, hover],
-    ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
+    [theme.primary_dark, theme.primary_slightlydark, hover] as MotionValue<
+      string | number
+    >[],
+    ([latestColor1, latestColor2, latestHover]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor1 as string, latestColor2 as string],
+      ),
   );
 
   const handleHoverEnd = () => {

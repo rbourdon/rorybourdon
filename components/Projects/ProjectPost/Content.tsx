@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 import styled from "styled-components";
 
 const Text = styled(motion.p)`
@@ -10,6 +11,6 @@ const Text = styled(motion.p)`
   padding: 1vw 0;
 `;
 
-export default function Content({ children }) {
+export default function Content({ children }: { children?: ReactNode }) {
   return <Text>{children}</Text>;
 }

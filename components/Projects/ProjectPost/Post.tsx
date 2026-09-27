@@ -1,4 +1,6 @@
+import type { Variants } from "framer-motion";
 import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 import styled from "styled-components";
 
 const Block = styled(motion.div)`
@@ -11,6 +13,11 @@ const Block = styled(motion.div)`
   flex-direction: column;
 `;
 
+interface PostProps {
+  children?: ReactNode;
+  variants?: Variants;
+}
+
 export default function Post({
   children,
   variants = {
@@ -21,6 +28,6 @@ export default function Post({
       y: 0,
     },
   },
-}) {
+}: PostProps) {
   return <Block variants={variants}>{children}</Block>;
 }

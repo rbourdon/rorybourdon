@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -12,6 +13,6 @@ const Container = styled.div`
   }
 `;
 
-export default function ProjectLinkBox({ children }) {
+export default function ProjectLinkBox({ children }: { children?: ReactNode }) {
   return <Container>{children}</Container>;
 }

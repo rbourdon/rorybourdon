@@ -1,6 +1,12 @@
-import { motion } from "framer-motion";
+import { type MotionValue, motion } from "framer-motion";
 import { useEffect } from "react";
 import styled from "styled-components";
+import type {
+  BehaviorName,
+  GuideDispatch,
+  GuideState,
+  PoseName,
+} from "@/components/utils/useGuide";
 import GridGuideCell from "./GridGuideCell";
 
 const GRID_GAP = 3;
@@ -25,6 +31,20 @@ const Container = styled(motion.div)`
   cursor: pointer;
 `;
 
+interface GridGuideProps {
+  hoverPose?: PoseName;
+  hoverBehavior?: BehaviorName;
+  clickPose?: PoseName;
+  defaultPose?: PoseName;
+  defaultBehavior?: BehaviorName;
+  clickBehavior?: BehaviorName;
+  guideDispatch: GuideDispatch;
+  guideState: GuideState;
+  rotate: MotionValue<number>;
+  x: MotionValue<number>;
+  y: MotionValue<number>;
+}
+
 export default function GridGuide({
   hoverPose = "expandPose",
   hoverBehavior = "spin",
@@ -37,7 +57,7 @@ export default function GridGuide({
   rotate,
   x,
   y,
-}) {
+}: GridGuideProps) {
   useEffect(() => {
     guideDispatch({
       type: "updateAll",
@@ -46,15 +66,15 @@ export default function GridGuide({
     });
   }, [defaultBehavior, defaultPose, guideDispatch]);
 
-  const updateBehavior = (behavior) => {
+  const updateBehavior = (behavior: BehaviorName) => {
     guideDispatch({ type: "updateBehavior", behavior: behavior });
   };
 
-  const updatePose = (pose) => {
+  const updatePose = (pose: PoseName) => {
     guideDispatch({ type: "updatePose", pose: pose });
   };
 
-  const updateAll = (pose, behavior) => {
+  const updateAll = (pose: PoseName, behavior: BehaviorName) => {
     guideDispatch({
       type: "updateAll",
       pose: pose,

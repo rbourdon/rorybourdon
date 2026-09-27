@@ -1,8 +1,9 @@
+import type { Variants } from "framer-motion";
 import { motion } from "framer-motion";
 
 import styled, { useTheme } from "styled-components";
 
-const Container = styled(motion.div)`
+const Container = styled(motion.div)<{ $zIndex: number; $margin: string }>`
   width: 100%;
   height: 100%;
   display: flex;
@@ -14,7 +15,7 @@ const Container = styled(motion.div)`
   user-select: none;
 `;
 
-const trunkV = {
+const trunkV: Variants = {
   hidden: {
     x: 175,
     scale: 0,
@@ -42,7 +43,7 @@ const trunkV = {
   },
 };
 
-const foliageV = {
+const foliageV: Variants = {
   hidden: {
     x: 175,
     scale: 0,
@@ -69,21 +70,21 @@ const foliageV = {
   },
 };
 
-const manV = {
+const manV: Variants = {
   hidden: { x: -330, y: 90 },
-  visible: (custom) => ({ x: custom ? -330 : 0, y: custom ? 90 : 0 }),
-  selected: (custom) => ({ x: custom ? -330 : 0, y: custom ? 90 : 0 }),
+  visible: (custom: boolean) => ({ x: custom ? -330 : 0, y: custom ? 90 : 0 }),
+  selected: (custom: boolean) => ({ x: custom ? -330 : 0, y: custom ? 90 : 0 }),
 };
 
-const blobV = {
+const blobV: Variants = {
   hidden: { x: -340, y: 70, rotate: 100, scale: 0.5 },
-  visible: (custom) => ({
+  visible: (custom: boolean) => ({
     scale: custom ? 0.5 : 1,
     x: custom ? -340 : 0,
     y: custom ? 70 : 0,
     rotate: custom ? 100 : 0,
   }),
-  selected: (custom) => ({
+  selected: (custom: boolean) => ({
     scale: custom ? 0.5 : 1,
     x: custom ? -340 : 0,
     y: custom ? 70 : 0,
@@ -91,25 +92,31 @@ const blobV = {
   }),
 };
 
-const socialIconV = {
-  hidden: (custom) => ({ x: custom.x, y: custom.y }),
-  visible: (custom) => ({
+interface SocialIconCustom {
+  collapsed: boolean;
+  x: number;
+  y: number;
+}
+
+const socialIconV: Variants = {
+  hidden: (custom: SocialIconCustom) => ({ x: custom.x, y: custom.y }),
+  visible: (custom: SocialIconCustom) => ({
     x: custom.collapsed ? custom.x : 0,
     y: custom.collapsed ? custom.y : 0,
   }),
-  selected: (custom) => ({
+  selected: (custom: SocialIconCustom) => ({
     x: custom.collapsed ? custom.x : 0,
     y: custom.collapsed ? custom.y : 0,
   }),
 };
 
-const groundV = {
+const groundV: Variants = {
   hidden: { scaleX: 0 },
   visible: { scaleX: 1 },
   selected: { scaleX: 1 },
 };
 
-const boxV = {
+const boxV: Variants = {
   hidden: { x: 200, opacity: 0 },
   visible: {
     x: 0,
@@ -123,7 +130,7 @@ const boxV = {
   selected: { x: 0, opacity: 1 },
 };
 
-const bushV = {
+const bushV: Variants = {
   hidden: {
     x: 155,
     scale: 0,
@@ -151,12 +158,19 @@ const bushV = {
   },
 };
 
+interface SceneIconProps {
+  margin?: string;
+  zIndex?: number;
+  collapsed?: boolean;
+  scale?: number;
+}
+
 export default function SocialsSceneIcon({
   margin = "0px",
   zIndex = 1,
   collapsed = true,
   scale = 1,
-}) {
+}: SceneIconProps) {
   const theme = useTheme();
   return (
     <Container

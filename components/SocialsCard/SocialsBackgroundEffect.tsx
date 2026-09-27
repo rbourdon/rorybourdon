@@ -1,7 +1,9 @@
-import { motion, useMotionValue } from "framer-motion";
+import { motion, useMotionValue, type Variants } from "framer-motion";
 
 import styled, { useTheme } from "styled-components";
-import useBackgroundEffect from "../utils/useBackgroundEffect";
+import useBackgroundEffect, {
+  type EffectStyle,
+} from "../utils/useBackgroundEffect";
 
 const Container = styled(motion.div)`
   position: absolute;
@@ -11,7 +13,7 @@ const Container = styled(motion.div)`
   will-change: opacity translate;
 `;
 
-const containerV = {
+const containerV: Variants = {
   hidden: {
     scale: 0,
     transition: {
@@ -20,7 +22,7 @@ const containerV = {
       duration: 0.2,
     },
   },
-  visible: (custom) => ({
+  visible: (custom: EffectStyle) => ({
     scale: custom.scale,
     transition: {
       staggerChildren: 0.1,
@@ -39,7 +41,7 @@ const containerV = {
   },
 };
 
-const lineV = {
+const lineV: Variants = {
   hidden: {
     scaleX: 0,
     originX: 0,
@@ -69,10 +71,15 @@ const lineV = {
   },
 };
 
+interface SocialsBackgroundEffectProps {
+  inView?: boolean;
+  effectStyle?: EffectStyle;
+}
+
 export default function SocialsBackgroundEffect({
   inView = false,
   effectStyle = { x: 0, y: 0, scale: 1, delay: 0 },
-}) {
+}: SocialsBackgroundEffectProps) {
   const theme = useTheme();
   const x = useMotionValue(effectStyle.x);
   const y = useBackgroundEffect(inView, effectStyle);

@@ -1,8 +1,9 @@
+import type { MotionValue, Transition, Variants } from "framer-motion";
 import { motion } from "framer-motion";
 // import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const Container = styled(motion.div)`
+const Container = styled(motion.div)<{ $zIndex: number }>`
   height: 100%;
   width: 50%;
   z-index: ${(props) => props.$zIndex};
@@ -21,9 +22,14 @@ const Container = styled(motion.div)`
 //   height: 8px;
 // `;
 
-const trunkV = {
+interface TreeCustom {
+  delay: number;
+  scale: number;
+}
+
+const trunkV: Variants = {
   hidden: { scale: 0, originY: 1 },
-  visible: (custom) => ({
+  visible: (custom: TreeCustom) => ({
     scale: custom.scale,
     originY: 1,
     transition: {
@@ -34,17 +40,17 @@ const trunkV = {
       delay: custom.delay,
     },
   }),
-  selected: (custom) => ({
+  selected: (custom: TreeCustom) => ({
     scale: custom.scale,
   }),
 };
 
-const foliageV = {
+const foliageV: Variants = {
   hidden: {
     scale: 0,
     originY: 1,
   },
-  visible: (custom) => ({
+  visible: (custom: TreeCustom) => ({
     scale: custom.scale,
     originY: 1,
     transition: {
@@ -55,11 +61,30 @@ const foliageV = {
       delay: custom.delay,
     },
   }),
-  selected: (custom) => ({
+  selected: (custom: TreeCustom) => ({
     scale: custom.scale,
     originY: 1,
   }),
 };
+
+interface TreeIconProps {
+  delay?: number;
+  layoutId?: string;
+  colors?: {
+    trunk: MotionValue<string> | string;
+    foliage: MotionValue<string> | string;
+  };
+  zIndex?: number;
+  scale?: number;
+  transition?: Transition;
+  width?: string;
+  height?: string;
+  pos?: {
+    left: number | string;
+    right: number | string;
+    bottom: number | string;
+  };
+}
 
 export default function TreeIcon({
   delay = 0,
@@ -71,7 +96,7 @@ export default function TreeIcon({
   width = "50%",
   height = "30%",
   pos = { left: "auto", right: "auto", bottom: 0 },
-}) {
+}: TreeIconProps) {
   return (
     <Container
       layoutId={layoutId}

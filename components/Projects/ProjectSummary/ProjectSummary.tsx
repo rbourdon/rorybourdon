@@ -1,3 +1,4 @@
+import type { MotionValue, Variants } from "framer-motion";
 import {
   animate,
   motion,
@@ -9,6 +10,7 @@ import { useEffect } from "react";
 import styled, { useTheme } from "styled-components";
 import DetailsLink from "@/components/Projects/ProjectSummary/DetailsLink";
 import SkillChip from "@/components/Projects/ProjectSummary/SkillChip";
+import type { ProjectSummaryData } from "@/lib/types";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -64,17 +66,24 @@ const Outline = styled(motion.div)`
   z-index: -1;
 `;
 
+// Not annotated as Variants: staggerChildren sits outside `transition`, which
+// the type rejects; kept as-is to avoid changing behaviour.
 const skillChipsV = {
   visible: {
     staggerChildren: 0.2,
   },
 };
 
-const containerV = {
-  hidden: (props) => ({
+interface ContainerCustom {
+  dir: number;
+  delay: number;
+}
+
+const containerV: Variants = {
+  hidden: (props: ContainerCustom) => ({
     x: 200 * props.dir,
   }),
-  visible: (props) => ({
+  visible: (props: ContainerCustom) => ({
     x: 0,
     transition: {
       delayChildren: props.delay,
@@ -93,8 +102,8 @@ const containerV = {
   },
 };
 
-const descV = {
-  hidden: (dir) => ({
+const descV: Variants = {
+  hidden: (dir: number) => ({
     x: 190 * dir,
     opacity: 0,
   }),
@@ -120,8 +129,8 @@ const descV = {
   },
 };
 
-const titleV = {
-  hidden: (dir) => ({
+const titleV: Variants = {
+  hidden: (dir: number) => ({
     x: 300 * dir,
     opacity: 0,
   }),
@@ -147,7 +156,7 @@ const titleV = {
   },
 };
 
-const outlineV = {
+const outlineV: Variants = {
   hidden: {
     opacity: 0,
   },
@@ -158,6 +167,23 @@ const outlineV = {
     },
   },
 };
+
+interface ProjectSummaryProps {
+  project: ProjectSummaryData;
+  outline?: boolean;
+  bgColor?: MotionValue<string> | string;
+  primaryColor?: MotionValue<string> | string;
+  onHover?: ((slug: string) => void) | null;
+  delay?: number;
+  id: string;
+  active: boolean;
+  intro?: boolean;
+  defaultBGColor: MotionValue<string>;
+  scrollerPos?: number;
+  drag?: boolean;
+  // Passed by ProjectsCard but not used here.
+  outlineV?: Variants;
+}
 
 export default function ProjectSummary({
   project,
@@ -172,7 +198,7 @@ export default function ProjectSummary({
   defaultBGColor,
   scrollerPos = 1,
   drag = true,
-}) {
+}: ProjectSummaryProps) {
   const theme = useTheme();
   const hover = useMotionValue(0);
   const scale = useTransform(hover, [0, 1], [1, 1.02]);
@@ -200,22 +226,35 @@ export default function ProjectSummary({
   const outlineWidth = useTransform(hover, [0, 1], ["1px", "8px"]);
 
   const outlineColor = useTransform(
-    [theme.primary_verydark, bgColor, hover],
-    ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
+    // Mixed string/number inputs; the tuple type below reads them back.
+    [theme.primary_verydark, bgColor, hover] as MotionValue<string | number>[],
+    ([latestColor1, latestColor2, latestHover]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor1 as string, latestColor2 as string],
+      ),
   );
 
   const backgroundColor = useTransform(
-    [defaultBGColor, bgColor, hover],
-    ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
+    // Mixed string/number inputs; the tuple type below reads them back.
+    [defaultBGColor, bgColor, hover] as MotionValue<string | number>[],
+    ([latestColor1, latestColor2, latestHover]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor1 as string, latestColor2 as string],
+      ),
   );
 
   const boxShadow = useTransform(
-    [hover, theme.shadow_key, theme.shadow_ambient],
-    ([latestHover, latestShadow1, latestShadow2]) =>
+    // Mixed string/number inputs; the tuple type below reads them back.
+    [hover, theme.shadow_key, theme.shadow_ambient] as MotionValue<
+      string | number
+    >[],
+    ([latestHover, latestShadow1, latestShadow2]: (string | number)[]) =>
       transform(
-        latestHover,
+        latestHover as number,
         [0, 1],
         [
           "0px 0px 0px 0px " +
@@ -235,33 +274,66 @@ export default function ProjectSummary({
   );
 
   const linkColor = useTransform(
-    [theme.primary_verydark, primaryColor, hover],
-    ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
+    // Mixed string/number inputs; the tuple type below reads them back.
+    [theme.primary_verydark, primaryColor, hover] as MotionValue<
+      string | number
+    >[],
+    ([latestColor1, latestColor2, latestHover]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor1 as string, latestColor2 as string],
+      ),
   );
 
   const color = useTransform(
-    [theme.primary_verydark, primaryColor, hover],
-    ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
+    // Mixed string/number inputs; the tuple type below reads them back.
+    [theme.primary_verydark, primaryColor, hover] as MotionValue<
+      string | number
+    >[],
+    ([latestColor1, latestColor2, latestHover]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor1 as string, latestColor2 as string],
+      ),
   );
 
   const chipTextColor = useTransform(
-    [theme.primary_verydark, bgColor, hover],
-    ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
+    // Mixed string/number inputs; the tuple type below reads them back.
+    [theme.primary_verydark, bgColor, hover] as MotionValue<string | number>[],
+    ([latestColor1, latestColor2, latestHover]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor1 as string, latestColor2 as string],
+      ),
   );
 
   const chipBGColor = useTransform(
-    [theme.primary_light, primaryColor, hover],
-    ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
+    // Mixed string/number inputs; the tuple type below reads them back.
+    [theme.primary_light, primaryColor, hover] as MotionValue<
+      string | number
+    >[],
+    ([latestColor1, latestColor2, latestHover]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor1 as string, latestColor2 as string],
+      ),
   );
 
   const chipBorderColor = useTransform(
-    [theme.primary_slightlydark, primaryColor, hover],
-    ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
+    // Mixed string/number inputs; the tuple type below reads them back.
+    [theme.primary_slightlydark, primaryColor, hover] as MotionValue<
+      string | number
+    >[],
+    ([latestColor1, latestColor2, latestHover]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor1 as string, latestColor2 as string],
+      ),
   );
   return (
     <Container

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
+import type { ReactNode } from "react";
 import styled from "styled-components";
 
 const Container = styled(motion.figure)`
@@ -12,6 +13,16 @@ const Container = styled(motion.figure)`
   margin: 3vw 0 1vw 0;
 `;
 
+interface PostImageProps {
+  src: string;
+  width: number;
+  height: number;
+  alt?: string;
+  quality?: number;
+  priority?: boolean;
+  children?: ReactNode;
+}
+
 export default function PostImage({
   src,
   width,
@@ -20,7 +31,7 @@ export default function PostImage({
   quality = 90,
   priority = false,
   children,
-}) {
+}: PostImageProps) {
   return (
     <Container>
       {src !== "" && (

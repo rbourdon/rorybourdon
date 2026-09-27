@@ -1,5 +1,5 @@
-import { MotionConfig, motion } from "framer-motion";
-import { useState } from "react";
+import { MotionConfig, motion, type Variants } from "framer-motion";
+import { type ReactNode, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import styled, { useTheme } from "styled-components";
 import CardEffect from "@/components/CardComponents/CardEffect";
@@ -19,7 +19,7 @@ const Container = styled(motion.article)`
   align-items: center;
 `;
 
-const Card = styled(motion.article)`
+const Card = styled(motion.article)<{ $scrollMargin: string }>`
   top: calc(50vh - 631 / 2);
   scroll-margin-top: ${(props) => props.$scrollMargin};
   scroll-snap-margin: ${(props) => props.$scrollMargin};
@@ -121,7 +121,7 @@ const HEIGHT = 180;
 const STEMLENGTH = 345;
 const TAGLINESIZE = 350;
 
-const socialsCardV = {
+const socialsCardV: Variants = {
   hidden: {
     opacity: 0,
     transition: {
@@ -140,7 +140,7 @@ const socialsCardV = {
   },
 };
 
-const socialIconsV = {
+const socialIconsV: Variants = {
   visible: {
     transition: {
       delayChildren: HEIGHT * WIDTH * 0.0000012 + 0.25,
@@ -155,7 +155,7 @@ const socialIconsV = {
   },
 };
 
-const containerV = {
+const containerV: Variants = {
   hidden: {
     opacity: 1,
   },
@@ -170,7 +170,15 @@ const containerV = {
   },
 };
 
-export default function SocialsCard({ sectionHeight = 1400, children }) {
+interface SocialsCardProps {
+  sectionHeight?: number;
+  children?: ReactNode;
+}
+
+export default function SocialsCard({
+  sectionHeight = 1400,
+  children,
+}: SocialsCardProps) {
   const theme = useTheme();
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
@@ -179,7 +187,8 @@ export default function SocialsCard({ sectionHeight = 1400, children }) {
     threshold: 0.4,
   });
 
-  const portrait = width * 0.95 < WIDTH + STEMLENGTH + TAGLINESIZE;
+  // Before mount width is undefined; NaN < n is false, so not portrait.
+  const portrait = (width as number) * 0.95 < WIDTH + STEMLENGTH + TAGLINESIZE;
 
   const clickHandler = () => {
     setSelected(true);

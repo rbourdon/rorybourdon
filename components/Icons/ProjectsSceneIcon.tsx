@@ -1,8 +1,9 @@
+import type { Variants } from "framer-motion";
 import { motion } from "framer-motion";
 
 import styled, { useTheme } from "styled-components";
 
-const Container = styled(motion.div)`
+const Container = styled(motion.div)<{ $zIndex: number; $margin: string }>`
   width: 100%;
   height: 100%;
   display: flex;
@@ -14,37 +15,37 @@ const Container = styled(motion.div)`
   user-select: none;
 `;
 
-const computerV = {
+const computerV: Variants = {
   hidden: { x: 60, y: 30 },
-  visible: (custom) => ({ x: custom ? 65 : 0, y: custom ? 30 : 0 }),
-  selected: (custom) => ({ x: custom ? 65 : 0, y: custom ? 30 : 0 }),
+  visible: (custom: boolean) => ({ x: custom ? 65 : 0, y: custom ? 30 : 0 }),
+  selected: (custom: boolean) => ({ x: custom ? 65 : 0, y: custom ? 30 : 0 }),
 };
 
-const chairV = {
+const chairV: Variants = {
   hidden: { x: -80, y: 30 },
-  visible: (custom) => ({ x: custom ? -85 : 0, y: custom ? 30 : 0 }),
-  selected: (custom) => ({ x: custom ? -85 : 0, y: custom ? 30 : 0 }),
+  visible: (custom: boolean) => ({ x: custom ? -85 : 0, y: custom ? 30 : 0 }),
+  selected: (custom: boolean) => ({ x: custom ? -85 : 0, y: custom ? 30 : 0 }),
 };
 
-const plantV = {
+const plantV: Variants = {
   hidden: { opacity: 0, x: 60 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.8, delay: 0.5 } },
   selected: { opacity: 1, x: 0 },
 };
 
-const rightPlantV = {
+const rightPlantV: Variants = {
   hidden: { opacity: 0, x: -60 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.8, delay: 0.5 } },
   selected: { opacity: 1, x: 0 },
 };
 
-const groundV = {
+const groundV: Variants = {
   hidden: { scaleX: 0 },
   visible: { scaleX: 1 },
   selected: { scaleX: 1 },
 };
 
-const emailV = {
+const emailV: Variants = {
   hidden: { x: -50, opacity: 0 },
   visible: {
     x: 0,
@@ -58,9 +59,14 @@ const emailV = {
   selected: { x: 0, opacity: 1 },
 };
 
-const noteV = {
+interface TimingCustom {
+  delay: number;
+  duration: number;
+}
+
+const noteV: Variants = {
   hidden: { x: 100, opacity: 0 },
-  visible: (custom) => ({
+  visible: (custom: TimingCustom) => ({
     x: 0,
     opacity: 1,
     transition: {
@@ -72,9 +78,9 @@ const noteV = {
   selected: { x: 0, opacity: 1 },
 };
 
-const computerLineV = {
+const computerLineV: Variants = {
   hidden: { pathLength: 0 },
-  visible: (custom) => ({
+  visible: (custom: TimingCustom) => ({
     pathLength: 1,
     transition: {
       duration: custom.duration,
@@ -84,12 +90,19 @@ const computerLineV = {
   selected: { pathLength: 1 },
 };
 
+interface SceneIconProps {
+  margin?: string;
+  zIndex?: number;
+  collapsed?: boolean;
+  scale?: number;
+}
+
 export default function ProjectsSceneIcon({
   margin = "0px",
   zIndex = 1,
   collapsed = true,
   scale = 1,
-}) {
+}: SceneIconProps) {
   const theme = useTheme();
   return (
     <Container

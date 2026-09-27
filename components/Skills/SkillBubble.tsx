@@ -1,18 +1,26 @@
 import {
   animate,
   MotionConfig,
+  type MotionValue,
   motion,
+  type Transition,
   transform,
   useMotionTemplate,
   useMotionValue,
   useTransform,
+  type Variants,
 } from "framer-motion";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import {
+  type ReactNode,
+  type SyntheticEvent,
+  useEffect,
+  useState,
+} from "react";
 import styled, { useTheme } from "styled-components";
 import ArrowIcon from "../Icons/ArrowIcon";
 
-const Bubble = styled(motion.li)`
+const Bubble = styled(motion.li)<{ $height: number }>`
   min-width: 80px;
   height: 40px;
   width: max-content;
@@ -70,7 +78,7 @@ const Arrow = styled(motion.div)`
   position: absolute;
 `;
 
-const arrowV = {
+const arrowV: Variants = {
   hidden: {
     opacity: 0,
     right: 35,
@@ -87,7 +95,7 @@ const arrowV = {
   },
 };
 
-const titleV = {
+const titleV: Variants = {
   hidden: {
     x: 0,
     scale: 1,
@@ -113,6 +121,24 @@ const titleV = {
   },
 };
 
+interface SkillBubbleProps {
+  transition?: Transition;
+  height?: number;
+  top?: boolean;
+  bottom?: boolean;
+  variants?: Variants;
+  custom?: number;
+  bgColor?: MotionValue<string>;
+  hoverColor: { bg?: MotionValue<string>; text?: MotionValue<string> };
+  select?: ((title: string) => void) | null;
+  selected?: boolean;
+  canHover?: boolean;
+  outlineTransition?: Transition;
+  title: string;
+  id: string;
+  children?: ReactNode;
+}
+
 export default function SkillBubble({
   transition = { type: "spring", stiffness: 30 },
   height = 37,
@@ -128,7 +154,7 @@ export default function SkillBubble({
   outlineTransition = { type: "spring", stiffness: 30 },
   title,
   id,
-}) {
+}: SkillBubbleProps) {
   const theme = useTheme();
   const hover = useMotionValue(0);
   const opacity = useMotionValue(bottom || top ? 0 : 1);
@@ -151,7 +177,8 @@ export default function SkillBubble({
   };
 
   const handleHoverStart = () => {
-    select(title);
+    // Every caller passes `select`; the null default is never hit.
+    select!(title);
     if (canHover && !hovering) {
       animateHover(1);
       setHovering(true);
@@ -163,7 +190,7 @@ export default function SkillBubble({
     setHovering(false);
   };
 
-  const disableLinkDrag = (e) => {
+  const disableLinkDrag = (e: SyntheticEvent | Event) => {
     e.preventDefault();
     if (hovering) {
       animateHover(0);
@@ -171,20 +198,35 @@ export default function SkillBubble({
     }
   };
 
-  const animateHover = (t) => {
+  const animateHover = (t: number) => {
     animate(hover, t, { type: "tween", duration: 0.2, ease: "easeInOut" });
   };
 
   const backgroundColor = useTransform(
-    [bgColor || theme.primary_light, hoverColor?.bg || theme.teal, hover],
-    ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
+    // Mixed string/number inputs; the tuple type below reads them back.
+    [
+      bgColor || theme.primary_light,
+      hoverColor?.bg || theme.teal,
+      hover,
+    ] as MotionValue<string | number>[],
+    ([latestColor1, latestColor2, latestHover]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor1 as string, latestColor2 as string],
+      ),
   );
 
   const outlineColor = useTransform(
-    [theme.primary_dark, hoverColor?.bg || theme.teal, hover],
-    ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
+    [theme.primary_dark, hoverColor?.bg || theme.teal, hover] as MotionValue<
+      string | number
+    >[],
+    ([latestColor1, latestColor2, latestHover]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor1 as string, latestColor2 as string],
+      ),
   );
 
   const border = useTransform(
@@ -197,12 +239,15 @@ export default function SkillBubble({
   const boxShadowHover = useMotionTemplate`1px 2px 0px 4px ${theme.shadow_key}, 0px 0px 10px 5px ${theme.shadow_ambient}`;
 
   const boxShadow = useTransform(
-    [boxShadowNormal, boxShadowHover, hover],
-    ([latestBoxShadowNormal, latestBoxShadowHover, latestHover]) =>
+    [boxShadowNormal, boxShadowHover, hover] as MotionValue<string | number>[],
+    ([latestBoxShadowNormal, latestBoxShadowHover, latestHover]: (
+      | string
+      | number
+    )[]) =>
       transform(
-        latestHover,
+        latestHover as number,
         [0, 1],
-        [latestBoxShadowNormal, latestBoxShadowHover],
+        [latestBoxShadowNormal as string, latestBoxShadowHover as string],
       ),
   );
 
@@ -210,9 +255,17 @@ export default function SkillBubble({
   const outlineWidth = useTransform(hover, [0, 1], ["1px", "6px"]);
 
   const titleColor = useTransform(
-    [theme.primary_verydark, hoverColor.text || theme.primary_dark, hover],
-    ([latestColor3, latestColor4, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor3, latestColor4]),
+    [
+      theme.primary_verydark,
+      hoverColor.text || theme.primary_dark,
+      hover,
+    ] as MotionValue<string | number>[],
+    ([latestColor3, latestColor4, latestHover]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor3 as string, latestColor4 as string],
+      ),
   );
 
   return (
@@ -245,7 +298,7 @@ export default function SkillBubble({
         >
           <BubbleLink
             draggable={false}
-            onClick={canHover ? null : disableLinkDrag}
+            onClick={canHover ? undefined : disableLinkDrag}
             onTapStart={disableLinkDrag}
             onDragStart={disableLinkDrag}
             initial="hidden"

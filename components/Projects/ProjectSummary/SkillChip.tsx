@@ -1,3 +1,4 @@
+import type { MotionValue, Variants } from "framer-motion";
 import {
   animate,
   motion,
@@ -5,6 +6,7 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
+import type { ReactNode } from "react";
 
 import styled, { useTheme } from "styled-components";
 
@@ -24,12 +26,17 @@ const Chip = styled(motion.div)`
   cursor: pointer;
 `;
 
-const variants = {
-  hidden: (custom) => ({
+interface ChipCustom {
+  x: number;
+  delay: number;
+}
+
+const variants: Variants = {
+  hidden: (custom: ChipCustom) => ({
     x: custom.x,
     opacity: 0,
   }),
-  visible: (custom) => ({
+  visible: (custom: ChipCustom) => ({
     x: 0,
     opacity: 1,
     transition: {
@@ -40,6 +47,15 @@ const variants = {
   }),
 };
 
+interface SkillChipProps {
+  children?: ReactNode;
+  layoutId?: string;
+  bgColor: MotionValue<string>;
+  textColor: MotionValue<string>;
+  outline: MotionValue<string>;
+  custom: ChipCustom;
+}
+
 export default function SkillChip({
   children,
   layoutId = "skillChip",
@@ -47,37 +63,57 @@ export default function SkillChip({
   textColor,
   outline,
   custom,
-}) {
+}: SkillChipProps) {
   const theme = useTheme();
   const hover = useMotionValue(0);
 
   const backgroundColor = useTransform(
-    [bgColor, theme.primary, textColor, hover],
-    ([latestColor1, latestColor2, latestColor3, latestHover]) =>
+    // Mixed string/number inputs; the tuple type below reads them back.
+    [bgColor, theme.primary, textColor, hover] as MotionValue<
+      string | number
+    >[],
+    ([latestColor1, latestColor2, latestColor3, latestHover]: (
+      | string
+      | number
+    )[]) =>
       transform(
-        latestHover,
+        latestHover as number,
         [0, 1],
         [
-          latestColor1,
-          transform(latestHover, [0, 1], [latestColor2, latestColor3]),
+          latestColor1 as string,
+          transform(
+            latestHover as number,
+            [0, 1],
+            [latestColor2 as string, latestColor3 as string],
+          ),
         ],
       ),
   );
 
   const color = useTransform(
-    [textColor, theme.primary_verydark, bgColor, hover],
-    ([latestColor1, latestColor2, latestColor3, latestHover]) =>
+    // Mixed string/number inputs; the tuple type below reads them back.
+    [textColor, theme.primary_verydark, bgColor, hover] as MotionValue<
+      string | number
+    >[],
+    ([latestColor1, latestColor2, latestColor3, latestHover]: (
+      | string
+      | number
+    )[]) =>
       transform(
-        latestHover,
+        latestHover as number,
         [0, 1],
         [
-          latestColor1,
-          transform(latestHover, [0, 1], [latestColor2, latestColor3]),
+          latestColor1 as string,
+          transform(
+            latestHover as number,
+            [0, 1],
+            [latestColor2 as string, latestColor3 as string],
+          ),
         ],
       ),
   );
 
-  const handleHover = (to) => {
+  const handleHover = (to: number) => {
     animate(hover, to, {
       type: "tween",
       ease: "easeInOut",

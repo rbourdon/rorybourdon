@@ -1,11 +1,13 @@
 import {
   animate,
+  type MotionValue,
   motion,
   transform,
   useMotionValue,
   useTransform,
+  type Variants,
 } from "framer-motion";
-import { useState } from "react";
+import { type FormEvent, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import Button from "@/components/Nav/Button";
 
@@ -22,7 +24,8 @@ const Form = styled.form`
   z-index: 1;
 `;
 
-const Input = styled(motion.textarea)`
+// `type` is not a textarea attribute but is passed through as before.
+const Input = styled(motion.textarea)<{ type?: string }>`
   width: 100%;
   height: 17vh;
   max-height: 200px;
@@ -84,7 +87,7 @@ const Thanks = styled(motion.span)`
   margin-left: 0.5rem;
 `;
 
-const inputV = {
+const inputV: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -95,7 +98,7 @@ const inputV = {
   },
 };
 
-const thanksV = {
+const thanksV: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -112,24 +115,35 @@ export default function ContactForm() {
   const [sent, setSent] = useState(false);
 
   const color = useTransform(
-    [theme.primary_slightlydark, theme.primary_mediumdark, hover],
-    ([latestColor1, latestColor2, latestHover]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
+    [
+      theme.primary_slightlydark,
+      theme.primary_mediumdark,
+      hover,
+    ] as MotionValue<string | number>[],
+    ([latestColor1, latestColor2, latestHover]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor1 as string, latestColor2 as string],
+      ),
   );
 
   const border = useTransform(
     color,
-    (latestColor1) => "thin solid " + latestColor1,
+    (latestColor1: string) => "thin solid " + latestColor1,
   );
 
   const border2 = useTransform(
     theme.primary_slightlydark,
-    (latestColor1) => "1px solid " + latestColor1,
+    (latestColor1: string) => "1px solid " + latestColor1,
   );
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const msg = { message: e.target.message.value };
+    const form = e.target as HTMLFormElement & {
+      message: HTMLTextAreaElement;
+    };
+    const msg = { message: form.message.value };
     try {
       await fetch("/api/contact", {
         method: "POST",

@@ -1,9 +1,11 @@
 import {
   animate,
+  type MotionValue,
   motion,
   transform,
   useMotionValue,
   useTransform,
+  type Variants,
 } from "framer-motion";
 import Link from "next/link";
 
@@ -22,7 +24,7 @@ const Container = styled(motion.a)`
   }
 `;
 
-const socialLinkV = {
+const socialLinkV: Variants = {
   hidden: {
     y: -120,
     transition: {
@@ -47,7 +49,19 @@ const socialLinkV = {
   },
 };
 
-export default function SocialLink({ href = "/", platform, hoverColor }) {
+export type SocialPlatform = "twitter" | "github" | "instagram" | "linkedin";
+
+interface SocialLinkProps {
+  href?: string;
+  platform: SocialPlatform;
+  hoverColor?: MotionValue<string>;
+}
+
+export default function SocialLink({
+  href = "/",
+  platform,
+  hoverColor,
+}: SocialLinkProps) {
   const theme = useTheme();
 
   const hover = useMotionValue(0);
@@ -61,9 +75,17 @@ export default function SocialLink({ href = "/", platform, hoverColor }) {
   };
 
   const color = useTransform(
-    [hover, theme.primary_verydark, hoverColor || theme.primary_mediumdark],
-    ([latestHover, latestColor1, latestColor2]) =>
-      transform(latestHover, [0, 1], [latestColor1, latestColor2]),
+    [
+      hover,
+      theme.primary_verydark,
+      hoverColor || theme.primary_mediumdark,
+    ] as MotionValue<string | number>[],
+    ([latestHover, latestColor1, latestColor2]: (string | number)[]) =>
+      transform(
+        latestHover as number,
+        [0, 1],
+        [latestColor1 as string, latestColor2 as string],
+      ),
   );
 
   return (

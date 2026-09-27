@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { type MotionValue, motion, type Variants } from "framer-motion";
 
 import styled, { useTheme } from "styled-components";
 
@@ -7,7 +7,12 @@ const Container = styled(motion.div)`
   height: 100%;
 `;
 
-export default function Logo({ color, variants = {} }) {
+interface LogoProps {
+  color?: MotionValue<string>;
+  variants?: Variants;
+}
+
+export default function Logo({ color, variants = {} }: LogoProps) {
   const theme = useTheme();
 
   return (

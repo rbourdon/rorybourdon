@@ -1,4 +1,4 @@
-import { MotionConfig, motion } from "framer-motion";
+import { MotionConfig, motion, type Variants } from "framer-motion";
 import Head from "next/head";
 import React from "react";
 import styled, { useTheme } from "styled-components";
@@ -77,7 +77,7 @@ const HeadingBlock = styled(motion.div)`
   flex-direction: column;
 `;
 
-const detailsV = {
+const detailsV: Variants = {
   hidden: {
     opacity: 0,
     x: 200,
@@ -101,7 +101,7 @@ const detailsV = {
   },
 };
 
-const arrowV = {
+const arrowV: Variants = {
   hidden: {
     opacity: 1,
     x: "100%",

@@ -1,5 +1,11 @@
 import convert from "color-convert";
-import { animate, MotionConfig, motion, useMotionValue } from "framer-motion";
+import {
+  animate,
+  MotionConfig,
+  motion,
+  useMotionValue,
+  type Variants,
+} from "framer-motion";
 import Head from "next/head";
 import Image from "next/image";
 import React, { useEffect } from "react";
@@ -10,6 +16,7 @@ import NavBar from "@/components/Nav/NavBar";
 import TitleBlock from "@/components/PageTitleBlock";
 import ProjectsScroller from "@/components/Projects/ProjectsScroller";
 import { getSkillDetails, getSkillList } from "@/lib/graphcms";
+import type { Color, SkillDetails } from "@/lib/types";
 
 const Content = styled(motion.main)`
   width: 100%;
@@ -103,7 +110,7 @@ const ScrollerTitle = styled(motion.p)`
   justify-content: center;
 `;
 
-const detailsV = {
+const detailsV: Variants = {
   hidden: {
     opacity: 0,
     x: "70%",
@@ -128,7 +135,7 @@ const detailsV = {
   },
 };
 
-const skillImageV = {
+const skillImageV: Variants = {
   hidden: {
     opacity: 0,
   },
@@ -142,7 +149,7 @@ const skillImageV = {
   },
 };
 
-const arrowV = {
+const arrowV: Variants = {
   hidden: {
     opacity: 1,
     x: 600,
@@ -166,7 +173,12 @@ const arrowV = {
   },
 };
 
-export default function Skill({ skill }) {
+interface SkillPageProps {
+  // Every skill page reads both colours unconditionally, so they must be set in the CMS.
+  skill: SkillDetails & { primaryColor: Color; secondaryColor: Color };
+}
+
+export default function Skill({ skill }: SkillPageProps) {
   const theme = useTheme();
 
   const secondaryColorRGB = convert.rgb.hsl(
@@ -301,7 +313,11 @@ export default function Skill({ skill }) {
   );
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({
+  params,
+}: {
+  params: { skill: string };
+}) {
   const skill = (await getSkillDetails(params.skill)) || [];
   return {
     props: { skill },

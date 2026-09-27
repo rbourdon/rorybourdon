@@ -1,4 +1,6 @@
+import type { MotionValue, Variants } from "framer-motion";
 import { motion } from "framer-motion";
+import type { ReactNode, Ref } from "react";
 import styled from "styled-components";
 import Card from "@/components/CardComponents/Card";
 import CardBacking from "@/components/CardComponents/CardBacking";
@@ -8,7 +10,11 @@ import CardStem from "@/components/CardComponents/CardStem";
 import ShineBand from "@/components/CardComponents/ShineBand";
 import Tagline from "@/components/CardComponents/Tagline";
 
-const Container = styled(motion.div)`
+const Container = styled(motion.div)<{
+  $flexDir: string;
+  $width: number;
+  $height: number;
+}>`
   display: flex;
   justify-content: ${(props) =>
     props.$flexDir === "row" ? "center" : "start"};
@@ -19,7 +25,7 @@ const Container = styled(motion.div)`
   z-index: 10;
 `;
 
-const cardV = {
+const cardV: Variants = {
   visible: {
     transition: {
       delayChildren: 0.3,
@@ -34,7 +40,7 @@ const cardV = {
   },
 };
 
-const frameV = {
+const frameV: Variants = {
   visible: {
     transition: {
       staggerChildren: 0.4,
@@ -42,21 +48,26 @@ const frameV = {
   },
 };
 
-const containerV = {
-  visible: (custom) => ({
+const containerV: Variants = {
+  visible: (custom: number) => ({
     transition: {
       delayChildren: custom,
     },
   }),
 };
 
-const tagV = {
-  hidden: (custom) => ({
+interface TagOffsets {
+  hidden: number;
+  visible: number;
+}
+
+const tagV: Variants = {
+  hidden: (custom: TagOffsets) => ({
     y: custom.hidden,
     opacity: 0,
     transition: { delay: 0.25, duration: 0.25 },
   }),
-  visible: (custom) => ({
+  visible: (custom: TagOffsets) => ({
     opacity: 1,
     y: custom.visible,
     transition: {
@@ -65,12 +76,33 @@ const tagV = {
       opacity: { duration: 0.3, delay: 0.15 },
     },
   }),
-  selected: (custom) => ({
+  selected: (custom: TagOffsets) => ({
     y: custom.visible,
     opacity: 0,
     transition: { delay: 0.25, duration: 0.25 },
   }),
 };
+
+interface NavCardProps {
+  height?: number;
+  borderRadius?: number;
+  strokeWidth?: number;
+  width?: number;
+  stem?: boolean;
+  stemLength?: number;
+  stemDir?: "h" | "v";
+  stemLoc?: number;
+  children?: ReactNode;
+  color1?: MotionValue<string>;
+  color2?: MotionValue<string>;
+  id: string;
+  delay?: number;
+  tagline?: string;
+  keyShadow?: string;
+  faceBands?: number[];
+  intersectionRef?: Ref<HTMLDivElement>;
+  bgColor?: MotionValue<string>;
+}
 
 export default function NavCard({
   height = 200,
@@ -91,7 +123,7 @@ export default function NavCard({
   faceBands = [1, 5, 3],
   intersectionRef,
   bgColor,
-}) {
+}: NavCardProps) {
   return (
     <Container
       $width={stem && stemDir === "h" ? stemLength + width : width}
@@ -177,29 +209,32 @@ export default function NavCard({
           id={id}
         />
         <CardBacking
-          backingV={{
-            hidden: {
-              opacity: 0,
-              transition: {
+          // Cast: hidden.transition nests a stray `transition` key (kept as-is).
+          backingV={
+            {
+              hidden: {
+                opacity: 0,
+                transition: {
+                  transition: {
+                    duration: 0.3,
+                  },
+                },
+              },
+              visible: {
+                opacity: 1,
+                transition: {
+                  duration: 0.3,
+                  delay: width * height * 0.0000025 + 0.7 + (delay ? delay : 0),
+                },
+              },
+              selected: {
+                opacity: 0,
                 transition: {
                   duration: 0.3,
                 },
               },
-            },
-            visible: {
-              opacity: 1,
-              transition: {
-                duration: 0.3,
-                delay: width * height * 0.0000025 + 0.7 + (delay ? delay : 0),
-              },
-            },
-            selected: {
-              opacity: 0,
-              transition: {
-                duration: 0.3,
-              },
-            },
-          }}
+            } as Variants
+          }
           width={width}
           height={height}
           sWidth={strokeWidth}

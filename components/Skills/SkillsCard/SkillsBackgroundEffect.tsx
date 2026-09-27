@@ -1,7 +1,9 @@
-import { motion, useMotionValue } from "framer-motion";
+import { motion, useMotionValue, type Variants } from "framer-motion";
 
 import styled, { useTheme } from "styled-components";
-import useBackgroundEffect from "@/components/utils/useBackgroundEffect";
+import useBackgroundEffect, {
+  type EffectStyle,
+} from "@/components/utils/useBackgroundEffect";
 
 const Container = styled(motion.span)`
   position: absolute;
@@ -20,7 +22,7 @@ const Check = styled(motion.span)`
   pointer-events: none;
 `;
 
-const containerV = {
+const containerV: Variants = {
   hidden: {
     opacity: 0,
     transition: {
@@ -48,7 +50,7 @@ const containerV = {
   },
 };
 
-const lineV = {
+const lineV: Variants = {
   hidden: {
     scaleX: 0,
     originX: 0,
@@ -78,7 +80,7 @@ const lineV = {
   },
 };
 
-const checkV = {
+const checkV: Variants = {
   hidden: {
     scale: 0,
     transition: {
@@ -105,10 +107,15 @@ const checkV = {
   },
 };
 
+interface SkillsBackgroundEffectProps {
+  inView?: boolean;
+  effectStyle?: EffectStyle;
+}
+
 export default function SkillsBackgroundEffect({
   inView = false,
   effectStyle = { x: 0, y: 0, scale: 1, delay: 0 },
-}) {
+}: SkillsBackgroundEffectProps) {
   const theme = useTheme();
   const x = useMotionValue(effectStyle.x);
   const y = useBackgroundEffect(inView, effectStyle);
