@@ -8,7 +8,8 @@
     "build": "next build",
     "postbuild": "next-sitemap --config next-sitemap-config.js",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint .",
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit"
   },
   "dependencies": {
     "@photo-sphere-viewer/core": "^5.15.1",
@@ -17,21 +18,24 @@
     "framer-motion": "12.43.0",
     "graphql": "^16.14.2",
     "graphql-request": "^7.4.0",
-    "next": "^16.3.0",
+    "next": "^16.3.6",
     "next-mdx-remote": "^6.0.0",
     "next-sitemap": "^4.2.3",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "react-intersection-observer": "^11.0.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-intersection-observer": "^11.0.1",
     "react-photo-sphere-viewer": "^6.2.3",
-    "styled-components": "^6.5.0"
+    "styled-components": "^6.5.3"
   },
   "devDependencies": {
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^15.5.22",
-    "eslint-config-prettier": "^9.1.2",
-    "eslint-plugin-prettier": "^5.5.6",
-    "eslint-plugin-react": "^7.37.5",
-    "prettier": "^3.9.6"
+    "@types/node": "^22",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@typescript/typescript6": "^6.0.2",
+    "eslint": "^10.11.0",
+    "eslint-config-next": "^16.3.6",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.9",
+    "typescript": "^7.0.2"
   }
 }

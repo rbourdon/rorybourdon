@@ -1,6 +1,6 @@
+import type { NextConfig } from "next";
 
-/** @type {import('next').NextConfig} */
-module.exports =  {
+const nextConfig: NextConfig = {
   reactStrictMode: true,
   compiler: {
     styledComponents: true,
@@ -22,8 +22,7 @@ module.exports =  {
     workerThreads: false,
     cpus: 1,
   },
-  transpilePackages: [
-    "@photo-sphere-viewer/core",
-    "react-photo-sphere-viewer",
-  ],
+  transpilePackages: ["@photo-sphere-viewer/core", "react-photo-sphere-viewer"],
 };
+
+export default nextConfig;
