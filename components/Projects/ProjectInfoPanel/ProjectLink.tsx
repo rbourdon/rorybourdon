@@ -6,7 +6,6 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import Link from "next/link";
 
 import styled, { useTheme } from "styled-components";
 import CodeIcon from "@/components/Icons/CodeIcon";
@@ -93,26 +92,25 @@ export default function ProjectLink({
   };
 
   return href ? (
-    <Link href={href} passHref legacyBehavior>
-      <LinkContainer
-        rel="noopener"
-        target="_blank"
-        onHoverStart={handleHoverStart}
-        onHoverEnd={handleHoverEnd}
-        onFocus={handleHoverStart}
-        onBlur={handleHoverEnd}
-        style={{
-          color,
-        }}
-      >
-        {type === "Code" ? (
-          <CodeIcon rotate={iconRotate} />
-        ) : (
-          <ExternalLinkIcon rotate={iconRotate} />
-        )}
-        <motion.span>{type}</motion.span>
-      </LinkContainer>
-    </Link>
+    <LinkContainer
+      href={href}
+      rel="noopener"
+      target="_blank"
+      onHoverStart={handleHoverStart}
+      onHoverEnd={handleHoverEnd}
+      onFocus={handleHoverStart}
+      onBlur={handleHoverEnd}
+      style={{
+        color,
+      }}
+    >
+      {type === "Code" ? (
+        <CodeIcon rotate={iconRotate} />
+      ) : (
+        <ExternalLinkIcon rotate={iconRotate} />
+      )}
+      <motion.span>{type}</motion.span>
+    </LinkContainer>
   ) : (
     <Container
       onHoverStart={handleHoverStart}

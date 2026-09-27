@@ -6,12 +6,12 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import Link from "next/link";
 
 import styled, { useTheme } from "styled-components";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
+import MotionLink from "@/components/utils/MotionLink";
 
-const Container = styled(motion.a)`
+const Container = styled(MotionLink)`
   -webkit-user-drag: none;
   -moz-user-drag: none;
   user-drag: none;
@@ -120,20 +120,19 @@ export default function DetailsLink({ href, linkColor }: DetailsLinkProps) {
   };
 
   return (
-    <Link href={href} passHref legacyBehavior>
-      <Container
-        onHoverStart={() => handleHover(1)}
-        onHoverEnd={() => handleHover(0)}
-        onFocus={() => handleHover(1)}
-        onBlur={() => handleHover(0)}
-        variants={detailsLinkV}
-        style={{ color, scale }}
-      >
-        View Details
-        <Arrow style={{ rotate, scale }} variants={arrowV}>
-          <ArrowIcon />
-        </Arrow>
-      </Container>
-    </Link>
+    <Container
+      href={href}
+      onHoverStart={() => handleHover(1)}
+      onHoverEnd={() => handleHover(0)}
+      onFocus={() => handleHover(1)}
+      onBlur={() => handleHover(0)}
+      variants={detailsLinkV}
+      style={{ color, scale }}
+    >
+      View Details
+      <Arrow style={{ rotate, scale }} variants={arrowV}>
+        <ArrowIcon />
+      </Arrow>
+    </Container>
   );
 }
