@@ -1,9 +1,8 @@
 import type { Variants } from "framer-motion";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import dynamic from "next/dynamic";
 import type { ReactNode } from "react";
-import { useState } from "react";
-import { useInView } from "react-intersection-observer";
+import { useRef, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import Logo from "@/components/Nav/Logo";
 
@@ -81,7 +80,8 @@ export default function PostPano({ src, children }: PostPanoProps) {
   const [isReady, setIsReady] = useState(false);
   const theme = useTheme();
   // Panoramas are large, so only start loading once the reader scrolls near.
-  const { ref, inView } = useInView({ triggerOnce: true, rootMargin: "50%" });
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "50%" });
 
   return (
     <Container ref={ref}>
