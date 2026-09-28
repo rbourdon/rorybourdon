@@ -22,7 +22,6 @@ const Container = styled(motion.article)`
 const Card = styled(motion.article)<{ $scrollMargin: string }>`
   top: calc(50vh - 631 / 2);
   scroll-margin-top: ${(props) => props.$scrollMargin};
-  scroll-snap-margin: ${(props) => props.$scrollMargin};
 `;
 
 const CardContent = styled(motion.div)`

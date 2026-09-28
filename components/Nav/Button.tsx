@@ -14,8 +14,8 @@ import CardBorder from "@/components/CardComponents/CardBorder";
 import MotionLink from "@/components/utils/MotionLink";
 
 const LinkContainer = styled(MotionLink)<{ $width: number; $height: number }>`
-  width: ${(props) => props.$width + "px"};
-  height: ${(props) => props.$height + "px"};
+  width: ${(props) => props.$width}px;
+  height: ${(props) => props.$height}px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,8 +31,8 @@ const ButtonContainer = styled(motion.button)<{
   $width: number;
   $height: number;
 }>`
-  width: ${(props) => props.$width + "px"};
-  height: ${(props) => props.$height + "px"};
+  width: ${(props) => props.$width}px;
+  height: ${(props) => props.$height}px;
   display: flex;
   justify-content: center;
   align-items: center;

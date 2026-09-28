@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 
 import styled, { useTheme } from "styled-components";
+import { noSelect } from "@/components/utils/styles";
 
 const Text = styled(motion.p)<{ $padding: string }>`
   height: max-content;
@@ -11,7 +12,7 @@ const Text = styled(motion.p)<{ $padding: string }>`
   font-weight: 300;
   font-size: 1.125rem;
   padding: ${(props) => props.$padding};
-  user-select: none;
+  ${noSelect}
 `;
 
 interface TaglineProps {

@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 const Container = styled(motion.div)<{ $width: number; $height: number }>`
-  width: ${(props) => props.$width + "px"};
-  height: ${(props) => props.$height + "px"};
+  width: ${(props) => props.$width}px;
+  height: ${(props) => props.$height}px;
   overflow: hidden;
   position: absolute;
   z-index: 5;
@@ -14,8 +14,8 @@ const Container = styled(motion.div)<{ $width: number; $height: number }>`
 `;
 
 const Band = styled(motion.div)<{ $width: number; $height: number }>`
-  width: ${(props) => props.$width + "px"};
-  height: ${(props) => props.$height + "px"};
+  width: ${(props) => props.$width}px;
+  height: ${(props) => props.$height}px;
   position: absolute;
   top: 0;
   left: 0;

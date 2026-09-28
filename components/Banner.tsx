@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { useEffect } from "react";
 import styled, { useTheme } from "styled-components";
+import { noSelect } from "@/components/utils/styles";
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -42,7 +43,7 @@ const BG = styled(motion.div)`
 `;
 
 const Letter = styled(motion.div)`
-  user-select: none;
+  ${noSelect}
   position: relative;
   padding: 1.25vw 0.2vw;
   mix-blend-mode: multiply;
@@ -58,7 +59,7 @@ const Subtitle = styled(motion.h2)`
   width: 100%;
   height: 100%;
   height: max-content;
-  user-select: none;
+  ${noSelect}
 `;
 
 const titleV: Variants = {

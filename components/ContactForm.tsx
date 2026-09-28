@@ -10,6 +10,7 @@ import {
 import { type FormEvent, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import Button from "@/components/Nav/Button";
+import { themedScrollbar } from "@/components/utils/styles";
 
 const Form = styled.form`
   width: 100%;
@@ -24,8 +25,7 @@ const Form = styled.form`
   z-index: 1;
 `;
 
-// `type` is not a textarea attribute but is passed through as before.
-const Input = styled(motion.textarea)<{ type?: string }>`
+const Input = styled(motion.textarea)`
   width: 100%;
   height: 17vh;
   max-height: 200px;
@@ -33,24 +33,7 @@ const Input = styled(motion.textarea)<{ type?: string }>`
   font-size: 1rem;
   font-weight: 200;
   resize: none;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-primary_mediumdark) var(--color-primary);
-
-  &::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: var(--color-primary);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--color-primary_mediumdark);
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-primary_dark);
-  }
+  ${themedScrollbar}
 
   outline: none;
 `;
@@ -167,7 +150,6 @@ export default function ContactForm() {
   return !sent ? (
     <Form onSubmit={handleSubmit}>
       <Input
-        type="text"
         name="message"
         variants={inputV}
         placeholder="Send me a message &#10084;"

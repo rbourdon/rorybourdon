@@ -10,15 +10,12 @@ import {
 import styled, { useTheme } from "styled-components";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
 import MotionLink from "@/components/utils/MotionLink";
+import { noDrag } from "@/components/utils/styles";
 
 const Container = styled(MotionLink)`
-  -webkit-user-drag: none;
-  -moz-user-drag: none;
-  user-drag: none;
-  user-select: none;
+  ${noDrag}
   font-size: 0.85rem;
   font-weight: 300;
-  user-select: none;
   padding: 8px 0 0 0;
   width: 160px;
   height: max-content;

@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import styled, { useTheme } from "styled-components";
 import DetailsLink from "@/components/Projects/ProjectSummary/DetailsLink";
 import SkillChip from "@/components/Projects/ProjectSummary/SkillChip";
+import { noDrag, noSelect } from "@/components/utils/styles";
 import type { ProjectSummaryData } from "@/lib/types";
 
 const Container = styled(motion.div)`
@@ -23,10 +24,7 @@ const Container = styled(motion.div)`
   justify-items: center;
   align-content: center;
   border-radius: 20px;
-  -webkit-user-drag: none;
-  -moz-user-drag: none;
-  user-drag: none;
-  user-select: none;
+  ${noDrag}
 
   &:focus {
     outline: none;
@@ -37,14 +35,14 @@ const ProjectTitle = styled(motion.p)`
   width: 100%;
   font-size: 1.1rem;
   font-weight: 400;
-  user-select: none;
+  ${noSelect}
 `;
 
 const ProjectDescription = styled(motion.p)`
   width: 100%;
   font-size: 0.9rem;
   font-weight: 200;
-  user-select: none;
+  ${noSelect}
   line-height: 1.25;
 `;
 
@@ -60,7 +58,7 @@ const Outline = styled(motion.div)`
   position: absolute;
   width: 100%;
   border-radius: 20px;
-  user-select: none;
+  ${noSelect}
   left: 0;
   top: 0;
   z-index: -1;

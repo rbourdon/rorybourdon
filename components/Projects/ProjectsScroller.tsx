@@ -3,6 +3,7 @@ import { LayoutGroup, motion, useMotionValue } from "framer-motion";
 import { useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import ArrowIcon from "@/components/Icons/ArrowIcon";
+import { noSelect } from "@/components/utils/styles";
 import type { ProjectSummaryData } from "@/lib/types";
 import useWindowSize from "../utils/useWindowSize";
 import ProjectSummary from "./ProjectSummary/ProjectSummary";
@@ -17,7 +18,7 @@ const Projects = styled(motion.div)`
   margin: 0;
   padding: 20px 0;
   justify-self: center;
-  user-select: none;
+  ${noSelect}
 
   @media (max-width: 555px) {
     padding: 0;
@@ -38,7 +39,7 @@ const Summaries = styled(motion.ul)`
   margin: 0;
   cursor: grab;
   grid-auto-rows: 320px;
-  user-select: none;
+  ${noSelect}
 `;
 
 const Arrow = styled(motion.button)`
