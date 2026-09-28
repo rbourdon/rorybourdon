@@ -1,4 +1,9 @@
-import { motion, useIsPresent, type Variants } from "framer-motion";
+import {
+  LayoutGroup,
+  motion,
+  useIsPresent,
+  type Variants,
+} from "framer-motion";
 import { useState } from "react";
 import styled, { useTheme } from "styled-components";
 import SkillBubble from "@/components/Skills/SkillBubble";
@@ -57,46 +62,53 @@ export default function SkillRoller({
   // the home page's exit animation then never completes.
   const visible = Math.min(numSkills, skills.length);
 
+  // The bubbles slide into their new rows via layout animations, which only
+  // measure a bubble when it re-renders. React Compiler memoizes the bubble
+  // elements, so on each tick only the ones whose props changed re-render and
+  // the rest snap to their new row. LayoutGroup makes every bubble measure
+  // whenever any one of them does.
   return (
-    <Roller variants={variants}>
-      {[
-        ...skills.slice(rollerPos, rollerPos + visible),
-        ...skills.slice(
-          0,
-          visible - skills.slice(rollerPos, rollerPos + visible).length,
-        ),
-      ].map((skill, index) => {
-        return (
-          <SkillBubble
-            title={skill.title}
-            id={skill.slug}
-            key={`${skill.slug}_roller`}
-            top={index === 0 ? true : false}
-            bottom={index === visible - 1 ? true : false}
-            hoverColor={{
-              bg: theme.teal,
-              text: theme.primary_dark,
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 60,
-              mass: 0.2,
-              damping: 18,
-            }}
-            outlineTransition={{
-              type: "spring",
-              stiffness: 150,
-              mass: 0.8,
-              damping: 15,
-            }}
-            select={selectBubble}
-            canHover={true}
-            selected={selectedBubble === skill.title}
-          >
-            {skill.title}
-          </SkillBubble>
-        );
-      })}
-    </Roller>
+    <LayoutGroup>
+      <Roller variants={variants}>
+        {[
+          ...skills.slice(rollerPos, rollerPos + visible),
+          ...skills.slice(
+            0,
+            visible - skills.slice(rollerPos, rollerPos + visible).length,
+          ),
+        ].map((skill, index) => {
+          return (
+            <SkillBubble
+              title={skill.title}
+              id={skill.slug}
+              key={`${skill.slug}_roller`}
+              top={index === 0 ? true : false}
+              bottom={index === visible - 1 ? true : false}
+              hoverColor={{
+                bg: theme.teal,
+                text: theme.primary_dark,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 60,
+                mass: 0.2,
+                damping: 18,
+              }}
+              outlineTransition={{
+                type: "spring",
+                stiffness: 150,
+                mass: 0.8,
+                damping: 15,
+              }}
+              select={selectBubble}
+              canHover={true}
+              selected={selectedBubble === skill.title}
+            >
+              {skill.title}
+            </SkillBubble>
+          );
+        })}
+      </Roller>
+    </LayoutGroup>
   );
 }
