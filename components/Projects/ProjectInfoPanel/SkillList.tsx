@@ -1,0 +1,82 @@
+import type { MotionValue } from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
+import { useState } from "react";
+import styled, { useTheme } from "styled-components";
+import SkillBubble from "@/components/Skills/SkillBubble";
+import type { SkillRef } from "@/lib/types";
+
+const Bubbles = styled(motion.ul)`
+  max-width: 100%;
+  width: max-content;
+  height: max-content;
+  justify-items: center;
+  align-items: center;
+  display: grid;
+  grid-template-rows: repeat(auto-fit, 40px);
+  grid-template-columns: 100%;
+  row-gap: 12px;
+  padding: 10px;
+  margin: 0;
+  grid-auto-rows: 40px;
+  align-self: center;
+  z-index: 6;
+`;
+
+interface SkillListProps {
+  skills: SkillRef[];
+  bubbleColor?: MotionValue<string>;
+  textColor?: MotionValue<string>;
+  // Passed by the project page but not used here.
+  selected?: boolean;
+  numSkills?: number;
+}
+
+export default function SkillList({
+  skills,
+  bubbleColor,
+  textColor,
+}: SkillListProps) {
+  const theme = useTheme();
+  const [selectedSkill, setSelectedSkill] = useState("");
+
+  const handleSkillSelect = (skill: string) => {
+    setSelectedSkill(skill);
+  };
+
+  return (
+    <LayoutGroup>
+      <Bubbles layout>
+        {skills.map((skill, index) => {
+          return (
+            <SkillBubble
+              title={skill.title}
+              key={`${skill.slug}_skilllist`}
+              custom={index}
+              hoverColor={{
+                bg: bubbleColor,
+                text: textColor,
+              }}
+              bgColor={theme.primary}
+              id={skill.slug}
+              transition={{
+                type: "spring",
+                stiffness: 200,
+                mass: 0.25,
+                damping: 28,
+              }}
+              outlineTransition={{
+                type: "spring",
+                stiffness: 150,
+                mass: 0.25,
+                damping: 10,
+              }}
+              select={handleSkillSelect}
+              selected={selectedSkill === skill.title}
+              canHover
+            />
+          );
+        })}
+      </Bubbles>
+    </LayoutGroup>
+  );
+}
