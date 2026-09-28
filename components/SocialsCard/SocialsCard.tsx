@@ -1,6 +1,5 @@
-import { MotionConfig, motion, type Variants } from "framer-motion";
-import { type ReactNode, useState } from "react";
-import { useInView } from "react-intersection-observer";
+import { MotionConfig, motion, useInView, type Variants } from "framer-motion";
+import { type ReactNode, useRef, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import CardEffect from "@/components/CardComponents/CardEffect";
 import NavCard from "@/components/CardComponents/NavCard";
@@ -182,9 +181,8 @@ export default function SocialsCard({
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
   const { width } = useWindowSize();
-  const { ref, inView } = useInView({
-    threshold: 0.4,
-  });
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { amount: 0.4 });
 
   // Before mount width is undefined; NaN < n is false, so not portrait.
   const portrait = (width as number) * 0.95 < WIDTH + STEMLENGTH + TAGLINESIZE;

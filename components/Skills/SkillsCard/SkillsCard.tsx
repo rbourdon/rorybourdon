@@ -2,10 +2,10 @@ import {
   MotionConfig,
   motion,
   type Transition,
+  useInView,
   type Variants,
 } from "framer-motion";
-import { type ReactNode, useState } from "react";
-import { useInView } from "react-intersection-observer";
+import { type ReactNode, useRef, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import CardEffect from "@/components/CardComponents/CardEffect";
 import NavCard from "@/components/CardComponents/NavCard";
@@ -176,9 +176,8 @@ export default function SkillsCard({
     }, 800);
   };
 
-  const { ref, inView } = useInView({
-    threshold: 0.36,
-  });
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { amount: 0.36 });
 
   const cardEffects =
     width && !portrait

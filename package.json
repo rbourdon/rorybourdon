@@ -3,6 +3,9 @@
   "author": "Rory Bourdon <rorybourdon@gmail.com> (https://rorybourdon.com)",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -21,7 +24,6 @@
     "next": "^16.3.6",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "react-intersection-observer": "^11.0.1",
     "react-photo-sphere-viewer": "^6.2.3",
     "remark-mdx": "^3.1.1",
     "remark-parse": "^11.0.0",
@@ -34,10 +36,11 @@
     "@types/estree": "^1.0.9",
     "@types/hast": "^3.0.5",
     "@types/mdast": "^4.0.4",
-    "@types/node": "^22",
+    "@types/node": "^24.19.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@types/unist": "^3.0.3",
+    "babel-plugin-react-compiler": "1.0.0",
     "typescript": "^7.0.2"
   }
 }

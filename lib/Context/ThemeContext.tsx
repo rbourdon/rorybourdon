@@ -2,10 +2,8 @@ import { animate, motionValue } from "framer-motion";
 import {
   createContext,
   type ReactNode,
-  useCallback,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from "react";
 import { type DefaultTheme, ThemeProvider } from "styled-components";
@@ -47,7 +45,7 @@ export const ThemeControlProvider = ({ children }: { children: ReactNode }) => {
     setMode(initial);
   }, [theme]);
 
-  const toggleMode = useCallback(() => {
+  const toggleMode = () => {
     const next: ThemeMode = mode === "light" ? "dark" : "light";
     localStorage.setItem("theme", next);
     applyPaletteCssVars(palettes[next]);
@@ -60,9 +58,10 @@ export const ThemeControlProvider = ({ children }: { children: ReactNode }) => {
       }
     }
     setMode(next);
-  }, [mode, theme]);
+  };
 
-  const dispatch = useMemo(() => ({ toggleMode }), [toggleMode]);
+  // React Compiler keeps this object stable until mode changes.
+  const dispatch = { toggleMode };
 
   return (
     <DispatchContext.Provider value={dispatch}>
