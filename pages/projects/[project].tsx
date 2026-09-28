@@ -6,8 +6,6 @@ import {
   type Variants,
 } from "framer-motion";
 import Head from "next/head";
-import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
-import { serialize } from "next-mdx-remote/serialize";
 import styled, { useTheme } from "styled-components";
 import Highlight from "@/components/Highlight";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
@@ -21,12 +19,14 @@ import SkillList from "@/components/Projects/ProjectInfoPanel/SkillList";
 import Caption from "@/components/Projects/ProjectPost/Caption";
 import Content from "@/components/Projects/ProjectPost/Content";
 import Post from "@/components/Projects/ProjectPost/Post";
+import PostContent from "@/components/Projects/ProjectPost/PostContent";
 import PostImage from "@/components/Projects/ProjectPost/PostImage";
 import PostPano from "@/components/Projects/ProjectPost/PostPano";
 import PostVideo from "@/components/Projects/ProjectPost/PostVideo";
 import Title from "@/components/Projects/ProjectPost/Title";
 import Spacer from "@/components/Spacer";
 import { getProjectDetails, getProjectList } from "@/lib/graphcms";
+import { type PostNode, parsePostContent } from "@/lib/postContent";
 import type { ProjectDetails } from "@/lib/types";
 
 const PageContent = styled(motion.main)`
@@ -162,10 +162,10 @@ const pageLinks = [
 
 interface ProjectPageProps {
   project: ProjectDetails;
-  source: MDXRemoteSerializeResult;
+  content: PostNode[];
 }
 
-export default function Project({ project, source }: ProjectPageProps) {
+export default function Project({ project, content }: ProjectPageProps) {
   const theme = useTheme();
 
   const secondaryColorRGB = project.secondaryColor
@@ -237,8 +237,8 @@ export default function Project({ project, source }: ProjectPageProps) {
             </PageTitle>
           </TitleBlock>
           <ProjectContent style={{ color: theme.primary_dark }}>
-            <MDXRemote
-              {...source}
+            <PostContent
+              content={content}
               components={components}
               scope={{ theme, color1: color1, color2: color2, ...project }}
             />
@@ -284,12 +284,11 @@ export async function getStaticProps({
   const project = (await getProjectDetails(params.project)) || [];
   const source =
     project.content || `<Post><Title>Add project content!</Title></Post>`;
-  // Posts reference assets with expressions like src={images[1].url}.
-  // next-mdx-remote 6 strips every {expression} unless blockJS is off; the
-  // content is our own CMS entries and blockDangerousJS stays on.
-  const mdxSource = await serialize(source, { blockJS: false });
+  // Parsed to JSON here so the page ships no MDX compiler. Expressions like
+  // src={images[1].url} are resolved against the scope passed at render.
+  const content = parsePostContent(source, Object.keys(components));
   return {
-    props: { project: project, source: mdxSource },
+    props: { project: project, content },
   };
 }
 
