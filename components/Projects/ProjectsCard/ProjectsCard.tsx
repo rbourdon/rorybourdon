@@ -9,12 +9,12 @@ import {
   MotionConfig,
   motion,
   transform,
+  useInView,
   useMotionValue,
   useTransform,
 } from "framer-motion";
 import type { ReactNode } from "react";
-import { useState } from "react";
-import { useInView } from "react-intersection-observer";
+import { useRef, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import CardEffect from "@/components/CardComponents/CardEffect";
 import NavCard from "@/components/CardComponents/NavCard";
@@ -203,9 +203,8 @@ export default function ProjectsCard({
   const [selected, setSelected] = useState(false);
   const [layoutComplete, setLayoutComplete] = useState(false);
   const { width } = useWindowSize();
-  const { ref, inView } = useInView({
-    threshold: 0.4,
-  });
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { amount: 0.4 });
 
   const portrait =
     width !== undefined && width * 0.95 < WIDTH + STEMLENGTH + TAGLINESIZE;

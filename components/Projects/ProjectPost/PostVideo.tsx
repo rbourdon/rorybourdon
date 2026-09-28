@@ -1,8 +1,7 @@
 import type { Variants } from "framer-motion";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "react-intersection-observer";
 import styled, { useTheme } from "styled-components";
 import Logo from "@/components/Nav/Logo";
 
@@ -99,7 +98,8 @@ export default function PostVideo({
   const [allowPlay, setAllowPlay] = useState(false);
   const [playing, setPlaying] = useState(false);
   const vidRef = useRef<HTMLVideoElement>(null);
-  const { ref, inView } = useInView({ threshold: 0.1 });
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { amount: 0.1 });
 
   useEffect(() => {
     setAllowPlay(true);
