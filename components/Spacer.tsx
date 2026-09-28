@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const Container = styled.div<{ $width: number; $height: number }>`
-  width: ${(props) => props.$width + "px"};
-  height: ${(props) => props.$height + "px"};
+  width: ${(props) => props.$width}px;
+  height: ${(props) => props.$height}px;
 `;
 
 interface SpacerProps {

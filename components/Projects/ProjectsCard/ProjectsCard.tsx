@@ -22,6 +22,7 @@ import ProjectsSceneIcon from "@/components/Icons/ProjectsSceneIcon";
 import Button from "@/components/Nav/Button";
 import ProjectSummary from "@/components/Projects/ProjectSummary/ProjectSummary";
 import ProjectsBackgroundEffect from "@/components/Projects/ProjectsCard/ProjectsBackgroundEffect";
+import { noSelect } from "@/components/utils/styles";
 import useWindowSize from "@/components/utils/useWindowSize";
 import type { ProjectSummaryData } from "@/lib/types";
 
@@ -37,7 +38,6 @@ const Container = styled(motion.article)`
 const Card = styled(motion.div)<{ $scrollMargin: string }>`
   top: calc(50vh - 358px / 2);
   scroll-margin-top: ${(props) => props.$scrollMargin};
-  scroll-snap-margin: ${(props) => props.$scrollMargin};
 `;
 
 const CardContent = styled(motion.div)`
@@ -76,7 +76,7 @@ const Label = styled(motion.p)`
   font-weight: 200;
   width: max-content;
   height: max-content;
-  user-select: none;
+  ${noSelect}
 `;
 
 const ProjectsBox = styled(motion.div)`

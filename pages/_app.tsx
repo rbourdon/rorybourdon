@@ -4,28 +4,12 @@ import { Raleway } from "next/font/google";
 import Head from "next/head";
 import { createGlobalStyle } from "styled-components";
 import Layout from "@/components/layout";
+import { themedScrollbar } from "@/components/utils/styles";
 import { ThemeControlProvider } from "@/lib/Context/ThemeContext";
 
 const GlobalStyle = createGlobalStyle`
 html {
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-primary_mediumdark) var(--color-primary);
-
-    &::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: var(--color-primary);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--color-primary_mediumdark);
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background-color: var(--color-primary_dark);
-    }
+    ${themedScrollbar}
     scroll-behavior: smooth;
   }
   body {

@@ -18,9 +18,10 @@ import {
 } from "react";
 import styled, { useTheme } from "styled-components";
 import MotionLink from "@/components/utils/MotionLink";
+import { noDrag, noSelect } from "@/components/utils/styles";
 import ArrowIcon from "../Icons/ArrowIcon";
 
-const Bubble = styled(motion.li)<{ $height: number }>`
+const Bubble = styled(motion.li)`
   min-width: 80px;
   height: 40px;
   width: max-content;
@@ -28,7 +29,7 @@ const Bubble = styled(motion.li)<{ $height: number }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  user-select: none;
+  ${noSelect}
   position: relative;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -40,15 +41,12 @@ const Outline = styled(motion.div)`
   position: absolute;
   width: calc(100% + 10px);
   border-radius: 30px;
-  user-select: none;
+  ${noSelect}
   pointer-events: none;
 `;
 
 const BubbleLink = styled(MotionLink)`
-  -webkit-user-drag: none;
-  -moz-user-drag: none;
-  user-drag: none;
-  user-select: none;
+  ${noDrag}
   width: 100%;
   height: 100%;
   display: flex;
@@ -123,7 +121,6 @@ const titleV: Variants = {
 
 interface SkillBubbleProps {
   transition?: Transition;
-  height?: number;
   top?: boolean;
   bottom?: boolean;
   variants?: Variants;
@@ -141,7 +138,6 @@ interface SkillBubbleProps {
 
 export default function SkillBubble({
   transition = { type: "spring", stiffness: 30 },
-  height = 37,
   top = false,
   bottom = false,
   variants,
@@ -271,7 +267,6 @@ export default function SkillBubble({
   return (
     <MotionConfig transition={transition}>
       <Bubble
-        $height={height}
         layoutId={`${id}_bubble`}
         onHoverStart={handleHoverStart}
         onTapStart={handleHoverStart}

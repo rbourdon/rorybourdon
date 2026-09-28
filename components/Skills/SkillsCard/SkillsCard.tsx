@@ -13,6 +13,7 @@ import TreeIcon from "@/components/Icons/TreeIcon";
 import Button from "@/components/Nav/Button";
 import SkillRoller from "@/components/Skills/SkillsCard/SkillRoller";
 import SkillsBackgroundEffect from "@/components/Skills/SkillsCard/SkillsBackgroundEffect";
+import { noSelect } from "@/components/utils/styles";
 import useWindowSize from "@/components/utils/useWindowSize";
 import type { SkillRef } from "@/lib/types";
 
@@ -27,7 +28,6 @@ const Container = styled(motion.article)`
 
 const Card = styled(motion.div)<{ $scrollMargin: string }>`
   scroll-margin-top: ${(props) => props.$scrollMargin};
-  scroll-snap-margin: ${(props) => props.$scrollMargin};
 `;
 
 const CardContent = styled(motion.div)`
@@ -69,7 +69,7 @@ const Label = styled(motion.p)`
   font-weight: 200;
   width: max-content;
   height: max-content;
-  user-select: none;
+  ${noSelect}
 `;
 
 const Backing = styled(motion.div)`

@@ -2,6 +2,7 @@ import type { Variants } from "framer-motion";
 import { motion } from "framer-motion";
 
 import styled, { useTheme } from "styled-components";
+import { noSelect } from "@/components/utils/styles";
 
 const Container = styled(motion.div)<{ $zIndex: number; $margin: string }>`
   width: 100%;
@@ -12,7 +13,7 @@ const Container = styled(motion.div)<{ $zIndex: number; $margin: string }>`
   z-index: ${(props) => props.$zIndex};
   margin: ${(props) => props.$margin};
   pointer-events: none;
-  user-select: none;
+  ${noSelect}
 `;
 
 const computerV: Variants = {

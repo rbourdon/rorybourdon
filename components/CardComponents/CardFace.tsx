@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 const Container = styled(motion.div)<{ $width: number; $height: number }>`
-  width: ${(props) => props.$width + "px"};
-  height: ${(props) => props.$height + "px"};
+  width: ${(props) => props.$width}px;
+  height: ${(props) => props.$height}px;
   display: flex;
   justify-content: center;
   align-items: center;

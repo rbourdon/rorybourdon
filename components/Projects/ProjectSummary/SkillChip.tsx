@@ -9,6 +9,7 @@ import {
 import type { ReactNode } from "react";
 
 import styled, { useTheme } from "styled-components";
+import { noSelect } from "@/components/utils/styles";
 
 const Chip = styled(motion.div)`
   height: 20px;
@@ -22,7 +23,7 @@ const Chip = styled(motion.div)`
   justify-content: center;
   margin-right: 5px;
   margin-bottom: 5px;
-  user-select: none;
+  ${noSelect}
   cursor: pointer;
 `;
 

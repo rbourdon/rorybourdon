@@ -14,7 +14,7 @@ import ArrowIcon from "../Icons/ArrowIcon";
 
 const Container = styled(motion.button)<{ $width: number }>`
   width: 12vw;
-  max-width: ${(props) => props.$width + "px"};
+  max-width: ${(props) => props.$width}px;
   height: max-content;
   display: flex;
   justify-content: center;

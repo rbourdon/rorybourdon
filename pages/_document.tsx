@@ -80,7 +80,7 @@ export default class MyDocument extends Document {
                   dark: {
                     "--color-name": "dark",                  
                     "--color-primary": "hsla(270, 8.74%, 85.88%, 1)",
-                    "--color-primary_verylight": "hsla(hsla(270, 8.64%, 91%, 1))",
+                    "--color-primary_verylight": "hsla(270, 8.64%, 91%, 1)",
                     "--color-primary_light": "hsla(270, 8.64%, 88.52%, 1)",
                     "--color-primary_superdark": "hsla(266.67, 5.89%, 18.63%, 1)",
                     "--color-primary_verydark": "hsla(266.67, 6.89%, 28.63%, 1)",
@@ -100,7 +100,7 @@ export default class MyDocument extends Document {
                   light: {
                     "--color-name": "light",
                     "--color-primary": "hsla(270, 8.74%, 85.88%, 1)",
-                    "--color-primary_verylight": "hsla(hsla(270, 8.64%, 91%, 1))",
+                    "--color-primary_verylight": "hsla(270, 8.64%, 91%, 1)",
                     "--color-primary_light": "hsla(270, 8.64%, 88.52%, 1)",
                     "--color-primary_superdark": "hsla(266.67, 5.89%, 18.63%, 1)",
                     "--color-primary_verydark": "hsla(266.67, 6.89%, 28.63%, 1)",
