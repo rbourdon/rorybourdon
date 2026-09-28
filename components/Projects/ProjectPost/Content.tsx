@@ -2,7 +2,10 @@ import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import styled from "styled-components";
 
-const Text = styled(motion.p)`
+// A div, not a <p>: multi-line <Content> in the CMS wraps its text in a
+// markdown <p>, and a <p> inside a <p> made server HTML and React disagree
+// (hydration error #418).
+const Text = styled(motion.div)`
   width: 100%;
   height: max-content;
   font-size: clamp(1.2rem, 4vw, 1.45rem);

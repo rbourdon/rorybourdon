@@ -19,18 +19,25 @@
     "graphql": "^16.14.2",
     "graphql-request": "^7.4.0",
     "next": "^16.3.6",
-    "next-mdx-remote": "^6.0.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-intersection-observer": "^11.0.1",
     "react-photo-sphere-viewer": "^6.2.3",
-    "styled-components": "^6.5.3"
+    "remark-mdx": "^3.1.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "styled-components": "^6.5.3",
+    "unified": "^11.0.5"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.14",
+    "@types/estree": "^1.0.9",
+    "@types/hast": "^3.0.5",
+    "@types/mdast": "^4.0.4",
     "@types/node": "^22",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "@types/unist": "^3.0.3",
     "typescript": "^7.0.2"
   }
 }
