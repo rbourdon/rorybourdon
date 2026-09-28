@@ -52,13 +52,18 @@ export default function SkillRoller({
     setSelectedBubble(bub);
   };
 
+  // Never show more bubbles than there are skills: wrapping round a short list
+  // repeats a skill, the duplicate key leaves an orphaned bubble behind, and
+  // the home page's exit animation then never completes.
+  const visible = Math.min(numSkills, skills.length);
+
   return (
     <Roller variants={variants}>
       {[
-        ...skills.slice(rollerPos, rollerPos + numSkills),
+        ...skills.slice(rollerPos, rollerPos + visible),
         ...skills.slice(
           0,
-          numSkills - skills.slice(rollerPos, rollerPos + numSkills).length,
+          visible - skills.slice(rollerPos, rollerPos + visible).length,
         ),
       ].map((skill, index) => {
         return (
@@ -67,7 +72,7 @@ export default function SkillRoller({
             id={skill.slug}
             key={`${skill.slug}_roller`}
             top={index === 0 ? true : false}
-            bottom={index === numSkills - 1 ? true : false}
+            bottom={index === visible - 1 ? true : false}
             hoverColor={{
               bg: theme.teal,
               text: theme.primary_dark,
