@@ -8,7 +8,6 @@ import {
 import Head from "next/head";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-import React, { useMemo } from "react";
 import styled, { useTheme } from "styled-components";
 import Highlight from "@/components/Highlight";
 import HorizonEffects from "@/components/Icons/HorizonEffects";
@@ -169,25 +168,21 @@ interface ProjectPageProps {
 export default function Project({ project, source }: ProjectPageProps) {
   const theme = useTheme();
 
-  const secondaryColorRGB = useMemo(() => {
-    return project.secondaryColor
-      ? convert.rgb.hsl(
-          project.secondaryColor.rgba.r,
-          project.secondaryColor.rgba.g,
-          project.secondaryColor.rgba.b,
-        )
-      : [0, 0, 0, 0];
-  }, [project.secondaryColor]);
+  const secondaryColorRGB = project.secondaryColor
+    ? convert.rgb.hsl(
+        project.secondaryColor.rgba.r,
+        project.secondaryColor.rgba.g,
+        project.secondaryColor.rgba.b,
+      )
+    : [0, 0, 0, 0];
 
-  const primaryColorRGB = useMemo(() => {
-    return project.primaryColor
-      ? convert.rgb.hsl(
-          project.primaryColor.rgba.r,
-          project.primaryColor.rgba.g,
-          project.primaryColor.rgba.b,
-        )
-      : [0, 0, 0, 0];
-  }, [project.primaryColor]);
+  const primaryColorRGB = project.primaryColor
+    ? convert.rgb.hsl(
+        project.primaryColor.rgba.r,
+        project.primaryColor.rgba.g,
+        project.primaryColor.rgba.b,
+      )
+    : [0, 0, 0, 0];
 
   const color1 = useMotionValue(
     `hsla(${primaryColorRGB[0]},${primaryColorRGB[1]}%,${primaryColorRGB[2]}%,1)`,

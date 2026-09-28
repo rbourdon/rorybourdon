@@ -5,7 +5,6 @@ import {
   motion,
   type Transition,
   transform,
-  useMotionTemplate,
   useMotionValue,
   useTransform,
   type Variants,
@@ -230,9 +229,17 @@ export default function SkillBubble({
     (latestColor1) => "thin solid " + latestColor1,
   );
 
-  const boxShadowNormal = useMotionTemplate`0px 0px 0px 0px ${theme.shadow_key}, 0px 0px 0x 0px ${theme.shadow_ambient}`;
+  // useTransform rather than useMotionTemplate: React Compiler can't compile
+  // tagged templates with interpolations and would skip this component.
+  const boxShadowNormal = useTransform(
+    [theme.shadow_key, theme.shadow_ambient],
+    ([key, ambient]) => `0px 0px 0px 0px ${key}, 0px 0px 0x 0px ${ambient}`,
+  );
 
-  const boxShadowHover = useMotionTemplate`1px 2px 0px 4px ${theme.shadow_key}, 0px 0px 10px 5px ${theme.shadow_ambient}`;
+  const boxShadowHover = useTransform(
+    [theme.shadow_key, theme.shadow_ambient],
+    ([key, ambient]) => `1px 2px 0px 4px ${key}, 0px 0px 10px 5px ${ambient}`,
+  );
 
   const boxShadow = useTransform(
     [boxShadowNormal, boxShadowHover, hover] as MotionValue<string | number>[],
