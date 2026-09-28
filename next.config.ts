@@ -1,6 +1,5 @@
 import type { NextConfig } from "next";
 import { securityHeaders } from "./lib/securityHeaders";
-import packageJson from "./package.json" with { type: "json" };
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -39,7 +38,6 @@ const nextConfig: NextConfig = {
     return securityHeaders({
       isDev: process.env.NODE_ENV === "development",
       isVercelPreview: process.env.VERCEL_ENV === "preview",
-      evaluatesMdx: "next-mdx-remote" in packageJson.dependencies,
     });
   },
   transpilePackages: ["@photo-sphere-viewer/core", "react-photo-sphere-viewer"],

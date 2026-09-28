@@ -13,12 +13,6 @@ type Env = {
   isDev: boolean;
   /** Vercel preview deployments load the Vercel toolbar from vercel.live. */
   isVercelPreview: boolean;
-  /**
-   * next-mdx-remote turns each post's compiled MDX back into a component with
-   * `new Function`. Project pages are reached by client-side navigation from
-   * any page, so eval has to be allowed site-wide while it is installed.
-   */
-  evaluatesMdx: boolean;
 };
 
 const cmsAssetHosts = [
@@ -40,11 +34,7 @@ const themeScriptHash = `'sha256-${createHash("sha256")
   .update(themeInitScript)
   .digest("base64")}'`;
 
-function contentSecurityPolicy({
-  isDev,
-  isVercelPreview,
-  evaluatesMdx,
-}: Env): string {
+function contentSecurityPolicy({ isDev, isVercelPreview }: Env): string {
   const toolbar = (key: keyof typeof vercelToolbar) =>
     isVercelPreview ? vercelToolbar[key] : [];
 
@@ -53,7 +43,7 @@ function contentSecurityPolicy({
     "script-src": [
       "'self'",
       themeScriptHash,
-      ...(isDev || evaluatesMdx ? ["'unsafe-eval'"] : []),
+      ...(isDev ? ["'unsafe-eval'"] : []),
       ...toolbar("script"),
     ],
     // styled-components injects <style> tags and framer-motion writes inline
