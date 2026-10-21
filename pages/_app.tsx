@@ -2,6 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
 import { Raleway } from "next/font/google";
 import Head from "next/head";
+import { type ReactNode, useLayoutEffect } from "react";
 import { createGlobalStyle } from "styled-components";
 import Layout from "@/components/layout";
 import { themedScrollbar } from "@/components/utils/styles";
@@ -81,12 +82,24 @@ html {
   
 `;
 
-function handleExitComplete() {
-  if (typeof window !== "undefined") {
-    // Must be instant: html has scroll-behavior: smooth, and a smooth scroll
-    // here keeps moving while the next page measures its layout animations.
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-  }
+// Each page sits inside this, keyed by route, so it unmounts once the page's
+// exit animation has finished. Scrolling to the top in its cleanup runs before
+// framer-motion snapshots the leaving page's shared layout elements (the home
+// cards) and before the next page measures, so both sides of the layoutId
+// animation see the same scroll. This used to be AnimatePresence's
+// onExitComplete, but since framer-motion 14.3.1 that fires after the old page
+// has unmounted and the new one has measured, which made the Projects and
+// Skills windows fly in from below the fold.
+function ScrollToTopOnExit({ children }: { children: ReactNode }) {
+  useLayoutEffect(
+    () => () => {
+      // Must be instant: html has scroll-behavior: smooth, and a smooth scroll
+      // here keeps moving while the next page measures its layout animations.
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    },
+    [],
+  );
+  return children;
 }
 
 const raleway = Raleway({ subsets: ["latin"] });
@@ -105,11 +118,10 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       <ThemeControlProvider>
         <GlobalStyle />
         <Layout className={raleway.className}>
-          <AnimatePresence
-            mode="wait"
-            onExitComplete={() => handleExitComplete()}
-          >
-            <Component {...pageProps} key={router.route} />
+          <AnimatePresence mode="wait">
+            <ScrollToTopOnExit key={router.route}>
+              <Component {...pageProps} />
+            </ScrollToTopOnExit>
           </AnimatePresence>
         </Layout>
       </ThemeControlProvider>
