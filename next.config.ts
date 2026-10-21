@@ -33,6 +33,11 @@ const nextConfig: NextConfig = {
   experimental: {
     workerThreads: false,
     cpus: 1,
+    // Next 16.4 turns this on by default, which inlines a per-route chunk
+    // bootstrap <script> into every page. The CSP only allows the theme
+    // script's hash, so the browser blocks it and the page never hydrates.
+    // Off keeps each route's runtime in its own chunk served from 'self'.
+    turbopackSharedRuntime: false,
   },
   async headers() {
     return securityHeaders({
