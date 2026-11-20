@@ -1,0 +1,57 @@
+/* No background: the answer sits in the room, and the room steps back. */
+.root {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 84px 28px 96px;
+  overflow-y: auto;
+  color: #fff;
+  font-family: var(--mono);
+}
+
+.block {
+  width: min(100%, 68ch);
+  margin: auto 0;
+}
+
+.asked,
+.aside {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  opacity: 0.45;
+}
+
+.asked::before {
+  content: "> ";
+}
+
+.said {
+  margin: 18px 0;
+  font-size: clamp(17px, 1.5vw, 22px);
+  line-height: 1.55;
+  white-space: pre-wrap;
+  text-wrap: pretty;
+}
+
+.said:empty {
+  display: none;
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: #fff;
+  animation: blink 0.9s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

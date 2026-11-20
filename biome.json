@@ -1,12 +1,13 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "root": true,
   "vcs": {
     "enabled": true,
     "clientKind": "git",
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!public", "!next-env.d.ts"]
+    "includes": ["**", "!next-env.d.ts"]
   },
   "formatter": {
     "enabled": true,
@@ -26,18 +27,7 @@
       "react": "recommended"
     },
     "rules": {
-      "preset": "recommended",
-      "a11y": {
-        "noSvgWithoutTitle": "warn"
-      },
-      "suspicious": {
-        "noArrayIndexKey": "warn",
-        "useIterableCallbackReturn": "warn"
-      },
-      "correctness": {
-        "useExhaustiveDependencies": "warn",
-        "noInnerDeclarations": "warn"
-      }
+      "preset": "recommended"
     }
   },
   "assist": {

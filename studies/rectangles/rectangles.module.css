@@ -1,0 +1,47 @@
+.root {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* The rectangles keep clear of the name and the prompt. */
+.field {
+  position: absolute;
+  inset: 68px 28px;
+}
+
+.box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  will-change: transform, width, height;
+}
+
+.label {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  right: 12px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  font: 500 12px / 1.3 var(--sans);
+  letter-spacing: -0.005em;
+}
+
+.caption {
+  position: absolute;
+  top: 27px;
+  right: 28px;
+  margin: 0;
+  font: 400 11px / 1 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.caption:empty {
+  display: none;
+}
