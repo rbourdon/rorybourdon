@@ -20,6 +20,8 @@ export interface StudyProps {
   today: Today;
   /** Call when the piece has said what it has to say. */
   onDone: () => void;
+  /** Hand the stage to another piece, by id. */
+  show: (studyId: string) => void;
 }
 
 export interface StudyDef {
@@ -29,5 +31,12 @@ export interface StudyDef {
   question: string;
   /** Seconds before the stage takes the piece off regardless. */
   maxSeconds: number;
+  /**
+   * Whether the show may put this piece on by itself. The answer to a
+   * question, for one, only ever appears because something was asked.
+   */
+  selfStarting: boolean;
+  /** Whether the piece stays up while the visitor types their next line. */
+  staysWhileTyping: boolean;
   Component: ComponentType<StudyProps>;
 }

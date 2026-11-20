@@ -14,11 +14,13 @@
     "format": "biome check --write ."
   },
   "dependencies": {
+    "ai": "^7.0.177",
     "motion": "^14.14.0",
     "next": "^16.4.6",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "tweakpane": "^4.0.5"
+    "tweakpane": "^4.0.5",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",

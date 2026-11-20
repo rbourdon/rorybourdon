@@ -24,13 +24,25 @@ it is dust; at 1 it is sharp and in color. A piece leaks in out of focus, snaps
 into focus, and when it lets go it falls back to a blur that takes a while to
 become nothing.
 
-**The director** (`stage/director.ts`). Decides what goes on and when. Right now
-it is a timer that plays the pieces in turn. This is the seat the agent takes
-later; it only needs to call `play` and `release`.
+**The director** (`stage/director.ts`). Decides what goes on and when. By
+default nothing plays unasked: the page rests in the in-between. "runs itself"
+in the panel turns on a timer that plays the pieces in turn.
 
-**The prompt** (`stage/Prompt.tsx`). The only fixed interface. Typing pulls the
-show back into the in-between. Pressing enter hands the line to the next piece
-as raw material. Nothing answers it yet.
+**The prompt** (`stage/Prompt.tsx`). The only fixed interface. Pressing enter
+asks the site, and the answer arrives in the in-between itself
+(`studies/answer`).
+
+**The agent** (`app/api/ask/route.ts`). A tool loop that can read today's front
+page, read Rory's recent commits, and ask for a piece to be put on the stage.
+It streams a small set of events to the page (`lib/askProtocol.ts`). What it
+knows about Rory is `content/rory.ts` and nothing else; it is told to say so
+rather than guess.
+
+**The models** (`lib/models.ts`). Requests go through Vercel AI Gateway and
+rotate through whichever language models are free there at the moment, read
+from the gateway's public catalog. Each answer says which model gave it. Set
+`AI_GATEWAY_MODEL` to pin one. On Vercel there is no key: the deployment
+authenticates as itself. Locally, link the project and `vercel env pull`.
 
 **Today** (`lib/today.ts`). The front page of Hacker News and Rory's recent
 public commits, fetched on the server and cached for an hour. If the network is
@@ -46,9 +58,10 @@ the stage and to be argued with.
 - `operator`: a control panel and a specimen interface drawn from the same
   eight design tokens, and a cursor that works the controls.
 
-To add one, make a folder in `studies/` with a component that takes
-`StudyProps` (`stage/types.ts`) and add it to the list in `studies/index.ts`.
-To kill one, remove it from that list.
+To add one, describe it in `studies/catalog.ts` (that description is what the
+agent reads), make a folder in `studies/` with a component that takes
+`StudyProps` (`stage/types.ts`), and add the component in `studies/index.ts`.
+To kill one, remove it from both.
 
 ## The panel
 

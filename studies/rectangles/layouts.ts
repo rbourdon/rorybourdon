@@ -111,17 +111,20 @@ export function columns(items: Item[], width: number, height: number): Layout {
   return out;
 }
 
-/** The last day left to right. Width is how much people argued. */
+/**
+ * The last day, left to right, ending now. Width is how much people argued.
+ * Anything older than a day waits at the left edge.
+ */
 export function timeline(items: Item[], width: number, height: number): Layout {
   const out: Layout = {};
+  const DAY = 24;
   const sorted = [...items].sort((a, b) => b.hoursAgo - a.hoursAgo);
-  const span = Math.max(...sorted.map((item) => item.hoursAgo), 1);
   const maxComments = Math.max(...sorted.map((item) => item.comments), 1);
   const lane = height / sorted.length;
   sorted.forEach((item, i) => {
     const w = Math.max(10, (item.comments / maxComments) * width * 0.34);
-    const at = (1 - item.hoursAgo / span) * (width - w);
-    out[item.id] = { x: at, y: i * lane, w, h: lane };
+    const age = Math.min(item.hoursAgo, DAY) / DAY;
+    out[item.id] = { x: (1 - age) * (width - w), y: i * lane, w, h: lane };
   });
   return out;
 }

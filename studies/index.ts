@@ -1,25 +1,42 @@
 import dynamic from "next/dynamic";
-import type { StudyDef } from "@/stage/types";
+import type { ComponentType } from "react";
+import type { StudyDef, StudyProps } from "@/stage/types";
+import { catalog, type PieceId } from "./catalog";
 
-// The show is whatever is in this list. To add a piece, make a folder beside
-// this file with a component that takes StudyProps, and add an entry here.
-// To kill one, delete its entry.
+// The show is whatever is in ./catalog.ts. To add a piece, describe it there
+// (that is what the agent reads), make a folder beside this file with a
+// component that takes StudyProps, and add the component below. To kill one,
+// delete its catalog entry and its line here.
+
+const components: Record<PieceId, ComponentType<StudyProps>> = {
+  rectangles: dynamic(() => import("./rectangles/Rectangles"), { ssr: false }),
+  operator: dynamic(() => import("./operator/Operator"), { ssr: false }),
+};
+
+const maxSeconds: Record<PieceId, number> = {
+  rectangles: 22,
+  operator: 26,
+};
 
 export const studies: StudyDef[] = [
+  // The site answering a typed line. Not in the catalog: the agent does not
+  // choose to show it, it is how the agent speaks.
   {
-    id: "rectangles",
-    title: "Today, in rectangles",
-    question:
-      "Can real material and one shape carry a piece with almost no type?",
-    maxSeconds: 22,
-    Component: dynamic(() => import("./rectangles/Rectangles"), { ssr: false }),
+    id: "answer",
+    title: "Answer",
+    question: "What does it look like when the site talks back?",
+    maxSeconds: 900,
+    selfStarting: false,
+    staysWhileTyping: true,
+    Component: dynamic(() => import("./answer/Answer"), { ssr: false }),
   },
-  {
-    id: "operator",
-    title: "An interface that operates itself",
-    question:
-      "Is generated UI more interesting as the performer than as the furniture?",
-    maxSeconds: 26,
-    Component: dynamic(() => import("./operator/Operator"), { ssr: false }),
-  },
+  ...catalog.map((piece) => ({
+    id: piece.id,
+    title: piece.title,
+    question: piece.question,
+    maxSeconds: maxSeconds[piece.id],
+    selfStarting: true,
+    staysWhileTyping: false,
+    Component: components[piece.id],
+  })),
 ];

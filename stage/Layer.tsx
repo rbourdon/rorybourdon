@@ -30,6 +30,7 @@ interface LayerProps {
   today: Today;
   onDone: (key: number) => void;
   onGone: (key: number) => void;
+  show: (studyId: string) => void;
 }
 
 /**
@@ -37,7 +38,13 @@ interface LayerProps {
  * from a single number, its presence: at 0 it is dust, at 1 it is sharp and
  * in full color. Focus arrives first and color floods in behind it.
  */
-export default function Layer({ layer, today, onDone, onGone }: LayerProps) {
+export default function Layer({
+  layer,
+  today,
+  onDone,
+  onGone,
+  show,
+}: LayerProps) {
   const { key, phase, quick } = layer;
   const presence = useMotionValue(0);
 
@@ -110,6 +117,7 @@ export default function Layer({ layer, today, onDone, onGone }: LayerProps) {
         query={layer.query}
         today={today}
         onDone={() => onDone(key)}
+        show={show}
       />
     </motion.div>
   );

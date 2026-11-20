@@ -22,8 +22,9 @@ export const defaults = {
   residue: 0.2, // presence a piece falls back to when it lets go
   residueSeconds: 16, // how long that residue takes to become nothing
 
-  // The show
-  auto: true,
+  // The show. Off by default: until there are pieces worth showing unasked,
+  // the page rests in the in-between and waits to be spoken to.
+  auto: false,
   gapSeconds: 6, // quiet time between pieces
 };
 
@@ -32,7 +33,7 @@ export type ParamKey = keyof Params;
 
 export const params: Params = { ...defaults };
 
-const STORAGE_KEY = "lab.params.v1";
+const STORAGE_KEY = "lab.params.v2";
 const listeners = new Set<() => void>();
 
 export function loadParams() {

@@ -70,7 +70,7 @@ export default function LabPanel({ controls }: { controls: StageControls }) {
         max: 30,
         label: "gap s",
       });
-      for (const study of studies) {
+      for (const study of studies.filter((s) => s.selfStarting)) {
         show
           .addButton({ title: `play: ${study.title.toLowerCase()}` })
           .on("click", () => controls.play(study.id));

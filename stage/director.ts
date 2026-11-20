@@ -16,6 +16,7 @@ export function createDirector(
 ) {
   let nextKey = 1;
   let current: number | null = null;
+  let currentStudy: string | null = null;
   let lastStudy: string | null = null;
   let timer: number | undefined;
   let held = false;
@@ -37,6 +38,7 @@ export function createDirector(
     if (current === null) return;
     setPhase(current, "leave");
     current = null;
+    currentStudy = null;
     animate(focus, 0, { duration: 0.9, ease: "easeOut" });
   };
 
@@ -77,8 +79,9 @@ export function createDirector(
     quick: boolean,
   ) => {
     release();
-    const others = studies.filter((study) => study.id !== lastStudy);
-    const pool = others.length > 0 ? others : studies;
+    const startable = studies.filter((study) => study.selfStarting);
+    const others = startable.filter((study) => study.id !== lastStudy);
+    const pool = others.length > 0 ? others : startable;
     const def =
       studies.find((study) => study.id === studyId) ??
       pool[Math.floor(Math.random() * pool.length)];
@@ -86,7 +89,8 @@ export function createDirector(
 
     const key = nextKey++;
     current = key;
-    lastStudy = def.id;
+    currentStudy = def.id;
+    if (def.selfStarting) lastStudy = def.id;
     held = false;
     setLayers((all) => [
       ...all,
@@ -120,10 +124,14 @@ export function createDirector(
       release();
       rest();
     },
-    /** Take the current piece off and stay in the in-between until released. */
+    /**
+     * The visitor started typing: nothing new starts until they finish or give
+     * up. Most pieces get out of the way; an answer stays up to be read.
+     */
     hold: () => {
       held = true;
-      release();
+      const def = studies.find((study) => study.id === currentStudy);
+      if (!def?.staysWhileTyping) release();
     },
     unhold: () => {
       held = false;

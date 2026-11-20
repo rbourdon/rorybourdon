@@ -92,7 +92,7 @@ function inkOn(fill: string) {
 const BEATS = [
   { name: "sized by points", build: "treemapPoints" },
   { name: "ranked", build: "columns" },
-  { name: "through the day", build: "timeline" },
+  { name: "the last day, ending now", build: "timeline" },
   { name: "all equal", build: "grid" },
   { name: "sized by argument", build: "treemapComments" },
   { name: "", build: "line" },
@@ -127,7 +127,7 @@ export default function Rectangles({
       title: `${commit.repo}: ${commit.message}`,
       points: typical,
       comments: 0,
-      hoursAgo: Math.min(commit.hoursAgo, 24),
+      hoursAgo: commit.hoursAgo,
       domain: "github.com",
     }));
     return [...stories, ...commits];

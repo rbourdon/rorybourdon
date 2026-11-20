@@ -49,6 +49,11 @@ export default function Stage({ today }: { today: Today }) {
     setLayers((all) => all.filter((layer) => layer.key !== key));
   }, []);
 
+  const show = useCallback(
+    (studyId: string) => director.play(studyId, null, true),
+    [director],
+  );
+
   const controls = useMemo<StageControls>(
     () => ({
       play: (studyId) => director.play(studyId, null, true),
@@ -77,6 +82,7 @@ export default function Stage({ today }: { today: Today }) {
           today={today}
           onDone={director.done}
           onGone={handleGone}
+          show={show}
         />
       ))}
 
@@ -86,7 +92,7 @@ export default function Stage({ today }: { today: Today }) {
         // Typing pulls the show back into the in-between and holds it there.
         onType={director.hold}
         onClear={director.unhold}
-        onSubmit={(text) => director.play(null, text, true)}
+        onSubmit={(text) => director.play("answer", text, true)}
       />
 
       <button
